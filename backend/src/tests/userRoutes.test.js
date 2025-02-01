@@ -3,6 +3,8 @@ import request from 'supertest';
 import mongoose from 'mongoose';
 import app from '../../index.js';
 import User from '../models/User.js';
+import dotenv from 'dotenv'; // ✅ Load environment variables
+dotenv.config(); // ✅ Ensure `.env` is loaded before running tests
 
 // Connect to MongoDB before running tests
 beforeAll(async () => {
