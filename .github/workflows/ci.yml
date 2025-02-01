@@ -30,6 +30,8 @@ jobs:
           cd ../frontend && npm install
 
       - name: Run backend tests
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }} # ✅ Load MongoDB URI from GitHub Secrets
         run: cd backend && npm test -- --coverage
 
       - name: Run frontend tests
