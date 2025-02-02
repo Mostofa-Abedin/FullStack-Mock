@@ -1,8 +1,16 @@
+import dotenv from 'dotenv'; // ✅ Load environment variables FIRST
+dotenv.config(); // ✅ Ensure `.env` is loaded before running tests
+
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
 import request from 'supertest';
 import mongoose from 'mongoose';
 import app from '../../index.js';
 import User from '../models/User.js';
+
+// Check if MONGO_URI is properly loaded
+if (!process.env.MONGO_URI) {
+  throw new Error('❌ MONGO_URI is undefined. Check your .env file.');
+}
 
 // Connect to MongoDB before running tests
 beforeAll(async () => {
@@ -14,7 +22,7 @@ beforeAll(async () => {
 
 // Clean up database before each test
 beforeEach(async () => {
-  await User.deleteMany({}); // ✅ Ensures test data is wiped before running
+  await User.deleteMany({});
 });
 
 // Close MongoDB connection after tests
