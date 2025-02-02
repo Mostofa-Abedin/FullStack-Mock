@@ -1,11 +1,29 @@
-import React from 'react'; // ✅ Ensure React is imported
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react';
 import UserList from '../components/UserList';
+import { api } from '../utils/api';
 
-describe('UserList Component', () => {
-  it('renders user list', () => {
+describe('UserList Component (Integration Test)', () => {
+  let users;
+
+  // ✅ Before tests, fetch real users from the backend
+  beforeAll(async () => {
+    const response = await api.get('/users'); // 🔥 REAL API CALL
+    users = response.data;
+  });
+
+  it('fetches and displays users from the backend', async () => {
     render(<UserList />);
-    expect(screen.getByText('@example.com')).toBeInTheDocument();
+
+    await waitFor(() => {
+      users.forEach((user) => {
+        expect(screen.getByText(`${user.name} - ${user.email}`)).toBeInTheDocument();
+      });
+    });
+  });
+
+  afterAll(() => {
+    users = null;
   });
 });
