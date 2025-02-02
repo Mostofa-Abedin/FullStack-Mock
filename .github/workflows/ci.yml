@@ -51,9 +51,10 @@ jobs:
 
       # ✅ Upload Coverage Reports as Artifacts
       - name: Upload test coverage reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # ✅ Updated to v4
         with:
           name: coverage-reports
           path: |
             backend/coverage
             frontend/coverage
+          retention-days: 7 # Keep artifacts for 7 days
