@@ -9,12 +9,14 @@ const UserSchema = new mongoose.Schema({
   // Email field - must be a string, required, and must be unique in the database
   email: { type: String, required: true, unique: true },
 
-  // Role field - must be a string, only accepts 'user' or 'admin', defaults to 'user' if not provided
-  role: { type: String, enum: ['user', 'admin'], default: 'user' }
+  // Role field - must be a string, only accepts 'client' or 'admin', defaults to 'client' if not provided
+  role: { type: String, enum: ['client', 'admin'], default: 'client' },
+
+}, { 
+  timestamps: true // Timestamp added so that we have createdAt: a date representing when this document was created & updatedAt: a date representing when this document was last updated.
 });
 
-// Check if the 'User' model is already defined to prevent overwriting (useful in testing environments)
-// If the model exists, use the existing one; otherwise, create a new model using the defined schema
+// Prevent model overwrite during testing
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
 
 // Export the User model so it can be used in other parts of the application

@@ -30,14 +30,13 @@ jobs:
           cd backend && npm install
           cd ../frontend && npm install
 
-      # ✅ Start the backend in the background & wait for it
-      - name: Start Backend
+      # ✅ Run Backend tests
+      - name: Run Backend Tests (Without Starting Server)
         env:
-          MONGO_URI: ${{ secrets.MONGO_URI }} # ✅ Use GitHub Secret for MongoDB
+          MONGO_URI: ${{ secrets.MONGO_URI }}
         run: |
           cd backend
-          npm run dev &
-          sleep 5 # Wait for the backend to start
+          npm test -- --coverage  # ✅ Directly run tests (without starting `server.js`)
 
       # ✅ Run Backend Tests (Unit + Integration)
       - name: Run backend tests
