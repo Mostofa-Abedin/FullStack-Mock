@@ -4,5 +4,8 @@
     "@testing-library/react": "^16.2.0",
     "@vitest/coverage-c8": "^0.33.0",
     "vitest": "^3.0.5"
+  },
+  "dependencies": {
+    "react-icons": "^5.4.0"
   }
 }
