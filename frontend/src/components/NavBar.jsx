@@ -9,7 +9,7 @@ const Navbar = () => {
         position: "sticky",
         top: 0,
         width: "100%",
-        background: "linear-gradient(to bottom, #00202e, #003f5c)", // Palette gradient
+        background: "#192F3C",
         padding: "0.8rem 2rem", // Sleeker padding
         display: "flex",
         justifyContent: "space-between",
@@ -53,12 +53,11 @@ const Navbar = () => {
         />
         <span
           style={{
-            fontFamily: "'Poppins', sans-serif",
-            fontSize: "1rem", // Smaller text for Magnet Labs
-            fontWeight: "600",
-            letterSpacing: "1px",
+            fontFamily: "'Kode Mono', monospace",
+            fontSize: "2rem", // Smaller text for Magnet Labs
+            fontWeight: "700",
             textTransform: "uppercase",
-            color: "#ffd380",
+            color: "#F3DCB2",
           }}
         >
           Magnet Labs™
@@ -78,14 +77,14 @@ const Navbar = () => {
           to="/services"
           style={{
             textDecoration: "none",
-            color: "#ffd380",
+            color: "white",
             fontSize: "1.2rem",
             fontWeight: "500",
-            fontFamily: "'Poppins', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             transition: "color 0.3s ease",
           }}
-          onMouseOver={(e) => (e.target.style.color = "#ff8531")}
-          onMouseOut={(e) => (e.target.style.color = "#ffd380")}
+          onMouseOver={(e) => (e.target.style.color = "#F3A83C")}
+          onMouseOut={(e) => (e.target.style.color = "white")}
         >
           Our Services
         </Link>
@@ -93,14 +92,14 @@ const Navbar = () => {
           to="/work"
           style={{
             textDecoration: "none",
-            color: "#ffd380",
+            color: "white",
             fontSize: "1.2rem",
             fontWeight: "500",
-            fontFamily: "'Poppins', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             transition: "color 0.3s ease",
           }}
-          onMouseOver={(e) => (e.target.style.color = "#ff8531")}
-          onMouseOut={(e) => (e.target.style.color = "#ffd380")}
+          onMouseOver={(e) => (e.target.style.color = "#F3A83C")}
+          onMouseOut={(e) => (e.target.style.color = "white")}
         >
           Our Work
         </Link>
@@ -108,14 +107,14 @@ const Navbar = () => {
           to="/contact"
           style={{
             textDecoration: "none",
-            color: "#ffd380",
+            color: "white",
             fontSize: "1.2rem",
             fontWeight: "500",
-            fontFamily: "'Poppins', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             transition: "color 0.3s ease",
           }}
-          onMouseOver={(e) => (e.target.style.color = "#ff8531")}
-          onMouseOut={(e) => (e.target.style.color = "#ffd380")}
+          onMouseOver={(e) => (e.target.style.color = "#F3A83C")}
+          onMouseOut={(e) => (e.target.style.color = "white")}
         >
           Contact Us
         </Link>
