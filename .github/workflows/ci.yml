@@ -33,7 +33,7 @@ jobs:
       # ✅ Start the backend in the background & wait for it
       - name: Start Backend
         env:
-          MONGO_URI: ${{ secrets.MONGO_URI }} # ✅ Use GitHub Secret for MongoDB
+          MONGO_URI: mongodb+srv://Admin:qazmokfgh7@cluster0.3efwx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 # ✅ Use GitHub Secret for MongoDB
         run: |
           cd backend
           npm run dev &
@@ -42,7 +42,7 @@ jobs:
       # ✅ Run Backend Tests (Unit + Integration)
       - name: Run backend tests
         env:
-          MONGO_URI: ${{ secrets.MONGO_URI }}
+          MONGO_URI: mongodb+srv://Admin:qazmokfgh7@cluster0.3efwx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
         run: cd backend && npm test -- --coverage
 
       # ✅ Run Frontend Tests (Ensuring Backend is Running)
