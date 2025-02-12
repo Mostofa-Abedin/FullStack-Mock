@@ -33,22 +33,15 @@ const Footer = () => {
             width: "50px",
             height: "50px",
             objectFit: "contain",
-            transition: "transform 0.3s ease, filter 0.3s ease",
-          }}
-          onMouseOver={(e) => {
-            e.target.style.transform = "scale(1.2)";
-            e.target.style.filter = "drop-shadow(0 0 15px #ffa600)";
-          }}
-          onMouseOut={(e) => {
-            e.target.style.transform = "scale(1)";
-            e.target.style.filter = "none";
+            overflow: "hidden",
+            transition: "transform 0.2s ease",
           }}
         />
         <span
           style={{
             fontFamily: "'Kode Mono', monospace",
             fontSize: "1.5rem", // Smaller text for Magnet Labs
-            fontWeight: "700",
+            fontWeight: "600",
             textTransform: "uppercase",
             color: "#F3DCB2",
           }}
@@ -87,10 +80,12 @@ const Footer = () => {
           onMouseOver={(e) => {
             e.target.style.opacity = "0.85";
             e.target.style.transform = "scale(1.05)";
+            e.target.style.color = "#F3A83C";
           }}
           onMouseOut={(e) => {
             e.target.style.opacity = "1";
             e.target.style.transform = "scale(1)";
+            e.target.style.color = "#1877f2";
           }}
         >
           <FaFacebook size={30} />
@@ -109,10 +104,12 @@ const Footer = () => {
           onMouseOver={(e) => {
             e.target.style.opacity = "0.85";
             e.target.style.transform = "scale(1.05)";
+            e.target.style.color = "#F3A83C";
           }}
           onMouseOut={(e) => {
             e.target.style.opacity = "1";
             e.target.style.transform = "scale(1)";
+            e.target.style.color = "#e1306c";
           }}
         >
           <FaInstagram size={30} />
@@ -125,16 +122,18 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            color: "white", // Official LinkedIn blue
+            color: "white", 
             transition: "transform 0.4s ease-in-out, opacity 0.3s ease-in-out",
           }}
           onMouseOver={(e) => {
             e.target.style.opacity = "0.85";
             e.target.style.transform = "scale(1.05)";
+            e.target.style.color = "#F3A83C";
           }}
           onMouseOut={(e) => {
             e.target.style.opacity = "1";
             e.target.style.transform = "scale(1)";
+            e.target.style.color = "white";
           }}
         >
           <FaLinkedin size={30} />

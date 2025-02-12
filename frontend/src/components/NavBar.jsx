@@ -16,11 +16,8 @@ const Navbar = () => {
         justifyContent: "space-between",
         alignItems: "center",
         zIndex: 100,
-        color: "#fff",
-        boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
         boxSizing: "border-box",
         backdropFilter: "blur(10px)",
-        backgroundColor: "rgba(0, 32, 46, 0.8)",
       }}
     >
       {/* Logo and Name */}
@@ -121,12 +118,17 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ 
+        display: "flex", 
+        alignItems: "center" 
+    }}
+       onMouseOver={(e) => (e.target.style.color = "#F3A83C")}
+       onMouseOut={(e) => (e.target.style.color = "#F3DCB2")}>
         <Link to="/login">
           <FaUserCircle
             style={{
               fontSize: "24px",
-              color: "white",
+              color: "#F3DCB2",
             }}
           />
         </Link>
