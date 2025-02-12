@@ -119,19 +119,17 @@ const Navbar = () => {
         >
           Contact Us
         </Link>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            cursor: "pointer",
-          }}
-          onMouseOver={(e) => (e.target.style.color = "#F3A83C")}
-          onMouseOut={(e) => (e.target.style.color = "#F3DCB2")}
-        >
-          <Link to="/login">
-            <FaUserCircle style={{ fontSize: "24px", marginLeft: "20px" }} />
-          </Link>
-        </div>
+      </div>
+
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Link to="/login">
+          <FaUserCircle
+            style={{
+              fontSize: "24px",
+              color: "white",
+            }}
+          />
+        </Link>
       </div>
     </nav>
   );
