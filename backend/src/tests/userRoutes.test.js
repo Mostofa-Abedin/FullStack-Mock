@@ -1,4 +1,4 @@
-import '../setup/dbSetup.js'; // Import  DB setup
+import './setup/dbSetup.js'; // Import  DB setup
 import request from 'supertest';
 import { describe, it, expect } from 'vitest';
 import app from '../../index.js';
@@ -7,12 +7,18 @@ import User from '../models/User.js';
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: GET /users Tests
 describe('GET /users', () => {
-  it('should return an empty array initially', async () => {
+  it('should return an empty array if no users exist', async () => {
+    await User.deleteMany({}); //  Ensure database is clean
+    const count = await User.countDocuments();
+    console.log(` User count before test: ${count}`); //  Log user count
+  
     const res = await request(app).get('/users');
-    
+  
     expect(res.statusCode).toBe(200);
-    expect(res.body).toEqual([]);
+    expect(res.body).toBeInstanceOf(Array); //  Ensure response is an array
+    expect(res.body.length).toBe(0); //  Expect no users initially
   });
+  
 
   it('should return the created user', async () => {
     await User.create({ 

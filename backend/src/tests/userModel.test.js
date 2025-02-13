@@ -1,4 +1,4 @@
-import '../setup/dbSetup.js'; //  Import  DB setup
+import './setup/dbSetup.js'; //  Import  DB setup
 import { describe, it, expect } from 'vitest';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';

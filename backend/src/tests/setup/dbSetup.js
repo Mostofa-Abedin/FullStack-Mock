@@ -25,10 +25,13 @@ beforeAll(async () => {
 
 // ✅ Clean up database before each test
 beforeEach(async () => {
-  if (mongoose.connection.readyState === 1) {
-    await User.deleteMany({});
-  }
-});
+    if (mongoose.connection.readyState === 1) {
+      await User.deleteMany({});
+      const count = await User.countDocuments();
+      console.log(`✅ Database cleared. User count: ${count}`);
+    }
+  });
+  
 
 // ✅ Disconnect from MongoDB after all tests
 afterAll(async () => {

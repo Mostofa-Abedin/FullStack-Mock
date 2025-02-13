@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
 
   // Email field - must be a string, required, and must be unique in the database
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true, match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/ },
 
   // Role field - must be a string, only accepts 'client' or 'admin', defaults to 'client' if not provided
   role: { type: String, enum: ['client', 'admin'], default: 'client' },
