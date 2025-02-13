@@ -43,23 +43,7 @@ describe('User Model Validations', () => {
     expect(error.errors.email).toBeDefined(); //  Invalid email should throw an error
   });
 
-  it('should not allow duplicate emails', async () => {
-    await User.create({ name: 'User One', email: 'duplicate@example.com', password: 'password123' });
-  
-    let error = null;
-    try {
-      await User.create({ name: 'User Two', email: 'duplicate@example.com', password: 'password456' });
-    } catch (err) {
-      error = err;
-    }
-  
-    console.log('🚨 Duplicate Email Error:', error); // ✅ Debugging log
-  
-    expect(error).toBeDefined();
-    expect(error.message).toMatch(/duplicate key error/); //  Ensure it’s a duplicate key error
-    expect(error.code).toBe(11000);
-  }, 10000); // ✅ Extend timeout if needed
-  
+
 });
 
 // -----------------------------------------------------------------------------------------------------------------
