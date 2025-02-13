@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
+
 // @route GET /users
 // @desc Get all users
 router.get('/', async (req, res) => {
@@ -17,8 +18,8 @@ router.get('/', async (req, res) => {
 // @desc Add a new user
 router.post('/', async (req, res) => {
   try {
-    const { name, email, role } = req.body;
-    const user = new User({ name, email, role });
+    const { name, email, role, password } = req.body;
+    const user = new User({ name, email, role , password });
     await user.save();
     res.status(201).json(user);
   } catch (err) {
