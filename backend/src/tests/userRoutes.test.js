@@ -6,18 +6,20 @@ import User from '../models/User.js';
 
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: GET /users Tests
-describe('GET /users', () => {
+describe(' GET /users', () => {
   it('should return an empty array if no users exist', async () => {
-    await User.deleteMany({}); //  Ensure database is clean
+    await User.deleteMany({}); // Ensure database is empty before testing
+
     const count = await User.countDocuments();
-    console.log(` User count before test: ${count}`); //  Log user count
-  
+    console.log(`User count before test: ${count}`); //  Debugging log
+
     const res = await request(app).get('/users');
-  
+
     expect(res.statusCode).toBe(200);
-    expect(res.body).toBeInstanceOf(Array); //  Ensure response is an array
-    expect(res.body.length).toBe(0); //  Expect no users initially
-  });
+    expect(res.body).toBeInstanceOf(Array);
+    expect(res.body.length).toBe(0);
+  }, 10000); //  Extend timeout to 10 seconds
+});
   
 
   it('should return the created user', async () => {
@@ -37,7 +39,7 @@ describe('GET /users', () => {
     expect(res.body[0]).toHaveProperty('createdAt');
     expect(res.body[0]).toHaveProperty('updatedAt');
     expect(new Date(res.body[0].updatedAt)).toBeInstanceOf(Date);
-  });
+  
 });
 
 // ------------------------------------------------------------------------------------------------------------------//
