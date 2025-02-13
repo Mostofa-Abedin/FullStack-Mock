@@ -16,41 +16,39 @@ jobs:
           - 27017:27017
 
     steps:
+      # ✅ Step 1: Checkout Repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # ✅ Step 2: Set Up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # ✅ Install dependencies for both backend & frontend
-      - name: Install dependencies
+      # ✅ Step 3: Install Dependencies
+      - name: Install dependencies (Backend & Frontend)
         run: |
           cd backend && npm install
           cd ../frontend && npm install
 
-      # ✅ Run Backend tests
-      - name: Run Backend Tests (Without Starting Server)
+      # ✅ Step 4: Run Backend Tests (With Coverage)
+      - name: Run Backend Tests (Unit & Integration)
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
         run: |
           cd backend
-          npm test -- --coverage  # ✅ Directly run tests (without starting `server.js`)
+          npm test -- --coverage  # ✅ Runs all backend tests
 
-      # ✅ Run Backend Tests (Unit + Integration)
-      - name: Run backend tests
-        env:
-          MONGO_URI: ${{ secrets.MONGO_URI }}
-        run: cd backend && npm test -- --coverage
+      # ✅ Step 5: Run Frontend Tests (With Coverage)
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          npm test -- --coverage
 
-      # ✅ Run Frontend Tests (Ensuring Backend is Running)
-      - name: Run frontend tests
-        run: cd frontend && npm test -- --coverage
-
-      # ✅ Upload Coverage Reports as Artifacts
+      # ✅ Step 6: Upload Coverage Reports as Artifacts
       - name: Upload test coverage reports
-        uses: actions/upload-artifact@v4 # ✅ Updated to v4
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-reports
           path: |
