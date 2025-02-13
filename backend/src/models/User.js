@@ -33,8 +33,9 @@ UserSchema.pre('save', async function(next) {
       return next(error); //  Pass error to next middleware if hashing fails
     }
   }
-  next(); // ✅ Proceed with saving the document
+  next(); 
 });
+
 
 // Prevent model overwrite during testing
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
