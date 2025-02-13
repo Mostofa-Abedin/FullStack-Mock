@@ -1,7 +1,7 @@
 // Import required libraries
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, createUser } = require('../controllers/userController'); // ✅ Import controllers
+const { getAllUsers, createUser, registerUser } = require('../controllers/userController'); // Import controllers
 
 // Route: GET all users 
 router.get('/', getAllUsers); 
@@ -9,8 +9,8 @@ router.get('/', getAllUsers);
 // Route: // Create a new user
 router.post('/', createUser);  
 
-
-
+// Route: Register a new user
+router.post('/register', registerUser);  
 
 
 
