@@ -45,7 +45,8 @@ const BusinessSchema = new mongoose.Schema({
   // Address - Required, must be a string, and trimmed
   address: { 
     type: String, 
-    required: true, 
+    required: true,
+    trim: true, // To remove space if it is at the beginning or end of the string  
     maxlength: 255 // Limits address length to a reasonable value
   } 
 
