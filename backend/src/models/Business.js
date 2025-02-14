@@ -14,7 +14,8 @@ const BusinessSchema = new mongoose.Schema({
   // Business Name - Required, must be a string, and trimmed to remove extra spaces
   businessName: { 
     type: String, 
-    required: true, 
+    required: true,
+    trim: true, // To remove space if it is at the beginning or end of the string 
     maxlength: 100 
   },
 
