@@ -70,6 +70,24 @@ describe(' Business Model Validations', () => {
         expect(error.errors.website.message).toMatch(/Invalid website URL/);
     });
     
+    it('should allow valid business data to be saved', async () => {
+        const user = await User.create({ name: 'John Doe', email: 'johndoe@example.com', password: 'password123' });
     
+        const business = new Business({
+          userId: user._id, 
+          businessName: 'Technolol Solutions',
+          industry: 'Software Development',
+          phone: '+61-400-123-456',
+          address: '456 TechMex St, Sydney',
+          website: 'https://techmexsolutions.com'
+        });
+    
+        const savedBusiness = await business.save();
+        expect(savedBusiness._id).toBeDefined();
+        expect(savedBusiness.createdAt).toBeDefined();
+        expect(savedBusiness.updatedAt).toBeDefined();
+      });
+    
+
 });
 // -----------------------------------------------------------------------------------------------------------------
