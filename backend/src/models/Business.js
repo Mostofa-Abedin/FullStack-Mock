@@ -34,6 +34,8 @@ const BusinessSchema = new mongoose.Schema({
   phone: { 
     type: String, 
     required: true, 
+    trim: true,
+    match: [/^\+?\d{1,3}[- ]?\d{3}[- ]?\d{3}[- ]?\d{3}$/, 'Invalid phone number format'] // Ensures proper phone format
   },
 
   // Address - Required, must be a string, and trimmed
