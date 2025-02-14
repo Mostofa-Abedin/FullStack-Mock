@@ -26,7 +26,26 @@ describe(' Business Model Validations', () => {
     expect(error.errors.address).toBeDefined();
     });
   
+    it('should validate phone number format', async () => {
+        const business = new Business({
+          userId: new User(), // Mock user reference
+          businessName: 'FunkySkunk Solutions',
+          industry: 'IT Services',
+          phone: '12345', 
+          address: '123 Opera house, Sydney'
+        });
     
+        let error;
+        try {
+          await business.validate();
+        } catch (err) {
+          error = err;
+        }
+    
+        expect(error).toBeDefined();
+        expect(error.errors.phone).toBeDefined();
+        expect(error.errors.phone.message).toMatch(/Invalid phone number format/);
+      });    
   
 });
 // -----------------------------------------------------------------------------------------------------------------
