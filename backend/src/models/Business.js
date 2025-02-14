@@ -22,7 +22,8 @@ const BusinessSchema = new mongoose.Schema({
   // Industry - Required, must be a string, and trimmed
   industry: { 
     type: String, 
-    required: true, 
+    required: true,
+    trim: true, // To remove space if it is at the beginning or end of the string  
     maxlength: 50 
   },
 
