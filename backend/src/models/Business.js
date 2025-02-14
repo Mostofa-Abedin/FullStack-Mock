@@ -27,7 +27,9 @@ const BusinessSchema = new mongoose.Schema({
 
   // Website - Optional field, must follow a valid URL format
   website: { 
-    type: String, 
+    type: String,
+    trim: true,
+    match: [/^(https?:\/\/)?([\w-]+\.)+[\w-]{2,4}\/?$/, 'Invalid website URL'] // Validates URL structure 
   },
 
   // Phone Number - Required, must follow a standardized format

@@ -45,7 +45,31 @@ describe(' Business Model Validations', () => {
         expect(error).toBeDefined();
         expect(error.errors.phone).toBeDefined();
         expect(error.errors.phone.message).toMatch(/Invalid phone number format/);
-      });    
+    });    
   
+
+    it('should validate website URL format', async () => {
+        const business = new Business({
+            userId: new User(), 
+            businessName: 'ABC Solutions',
+            industry: 'IT Services',
+            phone: '+61-400-123-456',
+            address: '123 Main St, Sydney',
+            website: 'invalid-url' 
+        });
+
+        let error;
+        try {
+            await business.validate();
+        } catch (err) {
+            error = err;
+        }
+
+        expect(error).toBeDefined();
+        expect(error.errors.website).toBeDefined();
+        expect(error.errors.website.message).toMatch(/Invalid website URL/);
+    });
+    
+    
 });
 // -----------------------------------------------------------------------------------------------------------------
