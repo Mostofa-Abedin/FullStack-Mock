@@ -36,3 +36,92 @@ footer {
     gap: 1.5rem;
     margin-top: 8px;
 }
+
+ /* Responsive Styling for Tablet and Mobile */
+
+ @media (max-width: 768px) and (min-width: 600px) {
+    footer {
+        background: #192F3C;
+        color: #fff;
+        text-align: center;
+        padding: 1rem 1rem;
+        font-family: 'Inter', sans-serif;
+        display: flex;
+    }
+    
+    .magnet-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+    }
+    
+    .logo-text {
+        font-family: 'Kode Mono', monospace;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #F3DCB2;
+    }
+    
+    .copyright {
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+        margin-left: auto;
+        margin-right: 2rem;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 8px;
+    }
+
+ }
+  @media (max-width: 600px) {
+    footer {
+        background: #192F3C;
+        color: #fff;
+        text-align: center;
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .magnet-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+        padding-bottom: 30px;
+    }
+    
+    .logo-text-footer {
+        font-family: 'Kode Mono', monospace;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #F3DCB2;
+        padding-bottom: 30px;
+    }
+    
+    .copyright {
+        font-size: 0.8rem;
+        margin-top: 50px;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: -80px;
+        padding-bottom:30px;
+    }
+
+  }

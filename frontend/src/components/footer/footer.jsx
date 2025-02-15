@@ -23,7 +23,7 @@ const Footer = () => {
           src={magnetLogo}
           alt="Magnet Logo"
         />
-        <span className="logo-text"
+        <span className="logo-text-footer"
         >
           Magnet Labs™
         </span>
@@ -36,7 +36,7 @@ const Footer = () => {
       >
         {/* Facebook */}
         <a
-          href="https://www.facebook.com/MagnetLabs" // Replace with your actual Facebook URL
+          href="https://www.facebook.com/MagnetLabs" 
           aria-label="Facebook"
           target="_blank"
           rel="noopener noreferrer"
@@ -55,12 +55,12 @@ const Footer = () => {
             e.target.style.color = "#1877f2";
           }}
         >
-          <FaFacebook size={30} />
+          <FaFacebook size={25} />
         </a>
 
         {/* Instagram */}
         <a
-          href="https://www.instagram.com/MagnetLabs" // Replace with your actual Instagram URL
+          href="https://www.instagram.com/MagnetLabs" 
           aria-label="Instagram"
           target="_blank"
           rel="noopener noreferrer"
@@ -79,12 +79,12 @@ const Footer = () => {
             e.target.style.color = "#e1306c";
           }}
         >
-          <FaInstagram size={30} />
+          <FaInstagram size={25} />
         </a>
 
         {/* LinkedIn */}
         <a
-          href="https://www.linkedin.com/company/MagnetLabs" // Replace with your actual LinkedIn URL
+          href="https://www.linkedin.com/company/MagnetLabs" 
           aria-label="LinkedIn"
           target="_blank"
           rel="noopener noreferrer"
@@ -103,7 +103,7 @@ const Footer = () => {
             e.target.style.color = "white";
           }}
         >
-          <FaLinkedin size={30} />
+          <FaLinkedin  size={25}/>
         </a>
       </div>
     </footer>
