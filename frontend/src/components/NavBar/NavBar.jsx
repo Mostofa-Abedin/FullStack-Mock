@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import magnetLogo from "../assets/magnet_bg_removed.png";
+import magnetLogo from "../../assets/magnet_bg_removed.png";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
-import "../NavBar/NavBar.css";
+import "./NavBar.css"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

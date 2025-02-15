@@ -68,6 +68,8 @@
     font-size: 24px;
   }
 
+  /* Responsive Styling for Tablet and Mobile */
+
   @media (max-width: 768px) {
     .nav-links {
       display: none;
