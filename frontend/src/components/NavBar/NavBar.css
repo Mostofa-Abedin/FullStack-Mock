@@ -114,11 +114,26 @@
   }
 
   @media (max-width: 600px) {
+    
+    .logo-img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+    .logo-text {
+        font-family: 'Kode Mono', monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #F3DCB2;
+      }
+
     .nav-links {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 90px;
+        top: 50px;
         left: 0;
         width: 100%;
         padding-top: 20px;
@@ -133,8 +148,7 @@
       }
   
       .nav-link {
-        font-size: 1.2rem;
-        padding-left: 2rem;
+        font-size: 1rem;
         padding-bottom: 1rem;
         display: block;
       }
@@ -145,6 +159,12 @@
       }
   
       .navbar {
-          width: 100%;
+        width: 100%;
+        padding: 0.5rem 1rem;
+      }
+
+      .login-icon a, .mobile-menu {
+        color: #F3DCB2;
+        font-size: 20px;
       }
   }
