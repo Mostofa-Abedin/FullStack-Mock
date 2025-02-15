@@ -29,6 +29,17 @@ describe("Navbar Component", () => {
     expect(screen.getByText("Our Work")).toHaveAttribute("href", "/work");
     expect(screen.getByText("Contact Us")).toHaveAttribute("href", "/contact");
   });
+
+  test("highlights the active link when on that page", () => {
+    render(
+        <MemoryRouter initialEntries={["/services"]}>
+            <Navbar />
+        </MemoryRouter>
+    );
+    const activeLink = screen.getByText("Our Services");
+    expect(activeLink).toHaveClass("active"); 
+  })
+
   test("renders the login icon", () => {
     render(<FaUserCircle data-testid="login-icon" style={{ fontSize: "24px", marginLeft: "20px", color: "#F3DCB2" }} />);
     const loginIcon = screen.getByTestId("login-icon");

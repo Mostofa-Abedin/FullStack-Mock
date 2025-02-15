@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import magnetLogo from "../../assets/magnet_bg_removed.png";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import "./NavBar.css"
@@ -23,16 +23,17 @@ const Navbar = () => {
       </button>
 
       {/* Navigation Links (only visible when isOpen is true) */}
+
       <div className={`nav-links ${isOpen ? "open" : ""}`}data-testid="nav-links">
-        <Link to="/services" className="nav-link">
+        <NavLink to="/services" className="nav-link" activeClassName="active-link">
           Our Services
-        </Link>
-        <Link to="/work" className="nav-link">
+        </NavLink>
+        <NavLink to="/work" className="nav-link" activeClassName="active-link">
           Our Work
-        </Link>
-        <Link to="/contact" className="nav-link">
+        </NavLink>
+        <NavLink to="/contact" className="nav-link" activeClassName="active-link">
           Contact Us
-        </Link>
+        </NavLink>
       </div>
 
       {/* Login Icon */}
