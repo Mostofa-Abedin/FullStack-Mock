@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import magnetLogo from "../../assets/magnet_bg_removed.png";
+import magnetLogo from "../../assets/images/magnet_bg_removed.png";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import "./NavBar.css"
 

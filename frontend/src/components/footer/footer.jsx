@@ -1,7 +1,7 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import magnetLogo from "../../assets/magnet_bg_removed.png";
+import magnetLogo from "../../assets/images/magnet_bg_removed.png";
 import "./footer.css"
 
 const Footer = () => {
