@@ -1,29 +1,17 @@
+// Import required libraries
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const { getAllUsers, createUser, registerUser } = require('../controllers/userController'); // Import controllers
 
-// @route GET /users
-// @desc Get all users
-router.get('/', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+// Route: GET all users 
+router.get('/', getAllUsers); 
 
-// @route POST /users
-// @desc Add a new user
-router.post('/', async (req, res) => {
-  try {
-    const { name, email, role } = req.body;
-    const user = new User({ name, email, role });
-    await user.save();
-    res.status(201).json(user);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
+// Route: // Create a new user
+router.post('/', createUser);  
+
+// Route: Register a new user
+router.post('/register', registerUser);  
+
+
 
 module.exports = router;

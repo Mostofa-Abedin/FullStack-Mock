@@ -1,34 +1,32 @@
-require('dotenv').config(); // ✅ Load environment variables first
+// Load environment variables
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
 const userRoutes = require('./src/routes/userRoutes');
 
+// Initialize Express app
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Ensure MongoDB URI is properly loaded
+// Ensure MongoDB URI exists
 if (!process.env.MONGO_URI) {
   console.error('❌ MONGO_URI is missing. Check your .env file.');
   process.exit(1);
 }
 
-// MongoDB Connection
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => console.log('✅ MongoDB Atlas Connected'))
+}).then(() => console.log('✅ MongoDB Connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Routes
+// Define routes
 app.use('/users', userRoutes);
 
-// Only start the server when NOT running tests
-if (process.env.NODE_ENV !== 'test') {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-}
-
-module.exports = app; // ✅ Exporting app for testing
+// Export app (without starting server)
+module.exports = app;

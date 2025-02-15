@@ -16,42 +16,39 @@ jobs:
           - 27017:27017
 
     steps:
+      # ✅ Step 1: Checkout Repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # ✅ Step 2: Set Up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # ✅ Install dependencies for both backend & frontend
-      - name: Install dependencies
+      # ✅ Step 3: Install Dependencies
+      - name: Install dependencies (Backend & Frontend)
         run: |
           cd backend && npm install
           cd ../frontend && npm install
 
-      # ✅ Start the backend in the background & wait for it
-      - name: Start Backend
-        env:
-          MONGO_URI: ${{ secrets.MONGO_URI }} # ✅ Use GitHub Secret for MongoDB
-        run: |
-          cd backend
-          npm run dev &
-          sleep 5 # Wait for the backend to start
-
-      # ✅ Run Backend Tests (Unit + Integration)
-      - name: Run backend tests
+      # ✅ Step 4: Run Backend Tests (With Coverage)
+      - name: Run Backend Tests (Unit & Integration)
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
-        run: cd backend && npm test -- --coverage
+        run: |
+          cd backend
+          npm test -- --coverage  # ✅ Runs all backend tests
 
-      # ✅ Run Frontend Tests (Ensuring Backend is Running)
-      - name: Run frontend tests
-        run: cd frontend && npm test -- --coverage
+      # ✅ Step 5: Run Frontend Tests (With Coverage)
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          npm test -- --coverage
 
-      # ✅ Upload Coverage Reports as Artifacts
+      # ✅ Step 6: Upload Coverage Reports as Artifacts
       - name: Upload test coverage reports
-        uses: actions/upload-artifact@v4 # ✅ Updated to v4
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-reports
           path: |
