@@ -18,12 +18,12 @@ const Navbar = () => {
       </Link>
 
       {/* Hamburger Menu Button */}
-      <button className="mobile-menu" onClick={toggleMenu}>
+      <button className="mobile-menu" data-testid="mobile-menu" onClick={toggleMenu}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
 
       {/* Navigation Links (only visible when isOpen is true) */}
-      <div className={`nav-links ${isOpen ? "open" : ""}`}>
+      <div className={`nav-links ${isOpen ? "open" : ""}`}data-testid="nav-links">
         <Link to="/services" className="nav-link">
           Our Services
         </Link>
