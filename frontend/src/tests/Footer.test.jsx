@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer/Footer";
 
 describe("Footer Component", () => {
   it("renders the footer with text and social links", () => {

@@ -1,0 +1,38 @@
+footer {
+    background: #192F3C;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 2rem;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+}
+
+.magnet-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.logo-text {
+    font-family: 'Kode Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #F3DCB2;
+}
+
+.copyright {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    margin-left: auto;
+    margin-right: 2rem;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 8px;
+}

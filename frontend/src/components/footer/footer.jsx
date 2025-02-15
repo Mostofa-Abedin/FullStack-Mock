@@ -1,20 +1,13 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import magnetLogo from "../assets/magnet_bg_removed.png";
+import magnetLogo from "../../assets/magnet_bg_removed.png";
+import "./footer.css"
 
 const Footer = () => {
   return (
-    <footer
-      style={{
-        background: "#192F3C",
-        color: "#fff",
-        textAlign: "center",
-        padding: "2rem 2rem",
-        fontFamily: "'Inter', sans-serif",
-        display: "flex",
-      }}
-    >
+    <footer className="footer">
+
       {/* Logo and Name */}
       <Link
         to="/"
@@ -26,46 +19,20 @@ const Footer = () => {
           gap: "0.5rem",
         }}
       >
-        <img
+        <img className="magnet-logo"
           src={magnetLogo}
           alt="Magnet Logo"
-          style={{
-            width: "50px",
-            height: "50px",
-            objectFit: "contain",
-            overflow: "hidden",
-            transition: "transform 0.2s ease",
-          }}
         />
-        <span
-          style={{
-            fontFamily: "'Kode Mono', monospace",
-            fontSize: "1.5rem", // Smaller text for Magnet Labs
-            fontWeight: "600",
-            textTransform: "uppercase",
-            color: "#F3DCB2",
-          }}
+        <span className="logo-text"
         >
           Magnet Labs™
         </span>
       </Link>
-      <p
-        style={{
-          marginBottom: "1rem",
-          fontSize: "1rem",
-          marginLeft: "auto",
-          marginRight: "2rem",
-        }}
+      <p className="copyright"
       >
         © 2025 Magnet Labs. All rights reserved.
       </p>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "1.5rem",
-          marginTop: "8px",
-        }}
+      <div className="social-icons"
       >
         {/* Facebook */}
         <a
