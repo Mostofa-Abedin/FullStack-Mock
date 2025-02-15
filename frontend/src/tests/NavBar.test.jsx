@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Navbar from "../components/NavBar";
+import Navbar from "../components/NavBar/NavBar";
 import { FaUserCircle } from "react-icons/fa";
 
 describe("Navbar Component", () => {
