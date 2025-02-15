@@ -15,7 +15,7 @@ footer {
     transition: transform 0.2s ease;
 }
 
-.logo-text {
+.logo-text-footer {
     font-family: 'Kode Mono', monospace;
     font-size: 1.5rem;
     font-weight: 600;
@@ -57,7 +57,7 @@ footer {
         transition: transform 0.2s ease;
     }
     
-    .logo-text {
+    .logo-text-footer {
         font-family: 'Kode Mono', monospace;
         font-size: 1rem;
         font-weight: 600;
