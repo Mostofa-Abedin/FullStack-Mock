@@ -56,11 +56,15 @@
 
   .mobile-menu {
     display: none;
-    font-size: 28px;
+    font-size: 24px;
     color: #F3DCB2;
     background: transparent;
     border: none;
     cursor: pointer;
+  }
+
+  .mobile-menu:hover{
+    color: #F3A83C;
   }
 
   .login-icon a {
@@ -68,19 +72,23 @@
     font-size: 24px;
   }
 
+  .login-icon a:hover {
+    color: #F3A83C;
+  }
+
   /* Responsive Styling for Tablet and Mobile */
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px) and (min-width: 600px) {
     .nav-links {
       display: none;
       flex-direction: column;
       position: absolute;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      background: #192F3C;
-      padding: 1rem;
-      text-align: center;
+      top: 90px;
+      left: 60%;
+      width: 40%;
+      overflow: hidden;
+      background: rgba(25, 47, 60, 0.95);
+      text-align: left;
       transition: all 0.3s ease-in-out;
     }
 
@@ -89,8 +97,9 @@
     }
 
     .nav-link {
-      font-size: 1.5rem;
-      padding: 1rem 0;
+      font-size: 1.2rem;
+      padding-left: 2rem;
+      padding-bottom: 1rem;
       display: block;
     }
 
@@ -98,4 +107,44 @@
       display: block;
       margin-left: auto;
     }
+
+    .navbar {
+        width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        padding-top: 20px;
+        overflow: hidden;
+        background: rgba(25, 47, 60, 0.95);
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+  
+      .nav-link {
+        font-size: 1.2rem;
+        padding-left: 2rem;
+        padding-bottom: 1rem;
+        display: block;
+      }
+  
+      .mobile-menu {
+        display: block;
+        margin-left: auto;
+      }
+  
+      .navbar {
+          width: 100%;
+      }
   }
