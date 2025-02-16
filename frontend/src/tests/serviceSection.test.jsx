@@ -14,6 +14,6 @@ describe("ServicesSection Component", () => {
 
     expect(serviceCards[0]).toHaveTextContent("WebDevelopment");
     expect(serviceCards[1]).toHaveTextContent("SEOOptimisation");
-    expect(serviceCards[2]).toHaveTextContent("Social Media Marketing");
+    expect(serviceCards[2]).toHaveTextContent("Social MediaMarketing");
   });
 });

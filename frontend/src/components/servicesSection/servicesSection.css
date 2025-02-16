@@ -1,40 +1,40 @@
 .services-section {
     padding: 2rem;
     background: rgba(217, 217, 217, 0.32);
-    color:#192F3C;
+    color: #192F3C;
     text-align: center;
     cursor: default;
 }
 
-  .services-link {
+.services-link {
     text-decoration: none;
     color: inherit;
-  }
-  
-  .services-title {
+}
+
+.services-title {
     font-size: 2.5rem;
     font-family: "Kode Mono", monospace;
     font-weight: 700;
     margin-bottom: 10px;
     text-transform: uppercase;
-  }
-  
-  .services-description {
+}
+
+.services-description {
     font-size: 1.2rem;
     font-family: "Inter", sans-serif;
     margin: 0 auto;
     line-height: 1.8;
     margin-bottom: 2rem;
-  }
-  
-  .services-cards {
+}
+
+.services-cards {
     display: flex;
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
-  }
-  
-  .service-card {
+}
+
+.service-card {
     width: 30%;
     height: 180px;
     display: flex;
@@ -45,37 +45,99 @@
     font-size: 1.7rem;
     text-transform: uppercase;
     color: white;
-  }
-  .card-web {
-    background-color: #841B13;
-  }
+}
 
-  .card-web:hover {
+.card-web {
+    background-color: #841B13;
+}
+
+.card-web:hover {
     background-image: url("../../assets/images/card-web.png");
     background-size: cover;
     background-position: center;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  }
+}
 
-  .card-seo {
+.card-seo {
     background-color: #8BC4D9;
-  }
+}
 
-  .card-seo:hover {
+.card-seo:hover {
     background-image: url("../../assets/images/card-seo.png");
     background-size: cover;
     background-position: center;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  }
+}
 
-  .card-mark {
+.card-mark {
     background-color: #F3A83C;
-  }
+}
 
-  .card-mark:hover {
+.card-mark:hover {
     background-image: url("../../assets/images/card-mark.png");
     background-size: cover;
     background-position: center;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  }
+}
 
+
+@media (max-width: 768px) and (min-width: 600px) {
+    .services-section {
+        padding: 1.5rem;
+    }
+
+    .services-title {
+        font-size: 2rem;
+        margin-top: -5px;
+        margin-bottom: 0;
+    }
+
+    .services-description {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .services-cards {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .service-card {
+        height: 100px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px){
+    .services-section {
+        padding: 1rem;
+    }
+
+    .services-title {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+
+    .services-description {
+        font-size: 0.8rem;
+        line-height: normal;
+        margin-bottom: 1rem;
+    }
+
+    .services-cards {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .service-card {
+        height: 100px;
+        width: 100%;
+        font-size: 1rem;
+    }
+}

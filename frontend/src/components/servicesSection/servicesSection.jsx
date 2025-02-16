@@ -18,7 +18,7 @@ const servicesSection = () => {
         {[
           { title: "Web\nDevelopment", className: "card-web" },
           { title: "SEO\nOptimisation", className: "card-seo" },
-          { title: "Social Media Marketing", className: "card-mark" },
+          { title: "Social Media\nMarketing", className: "card-mark" },
         ].map((service, index) => (
           <div
             key={index}
