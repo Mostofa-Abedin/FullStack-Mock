@@ -1,22 +1,11 @@
 .services-section {
-    padding: 4rem 2rem;
-    background: linear-gradient(to right, rgba(44, 72, 117, 0.7), rgba(0, 32, 46, 0.7));
-    backdrop-filter: blur(10px);
-    color: #fff;
+    padding: 2rem;
+    background: rgba(217, 217, 217, 0.32);
+    color:#192F3C;
     text-align: center;
-    border-radius: 20px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    margin: 2rem 1rem; 
-    transform: translateY(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: default;
 }
-  
-  .services-section:hover {
-    transform: translateY(-10px); /* Lift on hover */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  }
-  
+
   .services-link {
     text-decoration: none;
     color: inherit;
@@ -24,19 +13,15 @@
   
   .services-title {
     font-size: 2.5rem;
+    font-family: "Kode Mono", monospace;
     font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: text-shadow 0.3s ease;
-  }
-  
-  .services-title:hover {
-    text-shadow: 0 0 10px white;
+    margin-bottom: 10px;
+    text-transform: uppercase;
   }
   
   .services-description {
     font-size: 1.2rem;
-    max-width: 600px;
+    font-family: "Inter", sans-serif;
     margin: 0 auto;
     line-height: 1.8;
     margin-bottom: 2rem;
@@ -50,28 +35,47 @@
   }
   
   .service-card {
-    width: 180px;
+    width: 30%;
     height: 180px;
-    background: linear-gradient(to bottom, rgba(255, 99, 97, 0.8), rgba(255, 133, 49, 0.8));
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow for cards */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 1.2rem;
-    color: #00202e;
-    transition: box-shadow 0.3s ease;
-    cursor: pointer;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    color: white;
   }
-  
-  .service-card:hover {
-    box-shadow: 0 0 15px white;
+  .card-web {
+    background-color: #841B13;
   }
-  
-  .service-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+
+  .card-web:hover {
+    background-image: url("../../assets/images/card-web.png");
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
-  
+
+  .card-seo {
+    background-color: #8BC4D9;
+  }
+
+  .card-seo:hover {
+    background-image: url("../../assets/images/card-seo.png");
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .card-mark {
+    background-color: #F3A83C;
+  }
+
+  .card-mark:hover {
+    background-image: url("../../assets/images/card-mark.png");
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
