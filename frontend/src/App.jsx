@@ -3,6 +3,7 @@ import Navbar from "./components/navBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import WorkSection from "./components/workSection/workSection";
 import ServicesSection from "./components/servicesSection/servicesSection";
+import ContactSection from "./components/contactSection/contactSection";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css"
@@ -23,7 +24,8 @@ function App() {
         </p>
         <ServicesSection />
         <WorkSection />
-        <UserList />
+        <ContactSection />
+        {/* <UserList /> */}
         <Footer />
       </div>
     </Router>
