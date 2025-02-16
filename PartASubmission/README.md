@@ -97,49 +97,49 @@ The target audience for Magnet Labs includes businesses and organizations seekin
 
 ### Summary of user Stories
 
-| **Epic**                               | **User Story**                                                                                                                                    |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Public-Facing Website**              | As a visitor, I want a consistent navigation and footer across all pages, so that I can easily explore the website.                               |
-|                                        | As a visitor, I want to view a welcoming homepage, so that I can understand the company's mission and navigate to other sections easily.          |
-|                                        | As a visitor, I want to explore the 'Our Services' page, so that I can learn about the various services offered by the company.                   |
-|                                        | As a visitor, I want to browse the 'Our Work' page, so that I can see examples of the company's previous projects and assess their quality.       |
-|                                        | As a visitor, I want to view detailed information about specific projects, so that I can gain insights into the company's expertise and approach. |
-|                                        | As a visitor, I want to access the 'Contact Us' page, so that I can find ways to get in touch with the company for inquiries or collaborations.   |
-| **User Authentication**                | As a user, I want to register an account with my email and password, so that I can access the platform securely.                                  |
-|                                        | As a user, I want to see a successful registration message, so that I know my registration process worked.                                        |
-|                                        | **(Stretch)** As a user, I want to receive an email verification link after signing up, so that I can confirm my identity.                        |
-|                                        | As a user, I want to log in using my email and password, so that I can access my account.                                                         |
-|                                        | **(Stretch)** As a user, I want to reset my password via email, so that I can regain access if I forget it.                                       |
-|                                        | **(Stretch)** As a security-conscious admin, I want login attempts to be rate-limited, so that brute force attacks are prevented.                 |
-| **Access Control & Permissions**       | As an admin, I want to assign roles (client/admin) to users, so that they have appropriate permissions.                                           |
-|                                        | As a user, I want to only see features relevant to my role, so that I don’t access admin functionality.                                           |
-|                                        | **(Stretch)** As an admin, I want to revoke user access, so that I can disable inactive or malicious accounts.                                    |
-|                                        | **(Stretch)** As an admin, I want session expiration and automatic logout after inactivity, so that user security is maintained.                  |
-| **Client Onboarding Form**             | As a new user, I want to fill out an onboarding form with my business details, so that I can personalize my profile.                              |
-|                                        | As a system admin, I want to validate required fields, so that clients do not submit incomplete forms.                                            |
-|                                        | **(Stretch)** As an admin, I want to review and approve client onboarding details, so that I can ensure accurate business information.            |
-| **User Profile Management**            | As a user, I want to update my personal and business information, so that my profile remains accurate.                                            |
-|                                        | As a user, I want to change my password, so that I can maintain account security.                                                                 |
-|                                        | As an admin, I want to edit client profiles, so that I can assist with updates if needed.                                                         |
-| **Feedback & Communication**           | As a user, I want to submit feedback about my project, so that I can share my concerns or suggestions.                                            |
-|                                        | As an admin, I want to receive and track client feedback, so that I can address issues promptly.                                                  |
-|                                        | **(Stretch)** As an admin, I want to see past feedback submissions, so that I can track responses.                                                |
-| **User Dashboard (Client View)**       | As a user, I want to see my active projects, so that I can track progress.                                                                        |
-|                                        | **(Stretch)** As a user, I want to receive real-time notifications, so that I stay updated on project changes.                                    |
-|                                        | **(Stretch)** As a user, I want a quick overview of my recent interactions, so that I can stay informed.                                          |
-| **Announcements & Content Management** | As an admin, I want to create announcements, so that I can share company updates with clients.                                                    |
-|                                        | As a user, I want to see announcements on my dashboard, so that I stay informed.                                                                  |
-|                                        | **(Stretch)** As an admin, I want to schedule announcements, so that I can plan content in advance.                                               |
-| **Admin Dashboard (Admin View)**       | As an admin, I want to view all client accounts, so that I can manage them effectively.                                                           |
-|                                        | **(Stretch)** As an admin, I want to reset passwords for users, so that I can assist in account recovery.                                         |
-|                                        | **(Stretch)** As an admin, I want to track open client issues, so that I can prioritize problem resolution.                                       |
-| **Reporting & Analytics** _(Stretch)_  | As an admin, I want to see engagement metrics, so that I can analyze platform usage.                                                              |
-|                                        | As an admin, I want to generate reports on project progress, so that I can share updates with stakeholders.                                       |
-|                                        | As an admin, I want to track common feedback themes, so that I can identify improvement areas.                                                    |
-| **System Monitoring** _(Stretch)_      | As an admin, I want to monitor uptime and performance metrics, so that I can ensure system stability.                                             |
-|                                        | As an admin, I want to receive security alerts, so that I can proactively address risks.                                                          |
-| **User Task Management** _(Stretch)_   | As a user, I want a Kanban board for my projects, so that I can visualize progress.                                                               |
-|                                        | As an admin, I want to assign tasks to users, so that I can track project phases.                                                                 |
+| **Epic**                               | **User Story**                                                                                                                                        |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Public-Facing Website**              | **As a visitor, I want a consistent navigation and footer across all pages**, so that I can easily explore the website.                               |
+|                                        | **As a visitor, I want to view a welcoming homepage**, so that I can understand the company's mission and navigate to other sections easily.          |
+|                                        | **As a visitor, I want to explore the 'Our Services' page**, so that I can learn about the various services offered by the company.                   |
+|                                        | **As a visitor, I want to browse the 'Our Work' page**, so that I can see examples of the company's previous projects and assess their quality.       |
+|                                        | **As a visitor, I want to view detailed information about specific projects**, so that I can gain insights into the company's expertise and approach. |
+|                                        | **As a visitor, I want to access the 'Contact Us' page**, so that I can find ways to get in touch with the company for inquiries or collaborations.   |
+| **User Authentication**                | **As a user, I want to register an account with my email and password**, so that I can access the platform securely.                                  |
+|                                        | **As a user, I want to see a successful registration message**, so that I know my registration process worked.                                        |
+|                                        | **(Stretch)** **As a user, I want to receive an email verification link after signing up**, so that I can confirm my identity.                        |
+|                                        | **As a user, I want to log in using my email and password**, so that I can access my account.                                                         |
+|                                        | **(Stretch)** **As a user, I want to reset my password via email**, so that I can regain access if I forget it.                                       |
+|                                        | **(Stretch)** **As a security-conscious admin, I want login attempts to be rate-limited**, so that brute force attacks are prevented.                 |
+| **Access Control & Permissions**       | **As an admin, I want to assign roles (client/admin) to users**, so that they have appropriate permissions.                                           |
+|                                        | **As a user, I want to only see features relevant to my role**, so that I don’t access admin functionality.                                           |
+|                                        | **(Stretch)** **As an admin, I want to revoke user access**, so that I can disable inactive or malicious accounts.                                    |
+|                                        | **(Stretch)** **As an admin, I want session expiration and automatic logout after inactivity**, so that user security is maintained.                  |
+| **Client Onboarding Form**             | **As a new user, I want to fill out an onboarding form with my business details**, so that I can personalize my profile.                              |
+|                                        | **As a system admin, I want to validate required fields**, so that clients do not submit incomplete forms.                                            |
+|                                        | **(Stretch)** **As an admin, I want to review and approve client onboarding details**, so that I can ensure accurate business information.            |
+| **User Profile Management**            | **As a user, I want to update my personal and business information**, so that my profile remains accurate.                                            |
+|                                        | **As a user, I want to change my password**, so that I can maintain account security.                                                                 |
+|                                        | **As an admin, I want to edit client profiles**, so that I can assist with updates if needed.                                                         |
+| **Feedback & Communication**           | **As a user, I want to submit feedback about my project**, so that I can share my concerns or suggestions.                                            |
+|                                        | **As an admin, I want to receive and track client feedback**, so that I can address issues promptly.                                                  |
+|                                        | **(Stretch)** **As an admin, I want to see past feedback submissions**, so that I can track responses.                                                |
+| **User Dashboard (Client View)**       | **As a user, I want to see my active projects**, so that I can track progress.                                                                        |
+|                                        | **(Stretch)** **As a user, I want to receive real-time notifications**, so that I stay updated on project changes.                                    |
+|                                        | **(Stretch)** **As a user, I want a quick overview of my recent interactions**, so that I can stay informed.                                          |
+| **Announcements & Content Management** | **As an admin, I want to create announcements**, so that I can share company updates with clients.                                                    |
+|                                        | **As a user, I want to see announcements on my dashboard**, so that I stay informed.                                                                  |
+|                                        | **(Stretch)** **As an admin, I want to schedule announcements**, so that I can plan content in advance.                                               |
+| **Admin Dashboard (Admin View)**       | **As an admin, I want to view all client accounts**, so that I can manage them effectively.                                                           |
+|                                        | **(Stretch)** As an admin, I want to reset passwords for users, so that I can assist in account recovery.                                             |
+|                                        | **(Stretch)** **As an admin, I want to track open client issues**, so that I can prioritize problem resolution.                                       |
+| **Reporting & Analytics** _(Stretch)_  | **As an admin, I want to see engagement metrics**, so that I can analyze platform usage.                                                              |
+|                                        | **As an admin, I want to generate reports on project progress**, so that I can share updates with stakeholders.                                       |
+|                                        | **As an admin, I want to track common feedback themes**, so that I can identify improvement areas.                                                    |
+| **System Monitoring** _(Stretch)_      | **As an admin, I want to monitor uptime and performance metrics**, so that I can ensure system stability.                                             |
+|                                        | **As an admin, I want to receive security alerts**, so that I can proactively address risks.                                                          |
+| **User Task Management** _(Stretch)_   | **As a user, I want a Kanban board for my projects**, so that I can visualize progress.                                                               |
+|                                        | **As an admin, I want to assign tasks to users**, so that I can track project phases.                                                                 |
 
 ## Sprint Planning and Task Management for T3A2 – Part B
 
@@ -147,9 +147,9 @@ The target audience for Magnet Labs includes businesses and organizations seekin
 
 For Part B of the T3A2 assignment, we implemented an Agile approach using JIRA to manage and track development tasks. The project was structured into three sprints, each with a one-week duration, ensuring an iterative and organized workflow. The first sprint began on February 12, 2025, at 7:00 PM.
 
-- Total Sprints: 3
-- Sprint Duration: 1 week each
-- Start Date of First Sprint: February 12, 2025, at 7:00 PM
+- **Total Sprints: 3**
+- **Sprint Duration: 1 week each**
+- **Start Date of First Sprint: February 12, 2025, at 7:00 PM**
 
 Each sprint focused on completing a subset of tasks, allowing for incremental progress and continuous testing.
 
@@ -166,18 +166,18 @@ To maintain clarity and efficiency, tasks were categorized using JIRA’s hierar
 - **Subtasks**
   Each user story was broken into subtasks, categorized into six different functional areas:
 
-| **Subtask Type**             | **Purpose**                                                           |
-| ---------------------------- | --------------------------------------------------------------------- |
-| **Frontend Subtask**         | Implement UI components and client-side logic                         |
-| \***\*Backend Subtasks\*\*** | Develop API endpoints, databases, and server-side logic               |
-| **Security Subtask**         | Implement authentication, authorization, and data protection measures |
-| \***\*Testing Subtask\*\***  | Perform unit, integration, and end-to-end testing                     |
-| **Deployment Subtask**       | Manage deployment and CI/CD pipeline tasks                            |
-| **Documentation Subtask**    | Write API documentation, project reports, and user guides             |
-
-#### JIRA Hierarchy
+| **Subtask Type**          | **Purpose**                                                           |
+| ------------------------- | --------------------------------------------------------------------- |
+| **Frontend Subtask**      | Implement UI components and client-side logic                         |
+| **Backend Subtasks**      | Develop API endpoints, databases, and server-side logic               |
+| **Security Subtask**      | Implement authentication, authorization, and data protection measures |
+| **Testing Subtask**       | Perform unit, integration, and end-to-end testing                     |
+| **Deployment Subtask**    | Manage deployment and CI/CD pipeline tasks                            |
+| **Documentation Subtask** | Write API documentation, project reports, and user guides             |
 
 ⚠ Note: Not all subtasks were necessary for every user story. Tasks were assigned based on the specific requirements of each story.
+
+#### JIRA Task Hierarchy
 
 ```mermaid
 graph TD;
@@ -487,7 +487,7 @@ For this project, we categorized our chosen Epics into two groups:
 
 ### 2. **As a system admin, I want to validate required fields,** so that clients do not submit incomplete forms.
 
-**Testing Subtask**s
+**Testing Subtasks**
 
 - Create a **validation test suite** to check required fields across multiple forms.
 - Verify that API validation logic correctly rejects incomplete submissions.
