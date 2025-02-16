@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./docs/magnet_bg_removed.png" alt="Company Logo">
+</p>
+
 # Part A Submission
 
 ## Description of Website
