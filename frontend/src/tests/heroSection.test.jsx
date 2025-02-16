@@ -36,5 +36,11 @@ describe("HeroSection Component", () => {
       expect(icon).toBeVisible();
     });
   });
-});
 
+  test("ensures all essential elements are visible", () => {
+    render(<HeroSection />);
+
+    // Check if the overlay content is visible
+    expect(screen.getByText(/We craft solutions that/i)).toBeVisible();
+  });
+});
