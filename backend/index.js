@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const userRoutes = require('./src/routes/userRoutes');
+const authRoutes = require('./src/routes/authRoutes')
 
 // Initialize Express app
 const app = express();
@@ -27,6 +28,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Define routes
 app.use('/users', userRoutes);
+app.use('/login', authRoutes);
 
 // Export app (without starting server)
 module.exports = app;
