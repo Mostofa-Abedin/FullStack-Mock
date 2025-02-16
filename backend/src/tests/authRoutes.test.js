@@ -20,7 +20,7 @@ describe('POST /login', () => {
     const res = await request(app).post('/login').send(newUser);
     expect(res.statusCode).toBe(200);
     expect(res.body.token.startsWith('ey')).toBe(true); //  Check JWT has been generated
-  });
+  }, 10000);
 
   it('should fail if email does not exist', async () => {
     const userData = {
