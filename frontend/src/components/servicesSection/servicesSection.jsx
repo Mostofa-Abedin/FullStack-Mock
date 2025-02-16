@@ -20,10 +20,19 @@ const servicesSection = () => {
           { title: "SEO\nOptimisation", className: "card-seo" },
           { title: "Social Media Marketing", className: "card-mark" },
         ].map((service, index) => (
-          <div key={index} className={`service-card ${service.className}`}>
-            <div className="card-image"></div>
-            <div className="card-overlay"></div>
-            <div dangerouslySetInnerHTML={{ __html: service.title.replace("\n", "<br />") }} />
+          <div
+            key={index}
+            className={`service-card ${service.className}`}
+            role="article"
+          >
+            <div>
+              {service.title.split('\n').map((line, idx) => (
+                <React.Fragment key={idx}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))}
+            </div>
           </div>
         ))}
       </div>
