@@ -52,3 +52,43 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Homepage CSS */
+
+.hero-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  color: #192F3C;
+}
+
+.highlight {
+  transition: text-shadow 0.3s ease;
+  cursor: default;
+}
+
+/* Red highlight for 'Attract' */
+.red {
+  color: #841B13;
+}
+.red:hover {
+  text-shadow: 0 0 10px rgba(132, 27, 19, 0.5), 0 0 20px rgba(132, 27, 19, 0.5);
+}
+
+/* Blue highlight for 'Engage' */
+
+.blue {
+  color: #8BC4D9;
+}
+.blue:hover {
+  text-shadow: 0 0 20px rgba(139, 196, 217, 0.5), 0 0 30px rgba(139, 196, 217, 0.5);
+}
+
+/* Yellow highlight for 'Convert' */
+
+.yellow {
+  color: #F3A83C;
+}
+.yellow:hover {
+  text-shadow: 0 0 20px rgba(243, 168, 60, 0.5), 0 0 30px rgba(243, 168, 60, 0.5);
+}
