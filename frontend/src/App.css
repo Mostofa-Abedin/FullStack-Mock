@@ -56,3 +56,15 @@
 .yellow:hover {
   text-shadow: 0 0 20px rgba(243, 168, 60, 0.5), 0 0 30px rgba(243, 168, 60, 0.5);
 }
+
+@media (max-width: 768px) and (min-width: 600px) {
+  .hero-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-text {
+    font-size: 1rem;
+  }
+}
