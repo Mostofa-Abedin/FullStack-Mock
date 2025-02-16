@@ -11,7 +11,7 @@ const HeroSection = () => {
     <div className="hero-section">
       {/* Video Container */}
       <div className="hero-video-container">
-        <video autoPlay muted loop playsInline>
+        <video autoPlay muted loop playsInline data-testid="video">
           <source src={bgVideo} type="video/mp4" />
         </video>
         <div className="hero-overlay"></div>
@@ -19,7 +19,7 @@ const HeroSection = () => {
 
       {/* Overlay Content */}
       <div className="hero-content">
-        <h1>
+        <h1  data-testid="hero-title">
           THE ART OF <br />
           <span className="hero-highlight">DIGITAL ATTRACTION</span>
         </h1>
