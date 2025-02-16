@@ -749,4 +749,62 @@ For this project, we categorized our chosen Epics into two groups:
 
 ## Wireframes
 
+Each wireframe image contains a desktop, tablet and mobile view. Some pages will also show hamburger menu open.
+
+### Home Page
+![Photo of home page wireframe](./docs/wireframes/wireframe_homepage.png)
+
+### Services Page
+![Photo of services page wireframe](./docs/wireframes/wireframe_servicespage.png)
+
+### Our Work Page
+![Photo of our work page wireframe](./docs/wireframes/wireframe_workpage.png)
+
+### Project Page (Colour Scheme 1)
+![Photo of project page wireframe - colour scheme 1](./docs/wireframes/wireframe_projectpage1.png)
+
+### Project Page (Colour Scheme 2)
+![Photo of project page wireframe - colour scheme 2](./docs/wireframes/wireframe_projectpage2.png)
+
+### Contact Page
+![Photo of contact page wireframe](./docs/wireframes/wireframe_contactpage.png)
+
+### Admin Login Page
+![Photo of admin login page wireframe](./docs/wireframes/wireframe_adminlogin.png)
+
+### Admin Dashboard
+![Photo of admin dashboard page wireframe](./docs/wireframes/wireframe_admindashboard.png)
+
+### Client Login Page
+![Photo of client login page wireframe](./docs/wireframes/wireframe_clientlogin.png)
+
+### Client Dashboard
+![Photo of client dashboard page wireframe](./docs/wireframes/wireframe_clientdashboard.png)
+
+
 ## Kanban Screenshots
+We decided to use a simple Kanban board instead of sprints for Part A because we’re in the discovery phase, where requirements are still evolving. Sprints work best when tasks are well-defined and time-boxed, but since we need flexibility to adapt as we learn more, Kanban makes more sense. It allows us to visualise our workflow, track progress, and adjust priorities as needed without being restricted by rigid sprint cycles. This way, we can keep things moving efficiently while staying open to changes.
+
+#### Screenshot 1
+![Photo of kanban board 1](./docs//kanban%20screenshots/part-a_kanban_1.png)
+
+#### Screenshot 2
+![Photo of kanban board 2](./docs//kanban%20screenshots/part-a_kanban_2.png)
+
+#### Screenshot 3
+![Photo of kanban board 3](./docs//kanban%20screenshots/part-a_kanban_3.png)
+
+#### Screenshot 4
+![Photo of kanban board 4](./docs//kanban%20screenshots/part-a_kanban_4.png)
+
+#### Screenshot 5
+![Photo of kanban board 5](./docs//kanban%20screenshots/part-a_kanban_5.png)
+
+#### Screenshot 6
+![Photo of kanban board 6](./docs//kanban%20screenshots/part-a_kanban_6.png)
+
+#### Screenshot 7
+![Photo of kanban board 7](./docs//kanban%20screenshots/part-a_kanban_7.png)
+
+#### Screenshot 8
+![Photo of kanban board 8](./docs//kanban%20screenshots/part-a_kanban_8.png)
