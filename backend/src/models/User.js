@@ -5,21 +5,38 @@ const bcrypt = require('bcrypt');
 
 // Define a schema for the User model
 const UserSchema = new mongoose.Schema({
+
   // Name field - must be a string and is required
-  name: { type: String, required: true },
+  name: { 
+    type: String, 
+    required: true 
+  },
 
   // Email field - must be a string, required, and must be unique in the database
-  email: { type: String, required: true, unique: true, match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/ },
+  email: { 
+    type: String, 
+    required: true, 
+    unique: true, 
+    match: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/ 
+  },
 
   // Role field - must be a string, only accepts 'client' or 'admin', defaults to 'client' if not provided
-  role: { type: String, enum: ['client', 'admin'], default: 'client' },
+  role: { 
+    type: String, 
+    enum: ['client', 'admin'], 
+    default: 'client' 
+  },
 
   // Hashed Password - The password will be hashed and stored here using the Pre-save middleware
-  password: { type: String, required: true }
+  password: { 
+    type: String, 
+    required: true 
+  }
 
 }, { 
   timestamps: true // Timestamp added so that we have createdAt: a date representing when this document was created & updatedAt: a date representing when this document was last updated.
 });
+
 
 // Pre-save middleware to hash passwords before saving
 UserSchema.pre('save', async function(next) {
