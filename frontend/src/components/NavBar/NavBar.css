@@ -54,10 +54,6 @@
     color: #F3A83C;
   }
 
-  .active-link {
-    color: #F3A83C;
-  }
-
   .mobile-menu {
     display: none;
     font-size: 24px;
@@ -137,7 +133,7 @@
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 50px;
+        top: 60px;
         left: 0;
         width: 100%;
         padding-top: 20px;
@@ -149,6 +145,7 @@
 
       .nav-links.open {
         display: flex;
+        width: 100%;
       }
   
       .nav-link {
@@ -164,11 +161,11 @@
   
       .navbar {
         width: 100%;
-        padding: 0.5rem 1rem;
+        padding: 15px;
       }
 
       .login-icon a, .mobile-menu {
         color: #F3DCB2;
-        font-size: 20px;
+        font-size: 18px;
       }
   }

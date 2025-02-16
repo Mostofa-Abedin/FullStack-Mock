@@ -62,7 +62,6 @@
     font-size: 3.5rem;
     font-weight: 700;
     font-family: "Kode Mono", monospace;
-    cursor: pointer;
     transition: text-shadow 0.3s ease;
   }
   
@@ -114,37 +113,46 @@
     }
   }
   
-  /* Hover Effects */
-  .hero-text-attract {
-    font-weight: bold;
-    color: #bb0a1e;
-    cursor: pointer;
-    transition: text-shadow 0.3s ease;
-  }
   
-  .hero-text-attract:hover {
-    text-shadow: 0 0 20px #bb0a1e, 0 0 30px #bb0a1e;
+  /* Responsive Styling for Tablet and Mobile */
+
+  @media (max-width: 768px) and (min-width: 600px) {
+    
+    .hero-section {
+        height: 30vh;
+      }
+      
+      .hero-highlight {
+        color: white;
+        font-size: 3rem;
+        font-family: "Kode Mono", monospace;
+      }
+
+      .floating-icon {
+        width: 50px;
+      }
+      
   }
-  
-  .hero-text-engage {
-    font-weight: bold;
-    color: #367588;
-    cursor: pointer;
-    transition: text-shadow 0.3s ease;
+
+  @media (max-width: 600px) {
+
+    .hero-section {
+        height: 40vh;
+      }
+
+      .hero-content h1 {
+        font-size: 1rem;
+      }
+      
+      .hero-highlight {
+        color: white;
+        font-size: 2rem;
+        font-family: "Kode Mono", monospace;
+      }
+
+      .floating-icon {
+        width: 40px;
+      }
+    
+
   }
-  
-  .hero-text-engage:hover {
-    text-shadow: 0 0 20px #367588, 0 0 30px #367588;
-  }
-  
-  .hero-text-convert {
-    font-weight: bold;
-    color: #ffa600;
-    cursor: pointer;
-    transition: text-shadow 0.3s ease;
-  }
-  
-  .hero-text-convert:hover {
-    text-shadow: 0 0 20px #ffa600, 0 0 30px #ffa600;
-  }
-  
