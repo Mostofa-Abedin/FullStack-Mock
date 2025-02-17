@@ -1,0 +1,159 @@
+/* Hero Section Container */
+.hero-section {
+    position: relative;
+    height: 50vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    overflow: hidden;
+  }
+  
+  /* Video Container */
+  .hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .hero-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 32, 46, 0.5), transparent);
+  }
+  
+  /* Overlay Content */
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .hero-content h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    color: white;
+    animation: fadeIn 1.5s ease-in;
+  }
+  
+  .hero-highlight {
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 700;
+    font-family: "Kode Mono", monospace;
+    transition: text-shadow 0.3s ease;
+  }
+  
+
+  /* Floating Icons */
+
+  .floating-icon {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    animation: floatAnimation 6s infinite ease-in-out;
+    z-index: 10;
+  }
+
+  .icon1 {
+    top: 10%;
+    left: 10%;
+    animation-duration: 5s;
+  }
+
+  .icon2 {
+    top: 20%;
+    right: 15%;
+    animation-duration: 6.5s;
+  }
+  
+  .icon3 {
+    bottom: 10%;
+    left: 10%;
+    animation-duration: 7s;
+  }
+
+  .icon4 {
+    bottom: 10%;
+    right: 10%;
+    animation-duration: 7s;
+  }
+
+  /* Floating Animation */
+@keyframes floatAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  
+  /* Responsive Styling for Tablet and Mobile */
+
+  @media (max-width: 768px) and (min-width: 600px) {
+    
+    .hero-section {
+        height: 30vh;
+      }
+      
+      .hero-highlight {
+        color: white;
+        font-size: 3rem;
+        font-family: "Kode Mono", monospace;
+      }
+
+      .floating-icon {
+        width: 50px;
+      }
+      
+  }
+
+  @media (max-width: 600px) {
+
+    .hero-section {
+        height: 40vh;
+      }
+
+      .hero-content h1 {
+        font-size: 1.2rem;
+      }
+      
+      .hero-highlight {
+        color: white;
+        font-size: 2.5rem;
+        line-height: 40px;
+        font-family: "Kode Mono", monospace;
+      }
+
+      .floating-icon {
+        width: 40px;
+      }
+    
+
+  }

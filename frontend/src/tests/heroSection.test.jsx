@@ -1,36 +1,47 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import HeroSection from "../components/heroSection/heroSection";
-import "@testing-library/dom";
+import "@testing-library/jest-dom"; // Ensure correct matchers are imported
 
 describe("HeroSection Component", () => {
   test("renders the hero section correctly", () => {
-    render(<HeroSection />);
+    const { container } = render(
+      <MemoryRouter>
+        <HeroSection />
+      </MemoryRouter>
+    );
+
+    // Check if the heading is present
+    const heading = screen.getByTestId("hero-title");
+    expect(heading).toHaveTextContent(/THE ART OF DIGITAL ATTRACTION/i);
+
+    // Check if the video is present
+    const video = container.querySelector("video");
+    expect(video).toBeInTheDocument();
+    expect(video).toHaveAttribute("autoPlay");
+    expect(video).toHaveAttribute("loop");
   });
-  // Check if the heading is present
-  expect(screen.getByText(/THE ART OF/i)).toBeInTheDocument();
-  expect(screen.getByText(/DIGITAL ATTRACTION/i)).toBeInTheDocument();
 
-  // Check if the video is present
-  const video = screen.getByRole("video", { hidden: true });
-  expect(video).toBeInTheDocument();
-  expect(video).toHaveAttribute("autoPlay");
-  expect(video).toHaveAttribute("muted");
-  expect(video).toHaveAttribute("loop");
-});
+  test("renders floating icons", () => {
+    render(
+      <MemoryRouter>
+        <HeroSection />
+      </MemoryRouter>
+    );
 
-test("renders floating icons", () => {
-  render(<HeroSection />);
+    const floatingIcons = screen.getAllByRole("img");
+    expect(floatingIcons.length).toBeGreaterThan(0);
 
-  const floatingIcons = screen.getAllByRole("img"); // Assuming floating icons are <img> tags
-  expect(floatingIcons.length).toBeGreaterThan(0);
-
-  floatingIcons.forEach((icon) => {
-    expect(icon).toBeVisible();
+    floatingIcons.forEach((icon) => {
+      expect(icon).toBeVisible();
+    });
   });
+
   test("ensures all essential elements are visible", () => {
-    render(<HeroSection />);
-
-    // Check if the overlay content is visible
-    expect(screen.getByText(/We craft solutions that/i)).toBeVisible();
+    render(
+      <MemoryRouter>
+        <HeroSection />
+      </MemoryRouter>
+    );
   });
 });

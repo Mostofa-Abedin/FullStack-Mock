@@ -1,0 +1,121 @@
+.contact-section-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 2rem;
+    padding: 4rem 2rem;
+    background: rgba(217, 217, 217, 0.32);
+    transform: translateY(0);
+    cursor: default;
+  }
+  
+  /* Left Column */
+  .contact-section-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  
+  /* Right Column */
+  .contact-section-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; 
+    align-items: center;
+  }
+  
+  .contact-section-title {
+    font-size: 2.5rem;
+    font-family: "Kode Mono", monospace;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    color: #192F3C;
+    margin: 0 auto;
+  }
+  
+  .contact-section-description {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    font-family: "Inter", monospace;
+    color: #192F3C;
+  }
+
+  .contact-cta-text {
+    font-size: 1.8rem;
+    color: #192F3C;
+    margin: 10px auto;
+  }
+  
+  .contact-section-button {
+    padding: 1rem 2rem;
+    background-color: #F3A83C;
+    color: #00202e;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    margin: 0 auto;
+    width: 250px;
+    align-items: center;
+  }
+  
+  .contact-section-button:hover {
+    background-color: #841B13;
+    color: white;
+  }
+  
+  
+  @media (max-width: 600px) {
+    .contact-section-container {
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .contact-section-title {
+        font-size: 1.5rem;
+        font-family: "Kode Mono", monospace;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+        text-transform: uppercase;
+        color: #192F3C;
+        margin: 0 auto;
+      }
+      
+      .contact-section-description {
+        font-size: 1rem;
+        margin-top: 10px;
+        font-family: "Inter", monospace;
+        color: #192F3C;
+      }
+    
+      .contact-cta-text {
+        font-size: 1.5rem;
+        color: #192F3C;
+        margin: 10px auto;
+      }
+      
+      .contact-section-button {
+        padding: 1rem 2rem;
+        background-color: #F3A83C;
+        color: #00202e;
+        border: none;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: "Inter", sans-serif;
+        margin: 0 auto;
+        width: 250px;
+        align-items: center;
+      }
+ 
+  }
+  
+  

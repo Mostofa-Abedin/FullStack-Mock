@@ -1,0 +1,171 @@
+  .navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: #192F3C;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    gap: 0.5rem;
+  }
+
+  .logo-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+  }
+
+  .logo-text {
+    font-family: 'Kode Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #F3DCB2;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: auto;
+    margin-right: 5rem;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #F3A83C;
+  }
+
+  .mobile-menu {
+    display: none;
+    font-size: 24px;
+    color: #F3DCB2;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-menu:hover{
+    color: #F3A83C;
+  }
+
+  .login-icon a {
+    color: #F3DCB2;
+    font-size: 25px;
+  }
+
+  .login-icon a:hover {
+    color: #F3A83C;
+  }
+
+  /* Responsive Styling for Tablet and Mobile */
+
+  @media (max-width: 768px) and (min-width: 600px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 90px;
+      left: 60%;
+      width: 40%;
+      overflow: hidden;
+      background: rgba(25, 47, 60, 0.95);
+      text-align: left;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .nav-link {
+      font-size: 1.2rem;
+      padding-left: 2rem;
+      padding-bottom: 1rem;
+      display: block;
+    }
+
+    .mobile-menu {
+      display: block;
+      margin-left: auto;
+    }
+
+    .navbar {
+        width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    
+    .logo-img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+    .logo-text {
+        font-family: 'Kode Mono', monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #F3DCB2;
+      }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding-top: 20px;
+        overflow: hidden;
+        background: rgba(25, 47, 60, 0.95);
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .nav-links.open {
+        display: flex;
+        width: 100%;
+      }
+  
+      .nav-link {
+        font-size: 1rem;
+        padding-bottom: 1rem;
+        display: block;
+      }
+  
+      .mobile-menu {
+        display: block;
+        margin-left: auto;
+      }
+  
+      .navbar {
+        width: 100%;
+        padding: 15px;
+      }
+
+      .login-icon a, .mobile-menu {
+        color: #F3DCB2;
+        font-size: 18px;
+      }
+  }
