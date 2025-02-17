@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import magnetLogo from "../../assets/images/magnet_bg_removed.png";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
-import "./NavBar.css"
+import "./NavBar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,15 +23,23 @@ const Navbar = () => {
       </button>
 
       {/* Navigation Links (only visible when isOpen is true) */}
-
-      <div className={`nav-links ${isOpen ? "open" : ""}`}data-testid="nav-links">
-        <NavLink to="/services" className="nav-link" activeClassName="active-link">
+      <div className={`nav-links ${isOpen ? "open" : ""}`} data-testid="nav-links">
+        <NavLink
+          to="/services"
+          className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
+        >
           Our Services
         </NavLink>
-        <NavLink to="/work" className="nav-link" activeClassName="active-link">
+        <NavLink
+          to="/work"
+          className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
+        >
           Our Work
         </NavLink>
-        <NavLink to="/contact" className="nav-link" activeClassName="active-link">
+        <NavLink
+          to="/contact"
+          className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
+        >
           Contact Us
         </NavLink>
       </div>
