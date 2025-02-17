@@ -1,6 +1,5 @@
-import UserList from "./components/UserList";
-import Navbar from "./components/navBar/NavBar";
-import Footer from "./components/Footer/Footer";
+import Navbar from "./components/NavBar/NavBar";
+import Footer from "./components/footer/footer";
 import WorkSection from "./components/workSection/workSection";
 import ServicesSection from "./components/servicesSection/servicesSection";
 import ContactSection from "./components/contactSection/contactSection";
@@ -25,7 +24,6 @@ function App() {
         <ServicesSection />
         <WorkSection />
         <ContactSection />
-        {/* <UserList /> */}
         <Footer />
       </div>
     </Router>
