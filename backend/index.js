@@ -7,6 +7,8 @@ const cors = require('cors');
 
 const userRoutes = require('./src/routes/userRoutes');
 const authRoutes = require('./src/routes/authRoutes')
+const adminRoutes = require('./src/routes/adminRoutes');
+const clientRoutes = require('./src/routes/clientRoutes')
 
 // Initialize Express app
 const app = express();
@@ -29,6 +31,9 @@ mongoose.connect(process.env.MONGO_URI, {
 // Define routes
 app.use('/users', userRoutes);
 app.use('/login', authRoutes);
+
+app.use('/admin', adminRoutes);
+app.use('/client', clientRoutes)
 
 // Export app (without starting server)
 module.exports = app;

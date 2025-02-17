@@ -6,7 +6,7 @@ const { authenticateUser,authorizeAdmin } = require('../middlewares/authMiddlewa
 
 // Admin protected route via middleware
 // @Perri - Use this route for the admin dashboard.
-router.get('admin/dashboard', authenticateUser, authorizeAdmin, (req, res) => {
+router.get('/dashboard', authenticateUser, authorizeAdmin, (req, res) => {
     res.json({ message: "Welcome to the Admin Dashboard." });
 });
 

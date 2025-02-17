@@ -1,5 +1,5 @@
 import './setup/dbSetup.js'; // Import centralized DB setup
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import Business from '../models/Business.js';
 import User from '../models/User.js';
 
