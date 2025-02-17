@@ -1,163 +1,222 @@
 .services-container {
     font-family: "Poppins", sans-serif;
     background-color: #f9f9f9;
-  }
-  
-  /* Intro Section */
-  .services-intro {
-    background: linear-gradient(120deg, rgba(30, 30, 47, 0.7), rgba(46, 46, 72, 0.7));
+}
+
+/* Intro Section */
+.services-intro {
+    background-image: url("../../assets/images/card-dev.png");
+    background-position: static;
     padding: 4rem 2rem;
     color: white;
     text-align: center;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .services-intro h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
+}
+
+.expertise {
+    font-size: 2.5rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
     margin-bottom: 1rem;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  }
-  
-  .services-intro p {
+    color: white;
+    text-transform: uppercase;
+}
+
+.advantage {
+    color: #F3DCB2;
+    text-align: center;
+    font-family: "Kode Mono", monospace;
+    font-size: 2.6rem;
+    font-style: normal;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.services-intro p {
     font-size: 1.25rem;
+    font-family: "Inter", sans-serif;
     max-width: 700px;
     margin: 0 auto;
-    line-height: 1.8;
-  }
-  
-  /* Service Sections */
-  .service-section {
+    line-height: 1;
+}
+
+/* Service Sections */
+.service-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4rem 2rem;
+    padding: 3rem 3rem;
     flex-wrap: wrap;
-    border-radius: 12px;
-    margin: 2rem 1rem;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  .service-bg-1 {
-    background: rgba(44, 72, 117, 0.7);
-  }
-  
-  .service-bg-2 {
-    background: rgba(0, 32, 46, 0.7);
-  }
-  
-  .service-bg-3 {
-    background: rgba(139, 80, 143, 0.7);
-  }
-  
-  .service-text {
+    margin: 2rem 2rem;
+}
+
+.service-bg-1 {
+    background: #841B13;
+}
+
+.service-bg-2 {
+    background: #8BC4D9;
+}
+
+.service-bg-3 {
+    background: #F3A83C;
+}
+
+.service-text {
     flex: 1;
     min-width: 300px;
     color: white;
-  }
-  
-  .service-text.left {
+}
+
+.service-text.left {
     margin-right: 2rem;
-  }
-  
-  .service-text.right {
+}
+
+.service-text.right {
     margin-left: 2rem;
-  }
-  
-  .service-text h2 {
+}
+
+.service-text h2 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  }
-  
-  .service-text p {
-    font-size: 1.2rem;
+    font-family: "Kode Mono", monospace;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.service-text p {
+    font-size: 1rem;
     margin-bottom: 1.5rem;
     line-height: 1.8;
-  }
-  
-  .service-text ul {
+    text-align: left;
+}
+
+.service-text ul {
     margin-top: 1rem;
     list-style-type: disc;
-    padding-left: 1rem;
-  }
-  
-  .service-text li {
+    text-align:left;
+    padding-left: 0;
+}
+
+.service-text li {
     font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .service-image {
+    margin-bottom: 0.2rem;
+    background-color: transparent;
+    margin-left: 20px;
+    width: 100%;
+    box-shadow: none;
+}
+
+.service-image {
     flex: 1;
     min-width: 300px;
-  }
-  
-  .service-image img {
+}
+
+.service-image img {
     width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Packages Section */
-  .services-packages {
+}
+
+/* Packages Section */
+.services-packages {
     text-align: center;
     padding: 4rem 2rem;
-    background: linear-gradient(120deg, rgba(255, 99, 97, 0.7), rgba(255, 214, 128, 0.7));
-    color: white;
-    border-radius: 12px;
+    color: #192F3C;
     margin: 2rem 1rem;
-  }
-  
-  .packages-grid {
+}
+
+.services-packages h2{
+    font-family: "Kode Mono", monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+.services-packages p {
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+}
+
+.every {
+    color: #841B13;
+}
+
+.packages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-  }
-  
-  .package-card {
-    color: white;
-    border-radius: 12px;
+}
+
+.package-card {
     padding: 2rem;
-    text-align: left;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .package-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-  }
-  
-  .package-bg-1 {
-    background: linear-gradient(to right, #ff7f50, #ffb347);
-  }
-  
-  .package-bg-2 {
-    background: linear-gradient(to right, #3a7bd5, #3a6073);
-  }
-  
-  .package-bg-3 {
-    background: linear-gradient(to right, #d53369, #daae51);
-  }
-  
-  /* Call-to-Action */
-  .services-cta {
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    padding: 3rem 2rem;
-    background: linear-gradient(120deg, rgba(30, 30, 47, 0.7), rgba(46, 46, 72, 0.7));
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-weight: normal;
+    justify-content: space-between;
+}
+
+.package-icon {
+    font-size: 40px;
+}
+
+.package-card h3 {
+    font-family: "Kode Mono", monospace;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 10px auto;
+}
+
+.package-card li {
+    background-color: transparent;
+    box-shadow: none;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    line-height: 20px;
+}
+
+/* Package Backgrounds */
+
+
+.package-bg-1 {
+    background: #8BC4D9;
+}
+
+.package-bg-1 .package-price {
+    background-color: #192F3C;
     color: white;
-    border-radius: 12px;
-  }
-  
-  .cta-button {
-    text-decoration: none;
-    padding: 1rem 2rem;
-    font-size: 1.25rem;
-    background: #ff6f61;
+}
+
+.package-bg-2 {
+    background: #192F3C;
+    color: #8BC4D9;
+}
+
+.package-bg-2 .package-price {
+    background-color: #8BC4D9;
     color: white;
-    border-radius: 8px;
-  }
-  
+}
+
+.package-bg-3 {
+    background: linear-gradient(270deg, #841B13 2.11%, #F3A83C 38.33%, #F3DCB2 66.72%, #8BC4D9 100%);
+}
+
+.package-bg-3 .package-price {
+    background-color: #F3DCB2;
+    color: #192F3C;
+}
+
+/* Common .package-price Styles */
+.package-price {
+    padding: 10px 5px;
+    width: 250px;
+    margin: 0 auto;
+    font-family: "Inter", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+}

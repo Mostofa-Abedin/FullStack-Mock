@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import webImage from "../../assets/images/card-web.png";
 import seoImage from "../../assets/images/card-seo.png";
 import socialMediaImage from "../../assets/images/card-mark.png";
+import ContactSection from "../../components/contactSection/contactSection"
 import "./services.css";
 
 const Services = () => {
@@ -13,6 +14,7 @@ const Services = () => {
             points: ["Mobile-friendly design", "SEO-optimized structure", "Custom integrations (e.g., e-commerce, CRM tools)"],
             img: webImage,
             bg: "service-bg-1",
+            color: "#F3DCB2",
         },
         {
             title: "SEO That Drives Results",
@@ -20,6 +22,7 @@ const Services = () => {
             points: ["🔍 Keyword research and optimization", "📄 On-page and off-page SEO", "📈 Monthly performance reporting"],
             img: seoImage,
             bg: "service-bg-2",
+            color: "#192F3C",
         },
         {
             title: "Social Media Marketing",
@@ -31,6 +34,7 @@ const Services = () => {
             ],
             img: socialMediaImage,
             bg: "service-bg-3",
+            color:"#841B13",
         },
     ];
     return (
@@ -48,9 +52,9 @@ const Services = () => {
             {servicesData.map((service, index) => (
                 <section key={index} className={`service-section ${service.bg}`}>
                     <div className={`service-text ${index % 2 === 0 ? "left" : "right"}`}>
-                        <h2>{service.title}</h2>
-                        <p>{service.description}</p>
-                        <ul>
+                    <h2 style={{ color: service.color }}>{service.title}</h2>
+                        <p style={{ color: service.color }}>{service.description}</p>
+                        <ul style={{ color: service.color }}>
                             {service.points.map((point, i) => (
                                 <li key={i}>{point}</li>
                             ))}
@@ -63,7 +67,7 @@ const Services = () => {
             ))}
 
             <section className="services-packages">
-                <h2>Tailored Packages for Every Business</h2>
+                <h2>Tailored Packages for <span className="every">Every</span> Business</h2>
                 <p>Choose from flexible packages combining our core services to suit your needs.</p>
                 <div className="packages-grid">
                     {[
@@ -84,13 +88,9 @@ const Services = () => {
                     ))}
                 </div>
             </section>
+            <ContactSection />
 
-            <section className="services-cta">
-                <h2>Ready to Elevate Your Business?</h2>
-                <Link to="/contact" className="cta-button">
-                    Contact Us
-                </Link>
-            </section>
+           
         </div>
     );
 };
