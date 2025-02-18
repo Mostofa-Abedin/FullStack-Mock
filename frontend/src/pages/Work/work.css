@@ -1,0 +1,125 @@
+/* General Styles */
+.work-container {
+    font-family: "Poppins", sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  /* Introductory Section */
+  .work-intro {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(to right, rgba(31, 31, 31, 0.8), rgba(51, 51, 51, 0.8));
+    backdrop-filter: blur(10px);
+    color: #fff;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  .work-intro h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .work-intro p {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+  }
+  
+  /* Project Grid Section */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 4rem 2rem;
+    background: linear-gradient(to bottom, rgba(255, 99, 97, 0.2), rgba(255, 214, 128, 0.2));
+  }
+  
+  .project-card {
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(238, 238, 238, 0.8));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .project-card h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00202e;
+  }
+  
+  .project-card img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin: 1rem 0;
+  }
+  
+  .project-card p {
+    font-size: 1rem;
+    margin: 1rem 0;
+    color: #333;
+  }
+  
+  .project-link {
+    margin-top: auto;
+    padding: 0.75rem 1.5rem;
+    background: #ff6f61;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+    display: inline-block;
+  }
+  
+  .project-link:hover {
+    background: #e85b50;
+  }
+  
+  /* Call-to-Action Section */
+  .cta-section {
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(to right, rgba(31, 31, 31, 0.8), rgba(51, 51, 51, 0.8));
+    backdrop-filter: blur(10px);
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    margin: 2rem 1rem;
+  }
+  
+  .cta-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .cta-section p {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: #ff6f61;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background: #e85b50;
+  }
+  
