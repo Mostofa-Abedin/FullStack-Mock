@@ -1,4 +1,8 @@
 /* Introductory Section */
+
+.work-container {
+    width: 100%;
+}
 .work-intro {
     background-image: url("../../assets/images/card-dev.png");
     padding: 4rem 2rem;
@@ -80,4 +84,104 @@
 
 .project-link:hover {
     background: #F3A83C;
+}
+
+@media (max-width: 768px) and (min-width: 600px){
+    .work-intro {
+       padding: 2rem 2rem;
+    }
+    
+    
+    .work-intro h1 {
+        font-size: 2rem;
+    }
+    
+    .work-intro p {
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+    
+    /* Project Grid Section */
+    .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .project-card {
+        padding: 0.5rem;
+    }
+    
+    .project-card h3 {
+        font-size: 1.2rem;
+        margin: 10px auto;
+    }
+    
+    .project-card img {
+        width: 90%;
+        height: 100px;
+        margin: 0 auto;
+    }
+    
+    .project-card p {
+        font-size: 0.8rem;
+        margin: 1rem 0;
+    }
+    
+    .project-link {
+        margin: 10px auto;
+        padding: 0.5rem 1rem;
+        font-size: 0.7rem;
+        width: 100px;
+    }
+    
+    .project-link:hover {
+        background: #F3A83C;
+    }
+    
+}
+
+@media (max-width: 600px){
+
+    .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+     .work-intro h1 {
+         font-size: 1.7rem;
+     }
+
+     
+     .project-card {
+         padding: 0.5rem;
+     }
+     
+     .project-card h3 {
+         font-size: 1.5rem;
+         margin: 10px auto;
+     }
+     
+     .project-card img {
+         width: 90%;
+         height: 100px;
+         margin: 0 auto;
+     }
+     
+     .project-card p {
+         font-size: 0.8rem;
+         margin: 1rem 0;
+     }
+     
+     .project-link {
+         margin: 10px auto;
+         padding: 0.5rem 1rem;
+         font-size: 0.7rem;
+         width: 100px;
+     }
+     
+     .project-link:hover {
+         background: #F3A83C;
+     }
 }
