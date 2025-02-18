@@ -26,15 +26,17 @@ const loginUser = async (req, res) => {
         })
     }
 
-    const token = jwt.sign(
-        {userID: user._id}, 
-        process.env.JWT_SECRET || "secret",
-        { expiresIn: "1h"}
-    )
 
-    res.json(
-        { token }
-    )
+const token = jwt.sign(
+    { userID: user._id, role: user.role }, // Included user role in JWT token
+    process.env.JWT_SECRET || "secret",
+    { expiresIn: "1h" }
+);
+
+res.json({
+    token,
+    role: user.role // Sending role to frontend 
+});
 }
 
 module.exports = {loginUser}
