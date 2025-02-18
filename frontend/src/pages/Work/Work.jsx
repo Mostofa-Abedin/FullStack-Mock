@@ -4,7 +4,7 @@ import "./Work.css";
 import ContactSection from "../../components/contactSection/contactSection";
 
 // Import project preview images
-import ProjectPreview from "../../assets/images/card-dev.png";
+import ProjectPreview from "../../assets/images/project-images/card-dev.png";
 
 const Work = () => {
   const projects = [

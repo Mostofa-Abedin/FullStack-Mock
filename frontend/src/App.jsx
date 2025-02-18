@@ -11,6 +11,8 @@ import "./App.css";
 import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
 
+import Project1 from "./pages/projectdetails1";
+
 function App() {
   return (
     <Router>
@@ -37,6 +39,8 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/work" element={<Work />} />
 
+
+          <Route path="/project1" element={<Project1 />} />
 
      
         </Routes>

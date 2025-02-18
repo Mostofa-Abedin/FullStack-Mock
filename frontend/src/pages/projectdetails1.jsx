@@ -1,10 +1,10 @@
 import React from "react";
+import { transformWithEsbuild } from "vite";
 
 const Project1 = () => {
   return (
     <div
       style={{
-        fontFamily: "'Poppins', sans-serif",
         backgroundColor: "#f9f9f9",
         minHeight: "100vh",
         padding: "2rem",
@@ -13,11 +13,9 @@ const Project1 = () => {
       {/* Header Section */}
       <section
         style={{
-          background: "linear-gradient(to right, #003f5c, #2c4875)",
-          color: "#fff",
+          background: "#8BC4D9",
+          color: "#192F3C",
           padding: "4rem 2rem",
-          borderRadius: "12px",
-          boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
           marginBottom: "2rem",
         }}
       >
@@ -26,7 +24,7 @@ const Project1 = () => {
             fontSize: "3rem",
             fontWeight: "bold",
             marginBottom: "1rem",
-            textShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+            fontFamily: "'Kode Mono', monospace",
           }}
         >
           Project Title 1
