@@ -54,6 +54,10 @@
     color: #F3A83C;
   }
 
+  .nav-link.active-link {
+    color: #F3A83C;
+  }
+
   .mobile-menu {
     display: none;
     font-size: 24px;
