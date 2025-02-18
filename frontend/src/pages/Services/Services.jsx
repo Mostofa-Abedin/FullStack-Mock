@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import webImage from "../../assets/images/card-web.png";
-import seoImage from "../../assets/images/card-seo.png";
-import socialMediaImage from "../../assets/images/card-mark.png";
+import webImage from "../../assets/images/project-images/card-web.png";
+import seoImage from "../../assets/images/project-images/card-seo.png";
+import socialMediaImage from "../../assets/images/project-images/card-mark.png";
 import ContactSection from "../../components/contactSection/contactSection";
 import "./services.css";
 
