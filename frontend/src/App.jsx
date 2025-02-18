@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Services from "./pages/Services/Services";
+import Work from "./pages/Work/Work";
 
 function App() {
   return (
@@ -28,11 +29,14 @@ function App() {
               </p>
               <ServicesSection />
               <WorkSection />
+              <ContactSection />
             </>
           } />
 
       
           <Route path="/services" element={<Services />} />
+          <Route path="/work" element={<Work />} />
+
 
      
         </Routes>
