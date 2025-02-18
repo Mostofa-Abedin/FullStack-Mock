@@ -1,0 +1,438 @@
+/* Intro Section */
+.services-intro {
+    background-image: url("../../assets/images/card-dev.png");
+    background-position: static;
+    padding: 4rem 2rem;
+    color: white;
+    text-align: center;
+}
+
+.expertise {
+    font-size: 2.5rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+.advantage {
+    color: #F3DCB2;
+    text-align: center;
+    font-family: "Kode Mono", monospace;
+    font-size: 2.6rem;
+    font-style: normal;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.services-intro p {
+    font-size: 1.25rem;
+    font-family: "Inter", sans-serif;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1;
+}
+
+/* Service Sections */
+.service-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 3rem;
+    flex-wrap: wrap;
+    margin: 2rem 2rem;
+}
+
+.service-bg-1 {
+    background: #841B13;
+}
+
+.service-bg-2 {
+    background: #8BC4D9;
+}
+
+.service-bg-3 {
+    background: #F3A83C;
+}
+
+.service-text {
+    flex: 1;
+    min-width: 300px;
+    color: white;
+}
+
+.service-text h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-family: "Kode Mono", monospace;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.service-text p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.service-text ul {
+    margin-top: 1rem;
+    list-style-type: disc;
+    text-align:left;
+    padding-left: 0;
+}
+
+.service-text li {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+    background-color: transparent;
+    margin-left: 20px;
+    width: 100%;
+    box-shadow: none;
+}
+
+.service-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.service-image img {
+    width: 100%;
+}
+
+/* Packages Section */
+.services-packages {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #192F3C;
+    margin: 2rem 1rem;
+}
+
+.services-packages h2{
+    font-family: "Kode Mono", monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+.services-packages p {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.every {
+    color: #841B13;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.package-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-weight: normal;
+    justify-content: space-between;
+}
+
+.package-icon {
+    font-size: 40px;
+}
+
+.package-card h3 {
+    font-family: "Kode Mono", monospace;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 10px auto;
+}
+
+.package-card li {
+    background-color: transparent;
+    box-shadow: none;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    line-height: 20px;
+}
+
+/* Package Backgrounds */
+
+
+.package-bg-1 {
+    background: #8BC4D9;
+}
+
+.package-bg-1 .package-price {
+    background-color: #192F3C;
+    color: white;
+}
+
+.package-bg-2 {
+    background: #192F3C;
+    color: #8BC4D9;
+}
+
+.package-bg-2 .package-price {
+    background-color: #8BC4D9;
+    color: white;
+}
+
+.package-bg-3 {
+    background: linear-gradient(270deg, #841B13 2.11%, #F3A83C 38.33%, #F3DCB2 66.72%, #8BC4D9 100%);
+}
+
+.package-bg-3 .package-price {
+    background-color: #F3DCB2;
+    color: #192F3C;
+}
+
+/* Common .package-price Styles */
+.package-price {
+    padding: 10px 5px;
+    width: 250px;
+    margin: 0 auto;
+    font-family: "Inter", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+}
+
+@media (max-width: 768px) and (min-width: 600px) {
+    .expertise {
+        font-size: 2rem;
+    }
+    
+    .advantage {
+        font-size: 2.2rem;
+}
+
+.services-intro {
+    padding: 3rem 4rem;
+}
+
+.service-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    margin: 1rem;
+}
+
+.service-text h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1rem;
+    font-family: "Kode Mono", monospace;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.service-text p {
+    font-size: 15px;
+    margin-bottom: 1.5rem;
+    line-height: 15px;
+    text-align: left;
+}
+
+.service-text li {
+    font-size: 15px;
+    text-align: left;
+    line-height: 15px;
+    padding: 5px;
+}
+
+
+.service-image img {
+    width: auto;
+    height: 150px;
+    object-fit: contain;
+}
+
+.services-packages {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    color: #192F3C;
+    margin: 2rem 1rem;
+}
+
+.services-packages h2{
+    font-family: "Kode Mono", monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+.services-packages p {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.every {
+    color: #841B13;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.5rem;
+}
+
+.package-card {
+    padding: 1rem;
+}
+
+.package-icon {
+    font-size: 30px;
+}
+
+.package-card h3 {
+    font-size: 1.3rem;
+}
+
+.package-card li {
+    line-height: 20px;
+    padding: 0;
+}
+
+.package-price {
+    padding: 10px;
+    width: 190px;
+    margin: 0 auto;
+    font-family: "Inter", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: none;
+}
+
+}
+
+@media (max-width: 600px) {
+    .expertise {
+        font-size: 2rem;
+    }
+    
+    .advantage {
+        font-size: 2rem;
+}
+
+.services-intro {
+    padding: 2rem 2rem;
+}
+
+.services-intro p {
+    font-size: 18px;
+}
+.service-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    margin: 1rem;
+}
+
+.service-text h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.8rem;
+    font-family: "Kode Mono", monospace;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.service-text p {
+    font-size: 15px;
+    margin-bottom: 1.5rem;
+    line-height: 15px;
+    text-align: center;
+}
+
+.service-text li {
+    font-size: 12px;
+    text-align: left;
+    line-height: 15px;
+    padding: 5px;
+    width: 80%;
+}
+
+
+.service-image img {
+    width: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.services-packages {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    color: #192F3C;
+    margin: 2rem 1rem;
+}
+
+.services-packages h2{
+    font-family: "Kode Mono", monospace;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+.services-packages p {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.every {
+    color: #841B13;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    gap: 0.5rem;
+}
+
+.package-card {
+    padding: 1rem;
+}
+
+.package-icon {
+    font-size: 30px;
+}
+
+.package-card h3 {
+    font-size: 1.3rem;
+}
+
+.package-card li {
+    line-height: 20px;
+    padding: 0;
+}
+
+.package-price {
+    padding: 10px;
+    width: 200px;
+    margin: 0 auto;
+    font-family: "Inter", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: none;
+}
+
+}
