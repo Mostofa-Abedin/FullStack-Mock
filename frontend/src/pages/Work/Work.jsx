@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Work.css"; 
+import "./work.css"; 
 import ContactSection from "../../components/contactSection/contactSection";
 
 // Import project preview images
