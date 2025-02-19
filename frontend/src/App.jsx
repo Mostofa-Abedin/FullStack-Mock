@@ -12,6 +12,7 @@ import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
 
 import Project1 from "./pages/ProjectPages/projectdetails1";
+import Project2 from "./pages/ProjectPages/projectdetails2";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
 
 
           <Route path="/project1" element={<Project1 />} />
+          <Route path="/project2" element={<Project2 />} />
+
 
      
         </Routes>
