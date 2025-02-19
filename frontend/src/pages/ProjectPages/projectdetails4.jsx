@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ImagePlaceholder from "../../assets/images/project-images/projectplaceholder.jpg"
 
-const Project2 = () => {
+const Project4 = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Project2 = () => {
             color: "#841B13",
           }}
         >
-          Project Title 2
+          Project Title 4
         </h1>
         <p
           style={{
@@ -207,4 +207,4 @@ const Project2 = () => {
   );
 };
 
-export default Project2;
+export default Project4;

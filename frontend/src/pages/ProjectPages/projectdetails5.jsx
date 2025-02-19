@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ImagePlaceholder from "../../assets/images/project-images/projectplaceholder.jpg"
 
-const Project2 = () => {
+const Project5 = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -22,8 +22,8 @@ const Project2 = () => {
       {/* Header Section */}
       <section
         style={{
-          background: "#F3A83C",
-          color: "#841B13",
+          background: "#8BC4D9",
+          color: "#192F3C",
           padding: "4rem 2rem",
           marginBottom: isMobile ?  "0.4rem" : "2rem",
         }}
@@ -35,10 +35,10 @@ const Project2 = () => {
             marginBottom: "1rem",
             fontFamily: "'Kode Mono', monospace",
             textTransform: "uppercase",
-            color: "#841B13",
+            color: "#192F3C",
           }}
         >
-          Project Title 2
+          Project Title 5
         </h1>
         <p
           style={{
@@ -102,7 +102,7 @@ const Project2 = () => {
       {/* Details Section */}
       <section
         style={{
-          background:"#841B13",
+          background:"#192F3C",
           padding: "2rem",
         }}
       >
@@ -185,7 +185,7 @@ const Project2 = () => {
           style={{
             textDecoration: "none",
             padding: "1rem 2rem",
-            background: "#F3A83C",
+            background: "#8BC4D9",
             color: "#fff",
             fontSize: isMobile ? "1rem" : "1.2rem",
             fontWeight: "bold",
@@ -193,11 +193,11 @@ const Project2 = () => {
           }}
           onMouseOver={(e) => {
             e.target.style.transform = "scale(1.05)";
-            e.target.style.background = "#8BC4D9";
+            e.target.style.background = "#F3A83C";
           }}
           onMouseOut={(e) => {
             e.target.style.transform = "scale(1)";
-            e.target.style.background = "#F3A83C"; 
+            e.target.style.background = "#8BC4D9";
           }}
         >
           Back to Our Work
@@ -207,4 +207,4 @@ const Project2 = () => {
   );
 };
 
-export default Project2;
+export default Project5;
