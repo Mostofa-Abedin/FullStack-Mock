@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ImagePlaceholder from "../../assets/images/project-images/projectplaceholder.jpg"
 
 const Project1 = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div
       style={{
@@ -15,12 +25,12 @@ const Project1 = () => {
           background: "#8BC4D9",
           color: "#192F3C",
           padding: "4rem 2rem",
-          marginBottom: "2rem",
+          marginBottom: isMobile ?  "0.4rem" : "2rem",
         }}
       >
         <h1
           style={{
-            fontSize: "3rem",
+            fontSize: isMobile ? "2rem" : "3rem",
             fontWeight: "bold",
             marginBottom: "1rem",
             fontFamily: "'Kode Mono', monospace",
@@ -32,10 +42,10 @@ const Project1 = () => {
         </h1>
         <p
           style={{
-            fontSize: "1.2rem",
+            fontSize: isMobile ? "1rem" : "1.2rem",
             maxWidth: "800px",
             margin: "0 auto",
-            lineHeight: "1.8",
+            lineHeight: isMobile ? "1.8" : "1",
           }}
         >
           A brief overview of the project, highlighting its goals, objectives,
@@ -47,9 +57,10 @@ const Project1 = () => {
       <section
         style={{
           display: "flex",
+          flexDirection: isMobile ? "column" : "row",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "2rem",
+          marginBottom: isMobile ?  "0.4rem" : "2rem",
         }}
       >
         <img
@@ -57,8 +68,8 @@ const Project1 = () => {
           alt="Project 1"
           style={{
             width: "100%",
-            height: "600px",
-            maxWidth: "30%",
+            height: isMobile ? "auto" : "300px",
+            maxWidth: isMobile ? "100%" : "30%",
             objectFit: "cover",
             margin: "10px",
           }}
@@ -68,8 +79,8 @@ const Project1 = () => {
           alt="Project 1"
           style={{
             width: "100%",
-            height: "600px",
-            maxWidth: "30%",
+            height: isMobile ? "auto" : "300px",
+            maxWidth: isMobile ? "100%" : "30%",
             objectFit: "cover",
             margin: "10px",
 
@@ -80,8 +91,8 @@ const Project1 = () => {
           alt="Project 1"
           style={{
             width: "100%",
-            height: "600px",
-            maxWidth: "30%",
+            height: isMobile ? "auto" : "300px",
+            maxWidth: isMobile ? "100%" : "30%",
             objectFit: "cover",
             margin: "10px",
           }}
@@ -109,7 +120,7 @@ const Project1 = () => {
         </h2>
         <p
           style={{
-            fontSize: "1.1rem",
+            fontSize: isMobile ? "0.8rem" : "1.1rem",
             color: "white",
             lineHeight: "1.8",
             marginBottom: "1.5rem",
@@ -126,6 +137,7 @@ const Project1 = () => {
             lineHeight: "1.8",
             fontFamily: "'Inter', sans-serif",
             fontWeight: "400",
+            fontSize: isMobile ? "0.8rem" : "1.1rem",
             textAlign: "center",
             display:"flex",
             justifyContent: "center",
@@ -137,7 +149,7 @@ const Project1 = () => {
           style={{
             color: "white",
             background: "transparent",
-            width: "100%",
+            width: isMobile ? "70%" : "100%",
             boxShadow:"none",
           }}
           >
@@ -146,7 +158,7 @@ const Project1 = () => {
           style={{
             color: "white",
             background: "transparent",
-            width: "100%",
+            width: isMobile ? "70%" : "100%",
             boxShadow:"none",
           }}>
             Technologies: List tools, frameworks, or languages used.</li>
@@ -154,7 +166,7 @@ const Project1 = () => {
           style={{
             color: "white",
             background: "transparent",
-            width: "100%",
+            width: isMobile ? "70%" : "100%",
             boxShadow:"none",
           }}
           >Outcome: Highlight measurable success metrics or results.</li>
@@ -164,7 +176,7 @@ const Project1 = () => {
       {/* Call-to-Action Section */}
       <section
         style={{
-          margin: "6rem",
+          margin: isMobile ? "3rem" : "6rem",
           textAlign: "center",
         }}
       >
@@ -175,7 +187,7 @@ const Project1 = () => {
             padding: "1rem 2rem",
             background: "#8BC4D9",
             color: "#fff",
-            fontSize: "1.2rem",
+            fontSize: isMobile ? "1rem" : "1.2rem",
             fontWeight: "bold",
             transition: "background 0.3s ease, transform 0.3s ease",
           }}
