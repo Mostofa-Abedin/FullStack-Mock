@@ -18,9 +18,6 @@ import Project4 from "./pages/ProjectPages/projectdetails4";
 import Project5 from "./pages/ProjectPages/projectdetails5";
 import Project6 from "./pages/ProjectPages/projectdetails6";
 
-
-
-
 function App() {
   return (
     <Router>
@@ -54,9 +51,6 @@ function App() {
           <Route path="/project4" element={<Project4 />} />
           <Route path="/project5" element={<Project5 />} />
           <Route path="/project6" element={<Project6 />} />
-
-
-
      
         </Routes>
 
