@@ -1,5 +1,5 @@
 import React from "react";
-import ImagePlaceholder from "../assets/images/project-images/projectplaceholder.jpg"
+import ImagePlaceholder from "../../assets/images/project-images/projectplaceholder.jpg"
 
 const Project1 = () => {
   return (

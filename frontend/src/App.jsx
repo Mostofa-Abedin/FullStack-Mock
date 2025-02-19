@@ -11,7 +11,7 @@ import "./App.css";
 import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
 
-import Project1 from "./pages/projectdetails1";
+import Project1 from "./pages/ProjectPages/projectdetails1";
 
 function App() {
   return (
