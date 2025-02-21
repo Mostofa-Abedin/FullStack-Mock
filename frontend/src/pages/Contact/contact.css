@@ -1,0 +1,201 @@
+.contact-container {
+    width: 100%;
+}
+
+.intro-section {
+    padding: 4rem 2rem;
+    text-align: center;
+    background-image: url("../../assets/images/project-images/card-dev.png");
+    color: #fff;
+}
+
+.intro-section h1 {
+    font-size: 2.5rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+.intro-section p {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    font-family: "Inter", sans-serif;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+#contact-details {
+    color: #F3A83C;
+}
+
+.message-form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a2a33;
+    padding: 4rem;
+    gap: 4rem;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.message-form {
+    padding: 2rem;
+    width: 600px;
+    text-align: center;
+    align-items: center;
+}
+
+.message-form h2 {
+    color: #F3DCB2;
+    text-align: center;
+    font-family: "Kode Mono";
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.message-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-form input,
+.message-form textarea {
+    width: 600px;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid white;
+    font-size: 1rem;
+    background: #f9f9f9;
+    font-family: "Inter", sans-serif;
+}
+
+.message-form select {
+    width: 625px;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid white;
+    font-size: 1rem;
+    background: #f9f9f9;
+}
+
+
+.message-form textarea {
+    resize: none;
+}
+
+.message-form label {
+    color: #FFFDF7;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    padding-bottom: 10px;
+}
+
+.message-form button {
+    width: 625px;
+    padding: 12px;
+    border: none;
+    background: #7aa5c3;
+    color: #fff;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.message-form button:hover {
+    background: #F3A83C;
+}
+
+.message-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    height: 650px;
+}
+
+.message-image img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.faq-section {
+    padding: 4rem 2rem;
+    background: white;
+  }
+  
+  .faq-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-family: "Kode Mono", monospace;
+    text-transform: uppercase;
+    color: #192F3C;
+  }
+  
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+  }
+  
+  .faq-item {
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box; 
+  }
+  
+  .faq-item h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #192F3C;
+    background: #F3A83C;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+  }
+  
+  .faq-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    transition: transform 0.3s ease-in-out;
+    border-top: 8px solid #192F3C; 
+  }
+  
+  .faq-item.open .faq-arrow {
+    border-top: none;
+    border-bottom: 8px solid #192F3C; 
+
+  }
+  
+  .faq-item p {
+    font-size: 1rem;
+    color: #192F3C;
+    background-color: #F3DCB2;
+    padding: 20px 16px;
+    margin-top: -20px;
+    width: 100%;
+  }
+  
