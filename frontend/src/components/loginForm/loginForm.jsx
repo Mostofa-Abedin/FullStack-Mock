@@ -116,13 +116,6 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
           </button>
         )}
       </div>
-
-      {/* Show image for clients only */}
-      {!isAdmin && (
-        <div className="form-image">
-          <img src={LoginImage} alt="Login" />
-        </div>
-      )}
     </div>
   );
 };

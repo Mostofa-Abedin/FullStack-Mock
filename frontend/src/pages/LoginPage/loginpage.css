@@ -1,34 +1,82 @@
 .login-page {
     position: relative;
-    z-index: 10; /* Set a lower z-index than the navbar */
-    padding-top: 80px; /* Adjust the padding to account for sticky navbar */
+    z-index: 10;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .form-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    z-index: 20; /* Ensure the form is above the background but below the navbar */
-  }
-  
-  .form-overlay {
+    z-index: 20;
     display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+    flex-direction: column;
+    width: 100%;
   }
   
-  .logo {
-    max-width: 100px;
-  }
-  
-  .admin-login-page .form-container {
-    background-color: #f4f4f4; /* Change background color for admin page if needed */
+  /* Client Login */
+  .client-login-page {
+    background-color: #192F3C;
+    margin: 0 auto;
+    padding: 0;
   }
   
   .client-login-page .form-container {
-    background-color: #e5f0ff; /* Change background color for client page if needed */
+    flex-direction: column;
+    align-items: center;
   }
+
+
+  .client-login-page .form-overlay {
+    margin-top: -50px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .client-login-page .login-logo {
+    margin-top: 0; 
+  }
+  
+  .login-logo {
+    max-width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .form-image img {
+    width: 60vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+  
+  /* Admin Login */
+  .admin-login-page {
+    background: url("../../assets/images/loginbackground.png");
+    background-size: cover;
+  }
+  
+  .admin-login-page .form-image {
+    display: none;
+  }
+  
+  .admin-login-page .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin-top: -200px; /* Move the form up */
+  }
+  
+  .login-logo {
+    max-width: 300px;
+    margin-bottom: 20px; 
+    margin-top: 200px;
+  }
+
   
