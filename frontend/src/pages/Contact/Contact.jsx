@@ -99,6 +99,7 @@ const Contact = () => {
           presence, or launch an engaging marketing campaign, we're here to make
           it happen.
         </p>
+        <p className="contact-details" style={{color: "#F3A83C", marginTop: "50px",}}>0412 345 678 <br /> hello@magnetlabs.com.au</p>
       </section>
 
       {/* Message Form Section */}

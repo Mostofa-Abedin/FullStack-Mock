@@ -177,8 +177,9 @@
 
 .faq-arrow {
     transition: transform 0.3s ease-in-out;
-    font-size: 16px; /* Adjust font size */
-  }
+    font-size: 16px;
+    /* Adjust font size */
+}
 
 .faq-item p {
     font-size: 1rem;
@@ -192,140 +193,109 @@
 @media (max-width: 768px) and (min-width: 600px) {
 
     .message-form-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #1a2a33;
         padding: 1rem;
         gap: 1rem;
-        flex-wrap: wrap;
-        text-align: center;
     }
 
     .message-form {
         padding: 2rem;
         width: 300px;
-        text-align: center;
-        align-items: center;
-    }
-
-    .message-form h2 {
-        color: #F3DCB2;
-        text-align: center;
-        font-family: "Kode Mono";
-        font-size: 2.5rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        text-transform: uppercase;
-    }
-
-    .message-form form {
-        display: flex;
-        flex-direction: column;
     }
 
     .message-form input,
     .message-form textarea {
         width: 300px;
-        padding: 12px;
-        margin-bottom: 1rem;
-        border: 1px solid white;
-        font-size: 1rem;
-        background: #f9f9f9;
-        font-family: "Inter", sans-serif;
     }
 
     .message-form select {
         width: 325px;
-        padding: 12px;
-        margin-bottom: 1rem;
-        border: 1px solid white;
-        font-size: 1rem;
-        background: #f9f9f9;
-    }
-
-
-    .message-form textarea {
-        resize: none;
-    }
-
-    .message-form label {
-        color: #FFFDF7;
-        text-align: center;
-        font-family: "Inter", sans-serif;
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 400;
-        padding-bottom: 10px;
     }
 
     .message-form button {
         width: 325px;
-        padding: 12px;
-        border: none;
-        background: #7aa5c3;
-        color: #fff;
-        font-size: 1rem;
-        font-family: "Inter", sans-serif;
-        cursor: pointer;
-        margin-top: 20px;
-    }
-
-    .message-form button:hover {
-        background: #F3A83C;
     }
 
     .message-image {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
         height: 560px;
-        margin:20px;
-    }
-
-    .message-image img {
-        width: 100%;
-        object-fit: cover;
+        margin: 20px;
     }
 
     .faq-section {
         padding: 2rem;
-        background: white;
-    }
-
-    .faq-section h2 {
-        text-align: center;
-        margin-bottom: 2rem;
-        font-size: 2.5rem;
-        font-family: "Kode Mono", monospace;
-        text-transform: uppercase;
-        color: #192F3C;
     }
 
     .faq-container {
-        max-width: 00px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
+        max-width: 600px;
     }
 
-    .faq-item {
-        cursor: pointer;
-        transition: background 0.3s ease;
-        text-align: left;
+}
+
+@media (max-width: 600px) {
+
+    .intro-section h1 {
+        font-size: 2rem;
+    }
+
+    .intro-section p {
+        font-size: 1rem;
+    }
+
+    .message-form-section {
+        padding: 1rem;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
+        gap: 1rem;
+    }
+
+    .message-form h2 {
+        font-size: 2rem;
+    }
+
+    .message-form {
+        width: 225px;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .message-form input,
+    .message-form textarea {
         width: 100%;
-        box-sizing: border-box;
+        margin-left:-10px;
+    }
+
+    .message-form select {
+        width: 250px;
+        margin-left:-10px;
+
+    }
+
+    .message-form button {
+        width: 250px;
+        margin-left:-10px;
+
+    }
+
+    .message-image {
+        height: 300px;
+        margin: 20px;
+    }
+
+    .faq-section {
+        padding: 2rem;
+    }
+
+    .faq-section h2 {
+         font-size: 2rem;
+    }
+
+    .faq-container {
+        max-width: 500px;
+        gap: 0;
     }
 
     .faq-item h3 {
-        font-size: 1.25rem;
+        font-size: 0.8rem;
         font-weight: 600;
         color: #192F3C;
         background: #F3A83C;
@@ -336,28 +306,7 @@
         width: 100%;
     }
 
-    .faq-arrow {
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        transition: transform 0.3s ease-in-out;
-        border-top: 8px solid #192F3C;
-    }
-
-    .faq-item.open .faq-arrow {
-        border-top: none;
-        border-bottom: 8px solid #192F3C;
-
-    }
-
     .faq-item p {
-        font-size: 1rem;
-        color: #192F3C;
-        background-color: #F3DCB2;
-        padding: 20px 16px;
-        margin-top: -20px;
-        width: 100%;
+        font-size: 0.8rem;
     }
-
 }
