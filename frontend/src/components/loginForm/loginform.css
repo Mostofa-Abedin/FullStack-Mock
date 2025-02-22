@@ -1,4 +1,4 @@
-
+/* Main Form Container */
 .login-form {
     padding: 2rem;
     width: 600px;
@@ -118,3 +118,43 @@ input[type="radio"]:checked {
     color: white;
     cursor: pointer;
 }
+
+/* Success and Error Message Styling */
+.success-message {
+    color: #8BC4D9;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.error-message {
+    color: #F3A83C;
+    font-size: 0.8rem;
+    padding-top: 2px;
+    max-width: 400px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    padding-bottom: 20px;
+    margin: 0 auto;
+}
+
+/* Specific Error Messages for Email and Password */
+.error-message.email-error {
+    margin-top: 10px;
+    color: #e74c3c; /* Red color for email error */
+    font-size: 1rem;
+    text-align: center;
+}
+
+.error-message.password-error {
+    margin-top: 10px;
+    color: #e74c3c; /* Red color for password error */
+    font-size: 1rem;
+    text-align: center;
+}
+
+input:invalid {
+    border-color: #e74c3c; /* Red border for invalid input fields */
+}
+
