@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./loginform.css";
-import LoginImage from "../../assets/images/project-images/projectplaceholder.jpg";
 
 const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
-  const [isLogin, setIsLogin] = useState(true); // Toggle between login and register
+  const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,22 +16,18 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData); // Call the onSubmit prop with the form data
+    onSubmit(formData);
   };
 
-  // Dynamic class names based on userType (admin or client)
   const formContainerClass = isAdmin ? "admin-form-container" : "client-form-container";
   const submitButtonClass = isAdmin ? "admin-submit-button" : "client-submit-button";
-
-  // Set the form heading based on userType and login state
-  const formHeading = isAdmin ? "ADMIN LOGIN" : isLogin ? "CLIENT LOGIN" : "CLIENT REGISTER";
+  const formHeading = isAdmin ? "ADMIN LOGIN" : isLogin ? "CLIENT LOGIN" : "NEW CLIENT ACCOUNT";
 
   return (
     <div className={`form-container ${formContainerClass} ${!isAdmin ? "with-image" : ""}`}>
       <div className="form-content">
         <h2 className="form-title">{formHeading}</h2>
 
-        {/* User Type Toggle */}
         <div className="user-type-toggle">
           <label>
             <input
@@ -40,7 +35,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
               name="userType"
               value="client"
               checked={!isAdmin}
-              onChange={() => setIsAdmin(false)} // Switch to client page
+              onChange={() => setIsAdmin(false)}
             />
             Client
           </label>
@@ -50,16 +45,16 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
               name="userType"
               value="admin"
               checked={isAdmin}
-              onChange={() => setIsAdmin(true)} // Switch to admin page
+              onChange={() => setIsAdmin(true)}
             />
             Admin
           </label>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="login-form">
           {/* Name field only for registration */}
           {!isLogin && !isAdmin && (
-            <div className="form-field">
+            <div className="form-field form-input">
               <label htmlFor="name" className="label">Name</label>
               <input
                 type="text"
@@ -72,9 +67,8 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
               />
             </div>
           )}
-          
-          {/* Email field */}
-          <div className="form-field">
+
+          <div className="form-field form-input">
             <label htmlFor="email" className="label">Email</label>
             <input
               type="email"
@@ -87,8 +81,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
             />
           </div>
 
-          {/* Password field */}
-          <div className="form-field">
+          <div className="form-field form-input">
             <label htmlFor="password" className="label">Password</label>
             <input
               type="password"
@@ -106,7 +99,6 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
           </button>
         </form>
 
-        {/* Toggle button only for clients */}
         {!isAdmin && (
           <button
             className="toggle-button"

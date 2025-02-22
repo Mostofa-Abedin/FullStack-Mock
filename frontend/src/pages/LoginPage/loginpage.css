@@ -5,9 +5,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .form-container {
+}
+
+/* General Form Container */
+.form-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
@@ -15,68 +16,70 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
-  
-  /* Client Login */
-  .client-login-page {
+}
+
+/* Client Login */
+.client-login-page {
     background-color: #192F3C;
     margin: 0 auto;
     padding: 0;
-  }
-  
-  .client-login-page .form-container {
+    display: flex; /* Flexbox to align content */
+    justify-content: flex-end; /* Align content to the right column */
+    align-items: center; /* Center content vertically */
+    height: 100vh; /* Ensure full height */
+}
+
+.client-login-page .form-container {
     flex-direction: column;
-    align-items: center;
-  }
-
-
-  .client-login-page .form-overlay {
-    margin-top: -50px; 
-    display: flex;
     justify-content: center;
-    align-items: center;
-  }
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center form and logo content */
+}
 
-  .client-login-page .login-logo {
-    margin-top: 0; 
-  }
-  
-  .login-logo {
+/* Logo Styling */
+.client-login-page .login-logo {
     max-width: 300px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .form-image img {
+    margin-bottom: 20px;
+}
+
+/* Image Styling */
+.form-image img {
     width: 60vw;
     height: 100vh;
     object-fit: cover;
-  }
-  
-  /* Admin Login */
-  .admin-login-page {
+}
+
+/* Admin Login */
+.admin-login-page {
     background: url("../../assets/images/loginbackground.png");
     background-size: cover;
-  }
-  
-  .admin-login-page .form-image {
+}
+
+.admin-login-page .form-image {
     display: none;
-  }
-  
-  .admin-login-page .form-container {
+}
+
+.admin-login-page .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
-    margin-top: -200px; /* Move the form up */
-  }
-  
-  .login-logo {
-    max-width: 300px;
-    margin-bottom: 20px; 
-    margin-top: 200px;
-  }
+    margin-top: -150px;
+}
 
-  
+/* Default Logo Styling */
+.login-logo {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+/* Admin Logo Custom Styling */
+.admin-login-page .login-logo {
+    margin-top: 200px; 
+}
+
+/* Client Logo Custom Styling */
+.client-login-page .login-logo {
+    margin-top: 10px; 
+}
