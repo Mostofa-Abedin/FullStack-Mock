@@ -1,59 +1,34 @@
-/* Base login page styles */
 .login-page {
+    position: relative;
+    z-index: 10; /* Set a lower z-index than the navbar */
+    padding-top: 80px; /* Adjust the padding to account for sticky navbar */
+  }
+  
+  .form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 20; /* Ensure the form is above the background but below the navbar */
+  }
+  
+  .form-overlay {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
+    margin-bottom: 20px;
   }
   
-  /* Admin login page style */
-  .admin-login-page {
-    background-image: url("../../assets/images/loginbackground.png"); 
-    background-size: cover;
-    background-position: center;
+  .logo {
+    max-width: 100px;
   }
   
-  /* Client login page style */
-  .client-login-page {
-    display: flex;
-    flex-direction: row; /* Side-by-side layout for client login */
+  .admin-login-page .form-container {
+    background-color: #f4f4f4; /* Change background color for admin page if needed */
   }
   
   .client-login-page .form-container {
-    width: 50%; /* Form takes up half the screen */
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  }
-  
-  .client-login-page .form-container .form-overlay {
-    width: 50%; /* Image takes up the other half */
-    height: 100%;
-    background-image: url("../../assets/images/client-background.jpg"); /* Add client-specific background */
-    background-size: cover;
-    background-position: center;
-  }
-  
-  /* Logo styling */
-  .logo {
-    position: absolute;
-    top: 20px; /* Adjust as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 200px;
-    z-index: 10; /* Ensure logo is always on top of other content */
-  }
-  
-  /* Form Container */
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background for form */
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #e5f0ff; /* Change background color for client page if needed */
   }
   

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import LoginForm from "../../components/loginForm/loginForm";
 import Logo from "../../assets/images/magnetlabslogo_full.png"; 
 import "./loginpage.css";  
@@ -32,7 +33,9 @@ const LoginPage = () => {
       {/* Login Form */}
       <div className="form-container">
         <div className="form-overlay">
-          <img src={Logo} alt="Logo" className="logo" />
+          <Link to="/"> {/* Wrap the logo in a Link to home page */}
+            <img src={Logo} alt="Logo" className="logo" />
+          </Link>
         </div>
         <LoginForm
           onSubmit={handleLoginSubmit}
