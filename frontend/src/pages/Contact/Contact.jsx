@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import emailjs from "emailjs-com"; // Make sure you have EmailJS installed
+import emailjs from "emailjs-com";
 import "./Contact.css";
-import ProjectPreview from "../../assets/images/project-images/projectplaceholder.jpg"; // Adjust the path to your actual image
+import ProjectPreview from "../../assets/images/project-images/projectplaceholder.jpg";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"; // Correctly import the icons
 
 const Contact = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
   const [formData, setFormData] = useState({
-    user_name: "", // Match the placeholder for name
-    user_email: "", // Match the placeholder for email
-    user_package: "", // Match the placeholder for package
-    user_message: "", // Match the placeholder for message
+    user_name: "",
+    user_email: "",
+    user_package: "",
+    user_message: "",
   });
   const [isSent, setIsSent] = useState(false);
 
@@ -109,7 +112,7 @@ const Contact = () => {
                 color: "#8BC4D9",
                 fontSize: "1rem",
                 fontFamily: "Inter, sans-serif",
-                fontWeight: "bold",
+                fontWeight: "400",
                 textAlign: "center",
                 marginTop: "10px",
               }}
@@ -171,7 +174,13 @@ const Contact = () => {
               className={`faq-item ${openFAQ === index ? "open" : ""}`}
               onClick={() => toggleFAQ(index)}
             >
-              <h3>{faq.question}</h3>
+              <h3>
+                {faq.question}
+                <FontAwesomeIcon
+                  icon={openFAQ === index ? faChevronUp : faChevronDown} 
+                  className={`faq-arrow ${openFAQ === index ? "open" : ""}`} 
+                />
+              </h3>
               {openFAQ === index && <p>{faq.answer}</p>}
             </div>
           ))}

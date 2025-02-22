@@ -176,19 +176,9 @@
 }
 
 .faq-arrow {
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
     transition: transform 0.3s ease-in-out;
-    border-top: 8px solid #192F3C;
-}
-
-.faq-item.open .faq-arrow {
-    border-top: none;
-    border-bottom: 8px solid #192F3C;
-
-}
+    font-size: 16px; /* Adjust font size */
+  }
 
 .faq-item p {
     font-size: 1rem;
@@ -200,7 +190,6 @@
 }
 
 @media (max-width: 768px) and (min-width: 600px) {
-
 
     .message-form-section {
         display: flex;
@@ -215,7 +204,7 @@
 
     .message-form {
         padding: 2rem;
-        width: 600px;
+        width: 300px;
         text-align: center;
         align-items: center;
     }
@@ -238,7 +227,7 @@
 
     .message-form input,
     .message-form textarea {
-        width: 600px;
+        width: 300px;
         padding: 12px;
         margin-bottom: 1rem;
         border: 1px solid white;
@@ -248,7 +237,7 @@
     }
 
     .message-form select {
-        width: 625px;
+        width: 325px;
         padding: 12px;
         margin-bottom: 1rem;
         border: 1px solid white;
@@ -272,7 +261,7 @@
     }
 
     .message-form button {
-        width: 625px;
+        width: 325px;
         padding: 12px;
         border: none;
         background: #7aa5c3;
@@ -292,7 +281,8 @@
         display: flex;
         justify-content: center;
         overflow: hidden;
-        height: 650px;
+        height: 560px;
+        margin:20px;
     }
 
     .message-image img {
@@ -300,14 +290,8 @@
         object-fit: cover;
     }
 
-#success-message {
-        color: #8BC4D9 !important;
-        font-size: 1rem;
-        font-family: "Inter", sans-serif;
-    }
-
     .faq-section {
-        padding: 4rem 2rem;
+        padding: 2rem;
         background: white;
     }
 
@@ -321,7 +305,7 @@
     }
 
     .faq-container {
-        max-width: 800px;
+        max-width: 00px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
