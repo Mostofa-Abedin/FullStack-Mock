@@ -12,7 +12,7 @@ const authorizeAdmin = (req, res, next) => {
 //  Middleware to verify JWT token
 // @TRENTON- FYI Wrote this middleware to authenticate the fact that the user has a token
 const authenticateUser = (req, res, next) => {
-    const token = req.headers.authorization.substring("Bearer ".length);
+    const token = req.headers.authorization ? req.headers.authorization.substring("Bearer ".length) : "";
     if (!token) {
         return res.status(401).json({ message: 'Access Denied. No token provided.' });
     }
