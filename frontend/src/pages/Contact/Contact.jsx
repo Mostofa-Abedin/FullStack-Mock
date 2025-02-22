@@ -9,7 +9,7 @@ const ContactForm = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+  
     emailjs
       .sendForm(
         "service_xi7xapf",  // EmailJS Service ID
@@ -21,8 +21,12 @@ const ContactForm = () => {
         (result) => {
           console.log("Success:", result.text);
           alert("Message sent successfully!");
-          form.current.reset(); // Clear the form after submission
-          setPackageValue("starter"); // Reset dropdown
+  
+          // Reset form fields after submission
+          form.current.reset(); 
+  
+          // Reset package dropdown manually since it's controlled
+          setPackageValue("Starter Package");
         },
         (error) => {
           console.log("Error:", error.text);
@@ -35,14 +39,27 @@ const ContactForm = () => {
     <div className="message-form">
       <h2>Message Us</h2>
       <form ref={form} onSubmit={sendEmail}>
-        <label>Name</label>
-        <input type="text" name="user_name" placeholder="Your Name" required />
+        <label htmlFor="user_name">Name</label>
+        <input
+          id="user_name"
+          type="text"
+          name="user_name"
+          placeholder="Your Name"
+          required
+        />
 
-        <label>Email</label>
-        <input type="email" name="user_email" placeholder="Your Email" required />
+        <label htmlFor="user_email">Email</label>
+        <input
+          id="user_email"
+          type="email"
+          name="user_email"
+          placeholder="Your Email"
+          required
+        />
 
-        <label>Inquiring about a package?</label>
+        <label htmlFor="user_package">Inquiring about a package?</label>
         <select
+          id="user_package"
           name="user_package"
           value={packageValue}
           onChange={(e) => setPackageValue(e.target.value)}
@@ -53,8 +70,14 @@ const ContactForm = () => {
           <option value="Custom Package">Custom Package</option>
         </select>
 
-        <label>Message</label>
-        <textarea name="user_message" placeholder="Your Message" rows="5" required></textarea>
+        <label htmlFor="user_message">Message</label>
+        <textarea
+          id="user_message"
+          name="user_message"
+          placeholder="Your Message"
+          rows="5"
+          required
+        ></textarea>
 
         <button type="submit">Send Message</button>
       </form>
