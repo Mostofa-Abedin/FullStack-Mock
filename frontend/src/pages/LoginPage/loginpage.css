@@ -1,0 +1,59 @@
+/* Base login page styles */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  /* Admin login page style */
+  .admin-login-page {
+    background-image: url("../../assets/images/loginbackground.png"); 
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Client login page style */
+  .client-login-page {
+    display: flex;
+    flex-direction: row; /* Side-by-side layout for client login */
+  }
+  
+  .client-login-page .form-container {
+    width: 50%; /* Form takes up half the screen */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  }
+  
+  .client-login-page .form-container .form-overlay {
+    width: 50%; /* Image takes up the other half */
+    height: 100%;
+    background-image: url("../../assets/images/client-background.jpg"); /* Add client-specific background */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Logo styling */
+  .logo {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 200px;
+    z-index: 10; /* Ensure logo is always on top of other content */
+  }
+  
+  /* Form Container */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background for form */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  

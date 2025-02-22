@@ -10,6 +10,7 @@ import "./App.css";
 
 import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
+import LoginPage from "./pages/LoginPage/loginPage";
 
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
@@ -22,9 +23,10 @@ function App() {
   return (
     <Router>
       <div>
-        <Navbar />
+        {/* Conditionally render Navbar and Footer based on route */}
+        {window.location.pathname !== "/login" && <Navbar />}
+
         <Routes>
-    
           <Route path="/" element={
             <>
               <HeroSection />
@@ -40,10 +42,9 @@ function App() {
             </>
           } />
 
-      
           <Route path="/services" element={<Services />} />
           <Route path="/work" element={<Work />} />
-
+          <Route path="/login" element={<LoginPage />} />
 
           <Route path="/project1" element={<Project1 />} />
           <Route path="/project2" element={<Project2 />} />
@@ -51,11 +52,10 @@ function App() {
           <Route path="/project4" element={<Project4 />} />
           <Route path="/project5" element={<Project5 />} />
           <Route path="/project6" element={<Project6 />} />
-     
         </Routes>
 
-
-        <Footer />
+        {/* Conditionally render Footer based on route */}
+        {window.location.pathname !== "/login" && <Footer />}
       </div>
     </Router>
   );
