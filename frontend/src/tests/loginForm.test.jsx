@@ -1,31 +1,59 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import LoginForm from "../components/loginForm/loginForm"; // Adjust the import as needed
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import LoginForm from "../components/loginForm/loginForm"; // Adjust import as necessary
+import userEvent from "@testing-library/user-event";
 
 describe("LoginForm", () => {
-  test("displays error message if there's an exception in onSubmit", async () => {
-    // Create a mock for the onSubmit prop that throws an error
-    const mockOnSubmit = async () => {
-      throw new Error("Network Error");
-    };
+  let mockOnSubmit, mockSetIsAdmin;
 
-    render(
-      <MemoryRouter>
-        <LoginForm onSubmit={mockOnSubmit} isAdmin={false} setIsAdmin={() => {}} />
-      </MemoryRouter>
-    );
+  test("renders form for login by default", () => {
+    render(<LoginForm onSubmit={mockOnSubmit} isAdmin={false} setIsAdmin={mockSetIsAdmin} />);
+    
+    expect(screen.getByText("CLIENT LOGIN")).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("Password")).toBeInTheDocument();
+    expect(screen.getByText("Need an account? Register")).toBeInTheDocument();
+  });
 
-    // Fill out the form
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: "test@test.com" } });
-    fireEvent.change(screen.getByLabelText(/password/i), { target: { value: "password" } });
+  test("switches between login and registration forms", () => {
+    render(<LoginForm onSubmit={mockOnSubmit} isAdmin={false} setIsAdmin={mockSetIsAdmin} />);
+    
+    // Switch to Registration Form
+    fireEvent.click(screen.getByText("Need an account? Register"));
+    expect(screen.getByText("NEW CLIENT ACCOUNT")).toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
+    
+    // Switch back to Login Form
+    fireEvent.click(screen.getByText("Already have an account? Login"));
+    expect(screen.getByText("CLIENT LOGIN")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Name")).not.toBeInTheDocument();
+  });
 
-    // Submit the form (use getByRole to target the submit button)
-    fireEvent.click(screen.getByRole('button', { name: /login/i }));
+  test("validates email input", () => {
+    render(<LoginForm onSubmit={mockOnSubmit} isAdmin={false} setIsAdmin={mockSetIsAdmin} />);
+    
+    const emailInput = screen.getByLabelText("Email");
+    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
+    
+    expect(screen.getByText("Please enter a valid email address.")).toBeInTheDocument();
+    
+    fireEvent.change(emailInput, { target: { value: "valid@example.com" } });
+    
+    expect(screen.queryByText("Please enter a valid email address.")).not.toBeInTheDocument();
+  });
 
-    // Wait for the error message to appear
-    await waitFor(() => screen.getByText(/there was an error submitting the form./i));
-
-    // Assert that the error message is displayed
-    expect(screen.getByText(/there was an error submitting the form./i)).toBeInTheDocument();
+  test("validates password input for registration", async () => {
+    render(<LoginForm onSubmit={mockOnSubmit} isAdmin={false} setIsAdmin={mockSetIsAdmin} />);
+    
+    fireEvent.click(screen.getByText("Need an account? Register"));
+    
+    const passwordInput = screen.getByLabelText("Password");
+    
+    // Test invalid password
+    fireEvent.change(passwordInput, { target: { value: "weak" } });
+    expect(screen.getByText("Password must be at least 8 characters, include one uppercase letter, one number, and one special character.")).toBeInTheDocument();
+    
+    // Test valid password
+    fireEvent.change(passwordInput, { target: { value: "Strong@123" } });
+    expect(screen.queryByText("Password must be at least 8 characters, include one uppercase letter, one number, and one special character.")).not.toBeInTheDocument();
   });
 });

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./loginform.css";
 
 const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(true); // Whether the user is in login or register mode
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -58,8 +58,11 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
       return; // Prevent submission if there's an error during registration
     }
 
+    // Add `isRegister` flag to differentiate login from registration
+    const requestData = { ...formData, isRegister: !isLogin };
+
     try {
-      const response = await onSubmit(formData);
+      const response = await onSubmit(requestData); // Send request to backend with isRegister flag
 
       // If submission is successful, show a success message
       if (response.success) {
@@ -174,7 +177,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
           </div>
 
           <button type="submit" className={submitButtonClass}>
-            {isLogin ? "Login" : "Register"}
+            {isAdmin ? "Login" : isLogin ? "Login" : "Register"}
           </button>
         </form>
 
