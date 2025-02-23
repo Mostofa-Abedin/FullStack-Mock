@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import "./Contact.css";
+import "./contact.css";
 import ProjectPreview from "../../assets/images/project-images/projectplaceholder.jpg";
 
 const Contact = () => {
@@ -18,11 +18,11 @@ const Contact = () => {
   };
 
   const faqs = [
-    { question: "What services does Magnet Labs provide?", answer: "We offer web development, SEO, and more." },
-    { question: "How can I get started with Magnet Labs?", answer: "Contact us via this form." },
-    { question: "Can I customize my package?", answer: "Yes, we offer customizable packages." },
-    { question: "What industries do you specialize in?", answer: "We specialize in various industries." },
-    { question: "Do you offer ongoing support?", answer: "Yes, we offer ongoing support." },
+    { question: "What services does Magnet Labs provide?", answer: "Magnet Labs offers web development, SEO, social media marketing, and tailored packages to meet your business needs." },
+    { question: "How can I get started with Magnet Labs?", answer: "Simply use the contact form on this page or email us at info@magnetlabs.com. Our team will get back to you within 1-2 business days." },
+    { question: "Can I customize my package?", answer: "Absolutely! We provide flexible and customizable packages to suit your business requirements and goals." },
+    { question: "What industries do you specialize in?", answer: "We specialize in a variety of industries, including e-commerce, professional services, and startups, but are open to working with businesses from any sector." },
+    { question: "Do you offer ongoing support?", answer: "Yes, we provide ongoing support and maintenance services to ensure your website and campaigns perform optimally." },
   ];
 
   const handleInputChange = (e) => {
