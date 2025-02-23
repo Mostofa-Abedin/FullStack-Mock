@@ -22,4 +22,5 @@ router.patch('/:id/password', authenticateUser, changePassword)
 
 // Route: PATCH personal profile (only own profile or admin access)
 router.patch('/:id/profile');
+
 module.exports = router;
