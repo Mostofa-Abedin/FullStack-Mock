@@ -15,6 +15,7 @@ router.post('/', createUser);
 // Route: Register a new user
 router.post('/register', registerUser);
 
+//@Trenton- Can we move this to the newly created businessRoutes.js as this route falls under business-related logic. 
 router.post('/:id/onboarding', authenticateUser, registerBusiness)
 
 router.patch('/:id/password', authenticateUser, changePassword)

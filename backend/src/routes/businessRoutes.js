@@ -4,9 +4,8 @@ const router = express.Router();
 const { authenticateUser } = require('../middlewares/authMiddleware');
 const { authUserOrAdmin } = require('../middlewares/authUserOrAdmin');
 
-// @Trenton- I move this route that you created as this route falls under business-related logic. 
-
-router.post('/:id/onboarding', authenticateUser, registerBusiness)
+// @Trenton- here
+//router.post('/:id/onboarding', authenticateUser, registerBusiness)
 
 
 // Route: PATCH business details (only own business or admin access)
