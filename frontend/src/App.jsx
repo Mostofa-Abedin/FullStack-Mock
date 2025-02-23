@@ -11,8 +11,12 @@ import HeroSection from "./components/heroSection/heroSection";
 import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
 import LoginPage from "./pages/LoginPage/loginPage";
+
 import AdminDashboardPage from "./pages/AdminDashboard/adminDashboardPage";
 import ClientsList from "./components/adminDashboard/clientList";
+import ProjectsList from "./components/adminDashboard/projectsList";
+import AnnouncementsList from "./components/adminDashboard/announcementList";
+
 
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
@@ -31,6 +35,10 @@ function App() {
           {/* Admin Dashboard Route - No Navbar/Footer */}
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
           <Route path="/admin/clients" element={<ClientsList />} />
+          <Route path="/admin/projects" element={<ProjectsList/>} />
+          <Route path="/admin/announcements" element={<AnnouncementsList/>} />
+
+
 
 
           {/* Login Page */}

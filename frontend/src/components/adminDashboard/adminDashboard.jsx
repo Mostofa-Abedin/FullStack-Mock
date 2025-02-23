@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 import {
   CContainer,
   CHeader,
@@ -30,6 +30,10 @@ import CIcon from "@coreui/icons-react";
 import { cilUser, cilLockLocked, cilBell } from "@coreui/icons";
 import "@coreui/coreui/dist/css/coreui.min.css";
 import "./admindashboard.css";
+
+import ProjectsList from "../adminDashboard/projectsList"; 
+import ClientsList from "../adminDashboard/clientList"; 
+import AnnouncementsList from "../adminDashboard/announcementList";
 
 const AdminDashboard = ({ username }) => {
   const [sidebarVisible, setSidebarVisible] = useState(true);
@@ -247,10 +251,10 @@ const AdminDashboard = ({ username }) => {
               <CSidebarItem href="/admin/clients" className="sidebar-text">
                 Clients List
               </CSidebarItem>
-              <CSidebarItem href="/projects" className="sidebar-text">
+              <CSidebarItem href="/admin/projects" className="sidebar-text">
                 Projects List
               </CSidebarItem>
-              <CSidebarItem href="/announcements" className="sidebar-text">
+              <CSidebarItem href="/admin/announcements" className="sidebar-text">
                 Announcements List
               </CSidebarItem>
             </CSidebarNav>
@@ -258,13 +262,12 @@ const AdminDashboard = ({ username }) => {
         </CCol>
 
         <CCol md="10" className="p-4">
-          <CButton
-            color="primary"
-            onClick={() => setSidebarVisible(!sidebarVisible)}
-            className="sidebar-button"
-          >
-            {sidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
-          </CButton>
+
+          <Routes>
+            <Route path="/admin/clients" element={<ClientsList clients={clients} />} />
+            <Route path="/admin/projects" element={<ProjectsList projects={projects} />} />
+            <Route path="/announcements" element={<AnnouncementsList announcements={announcements} />} />
+          </Routes>
 
           <h2 className="welcome-text">
             Welcome, {username ? username : "Admin"}!
@@ -334,7 +337,7 @@ const AdminDashboard = ({ username }) => {
                 ))}
               </CRow>
               <Link to="/admin/clients">
-              <CButton color="primary">View All</CButton>
+              <CButton className="add-button">View All</CButton>
             </Link>
             </CCardBody>
           </CCard>
@@ -404,6 +407,9 @@ const AdminDashboard = ({ username }) => {
                   </CCol>
                 ))}
               </CRow>
+              <Link to="/admin/projects">
+              <CButton className="add-button">View All</CButton>
+            </Link>
             </CCardBody>
           </CCard>
 
@@ -458,10 +464,13 @@ const AdminDashboard = ({ username }) => {
                   </CCol>
                 ))}
               </CRow>
+              <Link to="/admin/announcements">
+              <CButton className="add-button">View All</CButton>
+            </Link>
             </CCardBody>
           </CCard>
 
-          {/* Modal for Add/Edit Client */}
+          {/* Modal for Add/Edit */}
           <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
             <CModalHeader>
               <CModalTitle>
