@@ -47,7 +47,7 @@
 
 .sidebar {
     background-color: #192F3C;
-    height: 100vh;
+    height: 120vh;
     border: none;
 }
 
@@ -110,8 +110,14 @@ li {
 .main-card {
     border-radius: 0% !important;
     margin-bottom: 2rem;
-
 }
+
+.client-card {
+    border-radius: 0% !important;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
 .card-header {
     display: flex;
     justify-content: space-between;
@@ -144,6 +150,7 @@ li {
 .card {
     border-radius: 0%;
     padding: 20px;
+    margin:10px;
 }
 
 /* Modal Popup Styles */

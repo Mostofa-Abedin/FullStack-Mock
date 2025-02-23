@@ -12,6 +12,7 @@ import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
 import LoginPage from "./pages/LoginPage/loginPage";
 import AdminDashboardPage from "./pages/AdminDashboard/adminDashboardPage";
+import ClientsList from "./components/adminDashboard/clientList";
 
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
@@ -29,6 +30,8 @@ function App() {
         <Routes>
           {/* Admin Dashboard Route - No Navbar/Footer */}
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+          <Route path="/admin/clients" element={<ClientsList />} />
+
 
           {/* Login Page */}
           <Route path="/login" element={<LoginPage />} />

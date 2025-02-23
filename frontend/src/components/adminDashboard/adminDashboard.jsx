@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   CContainer,
   CHeader,
@@ -54,6 +55,13 @@ const AdminDashboard = ({ username }) => {
       email: "robert.brown@example.com",
       phone: "456-789-0123",
     },
+    {
+        id: 4,
+        name: "Robert Brown",
+        businessName: "Robert's Auto Shop",
+        email: "robert.brown@example.com",
+        phone: "456-789-0123",
+      },
   ]);
   const [projects, setProjects] = useState([
     {
@@ -203,17 +211,15 @@ const AdminDashboard = ({ username }) => {
         return "complete";
       case "On Hold":
         return "on-hold";
-      default: "Upcoming";
+      default:
+        "Upcoming";
         return "upcoming";
     }
   };
 
   return (
     <CContainer fluid>
-      <CHeader
-        position="sticky"
-        className="header"
-      >
+      <CHeader position="sticky" className="header">
         <CHeaderBrand className="header-text">
           <strong>Admin Dashboard</strong>
         </CHeaderBrand>
@@ -235,21 +241,18 @@ const AdminDashboard = ({ username }) => {
 
       <CRow>
         <CCol md="2">
-          <CSidebar
-            visible={sidebarVisible}
-            className="sidebar"
-          >
+          <CSidebar visible={sidebarVisible} className="sidebar">
             <CSidebarNav>
               <CNavTitle className="sidebar-text">Overview</CNavTitle>
-                <CSidebarItem href="/clients" className="sidebar-text">
-                  Clients List
-                </CSidebarItem>
-                <CSidebarItem href="/projects" className="sidebar-text">
-                  Projects List
-                </CSidebarItem>
-                <CSidebarItem href="/announcements" className="sidebar-text">
-                  Announcements List
-                </CSidebarItem>
+              <CSidebarItem href="/admin/clients" className="sidebar-text">
+                Clients List
+              </CSidebarItem>
+              <CSidebarItem href="/projects" className="sidebar-text">
+                Projects List
+              </CSidebarItem>
+              <CSidebarItem href="/announcements" className="sidebar-text">
+                Announcements List
+              </CSidebarItem>
             </CSidebarNav>
           </CSidebar>
         </CCol>
@@ -263,8 +266,11 @@ const AdminDashboard = ({ username }) => {
             {sidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
           </CButton>
 
-          <h2 className="welcome-text">Welcome, {username ? username : "Admin"}!</h2>
+          <h2 className="welcome-text">
+            Welcome, {username ? username : "Admin"}!
+          </h2>
 
+          {/* Client Section */}
           <CCard className="main-card">
             <CCardHeader className="card-header">
               <h4>Manage Clients</h4>
@@ -282,7 +288,7 @@ const AdminDashboard = ({ username }) => {
             </CCardHeader>
             <CCardBody>
               <CRow>
-                {clients.map((client) => (
+                {clients.slice(0, 3).map((client) => (
                   <CCol sm="4" key={client.id}>
                     <div
                       className="card"
@@ -296,13 +302,17 @@ const AdminDashboard = ({ username }) => {
                       <p>{client.businessName}</p>
                       {activeClientId === client.id && (
                         <>
-                          <p style={{ fontWeight:"bold" }}>Email: {client.email}</p>
-                          <p style={{ fontWeight:"bold" }}>Phone: {client.phone}</p>
+                          <p style={{ fontWeight: "bold" }}>
+                            Email: {client.email}
+                          </p>
+                          <p style={{ fontWeight: "bold" }}>
+                            Phone: {client.phone}
+                          </p>
                         </>
                       )}
                       <div className="d-flex justify-content-end">
                         <CButton
-                        className="edit"
+                          className="edit"
                           onClick={() => {
                             setFormSection("clients");
                             setModalType("edit");
@@ -323,6 +333,9 @@ const AdminDashboard = ({ username }) => {
                   </CCol>
                 ))}
               </CRow>
+              <Link to="/admin/clients">
+              <CButton color="primary">View All</CButton>
+            </Link>
             </CCardBody>
           </CCard>
 
@@ -351,11 +364,23 @@ const AdminDashboard = ({ username }) => {
                         project.status
                       )}`}
                     >
-                        <p style={{ fontWeight:"bold", textTransform:"uppercase", fontSize:"16px", textAlign:"right" }}>{project.status}</p>
+                      <p
+                        style={{
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        {project.status}
+                      </p>
                       <h5>{project.name}</h5>
                       <p>{project.client}</p>
                       <p>Details: {project.details}</p>
-                      <p style={{ fontWeight:"bold"}}>Due Date: {new Date(project.dueDate).toLocaleDateString("en-GB")}</p>
+                      <p style={{ fontWeight: "bold" }}>
+                        Due Date:{" "}
+                        {new Date(project.dueDate).toLocaleDateString("en-GB")}
+                      </p>
                       <div className="d-flex justify-content-end">
                         <CButton
                           className="edit"
@@ -371,6 +396,60 @@ const AdminDashboard = ({ username }) => {
                         <CButton
                           className="delete"
                           onClick={() => handleDelete(project.id, "projects")}
+                        >
+                          Delete
+                        </CButton>
+                      </div>
+                    </div>
+                  </CCol>
+                ))}
+              </CRow>
+            </CCardBody>
+          </CCard>
+
+          <CCard className="main-card">
+            <CCardHeader className="card-header">
+              <h4>Manage Announcements</h4>
+              <CButton
+                className="add-button"
+                onClick={() => {
+                  setFormSection("announcements");
+                  setModalType("add");
+                  setCurrentItem(null);
+                  setModalVisible(true);
+                }}
+              >
+                Add Announcement
+              </CButton>
+            </CCardHeader>
+            <CCardBody>
+              <CRow>
+                {announcements.map((announcement) => (
+                  <CCol sm="4" key={announcement.id}>
+                    <div className="card p-3 shadow-sm">
+                      <h5>{announcement.title}</h5>
+                      <p>
+                        {new Date(announcement.date).toLocaleDateString(
+                          "en-GB"
+                        )}
+                      </p>
+                      <div className="d-flex justify-content-end">
+                        <CButton
+                          className="edit"
+                          onClick={() => {
+                            setFormSection("announcements");
+                            setModalType("edit");
+                            setCurrentItem(announcement);
+                            setModalVisible(true);
+                          }}
+                        >
+                          Edit
+                        </CButton>
+                        <CButton
+                          className="delete"
+                          onClick={() =>
+                            handleDelete(announcement.id, "announcements")
+                          }
                         >
                           Delete
                         </CButton>
