@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./loginform.css";
 
-const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
+const LoginForm = ({ onSubmit, isAdmin, setIsAdmin, setUserName }) => {
   const [isLogin, setIsLogin] = useState(true); // Whether the user is in login or register mode
   const [formData, setFormData] = useState({
     name: "",
@@ -68,6 +68,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
       if (response.success) {
         setSuccessMessage("Form submitted successfully!");
         setErrorMessage(null); // Clear error message if any
+        setUserName(formData.name); // Set username after successful login
       } else {
         setErrorMessage("Something went wrong. Please try again.");
         setSuccessMessage(null); // Clear success message if any

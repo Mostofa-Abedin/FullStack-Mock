@@ -1,133 +1,264 @@
-/* Main Container */
-.admin-dashboard {
-    background-color: #f8f9fa;
-    padding: 20px;
-  }
-  
-  /* Quick Stats Cards */
-  .card {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-10px);
-  }
-  
-  /* Card for managing clients, projects, and announcements */
-  .card-preview {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-  }
-  
-  .card-preview h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-  
-  .card-preview p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .card-preview .row {
-    margin-top: 10px;
-  }
-  
-  .card-preview .col {
-    margin-bottom: 15px;
-  }
-  
-  .card-preview .col h5 {
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-  
-  .card-preview .col p {
-    font-size: 0.9rem;
-    color: #777;
-  }
-  
-  /* Footer Styling */
-  .footer {
-    background-color: #343a40;
-    color: white;
-    padding: 20px;
-  }
-  
+.body {
+    font-family: "Inter", sans-serif !important;
+}
 
-  /* Sidebar.css */
+/* Header Styles */
 
-/* Sidebar Styling */
-.sidebar {
-    background-color: #343a40;
-    color: white;
-    height: 100vh;
-    padding-top: 20px;
-  }
-  
-  .sidebar .nav-item {
-    padding: 10px 20px;
-  }
-  
-  .sidebar .nav-item a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .sidebar .nav-item a:hover {
-    background-color: #495057;
-    border-radius: 5px;
-  }
-  
-  /* Toggle Sidebar Button */
-  .sidebar-toggle-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-    background-color: #343a40;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  .sidebar-toggle-btn:hover {
-    background-color: #495057;
-  }
-
-  /* Header.css */
-
-/* Header Styling */
 .header {
-    background-color: #343a40;
+    background-color: #192F3C !important;
     color: white;
-    padding: 15px 30px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  
-  .header .brand {
+    font-family: "Kode Mono", monospace;
+    text-transform: uppercase;
+    border: none;
+    padding: 2rem 2.5rem;
+    --cui-header-color: white;
+    --cui-body-font-family: "Inter", sans-serif;
+}
+
+.header-text {
+    color: #F3DCB2;
+    font-size: 2rem;
+}
+
+.header-nav {
+    margin: 0;
+    width: 200px;
+}
+
+.header-text:hover {
+    color: #F3DCB2;
+}
+
+.profile,
+.logout {
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    color: #192F3C;
+    background-color: transparent !important;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-icon {
+    color: #F3A83C;
+}
+
+/* Sidebar Styles */
+
+.sidebar {
+    background-color: #192F3C;
+    height: 100vh;
+    border: none;
+}
+
+.sidebar-text {
+    color: #8BC4D9 !important;
+}
+
+.sidebar-nav,
+.nav-link {
+    color: white !important;
+    border: none;
+    box-shadow: none;
+}
+
+.sidebar-nav,
+.nav-link:hover {
+    color: #F3A83C !important;
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
+}
+
+.sidebar-nav .nav-group-toggle::after {
+    --cui-sidebar-nav-group-indicator-color: #8BC4D9 !important;
+}
+
+.sidebar-button {
+    background: #F3DCB2;
+    border: none;
+    border-radius: 0%;
+    color: #F3A83C;
+    font-family: "Inter", sans-serif;
+}
+
+.sidebar-button:hover {
+    background: #F3A83C;
+    border: none;
+    border-radius: 0%;
+    color: #F3DCB2;
+}
+
+li {
+    background: #192F3C;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 0x;
+    border: none;
+    box-shadow: none;
+}
+
+/* Main Dashboard Styles */
+
+.welcome-text {
+    font-family: "Inter", sans-serif;
+    color: #192F3C;
+    padding: 1rem;
+}
+
+
+.main-card {
+    border-radius: 0% !important;
+    margin-bottom: 2rem;
+
+}
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D9D9D952;
+    border: none;
+    border-radius: 0% !important;
+    font-family: "Kode Mono", monospace;
     font-weight: bold;
-    font-size: 1.5rem;
-  }
-  
-  .header .nav-item {
-    padding: 10px;
-  }
-  
-  .header .nav-item a {
+    text-transform: uppercase;
+
+}
+
+.add-button {
+    background-color: #192F3C;
+    color: #8BC4D9;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+    border: none;
+
+}
+
+.add-button:hover {
+    background-color: #8BC4D9;
+    color: #192F3C;
+}
+
+/* Card Styles */
+
+.card {
+    border-radius: 0%;
+    padding: 20px;
+}
+
+/* Modal Popup Styles */
+
+.modal-header {
+    background-color: #8BC4D9;
+    color: #192F3C;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+}
+
+.modal-body, .modal-content {
+    color: #192F3C;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+    border: none;
+}
+
+.form-control {
+    border-radius: 0%;
+}
+
+.form-label {
+    padding-top: 10px;
+}
+
+.submit-button {
+    background: #F3A83C;
+    border-radius: 0%;
+}
+
+.submit-button:hover {
+    background: #F3DCB2;
+    border-radius: 0%;
+}
+
+
+
+/* Upcoming Project */
+
+.upcoming {
+    background-color: #8BC4D9;
+    color: #192F3C;
+}
+
+.upcoming .edit {
+    color: #192F3C;
+}
+
+/* In Progress Project */
+
+.in-progress {
+    background-color: #F3DCB2;
+    color: #841B13;
+}
+
+.in-progress .edit {
+    color: #841B13;
+}
+
+/* Client Review Project */
+
+.client-review {
+    background-color: #192F3C;
+    color: #8BC4D9;
+}
+
+.client-review .edit {
+    color: #8BC4D9;
+}
+
+/* Action Feedback Project */
+
+.action-feedback {
+    background-color: #F3A83C;
+    color: #192F3C;
+}
+
+.action-feedback .edit {
+    color: #192F3C;
+}
+
+/* Complete Project */
+
+.complete {
+    background-color: #A7CF81;
+    color: #192F3C;
+}
+
+.complete .edit {
+    color: #192F3C;
+}
+
+/*  On Hold Project */
+
+.on-hold {
+    background-color: #F1968F;
+    color: #841B13;
+}
+
+.on-hold.edit {
+    color: #841B13;
+}
+
+/* Delete Button */
+
+.delete {
+    background-color: #841B13;
     color: white;
-    text-decoration: none;
-  }
-  
-  .header .nav-item a:hover {
-    color: #dcdcdc;
-  }
-  
+    border-radius: 0%;
+}
+
+.delete:hover {
+    background-color: #841B13;
+    scale: 1.025;
+    color: white;
+}
+

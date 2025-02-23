@@ -11,63 +11,222 @@ import {
   CNavGroup,
   CNavTitle,
   CNavItem as CSidebarItem,
-  CFooter,
   CRow,
   CCol,
-  CButton
+  CButton,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CFormInput,
+  CFormSelect,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";  
-import { cilUser, cilLockLocked, cilFolderOpen, cilBell } from "@coreui/icons"; 
-import '@coreui/coreui/dist/css/coreui.min.css'; 
-import './admindashboard.css';  
+import CIcon from "@coreui/icons-react";
+import { cilUser, cilLockLocked, cilBell } from "@coreui/icons";
+import "@coreui/coreui/dist/css/coreui.min.css";
+import "./admindashboard.css";
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ username }) => {
   const [sidebarVisible, setSidebarVisible] = useState(true);
-  
-  // Example logged-in username (you can replace this with your login logic)
-  const username = "John Doe"; // Replace with dynamic username
-  
-  // Example data
-  const clients = [
-    { id: 1, name: "Client One", email: "client1@example.com", phone: "123-456-7890" },
-    { id: 2, name: "Client Two", email: "client2@example.com", phone: "987-654-3210" },
-    { id: 3, name: "Client Three", email: "client3@example.com", phone: "456-789-0123" },
-    { id: 4, name: "Client Four", email: "client4@example.com", phone: "321-654-9870" }
-  ];
+  const [clients, setClients] = useState([
+    {
+      id: 1,
+      name: "John Doe",
+      businessName: "John's Bakery",
+      email: "john.doe@example.com",
+      phone: "123-456-7890",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      businessName: "Jane's Designs",
+      email: "jane.smith@example.com",
+      phone: "987-654-3210",
+    },
+    {
+      id: 3,
+      name: "Robert Brown",
+      businessName: "Robert's Auto Shop",
+      email: "robert.brown@example.com",
+      phone: "456-789-0123",
+    },
+  ]);
+  const [projects, setProjects] = useState([
+    {
+      id: 1,
+      name: "Project Alpha",
+      details: "Details about Project Alpha",
+      client: "John Doe",
+      dueDate: "2025-03-01",
+      status: "Upcoming",
+    },
+    {
+      id: 2,
+      name: "Project Beta",
+      details: "Details about Project Beta",
+      client: "Jane Smith",
+      dueDate: "2025-04-01",
+      status: "Upcoming",
+    },
+    {
+      id: 3,
+      name: "Project Gamma",
+      details: "Details about Project Gamma",
+      client: "Robert Brown",
+      dueDate: "2025-05-01",
+      status: "Upcoming",
+    },
+  ]);
+  const [announcements, setAnnouncements] = useState([
+    { id: 1, title: "Update on New Features", date: "2025-02-20" },
+    { id: 2, title: "System Downtime Notice", date: "2025-02-19" },
+    { id: 3, title: "Client Survey", date: "2025-02-18" },
+  ]);
 
-  const projects = [
-    { id: 1, name: "Project One", status: "In Progress", client: "Client One" },
-    { id: 2, name: "Project Two", status: "Completed", client: "Client Two" },
-    { id: 3, name: "Project Three", status: "In Progress", client: "Client Three" },
-    { id: 4, name: "Project Four", status: "Not Started", client: "Client Four" }
-  ];
+  const [activeClientId, setActiveClientId] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState("");
+  const [currentItem, setCurrentItem] = useState(null);
+  const [formSection, setFormSection] = useState("");
 
-  const announcements = [
-    { id: 1, title: "New Feature Launch", date: "2025-03-01" },
-    { id: 2, title: "Maintenance Schedule", date: "2025-03-05" },
-    { id: 3, title: "Client Survey", date: "2025-03-10" }
-  ];
+  const handleSubmit = (e, type) => {
+    e.preventDefault();
+    const {
+      name,
+      details,
+      client,
+      dueDate,
+      status,
+      businessName,
+      email,
+      phone,
+    } = e.target.elements;
+    let newItem;
+
+    if (formSection === "clients") {
+      if (type === "add") {
+        newItem = {
+          id: Date.now(),
+          name: name.value,
+          businessName: businessName.value,
+          email: email.value,
+          phone: phone.value,
+        };
+        setClients([...clients, newItem]);
+      } else if (type === "edit" && currentItem) {
+        newItem = {
+          id: currentItem.id,
+          name: name.value,
+          businessName: businessName.value,
+          email: email.value,
+          phone: phone.value,
+        };
+        setClients(
+          clients.map((client) =>
+            client.id === currentItem.id ? newItem : client
+          )
+        );
+      }
+    } else if (formSection === "projects") {
+      if (type === "add") {
+        newItem = {
+          id: Date.now(),
+          name: name.value,
+          details: details.value,
+          client: client.value,
+          dueDate: dueDate.value,
+          status: status.value,
+        };
+        setProjects([...projects, newItem]);
+      } else if (type === "edit" && currentItem) {
+        newItem = {
+          id: currentItem.id,
+          name: name.value,
+          details: details.value,
+          client: client.value,
+          dueDate: dueDate.value,
+          status: status.value,
+        };
+        setProjects(
+          projects.map((project) =>
+            project.id === currentItem.id ? newItem : project
+          )
+        );
+      }
+    } else if (formSection === "announcements") {
+      if (type === "add") {
+        newItem = { id: Date.now(), title: name.value, date: dueDate.value };
+        setAnnouncements([...announcements, newItem]);
+      } else if (type === "edit" && currentItem) {
+        newItem = {
+          id: currentItem.id,
+          title: name.value,
+          date: dueDate.value,
+        };
+        setAnnouncements(
+          announcements.map((announcement) =>
+            announcement.id === currentItem.id ? newItem : announcement
+          )
+        );
+      }
+    }
+    setModalVisible(false);
+  };
+
+  const handleDelete = (id, section) => {
+    if (section === "clients") {
+      setClients(clients.filter((client) => client.id !== id));
+    } else if (section === "projects") {
+      setProjects(projects.filter((project) => project.id !== id));
+    } else {
+      setAnnouncements(
+        announcements.filter((announcement) => announcement.id !== id)
+      );
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Upcoming":
+        return "upcoming";
+      case "In Progress":
+        return "in-progress";
+      case "Client Review":
+        return "client-review";
+      case "Action Feedback":
+        return "action-feedback";
+      case "Complete":
+        return "complete";
+      case "On Hold":
+        return "on-hold";
+      default: "Upcoming";
+        return "upcoming";
+    }
+  };
 
   return (
-    <CContainer fluid className="admin-dashboard">
-      {/* Header */}
+    <CContainer fluid>
       <CHeader
         position="sticky"
-        className="header mb-4 px-3 d-flex justify-content-between align-items-center shadow-sm"
+        className="header"
       >
-        <CHeaderBrand href="#" className="brand text-white">
+        <CHeaderBrand className="header-text">
           <strong>Admin Dashboard</strong>
         </CHeaderBrand>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#" className="text-white">
-              <CIcon icon={cilUser} className="me-2" /> {/* Use icon prop */}
+            <CNavLink href="#" className="profile">
+              <CIcon icon={cilUser} className="profile-icon" />
               Profile
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#" className="text-white">
-              <CIcon icon={cilLockLocked} className="me-2" /> {/* Use a different icon */}
+            <CNavLink href="#" className="logout">
+              <CIcon icon={cilLockLocked} className="profile-icon" />
               Logout
             </CNavLink>
           </CNavItem>
@@ -75,143 +234,268 @@ const AdminDashboard = () => {
       </CHeader>
 
       <CRow>
-        {/* Sidebar */}
         <CCol md="2">
-          <CSidebar visible={sidebarVisible} className="sidebar min-vh-100 text-white">
-            {/* Logo in Sidebar */}
-            <div className="sidebar-logo">
-              <img src="path_to_logo.png" alt="Logo" />
-            </div>
-
+          <CSidebar
+            visible={sidebarVisible}
+            className="sidebar"
+          >
             <CSidebarNav>
-              <CNavTitle className="text-white">Dashboard</CNavTitle>
-              <CSidebarItem href="/dashboard" className="text-white">
-                Overview
-              </CSidebarItem>
-              <CNavGroup toggler="Clients" className="text-white">
-                <CSidebarItem href="/clients" className="text-white">
-                  Manage Clients
+              <CNavTitle className="sidebar-text">Overview</CNavTitle>
+                <CSidebarItem href="/clients" className="sidebar-text">
+                  Clients List
                 </CSidebarItem>
-              </CNavGroup>
-              <CNavGroup toggler="Projects" className="text-white">
-                <CSidebarItem href="/projects" className="text-white">
-                  Manage Projects
+                <CSidebarItem href="/projects" className="sidebar-text">
+                  Projects List
                 </CSidebarItem>
-              </CNavGroup>
-              <CNavGroup toggler="Announcements" className="text-white">
-                <CSidebarItem href="/announcements" className="text-white">
-                  Make Announcements
+                <CSidebarItem href="/announcements" className="sidebar-text">
+                  Announcements List
                 </CSidebarItem>
-              </CNavGroup>
             </CSidebarNav>
           </CSidebar>
         </CCol>
 
-        {/* Main Content */}
         <CCol md="10" className="p-4">
           <CButton
             color="primary"
             onClick={() => setSidebarVisible(!sidebarVisible)}
-            className="mb-4"
+            className="sidebar-button"
           >
             {sidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
           </CButton>
-          <h2 className="mt-3">Welcome, {username}</h2>
-          <p>Dashboard content goes here. This is where you can manage everything related to the platform.</p>
 
-          {/* Quick Stats Section */}
-          <CRow className="mt-5">
-            <CCol sm="4">
-              <div className="card text-center p-3 shadow-sm">
-                <h4>Total Clients</h4>
-                <h5>{clients.length}</h5>
-                <CButton color="info">View Clients</CButton>
-              </div>
-            </CCol>
-            <CCol sm="4">
-              <div className="card text-center p-3 shadow-sm">
-                <h4>Active Projects</h4>
-                <h5>{projects.length}</h5>
-                <CButton color="info">View Projects</CButton>
-              </div>
-            </CCol>
-            <CCol sm="4">
-              <div className="card text-center p-3 shadow-sm">
-                <h4>Announcements</h4>
-                <h5>{announcements.length}</h5>
-                <CButton color="info">View Announcements</CButton>
-              </div>
-            </CCol>
-          </CRow>
+          <h2 className="welcome-text">Welcome, {username ? username : "Admin"}!</h2>
 
-          {/* Manage Clients Section with Mock Client Previews */}
-          <CRow className="mt-5">
-            <CCol>
-              <div className="card-preview">
-                <h3>Manage Clients</h3>
-                <p>Preview of mock clients:</p>
-                <CRow>
-                  {clients.map((client) => (
-                    <CCol sm="6" md="3" key={client.id} className="mb-3">
-                      <div className="card p-3 text-center shadow-sm">
-                        <h5>{client.name}</h5>
-                        <p>{client.email}</p>
-                        <p>{client.phone}</p>
+          <CCard className="main-card">
+            <CCardHeader className="card-header">
+              <h4>Manage Clients</h4>
+              <CButton
+                className="add-button"
+                onClick={() => {
+                  setFormSection("clients");
+                  setModalType("add");
+                  setCurrentItem(null);
+                  setModalVisible(true);
+                }}
+              >
+                Add Client
+              </CButton>
+            </CCardHeader>
+            <CCardBody>
+              <CRow>
+                {clients.map((client) => (
+                  <CCol sm="4" key={client.id}>
+                    <div
+                      className="card"
+                      onClick={() =>
+                        setActiveClientId(
+                          activeClientId === client.id ? null : client.id
+                        )
+                      }
+                    >
+                      <h5>{client.name}</h5>
+                      <p>{client.businessName}</p>
+                      {activeClientId === client.id && (
+                        <>
+                          <p style={{ fontWeight:"bold" }}>Email: {client.email}</p>
+                          <p style={{ fontWeight:"bold" }}>Phone: {client.phone}</p>
+                        </>
+                      )}
+                      <div className="d-flex justify-content-end">
+                        <CButton
+                        className="edit"
+                          onClick={() => {
+                            setFormSection("clients");
+                            setModalType("edit");
+                            setCurrentItem(client);
+                            setModalVisible(true);
+                          }}
+                        >
+                          Edit
+                        </CButton>
+                        <CButton
+                          className="delete"
+                          onClick={() => handleDelete(client.id, "clients")}
+                        >
+                          Delete
+                        </CButton>
                       </div>
-                    </CCol>
-                  ))}
-                </CRow>
-              </div>
-            </CCol>
-          </CRow>
+                    </div>
+                  </CCol>
+                ))}
+              </CRow>
+            </CCardBody>
+          </CCard>
 
-          {/* Manage Projects Section with Mock Project Previews */}
-          <CRow className="mt-4">
-            <CCol>
-              <div className="card-preview">
-                <h3>Manage Projects</h3>
-                <p>Preview of mock projects:</p>
-                <CRow>
-                  {projects.map((project) => (
-                    <CCol sm="6" md="3" key={project.id} className="mb-3">
-                      <div className="card p-3 text-center shadow-sm">
-                        <h5>{project.name}</h5>
-                        <p>Status: {project.status}</p>
-                        <p>Client: {project.client}</p>
+          {/* Add/Edit Project Section */}
+          <CCard className="main-card">
+            <CCardHeader className="card-header">
+              <h4>Manage Projects</h4>
+              <CButton
+                className="add-button"
+                onClick={() => {
+                  setFormSection("projects");
+                  setModalType("add");
+                  setCurrentItem(null);
+                  setModalVisible(true);
+                }}
+              >
+                Add Project
+              </CButton>
+            </CCardHeader>
+            <CCardBody>
+              <CRow>
+                {projects.map((project) => (
+                  <CCol sm="4" key={project.id}>
+                    <div
+                      className={`card p-3 shadow-sm ${getStatusColor(
+                        project.status
+                      )}`}
+                    >
+                        <p style={{ fontWeight:"bold", textTransform:"uppercase", fontSize:"16px", textAlign:"right" }}>{project.status}</p>
+                      <h5>{project.name}</h5>
+                      <p>{project.client}</p>
+                      <p>Details: {project.details}</p>
+                      <p style={{ fontWeight:"bold"}}>Due Date: {new Date(project.dueDate).toLocaleDateString("en-GB")}</p>
+                      <div className="d-flex justify-content-end">
+                        <CButton
+                          className="edit"
+                          onClick={() => {
+                            setFormSection("projects");
+                            setModalType("edit");
+                            setCurrentItem(project);
+                            setModalVisible(true);
+                          }}
+                        >
+                          Edit
+                        </CButton>
+                        <CButton
+                          className="delete"
+                          onClick={() => handleDelete(project.id, "projects")}
+                        >
+                          Delete
+                        </CButton>
                       </div>
-                    </CCol>
-                  ))}
-                </CRow>
-              </div>
-            </CCol>
-          </CRow>
+                    </div>
+                  </CCol>
+                ))}
+              </CRow>
+            </CCardBody>
+          </CCard>
 
-          {/* Make Announcements Section with Mock Announcements Previews */}
-          <CRow className="mt-4">
-            <CCol>
-              <div className="card-preview">
-                <h3>Make Announcements</h3>
-                <p>Preview of mock announcements:</p>
-                <CRow>
-                  {announcements.map((announcement) => (
-                    <CCol sm="6" md="3" key={announcement.id} className="mb-3">
-                      <div className="card p-3 text-center shadow-sm">
-                        <h5>{announcement.title}</h5>
-                        <p>Date: {announcement.date}</p>
-                      </div>
-                    </CCol>
-                  ))}
-                </CRow>
-              </div>
-            </CCol>
-          </CRow>
+          {/* Modal for Add/Edit Client */}
+          <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
+            <CModalHeader>
+              <CModalTitle>
+                {modalType === "edit"
+                  ? `Edit ${formSection.slice(0, -1)}`
+                  : `Add ${formSection.slice(0, -1)}`}
+              </CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              <form onSubmit={(e) => handleSubmit(e, modalType)}>
+                {formSection === "clients" ? (
+                  <>
+                    <CFormInput
+                      type="text"
+                      label="Name"
+                      name="name"
+                      defaultValue={currentItem?.name}
+                    />
+                    <CFormInput
+                      type="text"
+                      label="Business Name"
+                      name="businessName"
+                      defaultValue={currentItem?.businessName}
+                    />
+                    <CFormInput
+                      type="email"
+                      label="Email"
+                      name="email"
+                      defaultValue={currentItem?.email}
+                    />
+                    <CFormInput
+                      type="text"
+                      label="Phone"
+                      name="phone"
+                      defaultValue={currentItem?.phone}
+                    />
+                  </>
+                ) : formSection === "projects" ? (
+                  <>
+                    <CFormInput
+                      type="text"
+                      label="Project Name"
+                      name="name"
+                      defaultValue={currentItem?.name}
+                    />
+                    <CFormInput
+                      type="text"
+                      label="Details"
+                      name="details"
+                      defaultValue={currentItem?.details}
+                    />
+                    <CFormSelect
+                      label="Client"
+                      name="client"
+                      defaultValue={currentItem?.client}
+                    >
+                      {clients.map((client) => (
+                        <option key={client.id} value={client.name}>
+                          {client.name}
+                        </option>
+                      ))}
+                    </CFormSelect>
+                    <CFormInput
+                      type="date"
+                      label="Due Date"
+                      name="dueDate"
+                      defaultValue={currentItem?.dueDate}
+                    />
+                    <CFormSelect
+                      label="Status"
+                      name="status"
+                      defaultValue={currentItem?.status}
+                    >
+                      <option value="Upcoming">Upcoming</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Client Review">Client Review</option>
+                      <option value="Action Feedback">Action Feedback</option>
+                      <option value="Complete">Complete</option>
+                      <option value="On Hold">On Hold</option>
+                    </CFormSelect>
+                  </>
+                ) : formSection === "announcements" ? (
+                  <>
+                    <CFormInput
+                      type="text"
+                      label="Title"
+                      name="name"
+                      defaultValue={currentItem?.title}
+                    />
+                    <CFormInput
+                      type="date"
+                      label="Date"
+                      name="dueDate"
+                      defaultValue={currentItem?.date}
+                    />
+                  </>
+                ) : null}
+                <CModalFooter>
+                  <CButton
+                    className="close-button"
+                    onClick={() => setModalVisible(false)}
+                  >
+                    Close
+                  </CButton>
+                  <CButton className="submit-button" type="submit">
+                    Save Changes
+                  </CButton>
+                </CModalFooter>
+              </form>
+            </CModalBody>
+          </CModal>
         </CCol>
       </CRow>
-
-      {/* Footer */}
-      <CFooter className="footer mt-auto">
-        <div>Admin Dashboard - 2025</div>
-      </CFooter>
     </CContainer>
   );
 };
