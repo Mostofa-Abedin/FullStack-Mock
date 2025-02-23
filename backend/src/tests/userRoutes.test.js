@@ -27,7 +27,7 @@ describe(' GET /users', () => {
       name: 'Test User', 
       email: 'test@example.com', 
       role: 'client', 
-      password: 'password123' 
+      password: 'Password123!' 
     });
 
     const res = await request(app).get('/users');
@@ -51,7 +51,7 @@ describe('POST /users/register', () => {
       name: 'Register User',
       email: 'register@example.com',
       role: 'client',
-      password: 'securepassword123'
+      password: 'Securepassword123!'
     };
 
     const res = await request(app).post('/users/register').send(newUser);
@@ -69,7 +69,7 @@ describe('POST /users/register', () => {
       name: 'Duplicate User',
       email: 'duplicate@example.com',
       role: 'client',
-      password: 'password123'
+      password: 'Password123!'
     };
 
     // Create user first
@@ -84,7 +84,8 @@ describe('POST /users/register', () => {
 
   it('should return validation error for missing fields', async () => {
     const res = await request(app).post('/users/register').send({
-      name: 'Missing Fields'
+      name: 'Missing Fields',
+      password: 'Securepassword123!'
     });
 
     expect(res.statusCode).toBe(400);
@@ -96,7 +97,7 @@ describe('POST /users/register', () => {
       name: 'Invalid Email User',
       email: 'invalid-email',
       role: 'client',
-      password: 'securepassword123'
+      password: 'Securepassword123!'
     });
 
     expect(res.statusCode).toBe(400);

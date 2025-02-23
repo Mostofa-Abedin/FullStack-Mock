@@ -33,7 +33,7 @@ const registerUser = async (req, res) => {
       if (existingUser) {
         return res.status(400).json({ message: 'User with this email already exists' });
       }
-      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Same regex as frontend
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Same regex as frontend, (minimum 8 characters, at least one number, one uppercase letter, and one special character)
       if (!passwordRegex.test(password)) {
         return res.status(400).json({ message: "Password does not match requirements" });
       }
@@ -63,7 +63,8 @@ const registerUser = async (req, res) => {
             message: "Wrong password."
         })
       }
-      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Same regex as frontend
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Same regex as frontend, (minimum 8 characters, at least one number, one uppercase letter, and one special character)
+      
       if (!passwordRegex.test(newPassword)) {
         return res.status(400).json({ message: "New password does not match requirements" });
       }

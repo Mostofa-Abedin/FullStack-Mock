@@ -14,7 +14,7 @@ describe('POST /user/:id/onboarding', () => {
       name: 'Business User',
       email: 'business@testexample.com',
       role: 'client',
-      password: 'securepassword123'
+      password: 'Securepassword123!'
     };
     
     await request(app).post('/users/register').send(newUser);

@@ -13,7 +13,7 @@ describe('POST /login', () => {
       name: 'Register User',
       email: 'register@testexample.com',
       role: 'client',
-      password: 'securepassword123'
+      password: 'Securepassword123!'
     };
 
     await User.create(newUser);
@@ -25,7 +25,7 @@ describe('POST /login', () => {
   it('should fail if email does not exist', async () => {
     const userData = {
       email: 'notaregister@example.com',
-      password: 'securepassword123'
+      password: 'Securepassword123!'
     };
 
     // Attempt to login with incorrect email

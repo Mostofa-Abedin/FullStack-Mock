@@ -13,7 +13,7 @@ describe('PATCH /users/:id/password', () => {
           name: 'Client User',
           email: 'changepassword@testexample.com',
           role: 'client',
-          password: 'password123'
+          password: 'Password123!'
         });
       });
   
@@ -28,8 +28,8 @@ describe('PATCH /users/:id/password', () => {
     const decoded = jwt.verify(clientToken, process.env.JWT_SECRET || "secret"); 
     const user = decoded;
     const newPassword = {
-        oldPassword: "password123",
-        newPassword: "password234"
+        oldPassword: "Password123!",
+        newPassword: "Password234!"
     }
     const res = await request(app)
                 .patch(`/users/${user.userID}/password`)

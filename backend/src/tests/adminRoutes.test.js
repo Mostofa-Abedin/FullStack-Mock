@@ -18,7 +18,7 @@ describe('GET /admin/dashboard', () => {
       name: 'Admin User',
       email: 'admin@testexample.com',
       role: 'admin',
-      password: 'password123'
+      password: 'Password123!'
     });
 
     // Create a client user
@@ -26,7 +26,7 @@ describe('GET /admin/dashboard', () => {
       name: 'Client User',
       email: 'client@testexample.com',
       role: 'client',
-      password: 'password123'
+      password: 'Password123!'
     });
 
     // Generate JWT tokens
