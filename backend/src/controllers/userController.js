@@ -81,19 +81,41 @@ const changePassword = async (req, res) => {
  * - Return updated user details.
  */
 const updateUserProfile = async (req, res) => {
+  
   // recommend: Add logic here to update user details
   // - Check if user is authorized (self or admin)
   // - Update fields like name, email
   // - Validate fields (use regex for email)
   // - Save and return updated user
 
-  // Step 1: Ensure that only the user or an admin can update the profile
+  const { id } = req.params; // Extract user ID from the request parameters
+  
+  // Step 1: Ensure only the user or an admin can update the profile
   if (req.user.role !== 'admin' && req.user.userID !== id) {
     return res.status(403).json({ message: 'Access Denied. You can only update your own profile.' });
   }
 
   try {
+    // Step 2: Find user by ID
     const user = await User.findById(id);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Send a basic success response for now
+    res.status(200).json({
+      message: 'User found and permission granted.',
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'An error occurred while accessing the user.', error });
   }
 };
 
