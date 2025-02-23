@@ -23,7 +23,7 @@ router.post('/', createUser);
 // Perhaps this should move to authRoutes?
 router.post('/register', registerUser);
 
-// Route: Onboard business (Client only)
+// Route: Onboard/Register business (Client only)
 //@Trenton- Can we move this to the newly created businessRoutes.js as this route falls under business-related logic. 
 router.post('/:id/onboarding', authenticateUser, registerBusiness)
 

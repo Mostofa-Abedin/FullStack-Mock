@@ -72,7 +72,6 @@ const changePassword = async (req, res) => {
 
 const updateUserProfile = async (req, res) => {
   
-
 // Extract user ID from the request parameters
   const { id } = req.params; 
   const updates = req.body;
@@ -137,20 +136,7 @@ const updateUserProfile = async (req, res) => {
   
 };
 
-/**
- * Pseudocode: Admin Updates Any User - wAT DO?
- * PATCH /admin/users/:id
- *
- * - Admin-only route.
- * - Full access to update user fields, including role.
- * - Validate inputs and handle errors.
- */
-const adminUpdateUser = async (req, res) => {
-  // recommend: Add admin-only logic
-  // - Admin can update any field including role
-  // - Handle validation of all fields
-  // - Return updated user info
-};
+
 
 // Export controllers
 module.exports = {
@@ -158,6 +144,5 @@ module.exports = {
   createUser,
   registerUser,
   changePassword,
-  updateUserProfile, // 🔥 New: Will implement step-by-step, me thinks
-  adminUpdateUser,   // 🔥 New: Will implement step-by-step, me thinks
+  updateUserProfile,   
 };
