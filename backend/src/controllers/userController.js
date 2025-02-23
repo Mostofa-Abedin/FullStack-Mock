@@ -71,10 +71,33 @@ const registerUser = async (req, res) => {
       }
   };
 
+  const changeUserDetails = async (req, res) => {
+    const userID = req.params.id
+    const { name, email, role } = req.body;
+    try {  
+      const existingUser = await User.findOne({ _id: userID });
+      
+      if (!existingUser) {
+        return res.status(400).json({ message: 'User with this email does not exist' });
+      }
 
+      existingUser.name = name || existingUser.name
+      existingUser.email = email || existingUser.email
+      existingUser.role = role || existingUser.role
+
+      await existingUser.save()
+      res.status(201).json({ message: 'User details changed successfully'});
+      } catch (err) {
+        console.log(err.code)
+        if (err.code == 11000) {
+          return res.status(400).json({ message: `User with this email ${email} already exists` });
+        }
+        res.status(400).json({ message: err.message });
+      }
+    }
 
 
 
 
 // Export controllers
-module.exports = { getAllUsers, createUser, registerUser, changePassword };
+module.exports = { getAllUsers, createUser, registerUser, changePassword, changeUserDetails };

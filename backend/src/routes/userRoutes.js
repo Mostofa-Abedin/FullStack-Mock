@@ -1,9 +1,9 @@
 // Import required libraries
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, createUser, registerUser, changePassword } = require('../controllers/userController'); // Import controllers
+const { getAllUsers, createUser, registerUser, changePassword, changeUserDetails } = require('../controllers/userController'); // Import controllers
 const { registerBusiness } = require('../controllers/businessFormController');
-const { authenticateUser } = require('../middlewares/authMiddleware');
+const { authenticateUser, authorizeAdmin } = require('../middlewares/authMiddleware');
 
 // Route: GET all users 
 router.get('/', getAllUsers); 
@@ -17,6 +17,8 @@ router.post('/register', registerUser);
 router.post('/:id/onboarding', authenticateUser, registerBusiness)
 
 router.patch('/:id/password', authenticateUser, changePassword)
+
+router.patch('/:id/profile', authenticateUser, authorizeAdmin, changeUserDetails)
 
 
 
