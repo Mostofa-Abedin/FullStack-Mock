@@ -70,25 +70,11 @@ const changePassword = async (req, res) => {
   }
 };
 
-/**
- * Initial Pseudocode: Update Personal Details- WAT DO?
- * PATCH /users/:id/profile
- *
- * - Ensure the user is authenticated (or admin).
- * - Allow partial updates (name, email).
- * - Only admin can update the role.
- * - Validate input fields (email format, etc.).
- * - Return updated user details.
- */
 const updateUserProfile = async (req, res) => {
   
-  // recommend: Add logic here to update user details
-  // - Check if user is authorized (self or admin)
-  // - Update fields like name, email
-  // - Validate fields (use regex for email)
-  // - Save and return updated user
 
-  const { id } = req.params; // Extract user ID from the request parameters
+// Extract user ID from the request parameters
+  const { id } = req.params; 
   const updates = req.body;
 
   // Step 1: Ensure only the user or an admin can update the profile
@@ -128,7 +114,7 @@ const updateUserProfile = async (req, res) => {
       return res.status(403).json({ message: 'Only admins can update user roles.' });
     }
 
-  
+
     // Password validation and hashing
     if (updates.password) {
       if (updates.password.length < 6) {
