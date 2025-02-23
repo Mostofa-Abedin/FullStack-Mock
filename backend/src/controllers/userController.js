@@ -33,7 +33,10 @@ const registerUser = async (req, res) => {
       if (existingUser) {
         return res.status(400).json({ message: 'User with this email already exists' });
       }
-  
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Same regex as frontend
+      if (!passwordRegex.test(password)) {
+        return res.status(400).json({ message: "Password does not match requirements" });
+      }
       // Create a new user (Password hashing handled in the User model)
       const user = new User({ name, email, role, password });
       await user.save();
@@ -60,11 +63,13 @@ const registerUser = async (req, res) => {
             message: "Wrong password."
         })
       }
-
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Same regex as frontend
+      if (!passwordRegex.test(newPassword)) {
+        return res.status(400).json({ message: "New password does not match requirements" });
+      }
       user.password = newPassword
       // Updates password in db
       await user.save();
-  
       res.status(201).json({ message: 'User password changed successfully'});
       } catch (err) {
         res.status(400).json({ message: err.message });
