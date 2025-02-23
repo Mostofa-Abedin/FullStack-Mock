@@ -20,6 +20,7 @@ router.get('/', getAllUsers);
 router.post('/', createUser);  
 
 // Route: Register a new user (Public)
+// Perhaps this should move to authRoutes?
 router.post('/register', registerUser);
 
 // Route: Onboard business (Client only)

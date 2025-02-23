@@ -99,23 +99,27 @@ const updateUserProfile = async (req, res) => {
     // Step 2: Find user by ID
     const user = await User.findById(id);
 
-    // Check if the user exists
+    // Step 3: Check if the user exists
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
 
-    // Send a basic success response for now
+    // Step 4: Handle name update
+    if (updates.name) {
+      user.name = updates.name.trim(); // Remove extra spaces
+    }
+
+    // Step 5: Save the updated user
+    await user.save();
+
+    // Step 6: Return updated user info without password
+    const { password, ...updatedUser } = user.toObject();
     res.status(200).json({
-      message: 'User found and permission granted.',
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
+      message: 'User profile updated successfully.',
+      user: updatedUser,
     });
   } catch (error) {
-    res.status(500).json({ message: 'An error occurred while accessing the user.', error });
+    res.status(500).json({ message: 'An error occurred while updating the user profile.', error });
   }
 };
 
