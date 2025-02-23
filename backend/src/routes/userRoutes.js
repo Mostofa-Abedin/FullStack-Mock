@@ -1,9 +1,11 @@
 // Import required libraries
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, createUser, registerUser, changePassword } = require('../controllers/userController'); // Import controllers
+const { getAllUsers, createUser, registerUser, changePassword, updateUserProfile   } = require('../controllers/userController'); // Import controllers
 const { registerBusiness } = require('../controllers/businessFormController');
 const { authenticateUser } = require('../middlewares/authMiddleware');
+
+//Middlewares
 const { authUserOrAdmin } = require('../middlewares/authUserOrAdmin');
 
 // Route: GET all users 

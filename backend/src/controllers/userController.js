@@ -86,6 +86,15 @@ const updateUserProfile = async (req, res) => {
   // - Update fields like name, email
   // - Validate fields (use regex for email)
   // - Save and return updated user
+
+  // Step 1: Ensure that only the user or an admin can update the profile
+  if (req.user.role !== 'admin' && req.user.userID !== id) {
+    return res.status(403).json({ message: 'Access Denied. You can only update your own profile.' });
+  }
+
+  try {
+    const user = await User.findById(id);
+  }
 };
 
 /**
