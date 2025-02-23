@@ -89,7 +89,8 @@ const updateUserProfile = async (req, res) => {
   // - Save and return updated user
 
   const { id } = req.params; // Extract user ID from the request parameters
-  
+  const updates = req.body;
+
   // Step 1: Ensure only the user or an admin can update the profile
   if (req.user.role !== 'admin' && req.user.userID !== id) {
     return res.status(403).json({ message: 'Access Denied. You can only update your own profile.' });
@@ -104,11 +105,37 @@ const updateUserProfile = async (req, res) => {
       return res.status(404).json({ message: 'User not found.' });
     }
 
-    // Step 4: Handle name update
+    // Step 4: Partial updates for fields
+
+    // Name Update
     if (updates.name) {
       user.name = updates.name.trim(); // Remove extra spaces
     }
 
+    // Email Validation
+    if (updates.email) {
+      const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      if (!emailRegex.test(updates.email)) {
+        return res.status(400).json({ message: 'Invalid email format.' });
+      }
+      user.email = updates.email;
+    }
+
+    // Role update only allowed for admins
+    if (updates.role && req.user.role === 'admin') {
+      user.role = updates.role;
+    } else if (updates.role) {
+      return res.status(403).json({ message: 'Only admins can update user roles.' });
+    }
+
+  
+    // Password validation and hashing
+    if (updates.password) {
+      if (updates.password.length < 6) {
+        return res.status(400).json({ message: 'Password must be at least 6 characters long.' });
+      }
+      user.password = await bcrypt.hash(updates.password, 10);
+    } 
     // Step 5: Save the updated user
     await user.save();
 
@@ -121,6 +148,7 @@ const updateUserProfile = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'An error occurred while updating the user profile.', error });
   }
+  
 };
 
 /**
