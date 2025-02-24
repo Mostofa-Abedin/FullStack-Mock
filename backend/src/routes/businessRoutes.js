@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { authenticateUser } = require('../middlewares/authMiddleware');
 const { authUserOrAdmin } = require('../middlewares/authUserOrAdmin');
-const { getAllBusinessesWithUserDetails } = require('../controllers/businessController');
+const { getAllBusinessesWithUserDetails, updateBusinessDetails } = require('../controllers/businessController');
 
 // @Trenton- here
 //router.post('/:id/onboarding', authenticateUser, registerBusiness)

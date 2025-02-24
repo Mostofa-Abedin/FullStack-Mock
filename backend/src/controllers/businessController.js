@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Business = require('../models/Business');
 
 // Controller: Get all businesses with user details populated
@@ -24,49 +25,54 @@ const updateBusinessDetails = async (req, res) => {
     const userId = req.user.userID; // Extracted from the JWT token
     const userRole = req.user.role;
   
-    try {
-      // Step 1: Find the business
-      const business = await Business.findById(id);
-  
-      if (!business) {
-        return res.status(404).json({ message: 'Business not found.' });
-      }
-  
-      // Step 2: Allow update if user is owner or admin
-      if (business.userId.toString() !== userId && userRole !== 'admin') {
-        return res.status(403).json({ message: 'Access Denied. You can only update your own business.' });
-      }
-  
-      // Step 3: Perform partial updates
-      if (updates.businessName) business.businessName = updates.businessName.trim();
-      if (updates.industry) business.industry = updates.industry.trim();
-      if (updates.website) {
-        const websiteRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,4}\/?$/;
-        if (!websiteRegex.test(updates.website)) {
-          return res.status(400).json({ message: 'Invalid website URL.' });
-        }
-        business.website = updates.website;
-      }
-      if (updates.phone) {
-        const phoneRegex = /^\+?\d{1,3}[- ]?\d{3}[- ]?\d{3}[- ]?\d{3}$/;
-        if (!phoneRegex.test(updates.phone)) {
-          return res.status(400).json({ message: 'Invalid phone number format.' });
-        }
-        business.phone = updates.phone;
-      }
-      if (updates.address) business.address = updates.address.trim();
-  
-      // Step 4: Save updated business
-      await business.save();
-  
-      res.status(200).json({
-        message: 'Business details updated successfully.',
-        business,
-      });
-    } catch (error) {
-      console.error('Error updating business:', error);
-      res.status(500).json({ message: 'An error occurred while updating the business.', error });
+// Step 1: Validate ObjectId
+if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid Business ID format.' });
+  }
+
+  try {
+    // Step 2: Find the business
+    const business = await Business.findById(id);
+
+    if (!business) {
+      return res.status(404).json({ message: 'Business not found.' });
     }
-  };
+
+    // Step 3: Allow update if user is owner or admin
+    if (business.userId.toString() !== userId && userRole !== 'admin') {
+      return res.status(403).json({ message: 'Access Denied. You can only update your own business.' });
+    }
+
+    // Step 4: Perform partial updates
+    if (updates.businessName) business.businessName = updates.businessName.trim();
+    if (updates.industry) business.industry = updates.industry.trim();
+    if (updates.website) {
+      const websiteRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,4}\/?$/;
+      if (!websiteRegex.test(updates.website)) {
+        return res.status(400).json({ message: 'Invalid website URL.' });
+      }
+      business.website = updates.website;
+    }
+    if (updates.phone) {
+      const phoneRegex = /^\+?\d{1,3}[- ]?\d{3}[- ]?\d{3}[- ]?\d{3}$/;
+      if (!phoneRegex.test(updates.phone)) {
+        return res.status(400).json({ message: 'Invalid phone number format.' });
+      }
+      business.phone = updates.phone;
+    }
+    if (updates.address) business.address = updates.address.trim();
+
+    // Step 5: Save updated business
+    await business.save();
+
+    res.status(200).json({
+      message: 'Business details updated successfully.',
+      business,
+    });
+  } catch (error) {
+    console.error('Error updating business:', error);
+    res.status(500).json({ message: 'An error occurred while updating the business.', error });
+  }
+};
 
 module.exports = { updateBusinessDetails,getAllBusinessesWithUserDetails };
