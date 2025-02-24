@@ -6,7 +6,7 @@ import "./footer.css"
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="main-footer">
 
       {/* Logo and Name */}
       <Link

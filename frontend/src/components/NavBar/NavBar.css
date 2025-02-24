@@ -1,4 +1,4 @@
-  .navbar {
+  .home-navbar {
     position: sticky;
     top: 0;
     width: 100%;
@@ -59,7 +59,7 @@
     color: #F3A83C;
   }
 
-  .mobile-menu {
+  .home-mobile-menu {
     display: none;
     font-size: 24px;
     color: #F3DCB2;

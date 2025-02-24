@@ -17,7 +17,6 @@ import ClientListPage from "./pages/AdminDashboard/clientListPage";
 import ProjectsListPage from "./pages/AdminDashboard/projectsListPage";
 import AnnouncementsListPage from "./pages/AdminDashboard/announcementsListPage";
 
-
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
 import Project3 from "./pages/ProjectPages/projectdetails3";
@@ -29,72 +28,128 @@ import "./App.css";
 function App() {
   return (
     <Router>
-        <div>
-          <Routes>
-            {/* Admin Dashboard Route - No Navbar/Footer */}
-            <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
-            <Route path="/admin/clients" element={<ClientListPage />} />
-            <Route path="/admin/projects" element={<ProjectsListPage />} />
-            <Route path="/admin/announcements" element={<AnnouncementsListPage />} />
+      <div>
+        <Routes>
+          {/* Admin Dashboard Route - No Navbar/Footer */}
+          <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
+          <Route path="/admin/clients" element={<ClientListPage />} />
+          <Route path="/admin/projects" element={<ProjectsListPage />} />
+          <Route
+            path="/admin/announcements"
+            element={<AnnouncementsListPage />}
+          />
 
-            {/* Login Page */}
-            <Route path="/login" element={<LoginPage />} />
+          {/* Login Page */}
+          <Route path="/login" element={<LoginPage />} />
 
-            {/* Public Routes with Navbar & Footer */}
-            <Route
-              path="/"
-              element={
-                <>
-                  <Navbar />
-                  <HeroSection />
-                  <p className="hero-text">
-                    We craft solutions that
-                    <span className="highlight red"> Attract</span>,
-                    <span className="highlight blue"> Engage</span>, &{" "}
-                    <span className="highlight yellow">Convert</span>.
-                  </p>
-                  <ServicesSection />
-                  <WorkSection />
-                  <ContactSection />
-                  <Footer />
-                </>
-              }
-            />
+          {/* Public Routes with Navbar & Footer */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <HeroSection />
+                <p className="hero-text">
+                  We craft solutions that
+                  <span className="highlight red"> Attract</span>,
+                  <span className="highlight blue"> Engage</span>, &{" "}
+                  <span className="highlight yellow">Convert</span>.
+                </p>
+                <ServicesSection />
+                <WorkSection />
+                <ContactSection />
+                <Footer />
+              </>
+            }
+          />
 
-            <Route
-              path="/services"
-              element={
-                <>
-                  <Navbar />
-                  <Services />
-                  <Footer />
-                </>
-              }
-            />
+          <Route
+            path="/services"
+            element={
+              <>
+                <Navbar />
+                <Services />
+                <Footer />
+              </>
+            }
+          />
 
-            <Route
-              path="/work"
-              element={
-                <>
-                  <Navbar />
-                  <Work />
-                  <Footer />
-                </>
-              }
-            />
+          <Route
+            path="/work"
+            element={
+              <>
+                <Navbar />
+                <Work />
+                <Footer />
+              </>
+            }
+          />
 
-            {/* Project Details Pages */}
-            <Route path="/project1" element={<Project1 />} />
-            <Route path="/project2" element={<Project2 />} />
-            <Route path="/project3" element={<Project3 />} />
-            <Route path="/project4" element={<Project4 />} />
-            <Route path="/project5" element={<Project5 />} />
-            <Route path="/project6" element={<Project6 />} />
-          </Routes>
-        </div>
+          {/* Project Details Pages */}
+          <Route
+            path="/project1"
+            element={
+              <>
+                <Navbar />
+                <Project1 />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/project2"
+            element={
+              <>
+                <Navbar />
+                <Project2 />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/project3"
+            element={
+              <>
+                <Navbar />
+                <Project3 />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/project4"
+            element={
+              <>
+                <Navbar />
+                <Project4 />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/project5"
+            element={
+              <>
+                <Navbar />
+                <Project5 />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/project6"
+            element={
+              <>
+                <Navbar />
+                <Project6 />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </div>
     </Router>
   );
 }
-
 
 export default App;

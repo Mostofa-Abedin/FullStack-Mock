@@ -17,7 +17,8 @@
   font-weight: bold;
   font-family: 'Inter', sans-serif;
   color: #192F3C;
-  padding: 1rem;
+  padding: 2rem;
+  text-align: center;
 }
 
 .highlight {

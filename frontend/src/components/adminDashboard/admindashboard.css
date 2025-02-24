@@ -4,25 +4,24 @@
 
 /* Main Dashboard Styles */
 
-.welcome-text {
+.dash-welcome-text {
     font-family: "Inter", sans-serif;
     color: #192F3C;
     padding: 1rem;
 }
 
-
-.main-card {
+.dash-main-card {
     border-radius: 0% !important;
     margin-bottom: 2rem;
 }
 
-.client-card {
+.dash-client-card {
     border-radius: 0% !important;
     margin-bottom: 2rem;
     cursor: pointer;
 }
 
-.card-header {
+.dash-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,7 +34,7 @@
 
 }
 
-.add-button {
+.dash-add-button {
     background-color: #192F3C;
     color: #8BC4D9;
     font-family: "Inter", sans-serif;
@@ -43,21 +42,7 @@
     border: none;
 }
 
-.dashboard-button {
-    background-color: #192F3C;
-    color: #8BC4D9;
-    font-family: "Inter", sans-serif;
-    border-radius: 0%;
-    border: none;
-    margin-top: 10px;
-}
-
-.add-button:hover {
-    background-color: #8BC4D9;
-    color: #192F3C;
-}
-
-.dashboard-button:hover {
+.dash-add-button:hover {
     background-color: #8BC4D9;
     color: #192F3C;
 }
@@ -65,7 +50,7 @@
 
 /* Card Styles */
 
-.card {
+.dash-card {
     border-radius: 0%;
     padding: 20px;
     margin:10px;
@@ -95,16 +80,15 @@
     padding-top: 10px;
 }
 
-.submit-button {
+.dash-submit-button {
     background: #F3A83C;
     border-radius: 0%;
 }
 
-.submit-button:hover {
+.dash-submit-button:hover {
     background: #F3DCB2;
     border-radius: 0%;
 }
-
 
 
 /* Upcoming Project */
@@ -175,17 +159,18 @@
 
 /* Delete Button */
 
-.delete {
+.dash-delete {
     background-color: #841B13;
     color: white;
     border-radius: 0%;
 }
 
-.delete:hover {
+.dash-delete:hover {
     background-color: #841B13;
     scale: 1.025;
     color: white;
 }
 
-
-
+.col-md-10 {
+    width: 100% !important;
+}

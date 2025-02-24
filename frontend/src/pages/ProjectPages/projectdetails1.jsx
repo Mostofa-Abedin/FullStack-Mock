@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import ImagePlaceholder from "../../assets/images/project-images/projectplaceholder.jpg"
+import { Link } from "react-router-dom";
+import ImagePlaceholder from "../../assets/images/project-images/projectplaceholder.jpg";
 
 const Project1 = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -16,7 +18,6 @@ const Project1 = () => {
     <div
       style={{
         backgroundColor: "#f9f9f9",
-        minHeight: "100vh",
       }}
     >
       {/* Header Section */}
@@ -25,7 +26,8 @@ const Project1 = () => {
           background: "#8BC4D9",
           color: "#192F3C",
           padding: "4rem 2rem",
-          marginBottom: isMobile ?  "0.4rem" : "2rem",
+          marginBottom: isMobile ? "0.4rem" : "2rem",
+          textAlign: "center",
         }}
       >
         <h1
@@ -60,7 +62,7 @@ const Project1 = () => {
           flexDirection: isMobile ? "column" : "row",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: isMobile ?  "0.4rem" : "2rem",
+          marginBottom: isMobile ? "0.4rem" : "2rem",
         }}
       >
         <img
@@ -83,7 +85,6 @@ const Project1 = () => {
             maxWidth: isMobile ? "100%" : "30%",
             objectFit: "cover",
             margin: "10px",
-
           }}
         />
         <img
@@ -102,7 +103,7 @@ const Project1 = () => {
       {/* Details Section */}
       <section
         style={{
-          background:"#192F3C",
+          background: "#192F3C",
           padding: "2rem",
         }}
       >
@@ -114,6 +115,7 @@ const Project1 = () => {
             color: "white",
             fontFamily: "'Kode Mono', monospace",
             textTransform: "uppercase",
+            textAlign: "center",
           }}
         >
           Project Details
@@ -126,6 +128,7 @@ const Project1 = () => {
             marginBottom: "1.5rem",
             fontFamily: "'Inter', sans-serif",
             fontWeight: "400",
+            textAlign: "center",
           }}
         >
           This section contains a detailed description of the project. Explain
@@ -139,49 +142,58 @@ const Project1 = () => {
             fontWeight: "400",
             fontSize: isMobile ? "0.8rem" : "1.1rem",
             textAlign: "center",
-            display:"flex",
-            justifyContent: "center",
+            display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            paddingLeft: isMobile ? "0" : "30%",
           }}
         >
           <li
-          style={{
-            color: "white",
-            background: "transparent",
-            width: isMobile ? "70%" : "100%",
-            boxShadow:"none",
-          }}
+            style={{
+              color: "white",
+              background: "transparent",
+              width: "100%",
+              boxShadow: "none",
+              textAlign: "left",
+            }}
           >
-            Goal: Describe the main objective of the project.</li>
+            Goal: Describe the main objective of the project.
+          </li>
           <li
-          style={{
-            color: "white",
-            background: "transparent",
-            width: isMobile ? "70%" : "100%",
-            boxShadow:"none",
-          }}>
-            Technologies: List tools, frameworks, or languages used.</li>
+            style={{
+              color: "white",
+              background: "transparent",
+              width: "100%",
+              boxShadow: "none",
+              textAlign: "left",
+            }}
+          >
+            Technologies: List tools, frameworks, or languages used.
+          </li>
           <li
-          style={{
-            color: "white",
-            background: "transparent",
-            width: isMobile ? "70%" : "100%",
-            boxShadow:"none",
-          }}
-          >Outcome: Highlight measurable success metrics or results.</li>
+            style={{
+              color: "white",
+              background: "transparent",
+              width: "100%",
+              boxShadow: "none",
+              textAlign: "left",
+            }}
+          >
+            Outcome: Highlight measurable success metrics or results.
+          </li>
         </ul>
       </section>
 
       {/* Call-to-Action Section */}
       <section
         style={{
-          margin: isMobile ? "3rem" : "6rem",
+          margin: "0 auto",
           textAlign: "center",
+          background: "#D9D9D952",
+          padding: "50px",
         }}
       >
-        <a
-          href="/work"
+        <Link
+          to="/work"
           style={{
             textDecoration: "none",
             padding: "1rem 2rem",
@@ -201,7 +213,7 @@ const Project1 = () => {
           }}
         >
           Back to Our Work
-        </a>
+        </Link>
       </section>
     </div>
   );

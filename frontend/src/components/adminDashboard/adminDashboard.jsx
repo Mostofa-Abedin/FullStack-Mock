@@ -2,15 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, Routes, Route } from "react-router-dom";
 import {
   CContainer,
-  CHeader,
-  CHeaderNav,
-  CHeaderBrand,
-  CNavItem,
-  CNavLink,
-  CSidebar,
-  CSidebarNav,
-  CNavGroup,
-  CNavTitle,
   CNavItem as CSidebarItem,
   CRow,
   CCol,
@@ -26,17 +17,11 @@ import {
   CModalBody,
   CModalFooter,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { cilUser, cilLockLocked, cilBell } from "@coreui/icons";
-import { cilMenu } from "@coreui/icons";
 import "@coreui/coreui/dist/css/coreui.min.css";
 import "./admindashboard.css";
 
-import Sidebar from "./adminSidebar";
-import Header from "./adminHeader";
-
-import ProjectsList from "../adminDashboard/projectsList"; 
-import ClientsList from "../adminDashboard/clientList"; 
+import ProjectsList from "../adminDashboard/projectsList";
+import ClientsList from "../adminDashboard/clientList";
 import AnnouncementsList from "../adminDashboard/announcementList";
 
 const AdminDashboard = ({ username }) => {
@@ -64,12 +49,12 @@ const AdminDashboard = ({ username }) => {
       phone: "456-789-0123",
     },
     {
-        id: 4,
-        name: "Robert Brown",
-        businessName: "Robert's Auto Shop",
-        email: "robert.brown@example.com",
-        phone: "456-789-0123",
-      },
+      id: 4,
+      name: "Robert Brown",
+      businessName: "Robert's Auto Shop",
+      email: "robert.brown@example.com",
+      phone: "456-789-0123",
+    },
   ]);
   const [projects, setProjects] = useState([
     {
@@ -229,23 +214,31 @@ const AdminDashboard = ({ username }) => {
     <CContainer fluid>
       <CRow>
         <CCol md="10" className="p-4">
-
           <Routes>
-            <Route path="/admin/clients" element={<ClientsList clients={clients} />} />
-            <Route path="/admin/projects" element={<ProjectsList projects={projects} />} />
-            <Route path="/announcements" element={<AnnouncementsList announcements={announcements} />} />
+            <Route
+              path="/admin/clients"
+              element={<ClientsList clients={clients} />}
+            />
+            <Route
+              path="/admin/projects"
+              element={<ProjectsList projects={projects} />}
+            />
+            <Route
+              path="/announcements"
+              element={<AnnouncementsList announcements={announcements} />}
+            />
           </Routes>
 
-          <h2 className="welcome-text">
+          <h2 className="dash-welcome-text">
             Welcome, {username ? username : "Admin"}!
           </h2>
 
           {/* Client Section */}
-          <CCard className="main-card">
-            <CCardHeader className="card-header">
+          <CCard className="dash-main-card">
+            <CCardHeader className="dash-card-header">
               <h4>Manage Clients</h4>
               <CButton
-                className="add-button"
+                className="dash-add-button"
                 onClick={() => {
                   setFormSection("clients");
                   setModalType("add");
@@ -261,7 +254,7 @@ const AdminDashboard = ({ username }) => {
                 {clients.slice(0, 3).map((client) => (
                   <CCol sm="4" key={client.id}>
                     <div
-                      className="card"
+                      className="dash-card"
                       onClick={() =>
                         setActiveClientId(
                           activeClientId === client.id ? null : client.id
@@ -282,7 +275,7 @@ const AdminDashboard = ({ username }) => {
                       )}
                       <div className="d-flex justify-content-end">
                         <CButton
-                          className="edit"
+                          className="dash-edit"
                           onClick={() => {
                             setFormSection("clients");
                             setModalType("edit");
@@ -293,7 +286,7 @@ const AdminDashboard = ({ username }) => {
                           Edit
                         </CButton>
                         <CButton
-                          className="delete"
+                          className="dash-delete"
                           onClick={() => handleDelete(client.id, "clients")}
                         >
                           Delete
@@ -304,17 +297,17 @@ const AdminDashboard = ({ username }) => {
                 ))}
               </CRow>
               <Link to="/admin/clients">
-              <CButton className="add-button">View All</CButton>
-            </Link>
+                <CButton className="dash-add-button">View All</CButton>
+              </Link>
             </CCardBody>
           </CCard>
 
           {/* Add/Edit Project Section */}
-          <CCard className="main-card">
-            <CCardHeader className="card-header">
+          <CCard className="dash-main-card">
+            <CCardHeader className="dash-card-header">
               <h4>Manage Projects</h4>
               <CButton
-                className="add-button"
+                className="dash-add-button"
                 onClick={() => {
                   setFormSection("projects");
                   setModalType("add");
@@ -330,7 +323,7 @@ const AdminDashboard = ({ username }) => {
                 {projects.map((project) => (
                   <CCol sm="4" key={project.id}>
                     <div
-                      className={`card p-3 shadow-sm ${getStatusColor(
+                      className={`dash-card p-3 shadow-sm ${getStatusColor(
                         project.status
                       )}`}
                     >
@@ -353,7 +346,7 @@ const AdminDashboard = ({ username }) => {
                       </p>
                       <div className="d-flex justify-content-end">
                         <CButton
-                          className="edit"
+                          className="dash-edit"
                           onClick={() => {
                             setFormSection("projects");
                             setModalType("edit");
@@ -364,7 +357,7 @@ const AdminDashboard = ({ username }) => {
                           Edit
                         </CButton>
                         <CButton
-                          className="delete"
+                          className="dash-delete"
                           onClick={() => handleDelete(project.id, "projects")}
                         >
                           Delete
@@ -375,16 +368,16 @@ const AdminDashboard = ({ username }) => {
                 ))}
               </CRow>
               <Link to="/admin/projects">
-              <CButton className="add-button">View All</CButton>
-            </Link>
+                <CButton className="dash-add-button">View All</CButton>
+              </Link>
             </CCardBody>
           </CCard>
 
-          <CCard className="main-card">
-            <CCardHeader className="card-header">
+          <CCard className="dash-main-card">
+            <CCardHeader className="dash-card-header">
               <h4>Manage Announcements</h4>
               <CButton
-                className="add-button"
+                className="dash-add-button"
                 onClick={() => {
                   setFormSection("announcements");
                   setModalType("add");
@@ -399,7 +392,7 @@ const AdminDashboard = ({ username }) => {
               <CRow>
                 {announcements.map((announcement) => (
                   <CCol sm="4" key={announcement.id}>
-                    <div className="card p-3 shadow-sm">
+                    <div className="dash-card p-3 shadow-sm">
                       <h5>{announcement.title}</h5>
                       <p>
                         {new Date(announcement.date).toLocaleDateString(
@@ -408,7 +401,7 @@ const AdminDashboard = ({ username }) => {
                       </p>
                       <div className="d-flex justify-content-end">
                         <CButton
-                          className="edit"
+                          className="dash-edit"
                           onClick={() => {
                             setFormSection("announcements");
                             setModalType("edit");
@@ -419,7 +412,7 @@ const AdminDashboard = ({ username }) => {
                           Edit
                         </CButton>
                         <CButton
-                          className="delete"
+                          className="dash-delete"
                           onClick={() =>
                             handleDelete(announcement.id, "announcements")
                           }
@@ -432,8 +425,8 @@ const AdminDashboard = ({ username }) => {
                 ))}
               </CRow>
               <Link to="/admin/announcements">
-              <CButton className="add-button">View All</CButton>
-            </Link>
+                <CButton className="dash-add-button">View All</CButton>
+              </Link>
             </CCardBody>
           </CCard>
 
@@ -537,12 +530,12 @@ const AdminDashboard = ({ username }) => {
                 ) : null}
                 <CModalFooter>
                   <CButton
-                    className="close-button"
+                    className="dash-close-button"
                     onClick={() => setModalVisible(false)}
                   >
                     Close
                   </CButton>
-                  <CButton className="submit-button" type="submit">
+                  <CButton className="dash-submit-button" type="submit">
                     Save Changes
                   </CButton>
                 </CModalFooter>

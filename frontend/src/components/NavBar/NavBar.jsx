@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="home-navbar">
       {/* Logo and Name */}
       <Link to="/" className="logo">
         <img src={magnetLogo} alt="Magnet Logo" className="logo-img" />
@@ -23,7 +23,7 @@ const Navbar = () => {
       </Link>
 
       {/* Hamburger Menu Button */}
-      <button className="mobile-menu" data-testid="mobile-menu" onClick={toggleMenu}>
+      <button className="home-mobile-menu" data-testid="mobile-menu" onClick={toggleMenu}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
 
