@@ -23,10 +23,6 @@ const Footer = () => {
           src={magnetLogo}
           alt="Magnet Logo"
         />
-        <span className="logo-text-footer"
-        >
-          Magnet Labs™
-        </span>
       </Link>
       <p className="copyright"
       >
