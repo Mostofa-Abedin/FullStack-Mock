@@ -254,7 +254,7 @@ const AdminDashboard = ({ username }) => {
                 {clients.slice(0, 3).map((client) => (
                   <CCol sm="4" key={client.id}>
                     <div
-                      className="dash-card"
+                      className="dash-client-card p-3 shadow-sm"
                       onClick={() =>
                         setActiveClientId(
                           activeClientId === client.id ? null : client.id
@@ -265,10 +265,10 @@ const AdminDashboard = ({ username }) => {
                       <p>{client.businessName}</p>
                       {activeClientId === client.id && (
                         <>
-                          <p style={{ fontWeight: "bold" }}>
+                          <p style={{ fontWeight: "bold", color:"#8BC4D9", lineHeight: "1" }}>
                             Email: {client.email}
                           </p>
-                          <p style={{ fontWeight: "bold" }}>
+                          <p style={{ fontWeight: "bold", color:"#8BC4D9", lineHeight: "1" }}>
                             Phone: {client.phone}
                           </p>
                         </>
@@ -444,24 +444,28 @@ const AdminDashboard = ({ username }) => {
                 {formSection === "clients" ? (
                   <>
                     <CFormInput
+                      className="form-input"
                       type="text"
                       label="Name"
                       name="name"
                       defaultValue={currentItem?.name}
                     />
                     <CFormInput
+                      className="form-input"
                       type="text"
                       label="Business Name"
                       name="businessName"
                       defaultValue={currentItem?.businessName}
                     />
                     <CFormInput
+                      className="form-input"
                       type="email"
                       label="Email"
                       name="email"
                       defaultValue={currentItem?.email}
                     />
                     <CFormInput
+                      className="form-input"
                       type="text"
                       label="Phone"
                       name="phone"
@@ -471,12 +475,14 @@ const AdminDashboard = ({ username }) => {
                 ) : formSection === "projects" ? (
                   <>
                     <CFormInput
+                      className="form-input"
                       type="text"
                       label="Project Name"
                       name="name"
                       defaultValue={currentItem?.name}
                     />
                     <CFormInput
+                      className="form-input"
                       type="text"
                       label="Details"
                       name="details"
@@ -485,6 +491,7 @@ const AdminDashboard = ({ username }) => {
                     <CFormSelect
                       label="Client"
                       name="client"
+                      className="custom-select"
                       defaultValue={currentItem?.client}
                     >
                       {clients.map((client) => (
@@ -494,6 +501,7 @@ const AdminDashboard = ({ username }) => {
                       ))}
                     </CFormSelect>
                     <CFormInput
+                      className="form-input"
                       type="date"
                       label="Due Date"
                       name="dueDate"
@@ -503,6 +511,7 @@ const AdminDashboard = ({ username }) => {
                       label="Status"
                       name="status"
                       defaultValue={currentItem?.status}
+                      className="custom-select"
                     >
                       <option value="Upcoming">Upcoming</option>
                       <option value="In Progress">In Progress</option>
@@ -515,12 +524,14 @@ const AdminDashboard = ({ username }) => {
                 ) : formSection === "announcements" ? (
                   <>
                     <CFormInput
+                      className="form-input"
                       type="text"
                       label="Title"
                       name="name"
                       defaultValue={currentItem?.title}
                     />
                     <CFormInput
+                      className="form-input"
                       type="date"
                       label="Date"
                       name="dueDate"

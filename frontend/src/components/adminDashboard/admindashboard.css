@@ -19,6 +19,7 @@
     border-radius: 0% !important;
     margin-bottom: 2rem;
     cursor: pointer;
+    padding: 1rem;
 }
 
 .dash-card-header {
@@ -42,9 +43,18 @@
     border: none;
 }
 
-.dash-add-button:hover {
+.dash-add-button:hover, .dashboard-button:hover {
     background-color: #8BC4D9;
     color: #192F3C;
+}
+
+.dashboard-button {
+    background-color: #192F3C;
+    color: #8BC4D9;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+    border: none;
+    margin: 20px 10px;
 }
 
 
@@ -52,8 +62,8 @@
 
 .dash-card {
     border-radius: 0%;
-    padding: 20px;
-    margin:10px;
+    padding: 2rem;
+    margin: 20px 10px;
 }
 
 /* Modal Popup Styles */
@@ -79,6 +89,16 @@
 .form-label {
     padding-top: 10px;
 }
+
+.custom-select {
+    border-radius: 0%;
+}
+.custom-select:focus, .form-input:focus {
+    border: #F3A83C; 
+    box-shadow: 0 0 0 0.2rem  #f3a73c77; /* Custom glow color */
+    border-radius: 0%;
+  }
+
 
 .dash-submit-button {
     background: #F3A83C;

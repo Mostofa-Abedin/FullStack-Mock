@@ -138,11 +138,11 @@ const ProjectsList = () => {
         <CButton className="dashboard-button">Back to Dashboard</CButton>
       </Link>
       {/* Add/Edit Project Section */}
-      <CCard className="main-card">
-        <CCardHeader className="card-header">
+      <CCard className="dash-main-card">
+        <CCardHeader className="dash-card-header">
           <h4>Manage Projects</h4>
           <CButton
-            className="add-button"
+            className="dash-add-button"
             onClick={() => {
               setFormSection("projects");
               setModalType("add");
@@ -158,7 +158,7 @@ const ProjectsList = () => {
             {projects.map((project) => (
               <CCol sm="4" key={project.id}>
                 <div
-                  className={`card p-3 shadow-sm ${getStatusColor(
+                  className={`dash-card ${getStatusColor(
                     project.status
                   )}`}
                 >
@@ -181,7 +181,7 @@ const ProjectsList = () => {
                   </p>
                   <div className="d-flex justify-content-end">
                     <CButton
-                      className="edit"
+                      className="dash-edit"
                       onClick={() => {
                         setFormSection("projects");
                         setModalType("edit");
@@ -192,7 +192,7 @@ const ProjectsList = () => {
                       Edit
                     </CButton>
                     <CButton
-                      className="delete"
+                      className="dash-delete"
                       onClick={() => handleDelete(project.id)}
                     >
                       Delete
@@ -263,7 +263,7 @@ const ProjectsList = () => {
               >
                 Close
               </CButton>
-              <CButton className="submit-button" type="submit">
+              <CButton className="dash-submit-button" type="submit">
                 Save Changes
               </CButton>
             </CModalFooter>

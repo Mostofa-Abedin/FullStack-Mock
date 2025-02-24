@@ -81,11 +81,11 @@ const AnnouncementsList = () => {
       </Link>
 
       {/* Add/Edit Announcement Section */}
-      <CCard className="main-card">
-        <CCardHeader className="card-header">
+      <CCard className="dash-main-card">
+        <CCardHeader className="dash-card-header">
           <h4>Manage Announcements</h4>
           <CButton
-            className="add-button"
+            className="dash-add-button"
             onClick={() => {
               setModalType("add");
               setCurrentItem(null);
@@ -99,7 +99,7 @@ const AnnouncementsList = () => {
           <CRow>
             {announcements.map((announcement) => (
               <CCol sm="4" key={announcement.id}>
-                <div className="card p-3 shadow-sm">
+                <div className="dash-card">
                   <h5>{announcement.title}</h5>
                   <p>{announcement.content}</p>
                   <p style={{ fontWeight: "bold" }}>
@@ -107,7 +107,7 @@ const AnnouncementsList = () => {
                   </p>
                   <div className="d-flex justify-content-end">
                     <CButton
-                      className="edit"
+                      className="dash-edit"
                       onClick={() => {
                         setModalType("edit");
                         setCurrentItem(announcement);
@@ -117,7 +117,7 @@ const AnnouncementsList = () => {
                       Edit
                     </CButton>
                     <CButton
-                      className="delete"
+                      className="dash-delete"
                       onClick={() => handleDelete(announcement.id)}
                     >
                       Delete
@@ -171,7 +171,7 @@ const AnnouncementsList = () => {
               >
                 Close
               </CButton>
-              <CButton className="submit-button" type="submit">
+              <CButton className="dash-submit-button" type="submit">
                 Save Changes
               </CButton>
             </CModalFooter>
