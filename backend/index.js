@@ -9,7 +9,7 @@ const userRoutes = require('./src/routes/userRoutes');
 const authRoutes = require('./src/routes/authRoutes')
 const adminRoutes = require('./src/routes/adminRoutes');
 const clientRoutes = require('./src/routes/clientRoutes')
-
+const businessRoutes = require('./src/routes/businessRoutes');
 // Initialize Express app
 const app = express();
 app.use(express.json());
@@ -34,6 +34,8 @@ app.use('/login', authRoutes);
 
 app.use('/admin', adminRoutes);
 app.use('/client', clientRoutes)
+
+app.use('/business', businessRoutes);
 
 // Export app (without starting server)
 module.exports = app;
