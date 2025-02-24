@@ -17,4 +17,56 @@ const getAllBusinessesWithUserDetails = async (req, res) => {
   }
 };
 
-module.exports = { getAllBusinessesWithUserDetails };
+// Controller: Update Business Details
+const updateBusinessDetails = async (req, res) => {
+    const { id } = req.params; // Business ID from URL
+    const updates = req.body;  // Fields to update
+    const userId = req.user.userID; // Extracted from the JWT token
+    const userRole = req.user.role;
+  
+    try {
+      // Step 1: Find the business
+      const business = await Business.findById(id);
+  
+      if (!business) {
+        return res.status(404).json({ message: 'Business not found.' });
+      }
+  
+      // Step 2: Allow update if user is owner or admin
+      if (business.userId.toString() !== userId && userRole !== 'admin') {
+        return res.status(403).json({ message: 'Access Denied. You can only update your own business.' });
+      }
+  
+      // Step 3: Perform partial updates
+      if (updates.businessName) business.businessName = updates.businessName.trim();
+      if (updates.industry) business.industry = updates.industry.trim();
+      if (updates.website) {
+        const websiteRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,4}\/?$/;
+        if (!websiteRegex.test(updates.website)) {
+          return res.status(400).json({ message: 'Invalid website URL.' });
+        }
+        business.website = updates.website;
+      }
+      if (updates.phone) {
+        const phoneRegex = /^\+?\d{1,3}[- ]?\d{3}[- ]?\d{3}[- ]?\d{3}$/;
+        if (!phoneRegex.test(updates.phone)) {
+          return res.status(400).json({ message: 'Invalid phone number format.' });
+        }
+        business.phone = updates.phone;
+      }
+      if (updates.address) business.address = updates.address.trim();
+  
+      // Step 4: Save updated business
+      await business.save();
+  
+      res.status(200).json({
+        message: 'Business details updated successfully.',
+        business,
+      });
+    } catch (error) {
+      console.error('Error updating business:', error);
+      res.status(500).json({ message: 'An error occurred while updating the business.', error });
+    }
+  };
+
+module.exports = { updateBusinessDetails,getAllBusinessesWithUserDetails };
