@@ -9,7 +9,7 @@ const { getAllBusinessesWithUserDetails } = require('../controllers/businessCont
 //router.post('/:id/onboarding', authenticateUser, registerBusiness)
 
 
-// Route: GET all businesses (Publicly accessible) (For now  & testing)
+// Route: GET all businesses (Publicly accessible) (For now & testing)
 router.get('/', getAllBusinessesWithUserDetails);
 
 
