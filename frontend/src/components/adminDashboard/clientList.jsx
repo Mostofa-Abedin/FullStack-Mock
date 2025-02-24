@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../../utils/api"; // Import Axios instance
-import { CContainer, CCard, CCardHeader, CCardBody, CRow, CCol } from "@coreui/react";
+import {
+  CContainer,
+  CCard,
+  CCardHeader,
+  CCardBody,
+  CRow,
+  CCol,
+} from "@coreui/react";
 
 const ClientsList = () => {
   const [clients, setClients] = useState([]); // State to store clients
@@ -27,6 +34,9 @@ const ClientsList = () => {
 
   return (
     <CContainer fluid>
+      <Link to="/admin/dashboard">
+        <CButton className="dashboard-button">Back to Dashboard</CButton>
+      </Link>
       <CCard>
         <CCardHeader>
           <h4>All Clients</h4>

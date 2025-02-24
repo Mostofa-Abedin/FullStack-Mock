@@ -1,21 +1,22 @@
 import React from "react";
-import AdminDashboard from "../../components/adminDashboard/adminDashboard";
 import Header from "../../components/adminDashboard/adminHeader"; 
 import Sidebar from "../../components/adminDashboard/adminSidebar"; 
+import ClientsList from "../../components/adminDashboard/clientList";
+
 import "./admindashboardpage.css"
 
-const AdminDashboardPage = () => {
+const ClientListPage = () => {
   return (
     <div className="admin-dashboard-container">
       <Header />
       <div className="dashboard-layout">
         <Sidebar />
         <div className="dashboard-content">
-          <AdminDashboard />
+          <ClientsList />
         </div>
       </div>
     </div>
   );
 };
 
-export default AdminDashboardPage;
+export default ClientListPage;

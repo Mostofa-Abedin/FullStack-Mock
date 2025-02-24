@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, Routes, Route } from "react-router-dom";
 import {
   CContainer,
@@ -28,8 +28,12 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilUser, cilLockLocked, cilBell } from "@coreui/icons";
+import { cilMenu } from "@coreui/icons";
 import "@coreui/coreui/dist/css/coreui.min.css";
 import "./admindashboard.css";
+
+import Sidebar from "./adminSidebar";
+import Header from "./adminHeader";
 
 import ProjectsList from "../adminDashboard/projectsList"; 
 import ClientsList from "../adminDashboard/clientList"; 
@@ -223,44 +227,7 @@ const AdminDashboard = ({ username }) => {
 
   return (
     <CContainer fluid>
-      <CHeader position="sticky" className="header">
-        <CHeaderBrand className="header-text">
-          <strong>Admin Dashboard</strong>
-        </CHeaderBrand>
-        <CHeaderNav>
-          <CNavItem>
-            <CNavLink href="#" className="profile">
-              <CIcon icon={cilUser} className="profile-icon" />
-              Profile
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#" className="logout">
-              <CIcon icon={cilLockLocked} className="profile-icon" />
-              Logout
-            </CNavLink>
-          </CNavItem>
-        </CHeaderNav>
-      </CHeader>
-
       <CRow>
-        <CCol md="2">
-          <CSidebar visible={sidebarVisible} className="sidebar">
-            <CSidebarNav>
-              <CNavTitle className="sidebar-text">Overview</CNavTitle>
-              <CSidebarItem href="/admin/clients" className="sidebar-text">
-                Clients List
-              </CSidebarItem>
-              <CSidebarItem href="/admin/projects" className="sidebar-text">
-                Projects List
-              </CSidebarItem>
-              <CSidebarItem href="/admin/announcements" className="sidebar-text">
-                Announcements List
-              </CSidebarItem>
-            </CSidebarNav>
-          </CSidebar>
-        </CCol>
-
         <CCol md="10" className="p-4">
 
           <Routes>

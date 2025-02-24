@@ -75,7 +75,7 @@ const AnnouncementsList = () => {
     <CContainer fluid>
       {/* Back to Dashboard Link */}
       <Link to="/admin/dashboard">
-        <CButton className="add-button">
+        <CButton className="dashboard-button">
           Back to Dashboard
         </CButton>
       </Link>
