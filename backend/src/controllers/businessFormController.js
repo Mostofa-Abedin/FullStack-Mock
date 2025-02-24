@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const registerBusiness = async (req, res) => {
 
     // This should probably be a middleware?
-    const token = req.headers.authorization.substring("Bearer ".length);
+    /* const token = req.headers.authorization.substring("Bearer ".length);
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret")
     } catch (error) {
@@ -16,11 +16,12 @@ const registerBusiness = async (req, res) => {
         .json({
             message: "Not logged in!"
         })
-    }
+    } 
     // Don't need to attach it to a request unless middleware is used
     req.authUserData = decoded
-    const userID = req.authUserData.userID
-    const user = await User.findOne({_id: userID})
+    */
+    const userID = req.user.userID
+    /* const user = await User.findOne({_id: userID})
     
     // User not found, must not be logged in
     if (!user) {
@@ -29,7 +30,7 @@ const registerBusiness = async (req, res) => {
         .json({
             message: "Not logged in!"
         })
-    }
+    } */
 
     const { businessName, industry, website, phone, address } = req.body;
 
@@ -43,6 +44,7 @@ const registerBusiness = async (req, res) => {
     try {
         const business = new Business({userId: userID, businessName, industry, website, phone, address})
         await business.save()
+        return res.status(201).json({ message: 'Business onboarded successfully', business });
     } catch (err) {
         return res
         .status(400)
@@ -50,7 +52,6 @@ const registerBusiness = async (req, res) => {
             message: err.errors
         })
     }
-    res.status(201).json({ message: 'Business onboarded successfully', business });
 }
 
 module.exports = {registerBusiness}

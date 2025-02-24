@@ -9,6 +9,11 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  // Close menu when a link is clicked
+  const handleLinkClick = () => {
+    setIsOpen(false); // Close the menu
+  };
+
   return (
     <nav className="navbar">
       {/* Logo and Name */}
@@ -27,18 +32,21 @@ const Navbar = () => {
         <NavLink
           to="/services"
           className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
+          onClick={handleLinkClick} // Close menu on link click
         >
           Our Services
         </NavLink>
         <NavLink
           to="/work"
           className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
+          onClick={handleLinkClick} // Close menu on link click
         >
           Our Work
         </NavLink>
         <NavLink
           to="/contact"
           className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
+          onClick={handleLinkClick} // Close menu on link click
         >
           Contact Us
         </NavLink>

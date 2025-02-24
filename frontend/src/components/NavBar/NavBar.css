@@ -18,6 +18,7 @@
     text-decoration: none;
     color: inherit;
     gap: 0.5rem;
+    min-width: 700px;
   }
 
   .logo-img {
@@ -118,58 +119,76 @@
   }
 
   @media (max-width: 600px) {
-    
     .logo-img {
-        width: 40px;
-        height: 40px;
-        object-fit: contain;
-      }
-
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+  
     .logo-text {
-        font-family: 'Kode Mono', monospace;
-        font-size: 1.1rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: #F3DCB2;
-      }
-
+      font-family: 'Kode Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #F3DCB2;
+    }
+  
     .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        padding-top: 20px;
-        overflow: hidden;
-        background: rgba(25, 47, 60, 0.95);
-        text-align: center;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .nav-links.open {
-        display: flex;
-        width: 100%;
-      }
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px; /* Adjust according to navbar height */
+      left: 0;
+      width: 100%;
+      padding-top: 20px;
+      overflow: hidden;
+      background: rgba(25, 47, 60, 0.95);
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+    }
   
-      .nav-link {
-        font-size: 1rem;
-        padding-bottom: 1rem;
-        display: block;
-      }
+    .nav-links.open {
+      display: flex;
+      width: 100%;
+    }
   
-      .mobile-menu {
-        display: block;
-        margin-left: auto;
-      }
+    .nav-link {
+      font-size: 1rem;
+      padding-bottom: 1rem;
+      display: block;
+    }
   
-      .navbar {
-        width: 100%;
-        padding: 15px;
-      }
-
-      .login-icon a, .mobile-menu {
-        color: #F3DCB2;
-        font-size: 18px;
-      }
+    /* Mobile Menu Styling */
+    .mobile-menu {
+      display: block;
+      position: absolute;
+      top: 50%; 
+      right: 15px; 
+      transform: translateY(-50%); 
+      font-size: 24px;
+      color: #F3DCB2;
+    }
+  
+    /* Fixing the login icon position */
+    .login-icon {
+      display: block;
+      position: absolute; 
+      top: 50%; 
+      right: 50px; 
+      transform: translateY(-50%); 
+    }
+  
+    .login-icon a {
+      color: #F3DCB2;
+      font-size: 18px;
+    }
+  
+    .navbar {
+      width: 100%;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+    }
   }
+  

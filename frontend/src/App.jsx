@@ -12,6 +12,9 @@ import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
 import Contact from "./pages/Contact/Contact";
 
+import LoginPage from "./pages/LoginPage/loginPage";
+
+
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
 import Project3 from "./pages/ProjectPages/projectdetails3";
@@ -23,29 +26,55 @@ function App() {
   return (
     <Router>
       <div>
-        <Navbar />
+        {/* Conditionally render Navbar and Footer */}
         <Routes>
-    
-          <Route path="/" element={
-            <>
-              <HeroSection />
-              <p className="hero-text">
-                We craft solutions that 
-                <span className="highlight red"> Attract</span>,
-                <span className="highlight blue"> Engage</span>, &{" "}
-                <span className="highlight yellow">Convert</span>.
-              </p>
-              <ServicesSection />
-              <WorkSection />
-              <ContactSection />
-            </>
-          } />
-
+          <Route path="/login" element={<LoginPage />} />
+          
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <HeroSection />
+                <p className="hero-text">
+                  We craft solutions that
+                  <span className="highlight red"> Attract</span>,
+                  <span className="highlight blue"> Engage</span>, &{" "}
+                  <span className="highlight yellow">Convert</span>.
+                </p>
+                <ServicesSection />
+                <WorkSection />
+                <ContactSection />
+                <Footer />
+              </>
+            }
+          />
       
           <Route path="/services" element={<Services />} />
           <Route path="/work" element={<Work />} />
           <Route path="/contact" element={<Contact />} />
 
+          <Route
+            path="/services"
+            element={
+              <>
+                <Navbar />
+                <Services />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/work"
+            element={
+              <>
+                <Navbar />
+                <Work />
+                <Footer />
+              </>
+            }
+          />
 
           <Route path="/project1" element={<Project1 />} />
           <Route path="/project2" element={<Project2 />} />
@@ -53,11 +82,7 @@ function App() {
           <Route path="/project4" element={<Project4 />} />
           <Route path="/project5" element={<Project5 />} />
           <Route path="/project6" element={<Project6 />} />
-     
         </Routes>
-
-
-        <Footer />
       </div>
     </Router>
   );

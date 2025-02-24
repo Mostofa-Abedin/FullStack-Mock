@@ -1,0 +1,335 @@
+/* Main Form Container */
+.login-form {
+    padding: 2rem;
+    width: 600px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.user-type-toggle {
+    color: white;
+    font-family: "Inter", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Header Styling */
+h2.form-title {
+    color: white;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+}
+
+/* Label Styling */
+.login-form label {
+    color: #FFFDF7;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    padding-bottom: 5px;
+}
+
+/* Input Fields Styling */
+.login-form .form-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form .form-input input,
+.login-form .form-input textarea,
+.login-form .form-input select {
+    padding: 12px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    background: #f9f9f9;
+    font-family: "Inter", sans-serif;
+    min-width: 400px;
+}
+
+.login-form textarea {
+    resize: none;
+}
+
+.login-form input:focus,
+.login-form textarea:focus,
+.login-form select:focus {
+    background-color: #fff;
+    outline: none;
+}
+
+/* Button Styling */
+.login-form button {
+    width: 100%;
+    max-width: 425px;
+    padding: 12px;
+    background-color: #7aa5c3;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #F3A83C;
+}
+
+/* Button for Switching Between Login and Register */
+.login-form button[type="button"] {
+    background-color: transparent;
+    color: #F3A83C;
+    border: 2px solid #F3A83C;
+}
+
+.login-form button[type="button"]:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Focus/Focus-Visible Styling */
+.login-form .form-input input:focus-visible,
+.login-form button:focus-visible {
+    outline: 3px solid #8BC4D9;
+}
+
+input[type="radio"]:checked {
+    accent-color: #F3A83C; /* Change the color when selected */
+}
+
+.toggle-button {
+    background: transparent;
+    border: none;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Success and Error Message Styling */
+.success-message {
+    color: #8BC4D9;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.error-message {
+    color: #F3A83C;
+    font-size: 0.8rem;
+    padding-top: 2px;
+    max-width: 400px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    padding-bottom: 20px;
+    margin: 0 auto;
+}
+
+/* Specific Error Messages for Email and Password */
+.error-message.email-error {
+    margin-top: 10px;
+    color: #e74c3c; /* Red color for email error */
+    font-size: 1rem;
+    text-align: center;
+}
+
+.error-message.password-error {
+    margin-top: 10px;
+    color: #e74c3c; /* Red color for password error */
+    font-size: 1rem;
+    text-align: center;
+}
+
+input:invalid {
+    border-color: #e74c3c; /* Red border for invalid input fields */
+}
+
+@media (max-width: 768px) and (min-width:600px){ 
+.login-form {
+    padding: 1rem;
+    width: 600px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.user-type-toggle {
+    color: white;
+    font-family: "Inter", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Header Styling */
+h2.form-title {
+    color: white;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+/* Label Styling */
+.login-form label {
+    color: #FFFDF7;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    padding-bottom: 5px;
+}
+
+/* Input Fields Styling */
+.login-form .form-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form .form-input input,
+.login-form .form-input textarea,
+.login-form .form-input select {
+    padding: 12px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    background: #f9f9f9;
+    font-family: "Inter", sans-serif;
+    min-width: 300px;
+}
+
+.login-form textarea {
+    resize: none;
+}
+
+.login-form input:focus,
+.login-form textarea:focus,
+.login-form select:focus {
+    background-color: #fff;
+    outline: none;
+}
+
+/* Button Styling */
+.login-form button {
+    width: 100%;
+    max-width: 325px;
+    padding: 12px;
+    background-color: #7aa5c3;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #F3A83C;
+}
+
+/* Button for Switching Between Login and Register */
+.login-form button[type="button"] {
+    background-color: transparent;
+    color: #F3A83C;
+    border: 2px solid #F3A83C;
+}
+
+.login-form button[type="button"]:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Focus/Focus-Visible Styling */
+.login-form .form-input input:focus-visible,
+.login-form button:focus-visible {
+    outline: 3px solid #8BC4D9;
+}
+
+input[type="radio"]:checked {
+    accent-color: #F3A83C; /* Change the color when selected */
+}
+
+.toggle-button {
+    background: transparent;
+    border: none;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Success and Error Message Styling */
+.success-message {
+    color: #8BC4D9;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.error-message {
+    color: #F3A83C;
+    font-size: 0.8rem;
+    padding-top: 2px;
+    max-width: 400px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    padding-bottom: 20px;
+    margin: 0 auto;
+}
+
+/* Specific Error Messages for Email and Password */
+.error-message.email-error {
+    margin-top: 10px;
+    color: #e74c3c; /* Red color for email error */
+    font-size: 1rem;
+    text-align: center;
+}
+
+.error-message.password-error {
+    margin-top: 10px;
+    color: #e74c3c; /* Red color for password error */
+    font-size: 1rem;
+    text-align: center;
+}
+
+input:invalid {
+    border-color: #e74c3c; /* Red border for invalid input fields */
+}
+}
+
+@media (max-width: 600px) {
+    .login-form .form-input input,
+.login-form .form-input textarea,
+.login-form .form-input select {
+    min-width: 250px;
+}
+.login-form button {
+    width: 100%;
+    max-width: 275px;
+}
+h2.form-title {
+    font-size: 1.5rem;
+}
+}

@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt')
 
 // Controller: Get all users
 const getAllUsers = async (req, res) => {
@@ -43,7 +44,32 @@ const registerUser = async (req, res) => {
     }
   };
 
+  const changePassword = async (req, res) => {
+    try {
+      const { oldPassword, newPassword } = req.body;
+      
+      const userID = req.user.userID
+      const user = await User.findOne({_id: userID})
 
+      const isPasswordValid = await bcrypt.compare(oldPassword, user.password)
+
+      if (!isPasswordValid) {
+        return res
+        .status(400)
+        .json({
+            message: "Wrong password."
+        })
+      }
+
+      user.password = newPassword
+      // Updates password in db
+      await user.save();
+  
+      res.status(201).json({ message: 'User password changed successfully'});
+      } catch (err) {
+        res.status(400).json({ message: err.message });
+      }
+  };
 
 
 
@@ -51,4 +77,4 @@ const registerUser = async (req, res) => {
 
 
 // Export controllers
-module.exports = { getAllUsers, createUser, registerUser };
+module.exports = { getAllUsers, createUser, registerUser, changePassword };
