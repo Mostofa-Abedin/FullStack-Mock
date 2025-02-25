@@ -10,7 +10,10 @@ import "./App.css";
 
 import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
+import Contact from "./pages/Contact/Contact";
+
 import LoginPage from "./pages/LoginPage/loginPage";
+
 
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
@@ -46,6 +49,10 @@ function App() {
               </>
             }
           />
+      
+          <Route path="/services" element={<Services />} />
+          <Route path="/work" element={<Work />} />
+          <Route path="/contact" element={<Contact />} />
 
           <Route
             path="/services"
