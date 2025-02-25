@@ -33,14 +33,14 @@
     color: #F3DCB2;
   }
 
-  .nav-links {
+  .home-nav-links {
     display: flex;
     gap: 1.5rem;
     margin-left: auto;
     margin-right: 5rem;
   }
 
-  .nav-link {
+  .home-nav-link {
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
@@ -49,12 +49,15 @@
     transition: color 0.3s ease;
   }
 
-  .nav-link:hover {
+  .home-nav-link:hover {
     color: #F3A83C;
   }
 
-  .nav-link.active-link {
+  .home-nav-link-active{
     color: #F3A83C;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
   }
 
   .home-mobile-menu {
