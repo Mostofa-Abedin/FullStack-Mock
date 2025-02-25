@@ -19,12 +19,17 @@ const authUserOrAdmin = (req, res, next) => {
 
     // Allow the following:
     // Admins can edit any user or business profile
-    // Users can edit their own profile (ID in the token must match the ID in the request parameter)
-    if (req.user.role === 'admin' || req.user.userID === req.params.id) {
+    // Users can edit their own profile (userID from token must match ID in the request parameter)
+    // Users can update their own business details (userID from token must match the business owner's ID)
+    if (
+      req.user.role === 'admin' || 
+      req.user.userID === req.params.id || // User updating their own profile
+      req.user.userID === req.params.businessId // User updating their own business
+    ) {
       next();
     } else {
       // Deny access if the user doesn't have permission
-      return res.status(403).json({ message: 'Access Denied. You can only update your own profile.' });
+      return res.status(403).json({ message: 'Access Denied. You can only update your own profile or business.' });
     }
   } catch (error) {
     // Handle invalid tokens

@@ -20,19 +20,19 @@ const getAllBusinessesWithUserDetails = async (req, res) => {
 
 // Controller: Update Business Details
 const updateBusinessDetails = async (req, res) => {
-    const { id } = req.params; // Business ID from URL
-    const updates = req.body;  // Fields to update
-    const userId = req.user.userID; // Extracted from the JWT token
-    const userRole = req.user.role;
-  
-// Step 1: Validate ObjectId
-if (!mongoose.Types.ObjectId.isValid(id)) {
+  const { businessId } = req.params; // Business ID from the URL
+  const updates = req.body;  // Fields to update
+  const userId = req.user.userID; // Extracted from JWT token
+  const userRole = req.user.role;
+
+  // Step 1: Validate ObjectId
+  if (!mongoose.Types.ObjectId.isValid(businessId)) {
     return res.status(400).json({ message: 'Invalid Business ID format.' });
   }
 
   try {
     // Step 2: Find the business
-    const business = await Business.findById(id);
+    const business = await Business.findById(businessId);
 
     if (!business) {
       return res.status(404).json({ message: 'Business not found.' });
