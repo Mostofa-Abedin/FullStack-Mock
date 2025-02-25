@@ -14,7 +14,6 @@ import Contact from "./pages/Contact/Contact";
 
 import LoginPage from "./pages/LoginPage/loginPage";
 
-
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
 import Project3 from "./pages/ProjectPages/projectdetails3";
@@ -29,7 +28,7 @@ function App() {
         {/* Conditionally render Navbar and Footer */}
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          
+
           <Route
             path="/"
             element={
@@ -49,10 +48,37 @@ function App() {
               </>
             }
           />
-      
-          <Route path="/services" element={<Services />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/contact" element={<Contact />} />
+
+          <Route
+            path="/services"
+            element={
+              <>
+                <Navbar />
+                <Services />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/work"
+            element={
+              <>
+                <Navbar />
+                <Work />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <Navbar />
+                <Contact />
+                <Footer />
+              </>
+            }
+          />
 
           <Route
             path="/services"
