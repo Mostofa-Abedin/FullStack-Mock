@@ -14,6 +14,7 @@ router.get('/', getAllBusinessesWithUserDetails);
 
 
 // Route: PATCH business details (only own business or admin access)
-router.patch('/:id', authenticateUser, authUserOrAdmin, updateBusinessDetails);
+router.patch('/update/:businessId', authenticateUser, authUserOrAdmin, updateBusinessDetails);
+
 
 module.exports = router;
