@@ -14,10 +14,9 @@ const businessRoutes = require('./src/routes/businessRoutes');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: "https://full-stack-mock-six.vercel.app",  // Allow only frontend
-  credentials: true
+  origin: ["https://full-stack-mock-six.vercel.app", "http://127.0.0.1:5000"],  // Allow frontend on Vercel & local dev
+  credentials: true  // Allow cookies & auth headers if needed
 }));
-
 // Ensure MongoDB URI exists
 if (!process.env.MONGO_URI) {
   console.error('❌ MONGO_URI is missing. Check your .env file.');

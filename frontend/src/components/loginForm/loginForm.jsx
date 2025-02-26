@@ -53,8 +53,13 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("🚀 Form submitted!"); // Check if the function fires
+
     // Check if there are any validation errors during registration
     if ((emailError || passwordError) && !isLogin && !isAdmin) {
+
+      console.log("❌ Form validation failed. Not sending request.");
+
       return; // Prevent submission if there's an error during registration
     }
      
