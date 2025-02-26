@@ -57,7 +57,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
     if ((emailError || passwordError) && !isLogin && !isAdmin) {
       return; // Prevent submission if there's an error during registration
     }
-
+      
     // Add `isRegister` flag to differentiate login from registration
     const requestData = { ...formData, isRegister: !isLogin };
 

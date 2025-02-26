@@ -13,7 +13,10 @@ const businessRoutes = require('./src/routes/businessRoutes');
 // Initialize Express app
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://full-stack-mock-six.vercel.app",  // Allow only frontend
+  credentials: true
+}));
 
 // Ensure MongoDB URI exists
 if (!process.env.MONGO_URI) {
