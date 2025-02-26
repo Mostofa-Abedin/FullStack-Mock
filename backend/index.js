@@ -14,11 +14,12 @@ const businessRoutes = require('./src/routes/businessRoutes');
 const app = express();
 
 app.use(cors({
-  origin: ["https://full-stack-mock-six.vercel.app", "http://127.0.0.1:5000"],  // Allow frontend on Vercel & local dev
+  origin: "*",  // ✅ Temporarily allow all origins
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true  // Allow cookies & auth headers if needed
+  credentials: true
 }));
+
 app.use(express.json());
 // Ensure MongoDB URI exists
 if (!process.env.MONGO_URI) {
