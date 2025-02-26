@@ -57,9 +57,13 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
     if ((emailError || passwordError) && !isLogin && !isAdmin) {
       return; // Prevent submission if there's an error during registration
     }
-      
-    // Add `isRegister` flag to differentiate login from registration
-    const requestData = { ...formData, isRegister: !isLogin };
+     
+    // Import frontend URL from .env or if fails use localhost.
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000"; 
+
+    // Add `isRegister` flag to differentiate login from registration 
+    // @Perri- (Don't need this anymore as backend already has separate routes for login (/login) and register (/users/register).)
+    // const requestData = { ...formData, isRegister: !isLogin };
 
     try {
       const response = await onSubmit(requestData); // Send request to backend with isRegister flag
