@@ -14,12 +14,11 @@ const businessRoutes = require('./src/routes/businessRoutes');
 const app = express();
 
 app.use(cors({
-  origin: "*",  // ✅ Temporarily allow all origins
+  origin: ["https://full-stack-mock-six.vercel.app", "http://127.0.0.1:5000"],  // Allow frontend on Vercel & local dev
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
+  credentials: true  // Allow cookies & auth headers if needed
 }));
-
 app.use(express.json());
 // Ensure MongoDB URI exists
 if (!process.env.MONGO_URI) {
@@ -43,23 +42,6 @@ app.use('/admin', adminRoutes);
 app.use('/client', clientRoutes)
 
 app.use('/business', businessRoutes);
-
-// Debugging
-console.log("✅ Registered Routes:");
-app._router.stack.forEach((middleware) => {
-  if (middleware.route) {
-    console.log(`${Object.keys(middleware.route.methods).join(', ').toUpperCase()} -> ${middleware.route.path}`);
-  } else if (middleware.name === 'router') {
-    middleware.handle.stack.forEach((subMiddleware) => {
-      if (subMiddleware.route) {
-        console.log(
-          `${Object.keys(subMiddleware.route.methods).join(', ').toUpperCase()} -> ${subMiddleware.route.path}`
-        );
-      }
-    });
-  }
-});
-
 
 // Export app (without starting server)
 module.exports = app;
