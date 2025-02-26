@@ -12,11 +12,14 @@ const clientRoutes = require('./src/routes/clientRoutes')
 const businessRoutes = require('./src/routes/businessRoutes');
 // Initialize Express app
 const app = express();
-app.use(express.json());
+
 app.use(cors({
   origin: ["https://full-stack-mock-six.vercel.app", "http://127.0.0.1:5000"],  // Allow frontend on Vercel & local dev
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true  // Allow cookies & auth headers if needed
 }));
+app.use(express.json());
 // Ensure MongoDB URI exists
 if (!process.env.MONGO_URI) {
   console.error('❌ MONGO_URI is missing. Check your .env file.');
