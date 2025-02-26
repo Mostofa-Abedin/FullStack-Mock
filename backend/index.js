@@ -34,6 +34,7 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Define routes
+console.log("✅ Loading userRoutes...");
 app.use('/users', userRoutes);
 app.use('/login', authRoutes);
 
