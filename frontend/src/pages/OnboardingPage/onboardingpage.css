@@ -3,29 +3,30 @@
     background-image: url("../../assets/images/loginbackground.png");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 80vh;
+    height: 100vh;
     padding: 0%;
     margin: 0 auto;
+    margin-top: -20px;
 }
 
 
 /* Main Onboarding Form Container */
 .onboarding-form {
     padding: 2rem;
-    width: 600px;
+    width: 550px;
     text-align: center;
     align-items: center;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background: #fff;
+    background: #192F3C;
 }
 
 /* Header Styling */
 h2.form-title {
     color: #F3DCB2;
     font-family: "Kode Mono", monospace;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 600;
     text-transform: uppercase;
     margin: 0 auto;
@@ -33,47 +34,47 @@ h2.form-title {
     padding-bottom: 50px;
 }
 
-/* Label Styling */
-.onboarding-form label {
-    color: #192F3C;
-    font-family: "Inter", sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    padding-bottom: 5px;
-    padding-top: 10px;
-    display: block;
-    text-align: left;
-}
-
 /* Input Fields Styling */
 .onboarding-form .form-input {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 500px;
+    padding: 1rem;
+    border: none;
+    margin: 10px;
+    font-size: 1rem;
 }
 
 .onboarding-form .form-input input,
 .onboarding-form .form-input textarea,
-.onboarding-form .form-input select {
+.onboarding-form .form-input select{
     padding: 12px;
     font-size: 1rem;
     margin-bottom: 1rem;
     border: 1px solid #ccc;
     background: #f9f9f9;
     font-family: "Inter", sans-serif;
-    width: 100%;
 }
 
 .onboarding-form textarea {
     resize: none;
 }
 
+.form-input::placeholder {
+    font-family: "Inter", sans-serif;
+    color: #192F3C50 !important;
+    font-size: 1rem;
+}
+
 .onboarding-form input:focus,
 .onboarding-form textarea:focus,
 .onboarding-form select:focus {
-    background-color: #fff;
-    border-color: #7aa5c3;
+    border: solid 2px #8BC4D9;
     outline: none;
+}
+
+.error-message {
+    color: #F3A83C !important;
 }
 
 /* Button Styling */
