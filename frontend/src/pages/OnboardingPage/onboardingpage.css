@@ -1,0 +1,126 @@
+
+.onboarding-container {
+    background-image: url("../../assets/images/loginbackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    padding: 0%;
+    margin: 0 auto;
+}
+
+
+/* Main Onboarding Form Container */
+.onboarding-form {
+    padding: 2rem;
+    width: 600px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background: #fff;
+}
+
+/* Header Styling */
+h2.form-title {
+    color: #F3DCB2;
+    font-family: "Kode Mono", monospace;
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 auto;
+    padding-top: 150px;
+    padding-bottom: 50px;
+}
+
+/* Label Styling */
+.onboarding-form label {
+    color: #192F3C;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    display: block;
+    text-align: left;
+}
+
+/* Input Fields Styling */
+.onboarding-form .form-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.onboarding-form .form-input input,
+.onboarding-form .form-input textarea,
+.onboarding-form .form-input select {
+    padding: 12px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    font-family: "Inter", sans-serif;
+    width: 100%;
+}
+
+.onboarding-form textarea {
+    resize: none;
+}
+
+.onboarding-form input:focus,
+.onboarding-form textarea:focus,
+.onboarding-form select:focus {
+    background-color: #fff;
+    border-color: #7aa5c3;
+    outline: none;
+}
+
+/* Button Styling */
+.onboarding-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #7aa5c3;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.onboarding-form button:hover {
+    background-color: #F3A83C;
+}
+
+/* Success and Error Message Styling */
+.success-message {
+    color: #28a745;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    padding-top: 2px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    padding-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .onboarding-form {
+        width: 90%;
+        padding: 1.5rem;
+    }
+    
+    h2.onboarding-title {
+        font-size: 1.5rem;
+    }
+}

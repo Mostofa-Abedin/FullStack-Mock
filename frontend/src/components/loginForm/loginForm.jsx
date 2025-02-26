@@ -52,22 +52,27 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Check if there are any validation errors during registration
     if ((emailError || passwordError) && !isLogin && !isAdmin) {
       return; // Prevent submission if there's an error during registration
     }
-
+  
     // Add `isRegister` flag to differentiate login from registration
     const requestData = { ...formData, isRegister: !isLogin };
-
+  
     try {
-      const response = await onSubmit(requestData); // Send request to backend with isRegister flag
-
+      const response = await onSubmit(requestData);
+  
       // If submission is successful, show a success message
       if (response.success) {
         setSuccessMessage("Form submitted successfully!");
-        setErrorMessage(null); // Clear error message if any
+        setErrorMessage(null); 
+  
+        // Store the name in localStorage 
+        if (!isLogin && !isAdmin) {
+          localStorage.setItem('userName', formData.name); // Store the name for onboarding page
+        }
       } else {
         setErrorMessage("Something went wrong. Please try again.");
         setSuccessMessage(null); // Clear success message if any
@@ -77,6 +82,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
       setSuccessMessage(null); // Clear success message if any
     }
   };
+  
 
   const formContainerClass = isAdmin
     ? "admin-form-container"

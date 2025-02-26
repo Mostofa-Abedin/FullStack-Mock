@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "../../components/loginForm/loginForm";
 import Logo from "../../assets/images/magnetlabslogo_full.png"; 
-import LoginImage from "../../assets/images/loginbackground.png"; // Import the image
+import LoginImage from "../../assets/images/loginbackground.png"; 
 import "./loginpage.css";  
 
 const LoginPage = () => {
   const [isAdmin, setIsAdmin] = useState(false); // Default is client login
+  const navigate = useNavigate(); // Initialise navigation
 
   const handleLoginSubmit = async (formData) => {
+    const isRegistering = !!formData.name; // Check if it's a registration
     const endpoint = formData.name ? "/api/register" : "/api/login"; 
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -24,6 +27,13 @@ const LoginPage = () => {
       }
 
       console.log("Success:", data);
+     if (isRegistering) {
+        // Redirect to onboarding form after successful registration
+        navigate("/onboarding");
+      } else {
+        // Redirect to dashboard or other page after login
+        navigate("/client/dashboard");
+      }
     } catch (error) {
       console.error("Error:", error.message);
     }
