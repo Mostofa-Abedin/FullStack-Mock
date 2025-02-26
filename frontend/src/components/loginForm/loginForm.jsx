@@ -71,16 +71,27 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
     ? `${baseUrl}/login`  // Login Route
     : `${baseUrl}/users/register`;  // Registration Route
 
-
+    // Send form data and headers via POST request
     try {
-      const response = await onSubmit(requestData); // Send request to backend with isRegister flag
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // Don't need this anymore as we  are using fetch instead of onsubmit
+      // try {
+      //   const response = await onSubmit(requestData); // Send request to backend with isRegister flag
 
       // If submission is successful, show a success message
-      if (response.success) {
+      
+      if (response.ok) { 
         setSuccessMessage("Form submitted successfully!");
         setErrorMessage(null); // Clear error message if any
       } else {
-        setErrorMessage("Something went wrong. Please try again.");
+        setErrorMessage(data.message ||"Something went wrong. Please try again.");
         setSuccessMessage(null); // Clear success message if any
       }
     } catch (error) {
