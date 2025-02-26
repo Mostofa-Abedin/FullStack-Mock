@@ -45,13 +45,21 @@ app.use('/client', clientRoutes)
 app.use('/business', businessRoutes);
 
 // Debugging
-app.options('*', (req, res) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.sendStatus(200);
+console.log("✅ Registered Routes:");
+app._router.stack.forEach((middleware) => {
+  if (middleware.route) {
+    console.log(`${Object.keys(middleware.route.methods).join(', ').toUpperCase()} -> ${middleware.route.path}`);
+  } else if (middleware.name === 'router') {
+    middleware.handle.stack.forEach((subMiddleware) => {
+      if (subMiddleware.route) {
+        console.log(
+          `${Object.keys(subMiddleware.route.methods).join(', ').toUpperCase()} -> ${subMiddleware.route.path}`
+        );
+      }
+    });
+  }
 });
+
 
 // Export app (without starting server)
 module.exports = app;
