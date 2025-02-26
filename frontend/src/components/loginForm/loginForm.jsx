@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import "./loginform.css";
 import { useNavigate } from "react-router-dom"; 
 
-const navigate = useNavigate();
-
 const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
+  const navigate = useNavigate(); // Use navigate inside component
 
-  const navigate = useNavigate(); //Navigate imported inside login form
-
-  const [isLogin, setIsLogin] = useState(true); // Whether the user is in login or register mode
+  const [isLogin, setIsLogin] = useState(true); 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,11 +16,9 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false); 
 
-  // Regular expression for validating email
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-  // Regular expression for strong password (minimum 8 characters, at least one number, one uppercase letter, and one special character)
   const passwordRegex =
     /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -31,204 +26,93 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Email validation
     if (name === "email") {
-      if (!value) {
-        setEmailError(""); // Clear error if input is empty
-      } else if (!emailRegex.test(value)) {
-        setEmailError("Please enter a valid email address.");
-      } else {
-        setEmailError("");
-      }
+      setEmailError(value && !emailRegex.test(value) ? "Invalid email address." : "");
     }
 
-    // Password validation only for registration
     if (name === "password" && !isLogin && !isAdmin) {
-      if (!value) {
-        setPasswordError(""); // Clear error if input is empty
-      } else if (!passwordRegex.test(value)) {
-        setPasswordError(
-          "Password must be at least 8 characters, include one uppercase letter, one number, and one special character."
-        );
-      } else {
-        setPasswordError("");
-      }
+      setPasswordError(value && !passwordRegex.test(value) ? "Weak password." : "");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if there are any validation errors during registration
-    if ((emailError || passwordError) && !isLogin && !isAdmin) {
+    if ((emailError || passwordError) && !isLogin && !isAdmin) return;
 
-      return; // Prevent submission if there's an error during registration
-    }
-     
-    // Import frontend URL from .env or if fails use localhost.
     const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000"; 
-
-    // Add `isRegister` flag to differentiate login from registration 
-    // @Perri- (Don't need this anymore as backend already has separate routes for login (/login) and register (/users/register).)
-    // const requestData = { ...formData, isRegister: !isLogin };
-
-    // Redirect to correct screen depending on login or registration
-
     const endpoint = isLogin
-    ? `${baseUrl}/login`  // Login Route
-    : `${baseUrl}/users/register`;  // Registration Route
+      ? `${baseUrl}/login`
+      : `${baseUrl}/users/register`;
 
-    // Send form data and headers via POST request
+    setLoading(true); // Set loading before making the request
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      // Don't need this anymore as we  are using fetch instead of onsubmit
-      // try {
-      //   const response = await onSubmit(requestData); // Send request to backend with isRegister flag
-
-      // If submission is successful, show a success message
-      
       if (response.ok) { 
-        setSuccessMessage("Form submitted successfully! Logging in!");
-        setErrorMessage(null); // Clear error message if any
+        setSuccessMessage("Form submitted successfully! Redirecting...");
+        setErrorMessage(null);
 
-        // @Perri- Redirect to dashboard after successful login
-      // Commented out for now until the page exists
-      // navigate("/dashboard");
-
+        setTimeout(() => {
+          // @Perri- Redirect to dashboard after successful login
+          // Commented out for now until the page exists
+          // navigate("/dashboard");
+        }, 2000); // Delay for UI feedback
       } else {
-        setErrorMessage(data.message ||"Something went wrong. Please try again.");
-        setSuccessMessage(null); // Clear success message if any
+        setErrorMessage("Something went wrong. Please try again.");
+        setSuccessMessage(null);
       }
     } catch (error) {
       setErrorMessage("There was an error submitting the form.");
-      setSuccessMessage(null); // Clear success message if any
+      setSuccessMessage(null);
+    } finally {
+      setLoading(false); //  Stop loading when request is done
     }
   };
 
-  const formContainerClass = isAdmin
-    ? "admin-form-container"
-    : "client-form-container";
-  const submitButtonClass = isAdmin
-    ? "admin-submit-button"
-    : "client-submit-button";
-  const formHeading = isAdmin
-    ? "ADMIN LOGIN"
-    : isLogin
-    ? "CLIENT LOGIN"
-    : "NEW CLIENT ACCOUNT";
-
   return (
-    <div
-      className={`form-container ${formContainerClass} ${
-        !isAdmin ? "with-image" : ""
-      }`}
-    >
+    <div className={`form-container ${isAdmin ? "admin-form-container" : "client-form-container"} ${!isAdmin ? "with-image" : ""}`}>
       <div className="form-content">
-        <h2 className="form-title">{formHeading}</h2>
+        <h2 className="form-title">{isAdmin ? "ADMIN LOGIN" : isLogin ? "CLIENT LOGIN" : "NEW CLIENT ACCOUNT"}</h2>
 
-        <div className="user-type-toggle">
-          <label>
-            <input
-              type="radio"
-              name="userType"
-              value="client"
-              checked={!isAdmin}
-              onChange={() => setIsAdmin(false)}
-            />
-            Client
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="userType"
-              value="admin"
-              checked={isAdmin}
-              onChange={() => setIsAdmin(true)}
-            />
-            Admin
-          </label>
-        </div>
+        {loading && <p className="loading-message">Processing... Please wait.</p>} {/* 🔹 Loading message */}
 
         <form onSubmit={handleSubmit} className="login-form">
-          {/* Name field only for registration */}
           {!isLogin && !isAdmin && (
             <div className="form-field form-input">
-              <label htmlFor="name" className="label">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required={!isLogin}
-                className="input-field"
-              />
+              <label htmlFor="name">Name</label>
+              <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="input-field" />
             </div>
           )}
 
           <div className="form-field form-input">
-            <label htmlFor="email" className="label">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="input-field"
-            />
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="input-field" />
             {emailError && <div className="error-message">{emailError}</div>}
           </div>
 
           <div className="form-field form-input">
-            <label htmlFor="password" className="label">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="input-field"
-            />
-            {/* Password validation error message only for registration */}
-            {!isLogin && !isAdmin && passwordError && (
-              <div className="error-message">{passwordError}</div>
-            )}
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required className="input-field" />
+            {!isLogin && !isAdmin && passwordError && <div className="error-message">{passwordError}</div>}
           </div>
 
-          <button type="submit" className={submitButtonClass}>
-            {isAdmin ? "Login" : isLogin ? "Login" : "Register"}
+          <button type="submit" className={isAdmin ? "admin-submit-button" : "client-submit-button"} disabled={loading}>
+            {loading ? "Submitting..." : isAdmin ? "Login" : isLogin ? "Login" : "Register"}
           </button>
         </form>
 
-        {/* Display Success or Error Messages */}
-        {successMessage && (
-          <div className="success-message">{successMessage}</div>
-        )}
+        {successMessage && <div className="success-message">{successMessage}</div>}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
 
         {!isAdmin && (
-          <button
-            className="toggle-button"
-            onClick={() => setIsLogin(!isLogin)}
-          >
-            {isLogin
-              ? "Need an account? Register"
-              : "Already have an account? Login"}
+          <button className="toggle-button" onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? "Need an account? Register" : "Already have an account? Login"}
           </button>
         )}
       </div>
