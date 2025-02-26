@@ -65,6 +65,13 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
     // @Perri- (Don't need this anymore as backend already has separate routes for login (/login) and register (/users/register).)
     // const requestData = { ...formData, isRegister: !isLogin };
 
+    // Redirect to correct screen depending on login or registration
+
+    const endpoint = isLogin
+    ? `${baseUrl}/login`  // Login Route
+    : `${baseUrl}/users/register`;  // Registration Route
+
+
     try {
       const response = await onSubmit(requestData); // Send request to backend with isRegister flag
 
