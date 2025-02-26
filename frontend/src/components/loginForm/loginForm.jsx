@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./loginform.css";
+import { useNavigate } from "react-router-dom"; 
+
+const navigate = useNavigate();
 
 const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
+
+  const navigate = useNavigate(); //Navigate imported inside login form
+
   const [isLogin, setIsLogin] = useState(true); // Whether the user is in login or register mode
   const [formData, setFormData] = useState({
     name: "",
@@ -53,12 +59,8 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
-
     // Check if there are any validation errors during registration
     if ((emailError || passwordError) && !isLogin && !isAdmin) {
-
-      
 
       return; // Prevent submission if there's an error during registration
     }
@@ -95,6 +97,11 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
       if (response.ok) { 
         setSuccessMessage("Form submitted successfully! Logging in!");
         setErrorMessage(null); // Clear error message if any
+
+        // @Perri- Redirect to dashboard after successful login
+      // Commented out for now until the page exists
+      // navigate("/dashboard");
+
       } else {
         setErrorMessage(data.message ||"Something went wrong. Please try again.");
         setSuccessMessage(null); // Clear success message if any
