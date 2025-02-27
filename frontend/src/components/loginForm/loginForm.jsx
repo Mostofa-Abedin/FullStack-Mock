@@ -43,8 +43,8 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
 
     const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000"; 
     const endpoint = isLogin
-      ? `${baseUrl}/login`
-      : `${baseUrl}/users/register`;
+      ? `${baseUrl}/login`  // Corrected to match the Express route for login
+      : `${baseUrl}users/register`;  // Corrected to match the Express route for user registration
 
     setLoading(true); // Set loading before making the request
 
@@ -59,8 +59,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
         setSuccessMessage("Form submitted successfully! Redirecting...");
         setErrorMessage(null);
 
-
-        //  Store user name in localStorage for onboarding (Added from PR)
+        // Store user name in localStorage for onboarding (if new client)
         if (!isLogin && !isAdmin) {
           localStorage.setItem("userName", formData.name);
         }
@@ -69,13 +68,10 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
           if (!isLogin && !isAdmin) {
             // Redirect to onboarding page for new clients.
             navigate("/onboarding");
-
-
-        } else {
-          // @Perri- Redirect to dashboard after successful login for returning users/admins and not new registrations
-          // Commented out for now until the page exists
-          // navigate("/dashboard"); // Uncomment when dashboard exists
-        }
+          } else {
+            // Redirect to dashboard for logged-in users or admins
+            navigate("/dashboard");  // Uncomment when dashboard page exists
+          }
         }, 2000); // Delay for UI feedback
       } else {
         setErrorMessage("Something went wrong. Please try again.");
@@ -85,7 +81,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
       setErrorMessage("There was an error submitting the form.");
       setSuccessMessage(null);
     } finally {
-      setLoading(false); //  Stop loading when request is done
+      setLoading(false); // Stop loading when request is done
     }
   };
 
@@ -96,8 +92,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
 
         {loading && <p className="loading-message">Processing... Please wait.</p>} {/* 🔹 Loading message */}
 
-
-        {/* User type toggle (Added from PR) */}
+        {/* User type toggle (Admin/Client) */}
         <div className="user-type-toggle">
           <label>
             <input

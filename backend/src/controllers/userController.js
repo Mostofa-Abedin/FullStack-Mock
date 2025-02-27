@@ -44,6 +44,8 @@ const registerUser = async (req, res) => {
   }
 };
 
+module.exports = { registerUser };
+
 // Controller: Change password (I think Separate route needed? )
 const changePassword = async (req, res) => {
   try {
