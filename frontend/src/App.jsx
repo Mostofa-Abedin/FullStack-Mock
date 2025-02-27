@@ -13,6 +13,7 @@ import Work from "./pages/Work/Work";
 import Contact from "./pages/Contact/Contact";
 
 import LoginPage from "./pages/LoginPage/loginPage";
+import OnboardingPage from "./pages/OnboardingPage/onboardingPage";
 
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
@@ -97,6 +98,17 @@ function App() {
               <>
                 <Navbar />
                 <Work />
+                <Footer />
+              </>
+            }
+          />
+
+<Route
+            path="/onboarding"
+            element={
+              <>
+                <Navbar />
+                <OnboardingPage />
                 <Footer />
               </>
             }

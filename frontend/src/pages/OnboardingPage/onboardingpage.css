@@ -1,0 +1,172 @@
+
+.onboarding-container {
+    background-image: url("../../assets/images/loginbackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    padding: 0%;
+    margin: 0 auto;
+    margin-top: -20px;
+}
+
+
+/* Main Onboarding Form Container */
+.onboarding-form {
+    padding: 2rem;
+    width: 550px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background: #192F3C;
+}
+
+/* Header Styling */
+h2.form-title {
+    color: #F3DCB2;
+    font-family: "Kode Mono", monospace;
+    font-size: 3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 auto;
+    padding-top: 150px;
+    padding-bottom: 50px;
+}
+
+/* Input Fields Styling */
+.onboarding-form .form-input {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 1rem;
+    border: none;
+    margin: 10px;
+    font-size: 1rem;
+}
+
+.onboarding-form .form-input input,
+.onboarding-form .form-input textarea,
+.onboarding-form .form-input select{
+    padding: 12px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    font-family: "Inter", sans-serif;
+}
+
+.onboarding-form textarea {
+    resize: none;
+}
+
+.form-input::placeholder {
+    font-family: "Inter", sans-serif;
+    color: #192F3C50 !important;
+    font-size: 1rem;
+}
+
+.onboarding-form input:focus,
+.onboarding-form textarea:focus,
+.onboarding-form select:focus {
+    border: solid 2px #8BC4D9;
+    outline: none;
+}
+
+.error-message {
+    color: #F3A83C !important;
+}
+
+/* Button Styling */
+.onboarding-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #7aa5c3;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.onboarding-form button:hover {
+    background-color: #F3A83C;
+}
+
+/* Success and Error Message Styling */
+.success-message {
+    color: #28a745;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    padding-top: 2px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    padding-bottom: 20px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) and (min-width: 600px){
+
+    .onboarding-container {
+        height: 70vh;
+    }
+    
+    .onboarding-form {
+        padding: 1rem;
+        width: 400px;
+    }
+    
+    h2.form-title {
+        font-size: 1.8em;
+        margin-left: 40px;
+        margin-right: 40px;
+        padding-top: 70px;
+}
+
+.onboarding-form .form-input {
+    width: 350px;
+    padding: 1rem;
+    border: none;
+    margin: 10px;
+    font-size: 1rem;
+}
+
+}
+@media (max-width: 600px) {
+
+    .onboarding-container {
+        height: 120vh;
+    }
+    
+    .onboarding-form {
+        padding: 1rem;
+        width: 250px;
+    }
+    
+    h2.form-title {
+        font-size: 1.8em;
+        margin-left: 40px;
+        margin-right: 40px;
+        padding-top: 70px;
+}
+
+.onboarding-form .form-input {
+    width: 200px;
+    padding: 1rem;
+    border: none;
+    margin: 10px;
+    font-size: 1rem;
+}
+
+}

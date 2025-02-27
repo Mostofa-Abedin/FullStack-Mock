@@ -16,7 +16,8 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [loading, setLoading] = useState(false); 
+
+  const [loading, setLoading] = useState(false); // Prevents multiple submissions
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passwordRegex =
@@ -58,6 +59,12 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
         setSuccessMessage("Form submitted successfully! Redirecting...");
         setErrorMessage(null);
 
+
+        // ✅ Store user name in localStorage for onboarding (Added from PR)
+        if (!isLogin && !isAdmin) {
+          localStorage.setItem("userName", formData.name);
+        }
+
         setTimeout(() => {
           // @Perri- Redirect to dashboard after successful login
           // Commented out for now until the page exists
@@ -81,6 +88,31 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
         <h2 className="form-title">{isAdmin ? "ADMIN LOGIN" : isLogin ? "CLIENT LOGIN" : "NEW CLIENT ACCOUNT"}</h2>
 
         {loading && <p className="loading-message">Processing... Please wait.</p>} {/* 🔹 Loading message */}
+
+
+        {/* ✅ User type toggle (Added from PR) */}
+        <div className="user-type-toggle">
+          <label>
+            <input
+              type="radio"
+              name="userType"
+              value="client"
+              checked={!isAdmin}
+              onChange={() => setIsAdmin(false)}
+            />
+            Client
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="userType"
+              value="admin"
+              checked={isAdmin}
+              onChange={() => setIsAdmin(true)}
+            />
+            Admin
+          </label>
+        </div>
 
         <form onSubmit={handleSubmit} className="login-form">
           {!isLogin && !isAdmin && (
