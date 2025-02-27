@@ -60,14 +60,14 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
         setErrorMessage(null);
 
 
-        // //  Store user name in localStorage for onboarding (Added from PR)
-        // if (!isLogin && !isAdmin) {
-        //   localStorage.setItem("userName", formData.name);
-        // }
+        //  Store user name in localStorage for onboarding (Added from PR)
+        if (!isLogin && !isAdmin) {
+          localStorage.setItem("userName", formData.name);
+        }
 
         setTimeout(() => {
           if (!isLogin && !isAdmin) {
-            // Redirect to onboarding page for new clients
+            // Redirect to onboarding page for new clients.
             navigate("/onboarding");
 
 
