@@ -60,15 +60,22 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
         setErrorMessage(null);
 
 
-        // ✅ Store user name in localStorage for onboarding (Added from PR)
-        if (!isLogin && !isAdmin) {
-          localStorage.setItem("userName", formData.name);
-        }
+        // //  Store user name in localStorage for onboarding (Added from PR)
+        // if (!isLogin && !isAdmin) {
+        //   localStorage.setItem("userName", formData.name);
+        // }
 
         setTimeout(() => {
-          // @Perri- Redirect to dashboard after successful login
+          if (!isLogin && !isAdmin) {
+            // Redirect to onboarding page for new clients
+            navigate("/onboarding");
+
+
+        } else {
+          // @Perri- Redirect to dashboard after successful login for returning users/admins and not new registrations
           // Commented out for now until the page exists
-          // navigate("/dashboard");
+          // navigate("/dashboard"); // Uncomment when dashboard exists
+        }
         }, 2000); // Delay for UI feedback
       } else {
         setErrorMessage("Something went wrong. Please try again.");
@@ -90,7 +97,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
         {loading && <p className="loading-message">Processing... Please wait.</p>} {/* 🔹 Loading message */}
 
 
-        {/* ✅ User type toggle (Added from PR) */}
+        {/* User type toggle (Added from PR) */}
         <div className="user-type-toggle">
           <label>
             <input
