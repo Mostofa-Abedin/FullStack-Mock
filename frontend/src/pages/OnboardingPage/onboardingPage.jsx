@@ -76,8 +76,8 @@ const OnboardingForm = () => {
         setError("User ID not found. Please log in again.");
         return;
       }
-
-      const response = await fetch(`/api/${userId}/onboarding`, {
+      const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001"; 
+      const response = await fetch(`${baseUrl}/users/${userId}/onboarding`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,6 +91,7 @@ const OnboardingForm = () => {
       console.log("Response Body:", text);
 
       if (!response.ok) {
+        console.log()
         console.error("Request failed:", text);
         throw new Error(text || "Something went wrong with the request.");
       }

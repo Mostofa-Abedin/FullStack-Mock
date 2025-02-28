@@ -41,10 +41,10 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
 
     if ((emailError || passwordError) && !isLogin && !isAdmin) return;
 
-    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000"; 
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001"; 
     const endpoint = isLogin
       ? `${baseUrl}/login`  // Corrected to match the Express route for login
-      : `${baseUrl}users/register`;  // Corrected to match the Express route for user registration
+      : `${baseUrl}/users/register`;  // Corrected to match the Express route for user registration
 
     setLoading(true); // Set loading before making the request
 
@@ -58,7 +58,9 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
       if (response.ok) { 
         setSuccessMessage("Form submitted successfully! Redirecting...");
         setErrorMessage(null);
-
+        const data = await response.json(); // Parse JSON response
+        localStorage.setItem("authToken", data.token); // Store token in localStorage
+        localStorage.setItem("userId", data.user._id); // Store user ID in localStorage
         // Store user name in localStorage for onboarding (if new client)
         if (!isLogin && !isAdmin) {
           localStorage.setItem("userName", formData.name);
@@ -78,6 +80,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin }) => {
         setSuccessMessage(null);
       }
     } catch (error) {
+      console.log(error)
       setErrorMessage("There was an error submitting the form.");
       setSuccessMessage(null);
     } finally {
