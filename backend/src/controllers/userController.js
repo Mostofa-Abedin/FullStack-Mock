@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // Controller: Get all users
 const getAllUsers = async (req, res) => {
@@ -37,8 +38,13 @@ const registerUser = async (req, res) => {
     // Create a new user (Password hashing handled in the User model)
     const user = new User({ name, email, role, password });
     await user.save();
-
-    res.status(201).json({ message: 'User registered successfully', user });
+    // Added token to user who registers, expiresIn should probably be something different
+    const token = jwt.sign(
+      { userID: user._id, role: user.role }, // Included user role in JWT token
+      process.env.JWT_SECRET || "secret",
+      { expiresIn: "1h" }
+  );
+    res.status(201).json({ token, message: 'User registered successfully', user });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
