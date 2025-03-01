@@ -14,7 +14,7 @@ const businessRoutes = require('./src/routes/businessRoutes');
 const app = express();
 
 app.use(cors({
-  origin: ["https://full-stack-mock-six.vercel.app", "http://127.0.0.1:5000"],  // Allow frontend on Vercel & local dev
+  origin: ["https://full-stack-mock-six.vercel.app", "http://127.0.0.1:5000", "http://localhost:5000"],  // Allow frontend on Vercel & local dev
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true  // Allow cookies & auth headers if needed
