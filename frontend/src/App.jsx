@@ -17,6 +17,8 @@ import ClientListPage from "./pages/AdminDashboard/clientListPage";
 import ProjectsListPage from "./pages/AdminDashboard/projectsListPage";
 import AnnouncementsListPage from "./pages/AdminDashboard/announcementsListPage";
 
+import ClientDashboardPage from "./pages/ClientDashboard/clientDashboardPage"
+
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
 import Project3 from "./pages/ProjectPages/projectdetails3";
@@ -34,6 +36,15 @@ function App() {
           <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
           <Route path="/admin/clients" element={<ClientListPage />} />
           <Route path="/admin/projects" element={<ProjectsListPage />} />
+          <Route
+            path="/admin/announcements"
+            element={<AnnouncementsListPage />}
+          />
+
+<Routes>
+          {/* Admin Dashboard Route - No Navbar/Footer */}
+          <Route path="/client/dashboard/*" element={<ClientDashboardPage />} />
+
           <Route
             path="/admin/announcements"
             element={<AnnouncementsListPage />}
