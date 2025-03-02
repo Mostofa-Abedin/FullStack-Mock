@@ -111,7 +111,7 @@
 
     .home-mobile-menu {
       display: block;
-      margin-left: auto;
+      margin-left: -4rem;
     }
 
     .home-nav-links {

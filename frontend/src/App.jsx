@@ -10,7 +10,10 @@ import HeroSection from "./components/heroSection/heroSection";
 
 import Services from "./pages/Services/Services";
 import Work from "./pages/Work/Work";
+import Contact from "./pages/Contact/Contact";
+
 import LoginPage from "./pages/LoginPage/loginPage";
+import OnboardingPage from "./pages/OnboardingPage/onboardingPage";
 
 import AdminDashboardPage from "./pages/AdminDashboard/adminDashboardPage";
 import ClientListPage from "./pages/AdminDashboard/clientListPage";
@@ -53,7 +56,9 @@ function App() {
           {/* Login Page */}
           <Route path="/login" element={<LoginPage />} />
 
+
           {/* Public Routes with Navbar & Footer */}
+
           <Route
             path="/"
             element={
@@ -84,6 +89,37 @@ function App() {
               </>
             }
           />
+          <Route
+            path="/work"
+            element={
+              <>
+                <Navbar />
+                <Work />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <Navbar />
+                <Contact />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/services"
+            element={
+              <>
+                <Navbar />
+                <Services />
+                <Footer />
+              </>
+            }
+          />
 
           <Route
             path="/work"
@@ -95,6 +131,7 @@ function App() {
               </>
             }
           />
+
 
           {/* Project Details Pages */}
           <Route
@@ -153,10 +190,28 @@ function App() {
               <>
                 <Navbar />
                 <Project6 />
+
+<Route
+            path="/onboarding"
+            element={
+              <>
+                <Navbar />
+                <OnboardingPage />
+
                 <Footer />
               </>
             }
           />
+
+
+
+          <Route path="/project1" element={<Project1 />} />
+          <Route path="/project2" element={<Project2 />} />
+          <Route path="/project3" element={<Project3 />} />
+          <Route path="/project4" element={<Project4 />} />
+          <Route path="/project5" element={<Project5 />} />
+          <Route path="/project6" element={<Project6 />} />
+
         </Routes>
       </div>
     </Router>

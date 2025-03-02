@@ -9,12 +9,17 @@ const userRoutes = require('./src/routes/userRoutes');
 const authRoutes = require('./src/routes/authRoutes')
 const adminRoutes = require('./src/routes/adminRoutes');
 const clientRoutes = require('./src/routes/clientRoutes')
-
+const businessRoutes = require('./src/routes/businessRoutes');
 // Initialize Express app
 const app = express();
-app.use(express.json());
-app.use(cors());
 
+app.use(cors({
+  origin: ["https://full-stack-mock-six.vercel.app", "http://127.0.0.1:5000", "http://localhost:5000"],  // Allow frontend on Vercel & local dev
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true  // Allow cookies & auth headers if needed
+}));
+app.use(express.json());
 // Ensure MongoDB URI exists
 if (!process.env.MONGO_URI) {
   console.error('❌ MONGO_URI is missing. Check your .env file.');
@@ -29,11 +34,14 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Define routes
+console.log("✅ Loading userRoutes...");
 app.use('/users', userRoutes);
 app.use('/login', authRoutes);
 
 app.use('/admin', adminRoutes);
 app.use('/client', clientRoutes)
+
+app.use('/business', businessRoutes);
 
 // Export app (without starting server)
 module.exports = app;
