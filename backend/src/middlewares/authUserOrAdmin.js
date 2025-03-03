@@ -37,4 +37,4 @@ const authUserOrAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { authUserOrAdmin };
+export { authUserOrAdmin };

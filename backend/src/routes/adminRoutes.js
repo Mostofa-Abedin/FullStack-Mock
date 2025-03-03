@@ -12,4 +12,4 @@ router.get('/dashboard', authenticateUser, authorizeAdmin, (req, res) => {
     res.json({ message: "Welcome to the Admin Dashboard." });
 });
 
-module.exports = router;
+export default router;

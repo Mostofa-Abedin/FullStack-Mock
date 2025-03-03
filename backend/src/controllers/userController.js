@@ -146,10 +146,4 @@ const updateUserProfile = async (req, res) => {
 
 
 // Export controllers
-module.exports = {
-  getAllUsers,
-  createUser,
-  registerUser,
-  changePassword,
-  updateUserProfile,   
-};
+export { getAllUsers, createUser, registerUser, changePassword, updateUserProfile };

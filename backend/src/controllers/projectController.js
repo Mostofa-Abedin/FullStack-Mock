@@ -2,14 +2,14 @@ import Project from "../models/Project.js";
 
 
 // Controller: Create a new project
-export const createProject = async (req, res) => {
+const createProject = async (req, res) => {
     try {
       console.log("Received project creation request:", req.body); // Debugging log
   
       const { clientId, projectName, status, description, startDate, endDate } = req.body;
   
       if (!clientId || !projectName || !status || !startDate || !endDate) {
-        
+
         console.error("❌ Missing required fields:", req.body);
 
         return res.status(400).json({ message: "All fields are required" });
@@ -90,10 +90,4 @@ const deleteProject = async (req, res) => {
   }
 };
 
-module.exports = {
-  createProject,
-  getAllProjects,
-  getClientProjects,
-  updateProject,
-  deleteProject,
-};
+export { createProject, getAllProjects, getClientProjects, updateProject, deleteProject };

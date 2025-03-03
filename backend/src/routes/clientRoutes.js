@@ -11,4 +11,4 @@ router.get('/dashboard', authenticateUser, (req, res) => {
     res.json({ message: "Welcome to the Client Dashboard." });
 });
 
-module.exports = router;
+export default router;

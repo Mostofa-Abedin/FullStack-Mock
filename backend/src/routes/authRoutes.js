@@ -9,4 +9,5 @@ const router = express.Router();
 // Route: Login a new user
 router.post('/', loginUser);
 
-module.exports = router;
+export default router;
+

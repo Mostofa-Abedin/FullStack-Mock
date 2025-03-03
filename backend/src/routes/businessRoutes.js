@@ -18,4 +18,4 @@ router.get('/', getAllBusinessesWithUserDetails);
 router.patch('/update/:businessId', authenticateUser, authUserOrAdmin, updateBusinessDetails);
 
 
-module.exports = router;
+export default router;

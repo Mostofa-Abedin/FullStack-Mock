@@ -39,4 +39,4 @@ res.json({
 });
 }
 
-module.exports = {loginUser}
+export { loginUser };

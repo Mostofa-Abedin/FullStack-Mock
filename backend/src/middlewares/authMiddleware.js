@@ -25,4 +25,4 @@ const authenticateUser = (req, res, next) => {
         res.status(403).json({ message: 'Invalid Token.' });
     }
 };
-module.exports = { authenticateUser, authorizeAdmin };
+export { authenticateUser, authorizeAdmin };

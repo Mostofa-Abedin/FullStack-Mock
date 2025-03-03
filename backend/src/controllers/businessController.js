@@ -75,4 +75,4 @@ const updateBusinessDetails = async (req, res) => {
   }
 };
 
-module.exports = { updateBusinessDetails,getAllBusinessesWithUserDetails };
+export { updateBusinessDetails, getAllBusinessesWithUserDetails };

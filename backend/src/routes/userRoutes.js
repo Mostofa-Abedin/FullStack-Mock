@@ -43,4 +43,5 @@ router.patch('/:id/password', authenticateUser, changePassword)
 // Route: Update personal profile (Partial update allowed) (only own profile or admin access)
 router.patch('/:id/profile', authenticateUser, authUserOrAdmin, updateUserProfile);
 
-module.exports = router;
+export default router;
+

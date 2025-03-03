@@ -54,4 +54,4 @@ const registerBusiness = async (req, res) => {
     }
 }
 
-module.exports = {registerBusiness}
+export { registerBusiness };

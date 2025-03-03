@@ -29,4 +29,5 @@ router.delete("/:projectId", authenticateUser, authUserOrAdmin, deleteProject);
 // Route: Public route to get all projects (No authentication required) ) Only for Testing
 router.get("/public/all", getAllProjects);
 
-module.exports = router;
+export default router;
+

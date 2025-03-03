@@ -57,6 +57,6 @@ const BusinessSchema = new mongoose.Schema({
 // Prevent model overwrite during testing
 const Business = mongoose.models.Business || mongoose.model('Business', BusinessSchema);
 
-module.exports = Business;
+export default Business;
 
 
