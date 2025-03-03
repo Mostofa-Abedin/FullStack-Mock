@@ -5,7 +5,7 @@ import app from '../../index.js';
 import Project from '../models/Project.js';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose'; 
+import mongoose from 'mongoose';
 
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: Project Routes
@@ -47,7 +47,7 @@ afterAll(async () => {
 describe('POST /projects/', () => {
   it('should create a new project when user is admin', async () => {
     const res = await request(app)
-      .post('/api/projects')
+      .post('/projects') // ✅ Fixed Route
       .set('Authorization', `Bearer ${adminToken}`)
       .send({
         clientId,
@@ -65,7 +65,7 @@ describe('POST /projects/', () => {
 
   it('should return 403 if client tries to create a project', async () => {
     const res = await request(app)
-      .post('/api/projects')
+      .post('/projects') // ✅ Fixed Route
       .set('Authorization', `Bearer ${clientToken}`)
       .send({
         clientId,
@@ -85,7 +85,7 @@ describe('POST /projects/', () => {
 describe('GET /projects/', () => {
   it('should retrieve all projects when user is admin', async () => {
     const res = await request(app)
-      .get('/api/projects')
+      .get('/projects') // ✅ Fixed Route
       .set('Authorization', `Bearer ${adminToken}`);
 
     expect(res.statusCode).toBe(200);
@@ -94,7 +94,7 @@ describe('GET /projects/', () => {
 
   it('should return 403 if client tries to get all projects', async () => {
     const res = await request(app)
-      .get('/api/projects')
+      .get('/projects') // ✅ Fixed Route
       .set('Authorization', `Bearer ${clientToken}`);
 
     expect(res.statusCode).toBe(403);
@@ -105,7 +105,7 @@ describe('GET /projects/', () => {
 // TEST: Get All Projects (Public)
 describe('GET /projects/public/all', () => {
   it('should retrieve all projects without authentication', async () => {
-    const res = await request(app).get('/api/projects/public/all');
+    const res = await request(app).get('/projects/public/all'); // ✅ Fixed Route
     expect(res.statusCode).toBe(200);
     expect(res.body.projects.length).toBeGreaterThan(0);
   });
@@ -116,7 +116,7 @@ describe('GET /projects/public/all', () => {
 describe('GET /projects/:clientId', () => {
   it('should retrieve projects for the authenticated client', async () => {
     const res = await request(app)
-      .get(`/api/projects/${clientId}`)
+      .get(`/projects/${clientId}`) // ✅ Fixed Route
       .set('Authorization', `Bearer ${clientToken}`);
 
     expect(res.statusCode).toBe(200);
@@ -125,7 +125,7 @@ describe('GET /projects/:clientId', () => {
 
   it('should return 403 if admin tries to get a specific client’s projects', async () => {
     const res = await request(app)
-      .get(`/api/projects/${clientId}`)
+      .get(`/projects/${clientId}`) // ✅ Fixed Route
       .set('Authorization', `Bearer ${adminToken}`);
 
     expect(res.statusCode).toBe(403);
@@ -137,7 +137,7 @@ describe('GET /projects/:clientId', () => {
 describe('PATCH /projects/:projectId', () => {
   it('should update project when user is admin', async () => {
     const res = await request(app)
-      .patch(`/api/projects/${projectId}`)
+      .patch(`/projects/${projectId}`) // ✅ Fixed Route
       .set('Authorization', `Bearer ${adminToken}`)
       .send({ status: 'Completed' });
 
@@ -147,7 +147,7 @@ describe('PATCH /projects/:projectId', () => {
 
   it('should return 403 if client tries to update project', async () => {
     const res = await request(app)
-      .patch(`/api/projects/${projectId}`)
+      .patch(`/projects/${projectId}`) // ✅ Fixed Route
       .set('Authorization', `Bearer ${clientToken}`)
       .send({ status: 'Completed' });
 
@@ -160,7 +160,7 @@ describe('PATCH /projects/:projectId', () => {
 describe('DELETE /projects/:projectId', () => {
   it('should delete a project when user is admin', async () => {
     const res = await request(app)
-      .delete(`/api/projects/${projectId}`)
+      .delete(`/projects/${projectId}`) // ✅ Fixed Route
       .set('Authorization', `Bearer ${adminToken}`);
 
     expect(res.statusCode).toBe(200);
@@ -169,7 +169,7 @@ describe('DELETE /projects/:projectId', () => {
 
   it('should return 403 if client tries to delete project', async () => {
     const res = await request(app)
-      .delete(`/api/projects/${projectId}`)
+      .delete(`/projects/${projectId}`) // ✅ Fixed Route
       .set('Authorization', `Bearer ${clientToken}`);
 
     expect(res.statusCode).toBe(403);
@@ -177,4 +177,3 @@ describe('DELETE /projects/:projectId', () => {
 });
 
 // ------------------------------------------------------------------------------------------------------------------//
-
