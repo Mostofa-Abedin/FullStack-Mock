@@ -1,38 +1,38 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
-const ProjectSchema = new mongoose.Schema(
-  {
-    clientId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Links project to a client (User)
-      required: true,
-    },
-    projectName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    status: {
-      type: String,
-      enum: ["Upcoming", "In Progress", "Completed", "On Hold"],
-      default: "Upcoming",
-    },
-    description: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    startDate: {
-      type: Date,
-      required: true,
-    },
-    endDate: {
-      type: Date,
-    },
+const projectSchema = new mongoose.Schema({
+  clientId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
-  { timestamps: true }
-);
+  projectName: {
+    type: String,
+    required: true
+  },
+  status: {
+    type: String,
+    enum: ['In Progress', 'Completed', 'On Hold'],
+    required: true
+  },
+  description: {
+    type: String
+  },
+  startDate: {
+    type: Date,
+    required: true
+  },
+  endDate: {
+    type: Date,
+    required: true,
+    validate: {
+      validator: function (value) {
+        return this.startDate ? value > this.startDate : true;
+      },
+      message: 'End date must be after start date'
+    }
+  }
+}, { timestamps: true });
 
-const Project = mongoose.model("Project", ProjectSchema);
-
-module.exports = Project;
+const Project = mongoose.model('Project', projectSchema);
+export default Project;
