@@ -29,5 +29,27 @@ describe('Project Model Validations', () => {
 
 });
 
+it('should validate project status to be within allowed values', async () => {
+    const project = new Project({
+      clientId: new User(),
+      projectName: 'Invalid Status Test',
+      status: 'InvalidStatus', // Invalid status
+      description: 'Testing invalid status',
+      startDate: new Date(),
+      endDate: new Date()
+    });
 
+    let error;
+    try {
+      await project.validate();
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error).toBeDefined();
+    expect(error.errors.status).toBeDefined();
+    expect(error.errors.status.message).toMatch(/`InvalidStatus` is not a valid enum value/);
+  });
+
+  
 // ------------------------------------------------------------------------------------------------------------------
