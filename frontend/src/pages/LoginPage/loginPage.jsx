@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 
 import LoginForm from "../../components/loginForm/loginForm";
 import Logo from "../../assets/images/magnetlabslogo_full.png"; 
@@ -10,7 +11,6 @@ const LoginPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top when the page loads
   }, []);
-  
   const [isAdmin, setIsAdmin] = useState(false); // Default is client login
   const navigate = useNavigate(); // Initialise navigation
 
@@ -32,7 +32,7 @@ const LoginPage = () => {
       }
 
       console.log("Success:", data);
-      if (isRegistering) {
+     if (isRegistering) {
         // Redirect to onboarding form after successful registration
         navigate("/onboarding");
       } else {
