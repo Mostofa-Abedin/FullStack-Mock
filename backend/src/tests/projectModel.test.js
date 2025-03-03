@@ -51,5 +51,27 @@ it('should validate project status to be within allowed values', async () => {
     expect(error.errors.status.message).toMatch(/`InvalidStatus` is not a valid enum value/);
   });
 
+  it('should ensure startDate is before endDate', async () => {
+    const project = new Project({
+      clientId: new User(),
+      projectName: 'Date Order Test',
+      status: 'In Progress',
+      description: 'Testing startDate after endDate',
+      startDate: new Date('2025-12-01'), // Future date
+      endDate: new Date('2025-01-01') // Earlier than startDate
+    });
+
+    let error;
+    try {
+      await project.validate();
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error).toBeDefined();
+    expect(error.errors.endDate).toBeDefined();
+    expect(error.errors.endDate.message).toMatch(/End date must be after start date/);
+  });
+
   
 // ------------------------------------------------------------------------------------------------------------------
