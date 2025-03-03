@@ -1,14 +1,15 @@
-const express = require("express");
-const router = express.Router();
-const { authenticateUser } = require("../middlewares/authMiddleware");
-const { authUserOrAdmin } = require("../middlewares/authUserOrAdmin");
-const {
+import express from "express";
+import { authenticateUser } from "../middlewares/authMiddleware.js";
+import { authUserOrAdmin } from "../middlewares/authUserOrAdmin.js";
+import {
   createProject,
   getAllProjects,
   getClientProjects,
   updateProject,
   deleteProject,
-} = require("../controllers/projectController");
+} from "../controllers/projectController.js";
+
+const router = express.Router();
 
 // Route: Create a new project (Admin only)
 router.post("/", authenticateUser, authUserOrAdmin, createProject);

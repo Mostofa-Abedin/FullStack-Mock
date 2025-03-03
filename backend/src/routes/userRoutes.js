@@ -1,15 +1,21 @@
 // Import required libraries
-const express = require('express');
-const router = express.Router();
+import express from "express";
 
 // Import Controllers
-const { getAllUsers, createUser, registerUser, changePassword, updateUserProfile   } = require('../controllers/userController'); // Import controllers
-const { registerBusiness } = require('../controllers/businessFormController');
+import {
+  getAllUsers,
+  createUser,
+  registerUser,
+  changePassword,
+  updateUserProfile,
+} from "../controllers/userController.js";
+import { registerBusiness } from "../controllers/businessFormController.js";
 
+// Import Middlewares
+import { authenticateUser } from "../middlewares/authMiddleware.js";
+import { authUserOrAdmin } from "../middlewares/authUserOrAdmin.js";
 
-//Import Middlewares
-const { authenticateUser } = require('../middlewares/authMiddleware');
-const { authUserOrAdmin } = require('../middlewares/authUserOrAdmin');
+const router = express.Router();
 
 // Route: GET all users 
 // (Need to add authentication in the future) (Admin or Authenticated User)

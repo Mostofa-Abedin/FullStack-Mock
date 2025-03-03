@@ -1,9 +1,10 @@
 // Import Libraries
-const express = require('express');
+import express from 'express';
+import { authenticateUser } from '../middlewares/authMiddleware.js';
+import { authUserOrAdmin } from '../middlewares/authUserOrAdmin.js';
+import { getAllBusinessesWithUserDetails, updateBusinessDetails } from '../controllers/businessController.js';
+
 const router = express.Router();
-const { authenticateUser } = require('../middlewares/authMiddleware');
-const { authUserOrAdmin } = require('../middlewares/authUserOrAdmin');
-const { getAllBusinessesWithUserDetails, updateBusinessDetails } = require('../controllers/businessController');
 
 // @Trenton- here
 //router.post('/:id/onboarding', authenticateUser, registerBusiness)

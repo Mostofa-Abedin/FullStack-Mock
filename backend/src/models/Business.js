@@ -1,5 +1,5 @@
 // Import the Mongoose library
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 // Define a schema for the Business model
 const BusinessSchema = new mongoose.Schema({

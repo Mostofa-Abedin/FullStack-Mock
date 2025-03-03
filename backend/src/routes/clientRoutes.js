@@ -1,8 +1,8 @@
 // Import Libraries
+import express from 'express';
+import { authenticateUser, authorizeAdmin } from '../middlewares/authMiddleware.js';
 
-const express = require('express');
 const router = express.Router();
-const { authenticateUser,authorizeAdmin } = require('../middlewares/authMiddleware');
 
 // We'll use this file for client dashboard.
 // @Perri - Use this route for the client dashboard

@@ -1,4 +1,5 @@
-const Project = require("../models/Project");
+import Project from "../models/Project.js";
+
 
 // Controller: Create a new project
 const createProject = async (req, res) => {

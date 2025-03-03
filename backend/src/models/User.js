@@ -1,7 +1,7 @@
 // Import the Mongoose library
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 // Import Bcrypt
-const bcrypt = require('bcrypt');
+import bcrypt from "bcrypt";
 
 // Define a schema for the User model
 const UserSchema = new mongoose.Schema({

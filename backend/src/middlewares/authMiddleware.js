@@ -1,5 +1,5 @@
 //Import JWT
-const jwt = require('jsonwebtoken');
+import jwt from "jsonwebtoken";
 
 //Middleware to verify role from JWT
 const authorizeAdmin = (req, res, next) => {
