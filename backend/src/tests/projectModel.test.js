@@ -71,7 +71,25 @@ it('should validate project status to be within allowed values', async () => {
     expect(error).toBeDefined();
     expect(error.errors.endDate).toBeDefined();
     expect(error.errors.endDate.message).toMatch(/End date must be after start date/);
+
+    it('should allow valid project data to be saved', async () => {
+        const user = await User.create({ name: 'Jane Doe', email: 'janedoe@example.com', password: 'securepass123' });
+    
+        const project = new Project({
+          clientId: user._id,
+          projectName: 'Valid Project',
+          status: 'In Progress',
+          description: 'A properly structured project',
+          startDate: new Date('2024-06-01'),
+          endDate: new Date('2024-12-01')
+        });
+    
+        const savedProject = await project.save();
+        expect(savedProject._id).toBeDefined();
+        expect(savedProject.createdAt).toBeDefined();
+        expect(savedProject.updatedAt).toBeDefined();
+      });
   });
 
-  
+
 // ------------------------------------------------------------------------------------------------------------------
