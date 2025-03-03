@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link
 
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
 import LoginForm from "../../components/loginForm/loginForm";
 import Logo from "../../assets/images/magnetlabslogo_full.png"; 
 import LoginImage from "../../assets/images/loginbackground.png"; 
