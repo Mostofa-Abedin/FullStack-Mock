@@ -3,8 +3,7 @@ import { authenticateUser, authorizeAdmin } from '../middlewares/authMiddleware.
 import  { getAnnouncements, createAnnouncement, updateAnnouncement, deleteAnnouncement } from '../controllers/announcementController.js';
 const router = express.Router();
 
-
-// Get all announcements
+// Get all active announcements
 router.get('/', authenticateUser, getAnnouncements)
 
 // Create a new announcement
