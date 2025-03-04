@@ -12,6 +12,8 @@
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {
+    "@coreui/react": "^4.10.0",
+    "@coreui/icons": "^2.1.0",
     "@coreui/icons-react": "^2.3.0",
     "@testing-library/react": "^16.2.0",
     "axios": "^1.7.9",
