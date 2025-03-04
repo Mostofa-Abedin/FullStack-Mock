@@ -14,9 +14,9 @@ const AnnouncementSchema = new mongoose.Schema({
   // Announcement Name - Required, must be a string, and trimmed to remove extra spaces
   businessId: { 
     type: String, 
-    required: true,
-    trim: true, // To remove space if it is at the beginning or end of the string 
-    maxlength: 100 
+    required: true, 
+    trim: true, 
+    maxlength: 50 
   },
   title: { 
     type: String, 
