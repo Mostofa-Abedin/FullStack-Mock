@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import "./contact.css";
 import ProjectPreview from "../../assets/images/project-images/projectplaceholder.jpg";
 
