@@ -11,6 +11,14 @@ export default defineConfig({
   server: {
     port: 5000,
   },
+  preview: {
+    port: 5000,
+  },
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
   test: {
     globals: true,
     environment: "jsdom", // ✅ Ensures React tests run in a browser-like environment
