@@ -239,6 +239,7 @@ const AdminDashboard = ({ username }) => {
             <CCardHeader className="dash-card-header">
               <h4>Manage Clients</h4>
               <CButton
+              data-testid="add-client-button"
                 className="dash-add-button"
                 onClick={() => {
                   setFormSection("clients");

@@ -1,82 +1,57 @@
-import { render, fireEvent, screen } from '@testing-library/react';
-import Sidebar from '../components/adminDashboard/adminDashboard';
-import '@testing-library/jest-dom';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import AdminDashboard from '../components/adminDashboard/adminDashboard';
+import { BrowserRouter } from 'react-router-dom';
 
-// Mocking window.innerWidth for responsive behavior
-global.innerWidth = 1024;
+describe('AdminDashboard', () => {
+  const renderComponent = () => {
+    render(
+      <BrowserRouter>
+        <AdminDashboard username="Admin" />
+      </BrowserRouter>
+    );
+  };
 
-describe('Sidebar Component', () => {
-  let toggleSidebarMock;
-
-  beforeEach(() => {
-    toggleSidebarMock = jest.fn();
+  it('should render the dashboard with the username', () => {
+    renderComponent();
+    expect(screen.getByText(/Welcome, Admin!/i)).toBeInTheDocument();
   });
 
-  test('renders sidebar visible on desktop by default', () => {
-    render(<Sidebar sidebarVisible={true} toggleSidebar={toggleSidebarMock} />);
-
-    // Check if sidebar is visible
-    const sidebar = screen.getByRole('navigation');  // Assuming CSidebar has role "navigation"
-    expect(sidebar).toHaveStyle('transform: translateX(0)');  // Sidebar should not be hidden
+  it('should display the "Add Client" button', () => {
+    renderComponent();
+    expect(screen.getByTestId('add-client-button')).toBeInTheDocument();
   });
 
-  test('shows hamburger menu on mobile', () => {
-    // Mock mobile viewport
-    global.innerWidth = 375;
-    render(<Sidebar sidebarVisible={true} toggleSidebar={toggleSidebarMock} />);
 
-    const hamburgerMenu = screen.getByRole('button');
-    expect(hamburgerMenu).toBeInTheDocument();
+  it('should render a list of projects', async () => {
+    renderComponent();
+    
+    // Wait for the "Manage Projects" text to ensure the list has loaded
+    await waitFor(() => {
+      expect(screen.getByText(/Manage Projects/i)).toBeInTheDocument();
+    });
+
+    // Find all instances of "Project Alpha" and ensure at least one is present
+    const projectElements = screen.getAllByText(/Project Alpha/i);
+    expect(projectElements.length).toBeGreaterThan(0); // Ensure we have multiple or at least one "Project Alpha"
   });
 
-  test('sidebar toggles visibility on mobile when hamburger menu clicked', () => {
-    global.innerWidth = 375; // Set mobile view
-    render(<Sidebar sidebarVisible={true} toggleSidebar={toggleSidebarMock} />);
+  it('should handle modal closing', async () => {
+    renderComponent();
+    fireEvent.click(screen.getByTestId('add-client-button'));
 
-    const hamburgerMenu = screen.getByRole('button');
-    fireEvent.click(hamburgerMenu); // Click to toggle sidebar
+    // Ensure the modal is displayed
+    const modalTitle = screen.getByRole('heading', { name: /Add client/i });
+    expect(modalTitle).toBeInTheDocument();
 
-    const sidebar = screen.getByRole('navigation');
-    expect(sidebar).toHaveStyle('transform: translateX(-100%)'); // Sidebar should be hidden
+    // Close the modal by clicking the "Close" button
+    fireEvent.click(screen.getByText(/Close/i));
 
-    fireEvent.click(hamburgerMenu); // Click again to show sidebar
-    expect(sidebar).toHaveStyle('transform: translateX(0)'); // Sidebar should be visible
-  });
+    // Wait for the modal to be removed from the document
+    await waitFor(() => {
+      expect(screen.queryByRole('heading', { name: /Add client/i })).not.toBeInTheDocument();
+    });
 
-  test('sidebar stays visible when switching from mobile to desktop', () => {
-    global.innerWidth = 375; // Set mobile view
-    render(<Sidebar sidebarVisible={true} toggleSidebar={toggleSidebarMock} />);
-
-    const hamburgerMenu = screen.getByRole('button');
-    fireEvent.click(hamburgerMenu); // Hide sidebar on mobile
-
-    // Switch to desktop
-    global.innerWidth = 1024;
-    fireEvent.resize(window); // Trigger resize event
-
-    const sidebar = screen.getByRole('navigation');
-    expect(sidebar).toHaveStyle('transform: translateX(0)'); // Sidebar should remain visible on desktop
-  });
-
-  test('sidebar updates visibility based on prop on mobile', () => {
-    global.innerWidth = 375; // Set mobile view
-    render(<Sidebar sidebarVisible={false} toggleSidebar={toggleSidebarMock} />);
-
-    const sidebar = screen.getByRole('navigation');
-    expect(sidebar).toHaveStyle('transform: translateX(-100%)'); // Sidebar should be hidden on mobile
-  });
-
-  test('sidebar visibility state is reset correctly on window resize', () => {
-    global.innerWidth = 375; // Set mobile view
-    render(<Sidebar sidebarVisible={false} toggleSidebar={toggleSidebarMock} />);
-
-    const sidebar = screen.getByRole('navigation');
-    expect(sidebar).toHaveStyle('transform: translateX(-100%)'); // Sidebar should be hidden on mobile
-
-    // Resize to desktop
-    global.innerWidth = 1024;
-    fireEvent.resize(window); // Trigger resize event
-
-    expect(sidebar).toHaveStyle('transform: translateX(0)'); // Sidebar should be visible on desktop
+    // Additionally, ensure that the "Add Client" button is still in the document
+    expect(screen.getByTestId('add-client-button')).toBeInTheDocument();
   });
 });
