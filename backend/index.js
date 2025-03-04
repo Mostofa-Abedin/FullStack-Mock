@@ -12,6 +12,7 @@ import adminRoutes from "./src/routes/adminRoutes.js";
 import clientRoutes from "./src/routes/clientRoutes.js";
 import businessRoutes from "./src/routes/businessRoutes.js";
 import projectRoutes from "./src/routes/projectRoutes.js";
+import announcementRoutes from "./src/routes/announcementRoutes.js";
 
 // Initialize Express app
 const app = express();
@@ -53,6 +54,7 @@ app.use("/admin", adminRoutes);
 app.use("/client", clientRoutes);
 app.use("/business", businessRoutes);
 app.use("/projects", projectRoutes);
+app.use("/announcements", announcementRoutes);
 
 // Export app (without starting server)
 export default app;
