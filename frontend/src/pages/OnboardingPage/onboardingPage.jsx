@@ -130,7 +130,9 @@ const OnboardingForm = () => {
               onBlur={handleBlur}
               required
               className="form-input"
-              placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+              placeholder={
+                field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1').trim()
+              }              
             />
             {touched[field] && formErrors[field] && <div className="error-message">{formErrors[field]}</div>}
           </div>
@@ -138,7 +140,7 @@ const OnboardingForm = () => {
         <button type="submit">Submit</button>
       </form>
     </div>
-  );
+  );  
 };
 
 export default OnboardingForm;

@@ -1,30 +1,33 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import OnboardingForm from "../pages/OnboardingPage/onboardingPage";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("OnboardingForm", () => {
-  test("renders the onboarding form", () => {
+  test("renders the onboarding form", async () => {
     render(
       <Router>
         <OnboardingForm />
       </Router>
     );
 
-    // Ensure that the form elements are rendered correctly
-    screen.getByPlaceholderText("Business Name");
-    screen.getByPlaceholderText("Industry");
-    screen.getByPlaceholderText("Website");
-    screen.getByPlaceholderText("Phone");
-    screen.getByPlaceholderText("Address");
-    screen.getByText("Submit");
+    // Use findBy to wait for the elements asynchronously
+    await screen.findByPlaceholderText("Business Name");  
+    await screen.findByPlaceholderText("Industry");
+    await screen.findByPlaceholderText("Website");
+    await screen.findByPlaceholderText("Phone");
+    await screen.findByPlaceholderText("Address");
+    await screen.findByText("Submit");
   });
 
-  test("displays error message for invalid phone number", () => {
+  test("displays error message for invalid phone number", async () => {
     render(
       <Router>
         <OnboardingForm />
       </Router>
     );
+
+    // Wait for the phone input to appear
+    await screen.findByPlaceholderText("Phone");
 
     // Simulate user input for the phone field
     fireEvent.change(screen.getByPlaceholderText("Phone"), {
@@ -33,14 +36,19 @@ describe("OnboardingForm", () => {
 
     fireEvent.blur(screen.getByPlaceholderText("Phone")); // Trigger onBlur event
 
+    // Wait for the error message and verify it
+    await screen.findByText("Please enter a valid phone number.");
   });
 
-  test("displays error message for invalid website", () => {
+  test("displays error message for invalid website", async () => {
     render(
       <Router>
         <OnboardingForm />
       </Router>
     );
+
+    // Wait for the website input to appear
+    await screen.findByPlaceholderText("Website");
 
     // Simulate user input for the website field
     fireEvent.change(screen.getByPlaceholderText("Website"), {
@@ -49,14 +57,23 @@ describe("OnboardingForm", () => {
 
     fireEvent.blur(screen.getByPlaceholderText("Website")); // Trigger onBlur event
 
+    // Wait for the error message and verify it
+    await screen.findByText("Please enter a valid website URL.");
   });
 
-  test("displays success message upon successful submission", () => {
+  test("displays success message upon successful submission", async () => {
     render(
       <Router>
         <OnboardingForm />
       </Router>
     );
+
+    // Wait for the form fields to appear
+    await screen.findByPlaceholderText("Business Name");
+    await screen.findByPlaceholderText("Industry");
+    await screen.findByPlaceholderText("Website");
+    await screen.findByPlaceholderText("Phone");
+    await screen.findByPlaceholderText("Address");
 
     // Simulate user input for all fields
     fireEvent.change(screen.getByPlaceholderText("Business Name"), {
@@ -76,17 +93,6 @@ describe("OnboardingForm", () => {
     });
 
     fireEvent.click(screen.getByText("Submit"));
-  });
 
-  test("does not show error for empty fields before user interaction", () => {
-    render(
-      <Router>
-        <OnboardingForm />
-      </Router>
-    );
-
-    // Ensure form elements are rendered
-    screen.getByPlaceholderText("Phone");
-    screen.getByPlaceholderText("Website");
   });
 });
