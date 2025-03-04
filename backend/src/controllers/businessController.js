@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Business = require('../models/Business');
+import mongoose from "mongoose";
+import Business from "../models/Business.js";
 
 // Controller: Get all businesses with user details populated
 const getAllBusinessesWithUserDetails = async (req, res) => {
@@ -75,4 +75,4 @@ const updateBusinessDetails = async (req, res) => {
   }
 };
 
-module.exports = { updateBusinessDetails,getAllBusinessesWithUserDetails };
+export { updateBusinessDetails, getAllBusinessesWithUserDetails };

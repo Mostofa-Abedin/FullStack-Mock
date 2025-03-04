@@ -1,10 +1,13 @@
 // Import required libraries
-const express = require('express');
+import express from 'express';
+import { loginUser } from '../controllers/authController.js'; // Import controllers
+import { authenticateUser, authorizeAdmin } from '../middlewares/authMiddleware.js';
+
 const router = express.Router();
-const { loginUser } = require('../controllers/authController'); // Import controllers
-const { authenticateUser,authorizeAdmin } = require('../middlewares/authMiddleware');
+
 
 // Route: Login a new user
 router.post('/', loginUser);
 
-module.exports = router;
+export default router;
+

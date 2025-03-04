@@ -1,7 +1,7 @@
-const User = require("../models/User")
-const Business = require("../models/Business")
+import User from "../models/User.js";
+import Business from "../models/Business.js";
+import jwt from "jsonwebtoken";
 
-const jwt = require('jsonwebtoken')
 
 const registerBusiness = async (req, res) => {
 
@@ -54,4 +54,4 @@ const registerBusiness = async (req, res) => {
     }
 }
 
-module.exports = {registerBusiness}
+export { registerBusiness };

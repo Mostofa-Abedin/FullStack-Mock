@@ -170,6 +170,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Throughout the project, our team encountered several challenges which provided valuable learning opportunities.
 
+- Testing with Github actions?
+  @Mostofa-
+
+- CoreUI template?
+  @Perri-
+
 ## Presentation
 
 T
