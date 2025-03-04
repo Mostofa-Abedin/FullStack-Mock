@@ -40,11 +40,11 @@ const updateAnnouncement = async (req, res) => {
     const { id } = req.params;
 
     // Extract the updated data from the request body
-    const { title, content } = req.body;
+    const { user, business, content, active  } = req.body;
 
     try {
         // Find the announcement in the database by ID and update its properties
-        const announcement = await Announcement.findByIdAndUpdate(id, { title, content }, { new: true });
+        const announcement = await Announcement.findByIdAndUpdate(id, { user, business, content, active }, { new: true });
         if (announcement) {
             res.json({message: 'Announcement updated', announcement} );
         } else {

@@ -12,13 +12,18 @@ const AnnouncementSchema = new mongoose.Schema({
   },
 
   // Announcement Name - Required, must be a string, and trimmed to remove extra spaces
-  BusinessName: { 
+  businessId: { 
     type: String, 
     required: true,
     trim: true, // To remove space if it is at the beginning or end of the string 
     maxlength: 100 
   },
-
+  title: { 
+    type: String, 
+    required: true,
+    trim: true, // To remove space if it is at the beginning or end of the string  
+    maxlength: 50 
+  },
   // Content - Main announcement content
   content: { 
     type: String, 
@@ -26,6 +31,11 @@ const AnnouncementSchema = new mongoose.Schema({
     trim: true, // To remove space if it is at the beginning or end of the string  
     maxlength: 50 
   },
+// Active - Indicates if the announcement is currently active or not
+  active: { 
+    type: Boolean, 
+    default: true 
+  }
 }, { 
   timestamps: true // Automatically adds createdAt and updatedAt fields
 });

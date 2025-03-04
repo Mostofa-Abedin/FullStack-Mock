@@ -53,6 +53,7 @@ app.use("/admin", adminRoutes);
 app.use("/client", clientRoutes);
 app.use("/business", businessRoutes);
 app.use("/projects", projectRoutes);
+app.use("/announcements", announcementRoutes);
 
 // Export app (without starting server)
 export default app;
