@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import LoginForm from "../../components/loginForm/loginForm";
 import Logo from "../../assets/images/magnetlabslogo_full.png"; 
 import LoginImage from "../../assets/images/loginbackground.png"; 
 import "./loginpage.css";  
 
 const LoginPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when the page loads
+  }, []);
   const [isAdmin, setIsAdmin] = useState(false); // Default is client login
   const navigate = useNavigate(); // Initialise navigation
 

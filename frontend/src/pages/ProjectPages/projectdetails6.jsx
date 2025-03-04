@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ImagePlaceholder from "../../assets/images/project-images/projectplaceholder.jpg"
 
-const Project6 = () => {
+const Project2 = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -16,7 +18,6 @@ const Project6 = () => {
     <div
       style={{
         backgroundColor: "#f9f9f9",
-        minHeight: "100vh",
       }}
     >
       {/* Header Section */}
@@ -26,6 +27,7 @@ const Project6 = () => {
           color: "#841B13",
           padding: "4rem 2rem",
           marginBottom: isMobile ?  "0.4rem" : "2rem",
+          textAlign: "center",
         }}
       >
         <h1
@@ -38,7 +40,7 @@ const Project6 = () => {
             color: "#841B13",
           }}
         >
-          Project Title 4
+          Project Title 6
         </h1>
         <p
           style={{
@@ -114,6 +116,7 @@ const Project6 = () => {
             color: "white",
             fontFamily: "'Kode Mono', monospace",
             textTransform: "uppercase",
+            textAlign: "center",
           }}
         >
           Project Details
@@ -126,6 +129,7 @@ const Project6 = () => {
             marginBottom: "1.5rem",
             fontFamily: "'Inter', sans-serif",
             fontWeight: "400",
+            textAlign: "center",
           }}
         >
           This section contains a detailed description of the project. Explain
@@ -140,17 +144,17 @@ const Project6 = () => {
             fontSize: isMobile ? "0.8rem" : "1.1rem",
             textAlign: "center",
             display:"flex",
-            justifyContent: "center",
             flexDirection: "column",
-            alignItems: "center",
+            paddingLeft: isMobile ? "0" : "30%",
           }}
         >
           <li
           style={{
             color: "white",
             background: "transparent",
-            width: isMobile ? "70%" : "100%",
+            width: "100%",
             boxShadow:"none",
+            textAlign: "left",
           }}
           >
             Goal: Describe the main objective of the project.</li>
@@ -158,16 +162,18 @@ const Project6 = () => {
           style={{
             color: "white",
             background: "transparent",
-            width: isMobile ? "70%" : "100%",
+            width: "100%",
             boxShadow:"none",
+            textAlign: "left",
           }}>
             Technologies: List tools, frameworks, or languages used.</li>
           <li
           style={{
             color: "white",
             background: "transparent",
-            width: isMobile ? "70%" : "100%",
+            width: "100%",
             boxShadow:"none",
+            textAlign: "left",
           }}
           >Outcome: Highlight measurable success metrics or results.</li>
         </ul>
@@ -176,12 +182,14 @@ const Project6 = () => {
       {/* Call-to-Action Section */}
       <section
         style={{
-          margin: isMobile ? "3rem" : "6rem",
+          margin: "0 auto",
           textAlign: "center",
+          background: "#D9D9D952",
+          padding: "50px",
         }}
       >
-        <a
-          href="/work"
+        <Link
+          to="/work"
           style={{
             textDecoration: "none",
             padding: "1rem 2rem",
@@ -193,18 +201,18 @@ const Project6 = () => {
           }}
           onMouseOver={(e) => {
             e.target.style.transform = "scale(1.05)";
-            e.target.style.background = "#8BC4D9";
+            e.target.style.background = "#8BC4D9";;
           }}
           onMouseOut={(e) => {
             e.target.style.transform = "scale(1)";
-            e.target.style.background = "#F3A83C"; 
+            e.target.style.background = "#F3A83C";
           }}
         >
           Back to Our Work
-        </a>
+        </Link>
       </section>
     </div>
   );
 };
 
-export default Project6;
+export default Project2;

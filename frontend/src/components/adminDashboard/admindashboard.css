@@ -1,0 +1,196 @@
+.body {
+    font-family: "Inter", sans-serif !important;
+}
+
+/* Main Dashboard Styles */
+
+.dash-welcome-text {
+    font-family: "Inter", sans-serif;
+    color: #192F3C;
+    padding: 1rem;
+}
+
+.dash-main-card {
+    border-radius: 0% !important;
+    margin-bottom: 2rem;
+}
+
+.dash-client-card {
+    border-radius: 0% !important;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.dash-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D9D9D952;
+    border: none;
+    border-radius: 0% !important;
+    font-family: "Kode Mono", monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+
+.dash-add-button {
+    background-color: #192F3C;
+    color: #8BC4D9;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+    border: none;
+}
+
+.dash-add-button:hover, .dashboard-button:hover {
+    background-color: #8BC4D9;
+    color: #192F3C;
+}
+
+.dashboard-button {
+    background-color: #192F3C;
+    color: #8BC4D9;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+    border: none;
+    margin: 20px 10px;
+}
+
+
+/* Card Styles */
+
+.dash-card {
+    border-radius: 0%;
+    padding: 2rem;
+    margin: 20px 10px;
+}
+
+/* Modal Popup Styles */
+
+.modal-header {
+    background-color: #8BC4D9;
+    color: #192F3C;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+}
+
+.modal-body, .modal-content {
+    color: #192F3C;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+    border: none;
+}
+
+.form-control {
+    border-radius: 0%;
+}
+
+.form-label {
+    padding-top: 10px;
+}
+
+.custom-select {
+    border-radius: 0%;
+}
+.custom-select:focus, .form-input:focus {
+    border: #F3A83C; 
+    box-shadow: 0 0 0 0.2rem  #f3a73c77; /* Custom glow color */
+    border-radius: 0%;
+  }
+
+
+.dash-submit-button {
+    background: #F3A83C;
+    border-radius: 0%;
+}
+
+.dash-submit-button:hover {
+    background: #F3DCB2;
+    border-radius: 0%;
+}
+
+
+/* Upcoming Project */
+
+.upcoming {
+    background-color: #8BC4D9;
+    color: #192F3C;
+}
+
+.upcoming .edit {
+    color: #192F3C;
+}
+
+/* In Progress Project */
+
+.in-progress {
+    background-color: #F3DCB2;
+    color: #841B13;
+}
+
+.in-progress .edit {
+    color: #841B13;
+}
+
+/* Client Review Project */
+
+.client-review {
+    background-color: #192F3C;
+    color: #8BC4D9;
+}
+
+.client-review .edit {
+    color: #8BC4D9;
+}
+
+/* Action Feedback Project */
+
+.action-feedback {
+    background-color: #F3A83C;
+    color: #192F3C;
+}
+
+.action-feedback .edit {
+    color: #192F3C;
+}
+
+/* Complete Project */
+
+.complete {
+    background-color: #A7CF81;
+    color: #192F3C;
+}
+
+.complete .edit {
+    color: #192F3C;
+}
+
+/*  On Hold Project */
+
+.on-hold {
+    background-color: #F1968F;
+    color: #841B13;
+}
+
+.on-hold.edit {
+    color: #841B13;
+}
+
+/* Delete Button */
+
+.dash-delete {
+    background-color: #841B13;
+    color: white;
+    border-radius: 0%;
+}
+
+.dash-delete:hover {
+    background-color: #841B13;
+    scale: 1.025;
+    color: white;
+}
+
+.col-md-10 {
+    width: 100% !important;
+}

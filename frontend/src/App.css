@@ -17,7 +17,8 @@
   font-weight: bold;
   font-family: 'Inter', sans-serif;
   color: #192F3C;
-  padding: 1rem;
+  padding: 2rem;
+  text-align: center;
 }
 
 .highlight {
@@ -60,5 +61,8 @@
 @media (max-width: 600px) {
   .hero-text {
     font-size: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 250px;
   }
 }

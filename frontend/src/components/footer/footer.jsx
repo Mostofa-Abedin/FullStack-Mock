@@ -6,7 +6,7 @@ import "./footer.css"
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="main-footer">
 
       {/* Logo and Name */}
       <Link
@@ -23,10 +23,6 @@ const Footer = () => {
           src={magnetLogo}
           alt="Magnet Logo"
         />
-        <span className="logo-text-footer"
-        >
-          Magnet Labs™
-        </span>
       </Link>
       <p className="copyright"
       >

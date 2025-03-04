@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import webImage from "../../assets/images/project-images/card-web.png";
 import seoImage from "../../assets/images/project-images/card-seo.png";
@@ -7,6 +7,9 @@ import ContactSection from "../../components/contactSection/contactSection";
 import "./services.css";
 
 const Services = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when the page loads
+  }, []);
   const servicesData = [
     {
       title: "Custom Web Development",

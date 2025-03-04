@@ -52,7 +52,7 @@
 }
 
 .card-web:hover {
-    background-image: url("../../assets/images/card-web.png");
+    background-image: url("../../assets/images/project-images/card-web.png");
     background-size: cover;
     background-position: center;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -63,7 +63,7 @@
 }
 
 .card-seo:hover {
-    background-image: url("../../assets/images/card-seo.png");
+    background-image: url("../../assets/images/project-images/card-seo.png");
     background-size: cover;
     background-position: center;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -74,7 +74,7 @@
 }
 
 .card-mark:hover {
-    background-image: url("../../assets/images/card-mark.png");
+    background-image: url("../../assets/images/project-images/card-mark.png");
     background-size: cover;
     background-position: center;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;

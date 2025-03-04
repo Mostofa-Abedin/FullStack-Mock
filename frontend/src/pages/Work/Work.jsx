@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./work.css"; 
 import ContactSection from "../../components/contactSection/contactSection";
@@ -8,6 +8,9 @@ import ContactSection from "../../components/contactSection/contactSection";
 import ProjectPreview from "../../assets/images/project-images/card-dev.png";
 
 const Work = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when the page loads
+  }, []);
   const projects = [
     { title: "Project Title 1", description: "A brief description of this project.", link: "/Project1", image: ProjectPreview },
     { title: "Project Title 2", description: "Another project showcasing our expertise.", link: "/Project2", image: ProjectPreview },

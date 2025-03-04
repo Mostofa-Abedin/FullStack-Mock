@@ -1,7 +1,6 @@
-  .navbar {
+  .home-navbar {
     position: sticky;
     top: 0;
-    width: 100%;
     background: #192F3C;
     padding: 0.8rem 2rem;
     display: flex;
@@ -18,7 +17,6 @@
     text-decoration: none;
     color: inherit;
     gap: 0.5rem;
-    min-width: 700px;
   }
 
   .logo-img {
@@ -35,14 +33,14 @@
     color: #F3DCB2;
   }
 
-  .nav-links {
+  .home-nav-links {
     display: flex;
     gap: 1.5rem;
     margin-left: auto;
     margin-right: 5rem;
   }
 
-  .nav-link {
+  .home-nav-link {
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
@@ -51,15 +49,18 @@
     transition: color 0.3s ease;
   }
 
-  .nav-link:hover {
+  .home-nav-link:hover {
     color: #F3A83C;
   }
 
-  .nav-link.active-link {
+  .home-nav-link-active{
     color: #F3A83C;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
   }
 
-  .mobile-menu {
+  .home-mobile-menu {
     display: none;
     font-size: 24px;
     color: #F3DCB2;
@@ -68,7 +69,7 @@
     cursor: pointer;
   }
 
-  .mobile-menu:hover{
+  .mobile-menu:hover {
     color: #F3A83C;
   }
 
@@ -84,7 +85,7 @@
   /* Responsive Styling for Tablet and Mobile */
 
   @media (max-width: 768px) and (min-width: 600px) {
-    .nav-links {
+    .home-nav-links {
       display: none;
       flex-direction: column;
       position: absolute;
@@ -97,47 +98,28 @@
       transition: all 0.3s ease-in-out;
     }
 
-    .nav-links.open {
+    .home-nav-links.open {
       display: flex;
     }
 
-    .nav-link {
+    .home-nav-link {
       font-size: 1.2rem;
-      padding-left: 2rem;
+      padding-left: 1rem;
       padding-bottom: 1rem;
       display: block;
     }
 
-    .mobile-menu {
+    .home-mobile-menu {
       display: block;
       margin-left: -4rem;
     }
 
-    .navbar {
-        width: 100%;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .logo-img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-    }
-  
-    .logo-text {
-      font-family: 'Kode Mono', monospace;
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #F3DCB2;
-    }
-  
-    .nav-links {
+    .home-nav-links {
       display: none;
       flex-direction: column;
       position: absolute;
-      top: 60px; /* Adjust according to navbar height */
+      top: 60px;
+      /* Adjust according to navbar height */
       left: 0;
       width: 100%;
       padding-top: 20px;
@@ -146,49 +128,121 @@
       text-align: center;
       transition: all 0.3s ease-in-out;
     }
-  
-    .nav-links.open {
+
+    .home-nav-links.open {
       display: flex;
       width: 100%;
+      padding: 2rem;
     }
-  
-    .nav-link {
+
+    .home-nav-link {
       font-size: 1rem;
-      padding-bottom: 1rem;
       display: block;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
     }
-  
+
+    .home-nav-link-active {
+      color: #F3A83C !important;
+      text-decoration: none;
+      padding: 10px;
+    }
+
     /* Mobile Menu Styling */
-    .mobile-menu {
+    .home-mobile-menu {
       display: block;
       position: absolute;
-      top: 50%; 
-      right: 15px; 
-      transform: translateY(-50%); 
+      top: 50%;
+      right: 70px;
+      transform: translateY(-50%);
       font-size: 24px;
       color: #F3DCB2;
     }
-  
+
+
+  }
+
+  @media (max-width: 600px) {
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: 'Kode Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #F3DCB2;
+    }
+
+    .home-nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      /* Adjust according to navbar height */
+      left: 0;
+      width: 100%;
+      padding-top: 20px;
+      overflow: hidden;
+      background: rgba(25, 47, 60, 0.95);
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .home-nav-links.open {
+      display: flex;
+      width: 100%;
+      padding: 2rem;
+    }
+
+    .home-nav-link {
+      font-size: 1rem;
+      display: block;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .home-nav-link-active {
+      color: #F3A83C !important;
+      text-decoration: none;
+      padding: 10px;
+    }
+
+    /* Mobile Menu Styling */
+    .home-mobile-menu {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: #F3DCB2;
+    }
+
     /* Fixing the login icon position */
     .login-icon {
       display: block;
-      position: absolute; 
-      top: 50%; 
-      right: 50px; 
-      transform: translateY(-50%); 
+      position: absolute;
+      top: 50%;
+      right: 50px;
+      transform: translateY(-50%);
     }
-  
+
     .login-icon a {
       color: #F3DCB2;
       font-size: 18px;
     }
-  
-    .navbar {
+
+    .home-navbar {
       width: 100%;
       padding: 15px;
       display: flex;
-      justify-content: space-between; 
+      justify-content: space-between;
       align-items: center;
     }
   }
-  
