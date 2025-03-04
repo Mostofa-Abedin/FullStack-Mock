@@ -35,6 +35,7 @@ const token = jwt.sign(
 
 res.json({
     token,
+    user,
     role: user.role // Sending role to frontend 
 });
 }
