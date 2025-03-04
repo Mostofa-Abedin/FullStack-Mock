@@ -27,13 +27,17 @@ const UserList = () => {
   return (
     <div>
       <h2>User List</h2>
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>
-            {user.name} - {user.email}
-          </li>
-        ))}
-      </ul>
+      {users.length === 0 ? (
+        <p>No users available</p> // Ensure this message is rendered when users are empty
+      ) : (
+        <ul>
+          {users.map((user) => (
+            <li key={user._id}>
+              {user.name} - {user.email}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
