@@ -1,19 +1,19 @@
-const express = require('express');
-const { authenticateUser,authorizeAdmin } = require('../middlewares/authMiddleware');
-const { getAnnouncements, createAnnouncement, updateAnnouncement, deleteAnnouncement } = require('../controllers/announcementController');
+import express from 'express';
+import { authenticateUser, authorizeAdmin } from '../middlewares/authMiddleware.js';
+import  { getAnnouncements, createAnnouncement, updateAnnouncement, deleteAnnouncement } from '../controllers/announcementController.js';
 const router = express.Router();
 
 
 // Get all announcements
-router.get('/', authenticateUser, authorizeAdmin, getAnnouncements)
+router.get('/', authenticateUser, getAnnouncements)
 
 // Create a new announcement
 router.post('/', authenticateUser, authorizeAdmin, createAnnouncement);
 
 // Update an existing announcement
-router.put('/:id', authenticateUser, authorizeAdmin, updateAnnouncement);
+router.patch('/:id', authenticateUser, authorizeAdmin, updateAnnouncement);
 
 // Delete an announcement
 router.delete('/:id', authenticateUser, authorizeAdmin, deleteAnnouncement);
 
-module.exports = router;
+export default router;

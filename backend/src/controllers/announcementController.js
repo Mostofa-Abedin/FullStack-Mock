@@ -1,13 +1,12 @@
 // Import any necessary modules or models
-const Announcement = require('../models/Announcement');
-
+import Announcement from '../models/Announcement.js';
 
 const getAnnouncements = async (req, res) => {
     try {
         // Find all announcements in the database
         const announcements = await Announcement.find();
         res.status(200).json({
-            message: 'Businesses retrieved successfully.',
+            message: 'Announcements retrieved successfully.',
             announcements,
           });
     } catch (error) {
@@ -17,12 +16,14 @@ const getAnnouncements = async (req, res) => {
 
 const createAnnouncement = async (req, res) => {
     // Extract the necessary data from the request body
-    const { title, content } = req.body;
+    const { title, business, content } = req.body;
 
     const userId = req.user.userID;
     // Create a new announcement object
     const newAnnouncement = {
         userId,
+        businessId: business,
+        title,
         content,
     };
 
@@ -31,6 +32,7 @@ const createAnnouncement = async (req, res) => {
         const announcement = await Announcement.create(newAnnouncement);
         res.status(201).json({ message: 'Announcement created successfully', announcement});
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Failed to create announcement' });
     }
 };
@@ -72,4 +74,4 @@ const deleteAnnouncement = async (req, res) => {
     }
 };
 
-module.exports = { getAnnouncements, createAnnouncement, updateAnnouncement, deleteAnnouncement };
+export { getAnnouncements, createAnnouncement, updateAnnouncement, deleteAnnouncement };
