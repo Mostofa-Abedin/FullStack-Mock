@@ -72,8 +72,8 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin, setUserName }) => {
             // Redirect to onboarding page for new clients.
             navigate("/onboarding");
           } else {
-            // Redirect to dashboard for logged-in users or admins
-            navigate("/dashboard");  // Uncomment when dashboard page exists
+            // Redirect to either admin dashboard or client dashboard depending on user role
+            data.role == "admin" ? navigate("/admin/dashboard") : navigate("/client/dashboard");
           }
         }, 2000); // Delay for UI feedback
 
