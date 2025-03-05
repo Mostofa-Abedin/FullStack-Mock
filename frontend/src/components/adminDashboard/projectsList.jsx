@@ -19,20 +19,23 @@ import {
 } from "@coreui/react";
 
 const ProjectsList = () => {
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001"; // Dynamic API base URL
-  const token = localStorage.getItem("authToken"); // Retrieve token from localStorage
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+  const token = localStorage.getItem("authToken");
 
   const [projects, setProjects] = useState([]);
+  const [clients, setClients] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState("add"); // 'add' or 'edit'
   const [currentItem, setCurrentItem] = useState(null);
-  const [clients, setClients] = useState([]);
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Fetch Projects from Backend
+  useEffect(() => {
+    fetchProjects();
+    fetchClients();
+  }, []);
+
   const fetchProjects = async () => {
     try {
       const response = await fetch(`${baseUrl}/projects`, {
@@ -49,36 +52,34 @@ const ProjectsList = () => {
 
       const data = await response.json();
       setProjects(data.projects);
+      setLoading(false);
     } catch (error) {
-      console.error("Error fetching projects:", error);
+      setError(error.message);
+      setLoading(false);
     }
   };
 
-  // Fetch Clients from Backend (Optional)
-  useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        const response = await fetch(`${baseUrl}/users`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+  // Fetch Clients from Backend
+  const fetchClients = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/users`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch clients");
-        }
-
-        const data = await response.json();
-        setClients(data.users);
-      } catch (error) {
-        console.error("Error fetching clients:", error);
+      if (!response.ok) {
+        throw new Error("Failed to fetch clients");
       }
-    };
 
-    fetchClients();
-  }, []);
+      const data = await response.json();
+      setClients(data.users);
+    } catch (error) {
+      console.error("Error fetching clients:", error);
+    }
+  };
 
   // Handle Delete Project
   const handleDelete = async (id) => {
@@ -94,14 +95,14 @@ const ProjectsList = () => {
         throw new Error("Failed to delete project");
       }
 
-      setProjects(projects.filter((project) => project._id !== id));
+      setProjects((prevProjects) => prevProjects.filter((project) => project._id !== id));
     } catch (error) {
       console.error("Error deleting project:", error);
     }
   };
 
   // Handle Save (Add/Edit)
-  const handleSubmit = async (e, modalType) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -109,7 +110,7 @@ const ProjectsList = () => {
       projectName: formData.get("name"),
       clientId: formData.get("client"),
       status: formData.get("status"),
-      dueDate: formData.get("dueDate"),
+      endDate: formData.get("dueDate"),
       description: formData.get("details"),
     };
 
@@ -117,7 +118,6 @@ const ProjectsList = () => {
       let response;
 
       if (modalType === "edit") {
-        // Update Project
         response = await fetch(`${baseUrl}/projects/${currentItem._id}`, {
           method: "PATCH",
           headers: {
@@ -127,7 +127,6 @@ const ProjectsList = () => {
           body: JSON.stringify(projectData),
         });
       } else {
-        // Create New Project
         response = await fetch(`${baseUrl}/projects`, {
           method: "POST",
           headers: {
@@ -143,7 +142,7 @@ const ProjectsList = () => {
       }
 
       fetchProjects(); // Refresh project list
-      setModalVisible(false); // Close modal
+      setModalVisible(false);
     } catch (error) {
       console.error("Error saving project:", error);
     }
@@ -169,7 +168,6 @@ const ProjectsList = () => {
         <CButton className="dashboard-button">Back to Dashboard</CButton>
       </Link>
 
-      {/* Add/Edit Project Section */}
       <CCard className="dash-main-card">
         <CCardHeader className="dash-card-header">
           <h4>Manage Projects</h4>
@@ -185,40 +183,48 @@ const ProjectsList = () => {
           </CButton>
         </CCardHeader>
         <CCardBody>
-          <CRow>
-            {projects.map((project) => (
-              <CCol sm="4" key={project._id}>
-                <div className={`dash-card ${getStatusColor(project.status)}`}>
-                  <p className="status">{project.status}</p>
-                  <h5>{project.projectName}</h5>
-                  <p>Client: {project.clientId?.name}</p>
-                  <p>Details: {project.description}</p>
-                  <p>
-                    <strong>Due Date:</strong>{" "}
-                    {new Date(project.dueDate).toLocaleDateString("en-GB")}
-                  </p>
-                  <div className="d-flex justify-content-end">
-                    <CButton
-                      className="dash-edit"
-                      onClick={() => {
-                        setModalType("edit");
-                        setCurrentItem(project);
-                        setModalVisible(true);
-                      }}
-                    >
-                      Edit
-                    </CButton>
-                    <CButton
-                      className="dash-delete"
-                      onClick={() => handleDelete(project._id)}
-                    >
-                      Delete
-                    </CButton>
+          {loading ? (
+            <p>Loading projects...</p>
+          ) : error ? (
+            <p className="error-message">{error}</p>
+          ) : projects.length === 0 ? (
+            <p>No projects available.</p>
+          ) : (
+            <CRow>
+              {projects.map((project) => (
+                <CCol sm="4" key={project._id}>
+                  <div className={`dash-card ${getStatusColor(project.status)}`}>
+                    <p className="status">{project.status}</p>
+                    <h5>{project.projectName}</h5>
+                    <p>Client: {project.clientId?.name || "Unknown"}</p>
+                    <p>Details: {project.description}</p>
+                    <p>
+                      <strong>Due Date:</strong>{" "}
+                      {new Date(project.endDate).toLocaleDateString("en-GB")}
+                    </p>
+                    <div className="d-flex justify-content-end">
+                      <CButton
+                        className="dash-edit"
+                        onClick={() => {
+                          setModalType("edit");
+                          setCurrentItem(project);
+                          setModalVisible(true);
+                        }}
+                      >
+                        Edit
+                      </CButton>
+                      <CButton
+                        className="dash-delete"
+                        onClick={() => handleDelete(project._id)}
+                      >
+                        Delete
+                      </CButton>
+                    </div>
                   </div>
-                </div>
-              </CCol>
-            ))}
-          </CRow>
+                </CCol>
+              ))}
+            </CRow>
+          )}
         </CCardBody>
       </CCard>
 
@@ -230,7 +236,7 @@ const ProjectsList = () => {
           </CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <form onSubmit={(e) => handleSubmit(e, modalType)}>
+          <form onSubmit={handleSubmit}>
             <CFormInput type="text" label="Project Name" name="name" defaultValue={currentItem?.projectName} />
             <CFormInput type="text" label="Details" name="details" defaultValue={currentItem?.description} />
             <CFormSelect label="Client" name="client" defaultValue={currentItem?.clientId?._id}>
@@ -240,7 +246,7 @@ const ProjectsList = () => {
                 </option>
               ))}
             </CFormSelect>
-            <CFormInput type="date" label="Due Date" name="dueDate" defaultValue={currentItem?.dueDate} />
+            <CFormInput type="date" label="Due Date" name="dueDate" defaultValue={currentItem?.endDate} />
             <CFormSelect label="Status" name="status" defaultValue={currentItem?.status}>
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
