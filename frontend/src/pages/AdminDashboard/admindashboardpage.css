@@ -23,7 +23,7 @@
     text-transform: uppercase;
     border: none;
     padding: 2rem;
-    height: 9rem;
+    --cui-header-min-height: 4rem;
     --cui-header-color: white;
     --cui-body-font-family: "Inter", sans-serif;
 }
