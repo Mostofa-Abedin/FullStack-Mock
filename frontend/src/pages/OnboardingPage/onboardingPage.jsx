@@ -105,7 +105,7 @@ const OnboardingForm = () => {
       }
 
       setSuccess(data.message || "Business onboarded successfully!");
-      setTimeout(() => navigate("/dashboard"), 2000);
+      setTimeout(() => navigate("/client/dashboard"), 2000);
     } catch (error) {
       console.error("Error:", error);
       setError(error.message || "An unexpected error occurred.");
