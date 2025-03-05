@@ -94,7 +94,7 @@ const ClientDashboard = ({ username }) => {
   }, []); // Empty dependency array to run once on component mount
 
   const handleClientUpdate = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
     const { name, businessName, email, phone, address, businessType, website } = e.target.elements;
     setClientDetails({
       name: name.value,
@@ -109,14 +109,14 @@ const ClientDashboard = ({ username }) => {
   };
 
   const handleProjectAdd = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
     setProjects([...projects, { id: Date.now(), ...newProject }]);
     setProjectModalVisible(false);
     setNewProject({ name: "", details: "", dueDate: "", status: "Upcoming" });
   };
 
   const handleProjectEdit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
     setProjects(
       projects.map((project) =>
         project.id === currentProject.id ? currentProject : project
@@ -239,87 +239,95 @@ const ClientDashboard = ({ username }) => {
             </CCardHeader>
             <CCardBody>
               <CRow>
-                {projects.length > 0 ? (
-                  projects.map((project) => (
-                    <CCol sm="4" key={project.id}>
-                      <div
-                        className={`dash-card p-3 shadow-sm ${getStatusColor(project.status)}`}
-                      >
-                        <h5>{project.name}</h5>
-                        <p>Details: {project.details}</p>
-                        <p>
-                          <strong>Due Date:</strong>{" "}
-                          {new Date(project.dueDate).toLocaleDateString("en-GB")}
-                        </p>
-                        <p>
-                          <strong>Status:</strong>
-                          <CFormSelect
-                            value={project.status}
-                            onChange={(e) => handleStatusChange(project.id, e.target.value)}
+                {projects.map((project) => (
+                  <CCol sm="4" key={project.id}>
+                    <div
+                      className={`dash-card p-3 shadow-sm ${getStatusColor(
+                        project.status
+                      )}`}
+                    >
+                      <h5>{project.name}</h5>
+                      <p>Details: {project.details}</p>
+                      <p>
+                        <strong>Due Date:</strong>{" "}
+                        {new Date(project.dueDate).toLocaleDateString("en-GB")}
+                      </p>
+                      <p>
+                        <strong>Status:</strong>
+                        <CFormSelect
+                          value={project.status}
+                          onChange={(e) =>
+                            handleStatusChange(project.id, e.target.value)
+                          }
+                        >
+                          <option value="Upcoming">Upcoming</option>
+                          <option value="In Progress">In Progress</option>
+                          <option value="Client Review">Client Review</option>
+                          <option value="Action Feedback">
+                            Action Feedback
+                          </option>
+                          <option value="Complete">Complete</option>
+                          <option value="On Hold">On Hold</option>
+                        </CFormSelect>
+                      </p>
+
+                      {/* Feedback Section (Only shows when Status is 'Client Review') */}
+                      {project.status === "Client Review" && (
+                        <div>
+                          <CFormTextarea
+                            label="Leave Client Feedback"
+                            value={feedback}
+                            onChange={handleFeedbackChange}
+                            rows="3"
+                            placeholder="Enter your feedback here"
+                          />
+                          <CButton
+                            color="success"
+                            onClick={() => submitFeedback(project.id)}
                           >
-                            <option value="Upcoming">Upcoming</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Client Review">Client Review</option>
-                            <option value="Action Feedback">Action Feedback</option>
-                            <option value="Complete">Complete</option>
-                            <option value="On Hold">On Hold</option>
-                          </CFormSelect>
-                        </p>
+                            Submit Feedback
+                          </CButton>
+                        </div>
+                      )}
 
-                        {/* Feedback Section (Only shows when Status is 'Client Review') */}
-                        {project.status === "Client Review" && (
-                          <div>
-                            <CFormTextarea
-                              label="Leave Client Feedback"
-                              value={feedback}
-                              onChange={handleFeedbackChange}
-                              rows="3"
-                              placeholder="Enter your feedback here"
-                            />
-                            <CButton
-                              color="success"
-                              onClick={() => setShowFeedbackConfirmation(true)}
-                            >
-                              Submit Feedback
-                            </CButton>
-                            {project.feedback.length > 0 && (
-                              <div>
-                                <h6>Admin Feedback:</h6>
-                                {project.feedback.map((feedbackItem, index) => (
-                                  <div key={index}>
-                                    <p>{feedbackItem.feedback}</p>
-                                    <small>{feedbackItem.timestamp}</small>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        )}
+                      {/* Render feedback in the project card */}
+                      {project.feedback.length > 0 && (
+                        <div className="feedback-section">
+                          <h6>Your Feedback:</h6>
+                          {project.feedback.map((feedbackItem, index) => (
+                            <div key={index} className="feedback-item">
+                              <p>{feedbackItem.feedback}</p>
+                              <small>
+                                {new Date(
+                                  feedbackItem.timestamp
+                                ).toLocaleString()}
+                              </small>
+                            </div>
+                          ))}
+                        </div>
+                      )}
 
-                        <CButton
-                          color="primary"
-                          onClick={() => {
-                            setCurrentProject(project);
-                            setEditProjectModalVisible(true);
-                          }}
-                        >
-                          Edit
-                        </CButton>
-                        <CButton
-                          color="danger"
-                          onClick={() => {
-                            setShowDeleteConfirmation(true);
-                            setProjectToDelete(project);
-                          }}
-                        >
-                          Delete
-                        </CButton>
-                      </div>
-                    </CCol>
-                  ))
-                ) : (
-                  <p>No projects found. Add a new project to get started.</p>
-                )}
+                      <CButton
+                        color="primary"
+                        onClick={() => {
+                          setCurrentProject(project);
+                          setEditProjectModalVisible(true);
+                        }}
+                      >
+                        Edit
+                      </CButton>
+                      <CButton
+                        color="danger"
+                        onClick={() => {
+                          setShowDeleteConfirmation(true);
+                          setProjectToDelete(project);
+                        }}
+                      >
+                        Delete
+                      </CButton>
+                    </div>
+                  </CCol>
+                ))}
               </CRow>
             </CCardBody>
           </CCard>
@@ -353,7 +361,7 @@ const ClientDashboard = ({ username }) => {
                   required
                 />
                 <CFormInput
-                  type="text"
+                  type="tel"
                   label="Phone"
                   name="phone"
                   defaultValue={clientDetails.phone}
@@ -374,11 +382,10 @@ const ClientDashboard = ({ username }) => {
                   required
                 />
                 <CFormInput
-                  type="text"
+                  type="url"
                   label="Website"
                   name="website"
                   defaultValue={clientDetails.website}
-                  required
                 />
                 <CModalFooter>
                   <CButton type="submit" color="primary">
@@ -393,6 +400,161 @@ const ClientDashboard = ({ username }) => {
                 </CModalFooter>
               </form>
             </CModalBody>
+          </CModal>
+
+          {/* Modal for Adding New Project */}
+          <CModal visible={projectModalVisible} onClose={() => setProjectModalVisible(false)}>
+            <CModalHeader>
+              <CModalTitle>Add New Project</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              <form onSubmit={handleProjectAdd}>
+                <CFormInput
+                  type="text"
+                  label="Project Name"
+                  value={newProject.name}
+                  onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
+                  required
+                />
+                <CFormTextarea
+                  label="Project Details"
+                  value={newProject.details}
+                  onChange={(e) => setNewProject({ ...newProject, details: e.target.value })}
+                  required
+                />
+                <CFormInput
+                  type="date"
+                  label="Due Date"
+                  value={newProject.dueDate}
+                  onChange={(e) => setNewProject({ ...newProject, dueDate: e.target.value })}
+                  required
+                />
+                <CFormSelect
+                  label="Status"
+                  value={newProject.status}
+                  onChange={(e) => setNewProject({ ...newProject, status: e.target.value })}
+                >
+                  <option value="Upcoming">Upcoming</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Client Review">Client Review</option>
+                  <option value="Action Feedback">Action Feedback</option>
+                  <option value="Complete">Complete</option>
+                  <option value="On Hold">On Hold</option>
+                </CFormSelect>
+                <CModalFooter>
+                  <CButton type="submit" color="primary">
+                    Add Project
+                  </CButton>
+                  <CButton color="secondary" onClick={() => setProjectModalVisible(false)}>
+                    Cancel
+                  </CButton>
+                </CModalFooter>
+              </form>
+            </CModalBody>
+          </CModal>
+
+          {/* Modal for Editing Existing Project */}
+          <CModal visible={editProjectModalVisible} onClose={() => setEditProjectModalVisible(false)}>
+            <CModalHeader>
+              <CModalTitle>Edit Project</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              <form onSubmit={handleProjectEdit}>
+                <CFormInput
+                  type="text"
+                  label="Project Name"
+                  value={currentProject?.name || ""}
+                  onChange={(e) =>
+                    setCurrentProject({ ...currentProject, name: e.target.value })
+                  }
+                />
+                <CFormTextarea
+                  label="Project Details"
+                  value={currentProject?.details || ""}
+                  onChange={(e) =>
+                    setCurrentProject({ ...currentProject, details: e.target.value })
+                  }
+                />
+                <CFormInput
+                  type="date"
+                  label="Due Date"
+                  value={currentProject?.dueDate || ""}
+                  onChange={(e) =>
+                    setCurrentProject({ ...currentProject, dueDate: e.target.value })
+                  }
+                />
+                <CFormSelect
+                  label="Status"
+                  value={currentProject?.status || "Upcoming"}
+                  onChange={(e) =>
+                    setCurrentProject({ ...currentProject, status: e.target.value })
+                  }
+                >
+                  <option value="Upcoming">Upcoming</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Client Review">Client Review</option>
+                  <option value="Action Feedback">Action Feedback</option>
+                  <option value="Complete">Complete</option>
+                  <option value="On Hold">On Hold</option>
+                </CFormSelect>
+                <CModalFooter>
+                  <CButton type="submit" color="primary">
+                    Save Changes
+                  </CButton>
+                  <CButton color="secondary" onClick={() => setEditProjectModalVisible(false)}>
+                    Cancel
+                  </CButton>
+                </CModalFooter>
+              </form>
+            </CModalBody>
+          </CModal>
+
+          {/* Confirmation Modal for Deleting Project */}
+          <CModal
+            visible={showDeleteConfirmation}
+            onClose={() => setShowDeleteConfirmation(false)}
+          >
+            <CModalHeader>
+              <CModalTitle>Confirm Deletion</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              Are you sure you want to delete this project?
+            </CModalBody>
+            <CModalFooter>
+              <CButton
+                color="danger"
+                onClick={handleProjectDelete}
+              >
+                Yes, Delete
+              </CButton>
+              <CButton
+                color="secondary"
+                onClick={() => setShowDeleteConfirmation(false)}
+              >
+                Cancel
+              </CButton>
+            </CModalFooter>
+          </CModal>
+
+          {/* Modal for Feedback Confirmation */}
+          <CModal
+            visible={showFeedbackConfirmation}
+            onClose={() => setShowFeedbackConfirmation(false)}
+          >
+            <CModalHeader>
+              <CModalTitle>Feedback Submitted</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              Your feedback has been submitted successfully!
+            </CModalBody>
+            <CModalFooter>
+              <CButton
+                color="secondary"
+                onClick={() => setShowFeedbackConfirmation(false)}
+              >
+                Close
+              </CButton>
+            </CModalFooter>
           </CModal>
         </CCol>
       </CRow>
