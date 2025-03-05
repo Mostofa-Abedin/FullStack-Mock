@@ -93,6 +93,7 @@ const AdminDashboard = ({ username }) => {
   const [modalType, setModalType] = useState("");
   const [currentItem, setCurrentItem] = useState(null);
   const [formSection, setFormSection] = useState("");
+  
 
   const handleSubmit = (e, type) => {
     e.preventDefault();
@@ -238,6 +239,7 @@ const AdminDashboard = ({ username }) => {
             <CCardHeader className="dash-card-header">
               <h4>Manage Clients</h4>
               <CButton
+              data-testid="add-client-button"
                 className="dash-add-button"
                 onClick={() => {
                   setFormSection("clients");
