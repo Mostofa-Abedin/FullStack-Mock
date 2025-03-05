@@ -20,19 +20,19 @@ const ClientsList = () => {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await api.get("/clients"); // Fetch clients from backend
-        
-        // ✅ Ensure clients is an array before setting state
-        if (Array.isArray(response.data.clients)) {
-          setClients(response.data.clients);
+        const response = await api.get("/users");
+    
+        //  Handle case where response is an array instead of an object
+        if (Array.isArray(response.data)) {
+          setClients(response.data);  // Directly set the array
+        } else if (response.data && Array.isArray(response.data.users)) {
+          setClients(response.data.users);  // If response contains { users: [...] }, extract it
         } else {
-          setClients([]); // Fallback to empty array
-          console.error("Unexpected API response format:", response.data);
+          throw new Error("Unexpected API response format");
         }
-
       } catch (err) {
-        setError("Error fetching clients");
         console.error("Error fetching clients:", err);
+        setError("Error fetching clients");
       } finally {
         setLoading(false);
       }

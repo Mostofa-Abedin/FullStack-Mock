@@ -7,7 +7,7 @@ export const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// ✅ Automatically attach token if available
+// Automatically attach token if available
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('authToken'); // Retrieve token
   if (token) {
