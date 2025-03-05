@@ -118,30 +118,42 @@
     color: #192F3C;
 }
 
-.upcoming .edit {
-    color: #192F3C;
+.upcoming .dash-edit {
+    color: white;
+    background-color: #192F3C;
+    border-radius: 0%;
+    outline: none;
+    border: none;
 }
 
 /* In Progress Project */
 
 .in-progress {
-    background-color: #F3DCB2;
+    background-color: #F3DCB2 !important;
     color: #841B13;
 }
 
-.in-progress .edit {
-    color: #841B13;
+.in-progress .dash-edit {
+    color: white;
+    background-color: #841B13;
+    border-radius: 0%;
+    outline: none;
+    border: none;
 }
 
 /* Client Review Project */
 
 .client-review {
-    background-color: #192F3C;
+    background-color: #192F3C !important;
     color: #8BC4D9;
 }
 
-.client-review .edit {
-    color: #8BC4D9;
+.client-review .dash-edit {
+    color: white;
+    background-color: #8BC4D9;
+    border-radius: 0%;
+    outline: none;
+    border: none;
 }
 
 /* Action Feedback Project */
@@ -151,8 +163,12 @@
     color: #192F3C;
 }
 
-.action-feedback .edit {
-    color: #192F3C;
+.action-feedback .dash-edit {
+    color: white;
+    background-color: #192F3C;
+    border-radius: 0%;
+    outline: none;
+    border: none;
 }
 
 /* Complete Project */
@@ -162,8 +178,12 @@
     color: #192F3C;
 }
 
-.complete .edit {
-    color: #192F3C;
+.complete .dash-edit {
+    color: white;
+    background-color: #192F3C;
+    border: none;
+    border-radius: 0;
+    outline: none;
 }
 
 /*  On Hold Project */
@@ -173,14 +193,18 @@
     color: #841B13;
 }
 
-.on-hold.edit {
-    color: #841B13;
+.on-hold .dash-edit {
+    color: white;
+    background-color: #841B13;
+    border-radius: 0%;
+    outline: none;
+    border: none;
 }
 
 /* Delete Button */
 
 .dash-delete {
-    background-color: #841B13;
+    background-color: #841B13 !important;
     color: white;
     border-radius: 0%;
 }
