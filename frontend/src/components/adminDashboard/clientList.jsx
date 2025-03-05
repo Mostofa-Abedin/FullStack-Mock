@@ -7,10 +7,13 @@ import {
   CCardBody,
   CRow,
   CCol,
+  CButton,
 } from "@coreui/react";
 
+import { Link } from "react-router-dom";
+
 const ClientsList = () => {
-  const [clients, setClients] = useState([]); // State to store clients
+  const [clients, setClients] = useState([]); // Ensure it's an array
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -18,9 +21,18 @@ const ClientsList = () => {
     const fetchClients = async () => {
       try {
         const response = await api.get("/clients"); // Fetch clients from backend
-        setClients(response.data); // Store clients in state
+        
+        // ✅ Ensure clients is an array before setting state
+        if (Array.isArray(response.data.clients)) {
+          setClients(response.data.clients);
+        } else {
+          setClients([]); // Fallback to empty array
+          console.error("Unexpected API response format:", response.data);
+        }
+
       } catch (err) {
         setError("Error fetching clients");
+        console.error("Error fetching clients:", err);
       } finally {
         setLoading(false);
       }
@@ -43,18 +55,22 @@ const ClientsList = () => {
         </CCardHeader>
         <CCardBody>
           <CRow>
-            {clients.map((client) => (
-              <CCol md="4" key={client._id}>
-                <CCard className="client-card">
-                  <CCardBody>
-                    <h5>{client.name}</h5>
-                    <p>{client.businessName}</p>
-                    <p>{client.email}</p>
-                    <p>{client.phone}</p>
-                  </CCardBody>
-                </CCard>
-              </CCol>
-            ))}
+            {clients.length > 0 ? (
+              clients.map((client) => (
+                <CCol md="4" key={client._id}>
+                  <CCard className="client-card">
+                    <CCardBody>
+                      <h5>{client.name}</h5>
+                      <p>{client.businessName}</p>
+                      <p>{client.email}</p>
+                      <p>{client.phone}</p>
+                    </CCardBody>
+                  </CCard>
+                </CCol>
+              ))
+            ) : (
+              <p>No clients found.</p>
+            )}
           </CRow>
         </CCardBody>
       </CCard>
