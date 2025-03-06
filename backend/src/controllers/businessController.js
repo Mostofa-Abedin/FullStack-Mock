@@ -19,7 +19,7 @@ const getAllBusinessesWithUserDetails = async (req, res) => {
   }
 };
 
-// Controller: Create a new Business record
+//  Controller: Create a new Business record
 
 const createBusiness = async (req, res) => {
   // Decide which userId to attach to this business
