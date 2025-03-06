@@ -53,7 +53,7 @@ const LoginForm = ({ onSubmit, isAdmin, setIsAdmin, setUserName }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+ 
       if (response.ok) {
         const data = await response.json(); // Parse JSON response
         localStorage.setItem("authToken", data.token); // Store token in localStorage
