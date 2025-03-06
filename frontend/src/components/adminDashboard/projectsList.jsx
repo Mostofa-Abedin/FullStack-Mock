@@ -168,34 +168,53 @@ const ProjectsList = ({ projects, setProjects }) => {
         </CModalHeader>
         <CModalBody>
           <form onSubmit={handleSubmit}>
-            <CFormInput
-              type="text"
-              label="Project Name"
-              name="name"
-              defaultValue={currentItem?.projectName || ""}
-            />
-            <CFormInput
-              type="text"
-              label="Details"
-              name="details"
-              defaultValue={currentItem?.description || ""}
-            />
-            <CFormInput
-              type="text"
-              label="Client"
-              name="client"
-              defaultValue={currentItem?.clientId?.name || ""}
-            />
-            <CFormInput
-              type="date"
-              label="Due Date"
-              name="dueDate"
-              defaultValue={
-                currentItem?.dueDate
-                  ? new Date(currentItem.dueDate).toISOString().split("T")[0]
-                  : ""
-              }
-            />
+          <CFormInput
+            type="text"
+            label="Project Name"
+            name="name"
+            defaultValue={currentItem?.projectName || ""}
+          />
+
+          <CFormInput
+            type="text"
+            label="Client ID"
+            name="clientId"
+            defaultValue={currentItem?.clientId || ""}
+          />
+
+          <CFormSelect label="Status" name="status" defaultValue={currentItem?.status || "In Progress"}>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="On Hold">On Hold</option>
+          </CFormSelect>
+
+          <CFormInput
+            type="text"
+            label="Description"
+            name="description"
+            defaultValue={currentItem?.description || ""}
+          />
+
+          <CFormInput
+            type="date"
+            label="Start Date"
+            name="startDate"
+            defaultValue={
+              currentItem?.startDate
+                ? new Date(currentItem.startDate).toISOString().split("T")[0]
+                : ""
+            }
+          />
+          <CFormInput
+            type="date"
+            label="End Date"
+            name="endDate"
+            defaultValue={
+              currentItem?.endDate
+                ? new Date(currentItem.endDate).toISOString().split("T")[0]
+                : ""
+            }
+          />
             <CFormSelect
               label="Status"
               name="status"

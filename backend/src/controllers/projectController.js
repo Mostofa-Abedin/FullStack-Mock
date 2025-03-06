@@ -57,6 +57,7 @@ const getClientProjects = async (req, res) => {
 // Controller: Update a project
 const updateProject = async (req, res) => {
   try {
+
     const { projectId } = req.params;
     const updates = req.body;
 
