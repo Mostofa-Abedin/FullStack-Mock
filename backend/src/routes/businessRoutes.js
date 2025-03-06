@@ -17,5 +17,11 @@ router.get('/', getAllBusinessesWithUserDetails);
 // Route: PATCH business details (only own business or admin access)
 router.patch('/update/:businessId', authenticateUser, authUserOrAdmin, updateBusinessDetails);
 
+// POST to create a new business record
+router.post('/', authenticateUser, authUserOrAdmin, createBusiness);
 
 export default router;
+
+
+
+
