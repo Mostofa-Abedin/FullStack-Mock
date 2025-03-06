@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; 
 import "./admindashboard.css";
 import { Link } from "react-router-dom";
 import {
@@ -25,8 +25,33 @@ const ProjectsList = ({ projects, setProjects }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState("add");
   const [currentItem, setCurrentItem] = useState(null);
+  const [clients, setClients] = useState([]); 
 
-  // Handle Delete
+  // 🔹 Fetch Clients from Backend
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const response = await fetch(`${baseUrl}/users`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) throw new Error("Failed to fetch clients");
+
+        const data = await response.json();
+
+        // 🔹 Filter only clients (role: "client")
+        const clientUsers = data.filter((user) => user.role === "client");
+
+        setClients(clientUsers); 
+      } catch (error) {
+        console.error("Error fetching clients:", error);
+      }
+    };
+
+    fetchClients();
+  }, []);
+
+  // 🔹 Handle Delete
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`${baseUrl}/projects/${id}`, {
@@ -42,22 +67,30 @@ const ProjectsList = ({ projects, setProjects }) => {
     }
   };
 
-  // Handle Save (Add/Edit)
+  // 🔹 Handle Save (Add/Edit)
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const formData = new FormData(e.target);
+    const selectedClientId = formData.get("client"); // Ensure correct ID is used
+
     const projectData = {
       projectName: formData.get("name"),
-      clientId: formData.get("clientId"), // Ensure this is an ID, not a name
+      clientId: selectedClientId || null, 
       status: formData.get("status"),
       description: formData.get("description"),
       startDate: formData.get("startDate"),
       endDate: formData.get("endDate"),
     };
-  
-    console.log("Submitting project:", projectData);
-  
+
+
+
+    // 🔴 Validate required fields BEFORE sending request
+    if (!projectData.projectName || !projectData.clientId || !projectData.startDate || !projectData.endDate) {
+      console.error("❌ Missing required fields! Ensure client is selected and dates are filled.");
+      return;
+    }
+
     try {
       let response;
       if (modalType === "edit" && currentItem) {
@@ -79,17 +112,15 @@ const ProjectsList = ({ projects, setProjects }) => {
           body: JSON.stringify(projectData),
         });
       }
-  
-      console.log("Response status:", response.status);
-  
+
+
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(`Failed to save project: ${errorMessage}`);
       }
-  
+
       const updatedProject = await response.json();
-      console.log("Updated Project:", updatedProject);
-  
+
       setProjects((prev) => {
         if (modalType === "edit") {
           return prev.map((proj) =>
@@ -99,14 +130,13 @@ const ProjectsList = ({ projects, setProjects }) => {
           return [...prev, updatedProject];
         }
       });
-  
+
       setModalVisible(false);
       setCurrentItem(null);
     } catch (error) {
-      console.error("Error saving project:", error);
+      console.error("❌ Error saving project:", error);
     }
   };
-  
 
   return (
     <CContainer fluid>
@@ -129,32 +159,35 @@ const ProjectsList = ({ projects, setProjects }) => {
         </CCardHeader>
         <CCardBody>
           <CRow>
-            {projects.map((project) => (
-              <CCol sm="4" key={project._id}>
-                <div className="dash-card">
-                  <h5>{project.projectName}</h5>
-                  <p>{project.clientId?.name}</p>
-                  <p>
-                    Due Date:{" "}
-                    {project.dueDate
-                      ? new Date(project.dueDate).toLocaleDateString("en-GB")
-                      : "N/A"}
-                  </p>
-                  <CButton
-                    onClick={() => {
-                      setModalType("edit");
-                      setCurrentItem(project);
-                      setModalVisible(true);
-                    }}
-                  >
-                    Edit
-                  </CButton>
-                  <CButton onClick={() => handleDelete(project._id)}>
-                    Delete
-                  </CButton>
-                </div>
-              </CCol>
-            ))}
+            {projects.map((project, index) => {
+
+              return (
+                <CCol sm="4" key={project._id || index}>
+                  <div className="dash-card">
+                    <h5>{project.projectName}</h5>
+                    <p>Client: {project.clientId?.name || "N/A"}</p> 
+                    <p>
+                      Due Date:{" "}
+                      {project.endDate
+                        ? new Date(project.endDate).toLocaleDateString("en-GB")
+                        : "N/A"}
+                    </p>
+                    <CButton
+                      onClick={() => {
+                        setModalType("edit");
+                        setCurrentItem(project);
+                        setModalVisible(true);
+                      }}
+                    >
+                      Edit
+                    </CButton>
+                    <CButton onClick={() => handleDelete(project._id)}>
+                      Delete
+                    </CButton>
+                  </div>
+                </CCol>
+              );
+            })}
           </CRow>
         </CCardBody>
       </CCard>
@@ -168,63 +201,38 @@ const ProjectsList = ({ projects, setProjects }) => {
         </CModalHeader>
         <CModalBody>
           <form onSubmit={handleSubmit}>
-          <CFormInput
-            type="text"
-            label="Project Name"
-            name="name"
-            defaultValue={currentItem?.projectName || ""}
-          />
+            <CFormInput
+              type="text"
+              label="Project Name"
+              name="name"
+              defaultValue={currentItem?.projectName || ""}
+            />
 
-          <CFormInput
-            type="text"
-            label="Client ID"
-            name="clientId"
-            defaultValue={currentItem?.clientId || ""}
-          />
-
-          <CFormSelect label="Status" name="status" defaultValue={currentItem?.status || "In Progress"}>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-            <option value="On Hold">On Hold</option>
-          </CFormSelect>
-
-          <CFormInput
-            type="text"
-            label="Description"
-            name="description"
-            defaultValue={currentItem?.description || ""}
-          />
-
-          <CFormInput
-            type="date"
-            label="Start Date"
-            name="startDate"
-            defaultValue={
-              currentItem?.startDate
-                ? new Date(currentItem.startDate).toISOString().split("T")[0]
-                : ""
-            }
-          />
-          <CFormInput
-            type="date"
-            label="End Date"
-            name="endDate"
-            defaultValue={
-              currentItem?.endDate
-                ? new Date(currentItem.endDate).toISOString().split("T")[0]
-                : ""
-            }
-          />
+            {/* 🔹 Client Dropdown (Ensures ObjectId is Sent) */}
             <CFormSelect
-              label="Status"
-              name="status"
-              defaultValue={currentItem?.status || "Upcoming"}
+              label="Client"
+              name="client"
+              defaultValue={currentItem?.clientId?._id || ""}
             >
+              <option value="" disabled>Select a Client</option>
+              {clients.map((client) => (
+                <option key={client._id} value={client._id}>
+                  {client.name} 
+                </option>
+              ))}
+            </CFormSelect>
+
+            <CFormSelect label="Status" name="status" defaultValue={currentItem?.status || "In Progress"}>
               <option value="Upcoming">Upcoming</option>
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
               <option value="On Hold">On Hold</option>
             </CFormSelect>
+
+            <CFormInput type="text" label="Description" name="description" defaultValue={currentItem?.description || ""} />
+            <CFormInput type="date" label="Start Date" name="startDate" defaultValue={currentItem?.startDate || ""} />
+            <CFormInput type="date" label="End Date" name="endDate" defaultValue={currentItem?.endDate || ""} />
+
             <CModalFooter>
               <CButton onClick={() => setModalVisible(false)}>Close</CButton>
               <CButton type="submit">Save Changes</CButton>
