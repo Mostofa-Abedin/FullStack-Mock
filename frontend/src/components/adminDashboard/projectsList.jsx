@@ -57,7 +57,7 @@ const ProjectsList = ({ projects, setProjects }) => {
 
     try {
       let response;
-      if (modalType === "edit") {
+      if (modalType === "edit" && currentItem) {
         response = await fetch(`${baseUrl}/projects/${currentItem._id}`, {
           method: "PATCH",
           headers: {
@@ -79,6 +79,17 @@ const ProjectsList = ({ projects, setProjects }) => {
 
       if (!response.ok) throw new Error("Failed to save project");
 
+      const updatedProject = await response.json();
+      setProjects((prev) => {
+        if (modalType === "edit") {
+          return prev.map((proj) =>
+            proj._id === updatedProject._id ? updatedProject : proj
+          );
+        } else {
+          return [...prev, updatedProject];
+        }
+      });
+
       setModalVisible(false);
     } catch (error) {
       console.error("Error saving project:", error);
@@ -93,8 +104,16 @@ const ProjectsList = ({ projects, setProjects }) => {
 
       <CCard className="dash-main-card">
         <CCardHeader className="dash-card-header">
-          <h4>Manage Projects</h4>
-          <CButton onClick={() => setModalVisible(true)}>Add Project</CButton>
+          <h4>All Projects</h4>
+          <CButton
+            onClick={() => {
+              setModalType("add");
+              setCurrentItem(null);
+              setModalVisible(true);
+            }}
+          >
+            Add Project
+          </CButton>
         </CCardHeader>
         <CCardBody>
           <CRow>
@@ -103,15 +122,85 @@ const ProjectsList = ({ projects, setProjects }) => {
                 <div className="dash-card">
                   <h5>{project.projectName}</h5>
                   <p>{project.clientId?.name}</p>
-                  <p>Due Date: {new Date(project.dueDate).toLocaleDateString("en-GB")}</p>
-                  <CButton onClick={() => setCurrentItem(project)}>Edit</CButton>
-                  <CButton onClick={() => handleDelete(project._id)}>Delete</CButton>
+                  <p>
+                    Due Date:{" "}
+                    {project.dueDate
+                      ? new Date(project.dueDate).toLocaleDateString("en-GB")
+                      : "N/A"}
+                  </p>
+                  <CButton
+                    onClick={() => {
+                      setModalType("edit");
+                      setCurrentItem(project);
+                      setModalVisible(true);
+                    }}
+                  >
+                    Edit
+                  </CButton>
+                  <CButton onClick={() => handleDelete(project._id)}>
+                    Delete
+                  </CButton>
                 </div>
               </CCol>
             ))}
           </CRow>
         </CCardBody>
       </CCard>
+
+      {/* Modal for Add/Edit Project */}
+      <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
+        <CModalHeader>
+          <CModalTitle>
+            {modalType === "edit" ? "Edit Project" : "Add Project"}
+          </CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <form onSubmit={handleSubmit}>
+            <CFormInput
+              type="text"
+              label="Project Name"
+              name="name"
+              defaultValue={currentItem?.projectName || ""}
+            />
+            <CFormInput
+              type="text"
+              label="Details"
+              name="details"
+              defaultValue={currentItem?.description || ""}
+            />
+            <CFormInput
+              type="text"
+              label="Client"
+              name="client"
+              defaultValue={currentItem?.clientId?.name || ""}
+            />
+            <CFormInput
+              type="date"
+              label="Due Date"
+              name="dueDate"
+              defaultValue={
+                currentItem?.dueDate
+                  ? new Date(currentItem.dueDate).toISOString().split("T")[0]
+                  : ""
+              }
+            />
+            <CFormSelect
+              label="Status"
+              name="status"
+              defaultValue={currentItem?.status || "Upcoming"}
+            >
+              <option value="Upcoming">Upcoming</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="On Hold">On Hold</option>
+            </CFormSelect>
+            <CModalFooter>
+              <CButton onClick={() => setModalVisible(false)}>Close</CButton>
+              <CButton type="submit">Save Changes</CButton>
+            </CModalFooter>
+          </form>
+        </CModalBody>
+      </CModal>
     </CContainer>
   );
 };

@@ -83,7 +83,7 @@ const AnnouncementsList = () => {
       {/* Add/Edit Announcement Section */}
       <CCard className="dash-main-card">
         <CCardHeader className="dash-card-header">
-          <h4>Manage Announcements</h4>
+          <h4>All Announcements</h4>
           <CButton
             className="dash-add-button"
             onClick={() => {
