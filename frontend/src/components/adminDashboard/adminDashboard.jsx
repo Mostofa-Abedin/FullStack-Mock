@@ -42,6 +42,7 @@ const AdminDashboard = ({ username }) => {
         fetch(`${baseUrl}/business`, { headers: { Authorization: `Bearer ${token}` } }),
       ]);
 
+
       if (!projectsRes.ok || !clientsRes.ok || !announcementsRes.ok || !businessRes.ok) {
         throw new Error("Failed to fetch data");
       }
@@ -98,7 +99,7 @@ const AdminDashboard = ({ username }) => {
               <h4>Manage Announcements</h4>
             </CCardHeader>
             <CCardBody>
-              <AnnouncementsList announcements={announcements} />
+              <AnnouncementsList announcements={announcements} setAnnouncements={setAnnouncements} businesses = {businesses}/>
             </CCardBody>
           </CCard>
         </>

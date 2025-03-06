@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for routing
 import "./admindashboard.css";
 import {
@@ -15,60 +15,88 @@ import {
   CModalFooter,
   CModalTitle,
   CFormInput,
+  CFormSelect,
 } from "@coreui/react";
 
-const AnnouncementsList = () => {
-  const [announcements, setAnnouncements] = useState([
-    {
-      id: 1,
-      title: "Website Maintenance",
-      content: "Our website will be down for maintenance on 2025-03-10 from 2AM to 4AM.",
-      date: "2025-02-20",
-    },
-    {
-      id: 2,
-      title: "New Feature Released",
-      content: "We are excited to announce the release of our new dashboard feature for clients.",
-      date: "2025-02-18",
-    },
-  ]);
+const AnnouncementsList = ({announcements, setAnnouncements, businesses}) => {
+
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+  const token = localStorage.getItem("authToken");
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState("add"); // 'add' or 'edit'
   const [currentItem, setCurrentItem] = useState(null);
-
   // Handle Delete
-  const handleDelete = (id) => {
-    setAnnouncements(announcements.filter((announcement) => announcement.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`${baseUrl}/announcements/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!response.ok) throw new Error("Failed to delete announcement");
+
+      setAnnouncements((prev) => prev.filter((announcement) => announcement._id !== id));
+    } catch (error) {
+      console.error("Error deleting announcement:", error);
+    }
   };
 
   // Handle Save (for Add/Edit)
-  const handleSubmit = (e, modalType) => {
+  const handleSubmit = async (e, modalType) => {
     e.preventDefault();
 
     // Collect form data
     const formData = new FormData(e.target);
-
     const newAnnouncement = {
       id: currentItem?.id || new Date().getTime(), // Generate a new ID for add
       title: formData.get("title"),
+      business: formData.get("business"),
       content: formData.get("content"),
       date: formData.get("date"),
     };
 
-    if (modalType === "edit") {
-      // Update announcement
-      setAnnouncements(
-        announcements.map((announcement) =>
-          announcement.id === currentItem.id ? newAnnouncement : announcement
-        )
-      );
-    } else {
-      // Add new announcement
-      setAnnouncements([...announcements, newAnnouncement]);
-    }
+    try {
+      let response;
+      if (modalType === "edit" && currentItem) {
+        response = await fetch(`${baseUrl}/announcements/${currentItem._id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newAnnouncement),
+        });
+      } else {
+        response = await fetch(`${baseUrl}/announcements`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`},
+          body: JSON.stringify(newAnnouncement),
+        });
+      }
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(`Failed to save announcement: ${errorMessage}`);
+      }
 
-    setModalVisible(false); // Close modal after saving
+      const data = await response.json();
+      const updatedAnnouncement = data.announcement;
+      setAnnouncements((prev) => {
+        if (modalType === "edit") {
+          return prev.map((announcement) =>
+            announcement._id === updatedAnnouncement._id ? updatedAnnouncement : announcement
+          );
+        } else {
+          return [...prev, updatedAnnouncement];
+        }
+      });
+
+      setModalVisible(false);
+      setCurrentItem(null);
+    } catch (error) {
+      console.error("❌ Error saving announcement:", error);
+    }
   };
 
   return (
@@ -98,12 +126,14 @@ const AnnouncementsList = () => {
         <CCardBody>
           <CRow>
             {announcements.map((announcement) => (
-              <CCol sm="4" key={announcement.id}>
+              <CCol sm="4" key={announcement._id}>
                 <div className="dash-card">
                   <h5>{announcement.title}</h5>
+                  <p>{businesses.find((business)=> business._id == announcement.businessId)?.businessName}</p>
+                  {/* <p>{businesses.filter((business)=> business._id == announcement.businessId)}</p> */}
                   <p>{announcement.content}</p>
                   <p style={{ fontWeight: "bold" }}>
-                    Date: {new Date(announcement.date).toLocaleDateString("en-GB")}
+                    Date: {new Date(announcement.updatedAt).toLocaleDateString("en-GB")}
                   </p>
                   <div className="d-flex justify-content-end">
                     <CButton
@@ -118,7 +148,7 @@ const AnnouncementsList = () => {
                     </CButton>
                     <CButton
                       className="dash-delete"
-                      onClick={() => handleDelete(announcement.id)}
+                      onClick={() => handleDelete(announcement._id)}
                     >
                       Delete
                     </CButton>
@@ -145,7 +175,12 @@ const AnnouncementsList = () => {
               name="title"
               defaultValue={currentItem?.title}
             />
-            
+            <CFormSelect label="Business" name="business" defaultValue={currentItem?.clientId?._id || ""}>
+              <option value="" disabled>Select a business</option>
+              {businesses.map((business) => (
+                <option key={business._id} value={business._id}>{business.businessName}</option>
+              ))}
+            </CFormSelect>
             {/* Use regular textarea here instead of CFormTextArea */}
             <div className="mb-3">
               <label htmlFor="content" className="form-label">Content</label>
@@ -161,7 +196,7 @@ const AnnouncementsList = () => {
               type="date"
               label="Date"
               name="date"
-              defaultValue={currentItem?.date}
+              defaultValue={currentItem?.updatedAt}
             />
 
             <CModalFooter>

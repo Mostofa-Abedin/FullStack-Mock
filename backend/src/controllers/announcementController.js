@@ -63,13 +63,14 @@ const deleteAnnouncement = async (req, res) => {
 
     try {
         // Find the announcement in the database by ID and remove it
-        const announcement = await Announcement.findByIdAndRemove(id);
+        const announcement = await Announcement.findByIdAndDelete(id);
         if (announcement) {
             res.json({ message: 'Announcement deleted' });
         } else {
             res.status(404).json({ error: 'Announcement not found' });
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Failed to delete announcement' });
     }
 };
