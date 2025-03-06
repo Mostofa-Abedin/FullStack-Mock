@@ -24,6 +24,7 @@ const AdminDashboard = ({ username }) => {
   const [projects, setProjects] = useState([]);
   const [clients, setClients] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
+  const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -34,19 +35,21 @@ const AdminDashboard = ({ username }) => {
 
   const fetchData = async () => {
     try {
-      const [projectsRes, clientsRes, announcementsRes] = await Promise.all([
+      const [projectsRes, clientsRes, announcementsRes, businessesRes] = await Promise.all([
         fetch(`${baseUrl}/projects`, { headers: { Authorization: `Bearer ${token}` } }),
         fetch(`${baseUrl}/users`, { headers: { Authorization: `Bearer ${token}` } }),
         fetch(`${baseUrl}/announcements`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${baseUrl}/business`, { headers: { Authorization: `Bearer ${token}` } }),
       ]);
 
-      if (!projectsRes.ok || !clientsRes.ok || !announcementsRes.ok) {
+      if (!projectsRes.ok || !clientsRes.ok || !announcementsRes.ok || !businessesRes.ok) {
         throw new Error("Failed to fetch data");
       }
 
       setProjects((await projectsRes.json()).projects || []);
       setClients((await clientsRes.json()).users || []);
       setAnnouncements((await announcementsRes.json()).announcements || []);
+      setBusinesses((await businessesRes.json()).businesses || []);
       setLoading(false);
     } catch (error) {
       setError(error.message);
@@ -90,7 +93,7 @@ const AdminDashboard = ({ username }) => {
               <h4>Manage Announcements</h4>
             </CCardHeader>
             <CCardBody>
-              <AnnouncementsList announcements={announcements} />
+              <AnnouncementsList announcements={announcements} setAnnouncements={setAnnouncements} businesses = {businesses}/>
             </CCardBody>
           </CCard>
         </>

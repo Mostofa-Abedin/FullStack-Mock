@@ -29,7 +29,7 @@ const AnnouncementSchema = new mongoose.Schema({
     type: String, 
     required: true,
     trim: true, // To remove space if it is at the beginning or end of the string  
-    maxlength: 50 
+    maxlength: 150
   },
 // Active - Indicates if the announcement is currently active or not
   active: { 
