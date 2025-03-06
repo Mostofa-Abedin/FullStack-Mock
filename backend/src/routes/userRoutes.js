@@ -8,6 +8,7 @@ import {
   registerUser,
   changePassword,
   updateUserProfile,
+  deleteUser,
 } from "../controllers/userController.js";
 import { registerBusiness } from "../controllers/businessFormController.js";
 
@@ -42,6 +43,11 @@ router.patch('/:id/password', authenticateUser, changePassword)
 
 // Route: Update personal profile (Partial update allowed) (only own profile or admin access)
 router.patch('/:id/profile', authenticateUser, authUserOrAdmin, updateUserProfile);
+
+
+// Route: DELETE a user (protected)
+router.delete("/:id", authenticateUser, authUserOrAdmin, deleteUser);
+
 
 export default router;
 
