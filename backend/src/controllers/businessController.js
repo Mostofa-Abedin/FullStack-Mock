@@ -4,10 +4,7 @@ import Business from "../models/Business.js";
 // Controller: Get all businesses with user details populated
 const getAllBusinessesWithUserDetails = async (req, res) => {
   try {
-    const businesses = await Business.find()
-      .populate('userId', 'name email role') // Populate user fields
-      
-
+    const businesses = await Business.find().populate('userId', 'name email role');
     res.status(200).json({
       message: 'Businesses retrieved successfully.',
       businesses,
@@ -18,6 +15,33 @@ const getAllBusinessesWithUserDetails = async (req, res) => {
   }
 };
 
+// Controller: Create a new Business record
+const createBusiness = async (req, res) => {
+  const userId = req.user.userID;
+  const { businessName, industry, website, phone, address } = req.body;
+
+  // Basic validation – adjust as necessary
+  if (!businessName || !industry || !website || !phone || !address) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+
+  try {
+    const business = new Business({
+      userId,
+      businessName: businessName.trim(),
+      industry: industry.trim(),
+      website,
+      phone,
+      address: address.trim(),
+    });
+    await business.save();
+    res.status(201).json({ message: "Business created successfully", business });
+  } catch (err) {
+    console.error("Error creating business:", err);
+    res.status(400).json({ message: err.message });
+  }
+};
+
 // Controller: Update Business Details
 const updateBusinessDetails = async (req, res) => {
   const { businessId } = req.params; // Business ID from the URL
@@ -25,25 +49,22 @@ const updateBusinessDetails = async (req, res) => {
   const userId = req.user.userID; // Extracted from JWT token
   const userRole = req.user.role;
 
-  // Step 1: Validate ObjectId
+  // Validate ObjectId
   if (!mongoose.Types.ObjectId.isValid(businessId)) {
     return res.status(400).json({ message: 'Invalid Business ID format.' });
   }
 
   try {
-    // Step 2: Find the business
+    // Find the business
     const business = await Business.findById(businessId);
-
     if (!business) {
       return res.status(404).json({ message: 'Business not found.' });
     }
-
-    // Step 3: Allow update if user is owner or admin
+    // Allow update if user is owner or admin
     if (business.userId.toString() !== userId && userRole !== 'admin') {
       return res.status(403).json({ message: 'Access Denied. You can only update your own business.' });
     }
-
-    // Step 4: Perform partial updates
+    // Perform partial updates
     if (updates.businessName) business.businessName = updates.businessName.trim();
     if (updates.industry) business.industry = updates.industry.trim();
     if (updates.website) {
@@ -62,9 +83,8 @@ const updateBusinessDetails = async (req, res) => {
     }
     if (updates.address) business.address = updates.address.trim();
 
-    // Step 5: Save updated business
+    // Save updated business
     await business.save();
-
     res.status(200).json({
       message: 'Business details updated successfully.',
       business,
@@ -75,4 +95,4 @@ const updateBusinessDetails = async (req, res) => {
   }
 };
 
-export { updateBusinessDetails, getAllBusinessesWithUserDetails };
+export { createBusiness, updateBusinessDetails, getAllBusinessesWithUserDetails };
