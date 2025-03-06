@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   CContainer,
   CRow,
@@ -24,7 +24,7 @@ const AdminDashboard = ({ username }) => {
   const [projects, setProjects] = useState([]);
   const [clients, setClients] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
-  const [businesses, setBusinesses] = useState([]);
+  const [businesses, setBusinesses] = useState([]); // New state for businesses
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,21 +35,22 @@ const AdminDashboard = ({ username }) => {
 
   const fetchData = async () => {
     try {
-      const [projectsRes, clientsRes, announcementsRes, businessesRes] = await Promise.all([
+      const [projectsRes, clientsRes, announcementsRes, businessRes] = await Promise.all([
         fetch(`${baseUrl}/projects`, { headers: { Authorization: `Bearer ${token}` } }),
         fetch(`${baseUrl}/users`, { headers: { Authorization: `Bearer ${token}` } }),
         fetch(`${baseUrl}/announcements`, { headers: { Authorization: `Bearer ${token}` } }),
         fetch(`${baseUrl}/business`, { headers: { Authorization: `Bearer ${token}` } }),
       ]);
 
-      if (!projectsRes.ok || !clientsRes.ok || !announcementsRes.ok || !businessesRes.ok) {
+
+      if (!projectsRes.ok || !clientsRes.ok || !announcementsRes.ok || !businessRes.ok) {
         throw new Error("Failed to fetch data");
       }
 
       setProjects((await projectsRes.json()).projects || []);
-      setClients((await clientsRes.json()).users || []);
+      setClients(await clientsRes.json());
       setAnnouncements((await announcementsRes.json()).announcements || []);
-      setBusinesses((await businessesRes.json()).businesses || []);
+      setBusinesses((await businessRes.json()).businesses || []);
       setLoading(false);
     } catch (error) {
       setError(error.message);
@@ -83,7 +84,12 @@ const AdminDashboard = ({ username }) => {
               <h4>Manage Clients</h4>
             </CCardHeader>
             <CCardBody>
-              <ClientsList clients={clients} />
+              <ClientsList 
+                clients={clients} 
+                setClients={setClients} 
+                businesses={businesses} 
+                setBusinesses={setBusinesses} 
+              />
             </CCardBody>
           </CCard>
 
