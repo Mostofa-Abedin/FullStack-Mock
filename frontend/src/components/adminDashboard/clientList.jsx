@@ -210,7 +210,7 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
       }
       setClients((prev) => prev.filter((client) => client._id !== id));
       // Remove associated business from state.
-      setBusinesses((prev) => prev.filter((bus) => bus.userId.toString() !== id));
+      setBusinesses((prev) => prev.filter((bus) => bus.userId !== id));
     } catch (error) {
       console.error("Error deleting user:", error);
     }
