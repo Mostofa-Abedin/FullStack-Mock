@@ -45,16 +45,19 @@ const ProjectsList = ({ projects, setProjects }) => {
   // Handle Save (Add/Edit)
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData(e.target);
     const projectData = {
       projectName: formData.get("name"),
-      clientId: formData.get("client"),
+      clientId: formData.get("clientId"), // Ensure this is an ID, not a name
       status: formData.get("status"),
-      dueDate: formData.get("dueDate"),
-      description: formData.get("details"),
+      description: formData.get("description"),
+      startDate: formData.get("startDate"),
+      endDate: formData.get("endDate"),
     };
-
+  
+    console.log("Submitting project:", projectData);
+  
     try {
       let response;
       if (modalType === "edit" && currentItem) {
@@ -76,10 +79,17 @@ const ProjectsList = ({ projects, setProjects }) => {
           body: JSON.stringify(projectData),
         });
       }
-
-      if (!response.ok) throw new Error("Failed to save project");
-
+  
+      console.log("Response status:", response.status);
+  
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(`Failed to save project: ${errorMessage}`);
+      }
+  
       const updatedProject = await response.json();
+      console.log("Updated Project:", updatedProject);
+  
       setProjects((prev) => {
         if (modalType === "edit") {
           return prev.map((proj) =>
@@ -89,12 +99,14 @@ const ProjectsList = ({ projects, setProjects }) => {
           return [...prev, updatedProject];
         }
       });
-
+  
       setModalVisible(false);
+      setCurrentItem(null);
     } catch (error) {
       console.error("Error saving project:", error);
     }
   };
+  
 
   return (
     <CContainer fluid>
