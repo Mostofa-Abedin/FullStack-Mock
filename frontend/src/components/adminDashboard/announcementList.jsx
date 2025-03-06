@@ -19,21 +19,7 @@ import {
 } from "@coreui/react";
 
 const AnnouncementsList = ({announcements, setAnnouncements, businesses}) => {
-  console.log(announcements);
-  /* const [announcements, setAnnouncements] = useState([
-     {
-      id: 1,
-      title: "Website Maintenance",
-      content: "Our website will be down for maintenance on 2025-03-10 from 2AM to 4AM.",
-      date: "2025-02-20",
-    },
-    {
-      id: 2,
-      title: "New Feature Released",
-      content: "We are excited to announce the release of our new dashboard feature for clients.",
-      date: "2025-02-18",
-    }, 
-  ]) */
+
   const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
   const token = localStorage.getItem("authToken");
 
@@ -61,12 +47,10 @@ const AnnouncementsList = ({announcements, setAnnouncements, businesses}) => {
 
     // Collect form data
     const formData = new FormData(e.target);
-
-    const businessId = businesses.find((business) => formData.get("business") === business.businessName)?._id;
     const newAnnouncement = {
       id: currentItem?.id || new Date().getTime(), // Generate a new ID for add
       title: formData.get("title"),
-      businessId: businessId,
+      business: formData.get("business"),
       content: formData.get("content"),
       date: formData.get("date"),
     };
@@ -96,7 +80,8 @@ const AnnouncementsList = ({announcements, setAnnouncements, businesses}) => {
         throw new Error(`Failed to save announcement: ${errorMessage}`);
       }
 
-      const updatedAnnouncement = await response.json();
+      const data = await response.json();
+      const updatedAnnouncement = data.announcement;
       setAnnouncements((prev) => {
         if (modalType === "edit") {
           return prev.map((announcement) =>
