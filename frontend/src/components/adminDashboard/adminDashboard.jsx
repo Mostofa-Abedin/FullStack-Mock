@@ -11,6 +11,8 @@ import {
 } from "@coreui/react";
 import "./admindashboard.css";
 
+import "@coreui/coreui/dist/css/coreui.min.css";
+
 import ProjectsList from "../adminDashboard/projectsList";
 import ClientsList from "../adminDashboard/clientList";
 import AnnouncementsList from "../adminDashboard/announcementList";
