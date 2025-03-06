@@ -2,7 +2,7 @@
 import express from 'express';
 import { authenticateUser } from '../middlewares/authMiddleware.js';
 import { authUserOrAdmin } from '../middlewares/authUserOrAdmin.js';
-import { getAllBusinessesWithUserDetails, updateBusinessDetails } from '../controllers/businessController.js';
+import { getAllBusinessesWithUserDetails, updateBusinessDetails, createBusiness, } from '../controllers/businessController.js';
 
 const router = express.Router();
 
