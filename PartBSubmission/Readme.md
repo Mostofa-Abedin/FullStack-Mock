@@ -369,6 +369,48 @@ During **Sprint Planning**, we discussed priority as a team to ensure a balanced
 |                     |        |                       |                |                             |                 |              | Test frontend validation with various inputs                                         | Testing Subtask  | TFS-68            | Medium   | Trenton Dunstan |
 |                     |        |                       |                |                             |                 |              | Ensure database constraints work (unique email test)                                 | Database Subtask | TFS-69            | Medium   | Mostofa         |
 
+#### **Sprint 1 Screenshots (12th Feb – 19th Feb)**
+
+###### **Sprint 1 Start**
+
+![Sprint 1 Start](./docs/Sprint1/Sprint1_start.png)
+
+###### **Day 1 - End of Day (12th Feb)**
+
+![Sprint 1 Day 1](./docs/Sprint1/Sprint1_EOD_12th_feb.png)
+
+###### **Day 2 - End of Day (13th Feb)**
+
+![Sprint 1 Day 2](./docs/Sprint1/Sprint1_EOD_13th_feb.png)
+
+###### **Day 3 - End of Day (14th Feb)**
+
+![Sprint 1 Day 3](./docs/Sprint1/Sprint1_EOD_14th_feb.png)
+
+###### **Day 4 - End of Day (15th Feb)**
+
+![Sprint 1 Day 4](./docs/Sprint1/Sprint1_EOD_15th_feb.png)
+
+###### **Day 5 - End of Day (16th Feb)**
+
+![Sprint 1 Day 5](./docs/Sprint1/Sprint1_EOD_16th_feb.png)
+
+###### **Day 6 - End of Day (17th Feb)**
+
+![Sprint 1 Day 6](./docs/Sprint1/Sprint1_EOD_17th_feb.png)
+
+###### **Day 7 - End of Day (18th Feb)**
+
+![Sprint 1 Day 7](./docs/Sprint1/Sprint1_EOD_18th_feb.png)
+
+###### **Sprint 1 End**
+
+![Sprint 1 End](./docs/Sprint1/Spint1_end.png)
+
+###### **Sprint 1 Burnup Chart**
+
+![Sprint 1 Burnup Chart](./docs/Sprint1/Sprint1_Burnup.png)
+
 #### Sprint 2
 
 - **Start Date:** 20th Feb 2025, 7:00 PM
@@ -483,6 +525,56 @@ During **Sprint Planning**, we discussed priority as a team to ensure a balanced
 |                     |        |                         |                |                                         |                 |              | Test error handling (e.g., trying to edit non-existent users).                                 | Testing Subtask  | TFS-142           | Medium   | Trenton Dunstan |
 |                     |        |                         |                |                                         |                 |              | Add an Admin Profile Management UI with a client search/filter function.                       | Frontend Subtask | TFS-141           | Medium   | Perri Adkins    |
 
+#### **Sprint 2 Screenshots (20th Feb – 2nd Mar)**
+
+###### **Sprint 2 Start**
+
+![Sprint 2 Start](./docs/Sprint2/Sprint2_start.png)
+
+###### **Day 2 - End of Day (21st Feb)**
+
+❌ _Screenshot was missed at End of Day for 21st Feb unfortunately._
+
+###### **Day 3 - End of Day (22nd Feb)**
+
+![Sprint 2 Day 3](./docs/Sprint2/Sprint2_EOD_22nd_feb.png)
+
+###### **Day 4 - End of Day (23rd Feb)**
+
+![Sprint 2 Day 4](./docs/Sprint2/Sprint2_EOD_23rd_feb.png)
+
+###### **Day 5 - End of Day (24th Feb)**
+
+![Sprint 2 Day 5](./docs/Sprint2/Sprint2_EOD_24th_feb.png)
+
+###### **Day 6 - End of Day (25th Feb)**
+
+![Sprint 2 Day 6](./docs/Sprint2/Sprint2_EOD_25th_feb.png)
+
+###### **Day 7 - End of Day (26th Feb)**
+
+![Sprint 2 Day 7](./docs/Sprint2/Sprint2_EOD_26th_feb.png)
+
+###### **Day 8 - End of Day (27th Feb)**
+
+![Sprint 2 Day 8](./docs/Sprint2/Sprint2_EOD_27th_feb.png)
+
+###### **Day 9 - End of Day (28th Feb)**
+
+![Sprint 2 Day 9](./docs/Sprint2/Sprint2_EOD_28th_feb.png)
+
+###### **Day 10 - End of Day (1st Mar)**
+
+❌ _Screenshot was missed at End of Day for 1st Mar unfortunately._
+
+###### **Sprint 2 End**
+
+![Sprint 2 End](./docs/Sprint2/Sprint2_end.png)
+
+###### **Sprint 2 Burnup Chart**
+
+![Sprint 2 Burnup Chart](./docs/Sprint2/Sprint2_Burnup.png)
+
 #### Sprint 3
 
 - **Start Date:** 3rd Mar 2025, 7:00 PM
@@ -577,6 +669,38 @@ During **Sprint Planning**, we discussed priority as a team to ensure a balanced
 |                  |        |                                    |                |                                          |                 |              | Verify that non-admin users cannot modify roles.                                                | Testing Subtask  | TFS-96            | Medium   | Mostofa         |
 |                  |        |                                    |                |                                          |                 |              | Ensure only admins can assign or modify roles.                                                  | Backend Subtask  | TFS-94            | High     | Mostofa         |
 |                  |        |                                    |                |                                          |                 |              | Create PATCH /users/:id/role API endpoint to update roles.                                      | Backend Subtask  | TFS-93            | High     | Mostofa         |
+
+###### **Day 3 - End of Day (5th Mar)**
+
+![Sprint 3 Day 3](./docs/Sprint3/Sprint3_EOD_5th_Mar.png)
+
+###### **Day 4 - End of Day (6th Mar)**
+
+![Sprint 3 Day 4](./docs/Sprint3/Sprint3_EOD_6th_Mar.png)
+
+###### **Day 5 - End of Day (7th Mar)**
+
+![Sprint 3 Day 5](./docs/Sprint3/Sprint3_EOD_7th_Mar.png)
+
+###### **Day 6 - End of Day (8th Mar)**
+
+![Sprint 3 Day 6](./docs/Sprint3/Sprint3_EOD_8th_Mar.png)
+
+###### **Day 7 - End of Day (9th Mar)**
+
+![Sprint 3 Day 7](./docs/Sprint3/Sprint3_EOD_9th_Mar.png)
+
+###### **Day 8 - End of Day (10th Mar)**
+
+![Sprint 3 Day 8](./docs/Sprint3/Sprint3_EOD_10th_Mar.png)
+
+###### **Sprint 3 End**
+
+![Sprint 3 End](./docs/Sprint3/Sprint3_end.png)
+
+###### **Sprint 3 Burnup Chart**
+
+![Sprint 3 Burnup Chart](./docs/Sprint3/Sprint3_Burnup.png)
 
 ##### Task Delegation Methodology
 
