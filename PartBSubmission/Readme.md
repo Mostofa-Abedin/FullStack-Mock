@@ -690,10 +690,6 @@ During **Sprint Planning**, we discussed priority as a team to ensure a balanced
 
 ![Sprint 3 Day 7](./docs/Sprint3/Sprint3_EOD_9th_Mar.png)
 
-###### **Day 8 - End of Day (10th Mar)**
-
-![Sprint 3 Day 8](./docs/Sprint3/Sprint3_EOD_10th_Mar.png)
-
 ###### **Sprint 3 End**
 
 ![Sprint 3 End](./docs/Sprint3/Sprint3_end.png)
@@ -726,19 +722,451 @@ The reviewer typically conducted the review using **GitHub Codespaces**, allowin
 
 ## Testing
 
-### Testing Methodology (TDD)
+This section provides an overview of our testing approach, including Test-Driven Development (TDD) methodology, development and production testing, and our automated test workflows to maintain high-quality code.
 
-### Development Testing
+### Test-Driven Development (TDD) Approach
 
-##### Testing using Vitest
+We followed a **Test-Driven Development (TDD)** approach to ensure all features were thoroughly tested before implementation. This methodology improved code stability, reduced post-deployment bugs, and maintained high-quality standards.
 
-##### Automated Testing using Github Actions
+**Key TDD steps we followed:**
 
-### Production Testing
+- **Write tests first** before implementing new features.
+- **Run tests initially (they should fail).**
+- **Implement the required functionality** until tests pass.
+- **Refactor the code** while keeping tests green.
+- **Aim for 90% test coverage** across frontend and backend, striving to get as close as possible unless infeasible due to external dependencies or complex edge cases.
 
-##### Testing plan
+TDD allowed us to **catch bugs early** and ensure that refactored code remained reliable while maintaining a high level of test coverage.
 
-##### Coverage Reports
+### **Development Testing (Pre-Merge)**
+
+Before merging any code to the main branch, Testing was done at **unit and integration levels** to ensure smooth functionality.
+
+#### **Unit Testing (Frontend & Backend) with Vitest**
+
+For unit testing, we used **Vitest** for both frontend and backend:
+
+- **Frontend:** Tested UI components using **Vitest + React Testing Library**.
+- **Backend:** Verified functions, controllers, and services in isolation.
+
+**Frontend Unit Test Example (Navbar Component)**
+
+One example of our frontend unit tests is verifying that the **Navbar component** renders correctly and includes the expected navigation links.
+
+```javascript
+import { render, screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import Navbar from "../components/NavBar/NavBar";
+
+describe("Navbar Component", () => {
+  test("renders the company name 'Magnet Labs™'", () => {
+    render(<Navbar />, { wrapper: MemoryRouter });
+
+    expect(screen.getByText("Magnet Labs™")).toBeInTheDocument();
+  });
+
+  test("renders all navigation links", () => {
+    render(<Navbar />, { wrapper: MemoryRouter });
+
+    expect(screen.getByText("Our Services")).toBeInTheDocument();
+    expect(screen.getByText("Our Work")).toBeInTheDocument();
+    expect(screen.getByText("Contact Us")).toBeInTheDocument();
+  });
+
+  test("navigation links contain correct href attributes", () => {
+    render(<Navbar />, { wrapper: MemoryRouter });
+
+    expect(screen.getByText("Our Services")).toHaveAttribute(
+      "href",
+      "/services"
+    );
+    expect(screen.getByText("Our Work")).toHaveAttribute("href", "/work");
+    expect(screen.getByText("Contact Us")).toHaveAttribute("href", "/contact");
+  });
+});
+```
+
+This test ensures that the Navbar component is correctly rendered with its navigation links and attributes.
+
+**Backend Unit Test Example (API Route - GET /users)**
+
+For backend testing, we validated API responses using Supertest to ensure expected behavior. Below is an example of testing the /users route:
+
+```javascript
+import "./setup/dbSetup.js"; // Import DB setup
+import request from "supertest";
+import { describe, it, expect } from "vitest";
+import app from "../../index.js";
+import User from "../models/User.js";
+
+describe("GET /users", () => {
+  it("should return an empty array if no users exist", async () => {
+    await User.deleteMany({}); // Ensure database is empty before testing
+
+    const res = await request(app).get("/users");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toBeInstanceOf(Array);
+    expect(res.body.length).toBe(0);
+  }, 10000); // Extend timeout to 10 seconds
+
+  it("should return the created user", async () => {
+    await User.create({
+      name: "Test User",
+      email: "test@example.com",
+      role: "client",
+      password: "password123",
+    });
+
+    const res = await request(app).get("/users");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(1);
+    expect(res.body[0].name).toBe("Test User");
+    expect(res.body[0].role).toBe("client");
+    expect(res.body[0]).toHaveProperty("createdAt");
+    expect(res.body[0]).toHaveProperty("updatedAt");
+    expect(new Date(res.body[0].updatedAt)).toBeInstanceOf(Date);
+  });
+});
+```
+
+This test ensures that the GET /users route correctly returns user data and handles empty databases properly.
+
+We executed all tests locally before merging:
+
+```bash
+npx vitest --coverage
+```
+
+#### **Integration Testing**
+
+We implemented **integration tests** to validate workflows that involved multiple components, ensuring **proper communication between the database, API, and application logic**.
+
+- **Backend Integration:** Used **Supertest** to verify API endpoints and database interactions.
+- **Frontend Integration:** Simulated **user interactions across multiple UI components** to ensure they worked together correctly.
+
+---
+
+#### **Example (Backend - API Route Test using Supertest)**
+
+This test ensures that the **GET `/users` API endpoint** correctly returns users from the database.
+
+```javascript
+import "./setup/dbSetup.js"; // Import DB setup
+import request from "supertest";
+import { describe, it, expect } from "vitest";
+import app from "../../index.js";
+import User from "../models/User.js";
+
+describe("GET /users", () => {
+  it("should return an empty array if no users exist", async () => {
+    await User.deleteMany({}); // Ensure database is empty before testing
+
+    const res = await request(app).get("/users");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toBeInstanceOf(Array);
+    expect(res.body.length).toBe(0);
+  }, 10000); // Extend timeout to 10 seconds
+
+  it("should return the created user", async () => {
+    await User.create({
+      name: "Test User",
+      email: "test@example.com",
+      role: "client",
+      password: "password123",
+    });
+
+    const res = await request(app).get("/users");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(1);
+    expect(res.body[0].name).toBe("Test User");
+    expect(res.body[0].role).toBe("client");
+    expect(res.body[0]).toHaveProperty("createdAt");
+    expect(res.body[0]).toHaveProperty("updatedAt");
+    expect(new Date(res.body[0].updatedAt)).toBeInstanceOf(Date);
+  });
+});
+```
+
+This integration test validates that the GET /users endpoint correctly fetches users from the database and handles an empty database scenario.
+
+**Example (Frontend - Login Form Integration Test using React Testing Library)**
+
+This test ensures that the LoginForm component properly renders, switches between login and registration states, and validates user input.
+
+```javascript
+import { render, fireEvent, screen } from "@testing-library/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import LoginForm from "../components/loginForm/loginForm";
+
+describe("LoginForm Integration Test", () => {
+  test("renders login form correctly", () => {
+    render(
+      <Router>
+        <LoginForm
+          onSubmit={jest.fn()}
+          isAdmin={false}
+          setIsAdmin={jest.fn()}
+        />
+      </Router>
+    );
+
+    expect(screen.getByText("CLIENT LOGIN")).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("Password")).toBeInTheDocument();
+  });
+
+  test("switches between login and registration forms", () => {
+    render(
+      <Router>
+        <LoginForm
+          onSubmit={jest.fn()}
+          isAdmin={false}
+          setIsAdmin={jest.fn()}
+        />
+      </Router>
+    );
+
+    fireEvent.click(screen.getByText("Need an account? Register"));
+    expect(screen.getByText("NEW CLIENT ACCOUNT")).toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("Already have an account? Login"));
+    expect(screen.getByText("CLIENT LOGIN")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Name")).not.toBeInTheDocument();
+  });
+
+  test("validates email input", () => {
+    render(
+      <Router>
+        <LoginForm
+          onSubmit={jest.fn()}
+          isAdmin={false}
+          setIsAdmin={jest.fn()}
+        />
+      </Router>
+    );
+
+    const emailInput = screen.getByLabelText("Email");
+    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
+
+    fireEvent.change(emailInput, { target: { value: "valid@example.com" } });
+
+    expect(
+      screen.queryByText(/Please enter a valid email address/)
+    ).not.toBeInTheDocument();
+  });
+});
+```
+
+This test simulates user interactions in the LoginForm, ensuring proper validation and UI behavior.
+
+##### **Automated Testing (CI/CD via GitHub Actions)**
+
+All branches were automatically tested using **GitHub Actions** before merging to ensure code stability. The CI/CD pipeline ran **unit and integration tests** for both frontend and backend whenever a **pull request (PR) was opened**.
+
+---
+
+### **Workflow:**
+
+1️. **Developer pushes code → GitHub Actions is triggered.**  
+2️. **CI/CD pipeline runs all tests** (frontend + backend, unit + integration).  
+3️. **If tests pass** ✅ → The PR is ready for review.  
+4️. **If tests fail** ❌ → We investigate the cause before deciding to merge.
+
+---
+
+### **Handling Test Failures in CI/CD**
+
+Contrary to a strict **"failing tests block merging"** approach, we found that some test failures were **not due to code issues but rather due to limitations in GitHub Actions’ environment**.
+
+**Common GitHub Actions Issues We Encountered:**
+
+- **MongoDB Access Issues (Why We Didn’t Run MongoDB in CI)**
+
+  - Some of our tests required a **real MongoDB database**, but **GitHub Actions does not have access to our private database instances**.
+  - Instead of setting up a temporary **MongoDB instance within GitHub Actions**, we decided it **wasn’t worth the effort** due to:
+    - **Lack of persistent test data** (each CI run would start with a fresh DB).
+    - **Security concerns** (exposing credentials for a cloud-hosted test DB).
+  - **Alternative approach:** We manually ran database-dependent tests **locally** before merging.
+
+- **Missing Environment Variables (Secrets Not Accessible in PRs)**
+
+  - Some tests depended on secrets like **API keys, database credentials, or authentication tokens**.
+  - **Why was this an issue?** GitHub Actions has **security restrictions** that prevent secrets from being exposed to PRs from forks or external contributors.
+  - **Workaround:** Since secrets **couldn’t be injected in GitHub Actions**, we **manually ran the failing tests locally** instead.
+
+- **Permission Issues with GitHub Actions' Testing Environment**
+  - The **CI/CD testing environment differs from local development**, meaning tests that passed locally **sometimes failed in GitHub Actions** due to different OS behaviors or permission restrictions.
+
+**How We Handled These Issues:**
+
+- If a test failure was **due to an actual bug in the code**, we fixed it before merging.
+- If a test failure was due to **GitHub Actions' limitations (e.g., MongoDB access, missing secrets)**, we **ran the tests locally** instead and merged the PR after verification.
+
+---
+
+### **Example CI/CD Workflow (GitHub Actions - ci.yml)**
+
+Below is our **actual GitHub Actions YAML file**, which runs tests for both frontend and backend:
+
+```yaml
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ✅ Step 1: Checkout Repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # ✅ Step 2: Set Up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # ✅ Step 3: Install Dependencies (Backend & Frontend)
+      - name: Install dependencies (Backend & Frontend)
+        run: |
+          cd backend && npm install
+          cd ../frontend && npm install
+
+      # ✅ Step 4: Run Backend Tests (With Coverage)
+      - name: Run Backend Tests (Unit & Integration)
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+        run: |
+          cd backend
+          npm test -- --coverage  # ✅ Runs all backend tests
+
+      # ✅ Step 5: Run Frontend Tests (With Coverage)
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          npm test -- --coverage
+
+      # ✅ Step 6: Upload Coverage Reports as Artifacts
+      - name: Upload test coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: |
+            backend/coverage
+            frontend/coverage
+          retention-days: 7 # Keep artifacts for 7 days
+```
+
+This pipeline automatically installs dependencies, runs tests, and uploads coverage reports.
+
+Screenshot of a successful test run in GitHub Actions has been provided below as an example.
+
+![Successful Github Actions Test](./docs/Succesful_github_test_example.png)
+
+### **Production Testing (User Acceptance Testing - UAT)**
+
+After merging to `main`, code was **auto-deployed to our live environment**. We then performed **User Acceptance Testing (UAT)** to confirm real-world functionality before public launch.
+
+### **Why We Tested in Production (Pre-Launch Justification)**
+
+Since our website was **not yet accessible to the public** and in a pre-launch stage, we conducted **manual testing directly in the live production environment**.
+
+- If a test **failed**, and moved the existing feature ticket **back to In Progress** to be fixed **in `main` itself**.
+- This approach was **acceptable** because **pre-launch**, we had no live users relying on the system, allowing us to fix issues directly in production.
+- **Once launched**, we plan to **test in a staging environment** before merging to `main`.
+
+### **Manual Test Plan**
+
+Below is our **structured UAT test plan**, documenting real tests performed before launch.
+
+#### **NAVBAR / FOOTER (TFS-25)**
+
+| **Test ID** | **Date** | **Test Description** | **Steps to Reproduce**                                                   | **Expected Outcome**            | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | -------------------- | ------------------------------------------------------------------------ | ------------------------------- | ------------------ | ------------- |
+| 01          | 15/2/25  | Navigation link test | Open app → Click navbar links (Our Services, Our Work, Contact Us, Logo) | User is redirected correctly    | All links work     | ✅ Pass       |
+| 02          | 15/2/25  | User login link test | Open app → Click on user icon                                            | User is directed to login page  | Works as expected  | ✅ Pass       |
+| 03          | 15/2/25  | Footer social links  | Open app → Click footer social media icons                               | Redirects to social media pages | All links work     | ✅ Pass       |
+
+---
+
+#### **HOMEPAGE UI (TFS-26)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                | **Expected Outcome**        | **Actual Outcome**        | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | ------------------------ | --------------------------- | ------------------------- | ------------- |
+| 04          | 18/2/25  | Ensure active highlighting in navbar    | Click navbar links       | Current page is highlighted | **FAIL**: No highlighting | ❌ Fail       |
+| 05          | 18/2/25  | Fix active highlighting in navbar       | Click navbar links       | Current page is highlighted | Fixed and working         | ✅ Pass       |
+| 06          | 18/2/25  | Ensure hamburger menu appears on mobile | Open on mobile/tablet    | Hamburger menu is visible   | Works as expected         | ✅ Pass       |
+| 07          | 18/2/25  | Verify responsive navbar/footer         | Open on all screen sizes | Displays correctly          | Works as expected         | ✅ Pass       |
+
+---
+
+#### **SERVICES PAGE (TFS-27)**
+
+| **Test ID** | **Date** | **Test Description**                 | **Steps** | **Expected Outcome**              | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | ------------------------------------ | --------- | --------------------------------- | ------------------ | ------------- |
+| 08          | 18/2/25  | Verify ‘Services’ page is responsive | Open app  | Displays correctly on all devices | Works as expected  | ✅ Pass       |
+
+---
+
+#### **OUR WORK PAGE (TFS-28)**
+
+| **Test ID** | **Date** | **Test Description**                 | **Steps** | **Expected Outcome**              | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | ------------------------------------ | --------- | --------------------------------- | ------------------ | ------------- |
+| 09          | 18/2/25  | Verify ‘Our Work’ page is responsive | Open app  | Displays correctly on all devices | Works as expected  | ✅ Pass       |
+| 10          | 19/2/25  | Verify project links                 | Open app  | Links go to correct project pages | All links correct  | ✅ Pass       |
+
+---
+
+#### **PROJECT PAGES (TFS-29)**
+
+| **Test ID** | **Date** | **Test Description**                  | **Steps**                        | **Expected Outcome**              | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | ------------------------------------- | -------------------------------- | --------------------------------- | ------------------ | ------------- |
+| 11          | 19/2/25  | Verify ‘Project’ pages are responsive | Open app                         | Displays correctly on all devices | Works as expected  | ✅ Pass       |
+| 12          | 19/2/25  | Verify ‘Back to Our Work’ buttons     | Open project page → Click button | Navigates back to /work page      | Works as expected  | ✅ Pass       |
+
+---
+
+#### **CONTACT PAGE (TFS-30)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                      | **Expected Outcome**              | **Actual Outcome**             | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | ------------------------------ | --------------------------------- | ------------------------------ | ------------- |
+| 13          | 26/2/25  | Verify ‘Contact’ page responsiveness    | Open app                       | Displays correctly on all devices | **FAIL**: Red outline on forms | ❌ Fail       |
+| 14          | 26/2/25  | Fix form display issue                  | Open app                       | Displays correctly on all devices | Fixed and working              | ✅ Pass       |
+| 15          | 26/2/25  | Ensure contact form sends inquiry email | Open app → Submit contact form | Email is received successfully    | Works as expected              | ✅ Pass       |
+
+---
+
+#### **LOGIN PAGE (TFS-30)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
+| 16          | 26/2/25  | Verify Client login page responsiveness | Open app → Navigate to login page | Displays correctly   | Works as expected  | ✅ Pass       |
+| 17          | 26/2/25  | Verify Client registration page         | Open app → Navigate to login page | Displays correctly   | Works as expected  | ✅ Pass       |
+| 18          | 26/2/25  | Verify Admin login page                 | Open app → Navigate to login page | Displays correctly   | Works as expected  | ✅ Pass       |
+| 19          | 26/2/25  | Verify email & password validation      | Open app → Attempt login/register | Validation works     | Works as expected  | ✅ Pass       |
+
+#### **Code Coverage Reports**
+
+Our final coverage report ensured that our codebase met **X%+ test coverage** across both frontend and backend.
+
+| **Metric**    | **Frontend Coverage** | **Backend Coverage** |
+| ------------- | --------------------- | -------------------- |
+| Lines Covered | X%                    | X%                   |
+| Statements    | X%                    | X%                   |
+| Functions     | X%                    | X%                   |
+| Branches      | X%                    | X%                   |
+
+✅ **Screenshot of the final test coverage report** _(to be added in README)_
 
 ---
 
