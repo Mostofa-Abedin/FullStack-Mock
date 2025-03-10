@@ -55,8 +55,8 @@ const registerBusiness = async (req, res) => {
 }
 
 
-// Endpoint to get business details for the logged-in user
-const getBusinessDetails = async (req, res) => {
+ // Endpoint to get business details for the logged-in user
+ const getBusinessDetails = async (req, res) => {
     const userID = req.user.userID;
 
     try {
@@ -75,4 +75,3 @@ const getBusinessDetails = async (req, res) => {
 module.exports = { registerBusiness, getBusinessDetails };
 
 export { registerBusiness };
-
