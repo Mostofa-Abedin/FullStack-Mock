@@ -1164,7 +1164,8 @@ Our final coverage report ensured that our codebase met **X%+ test coverage** ac
 | Lines Covered | X%                    | X%                   |
 | Statements    | X%                    | X%                   |
 | Functions     | X%                    | X%                   |
-| Branches      | X%                    | X%                   |
+| Branches      | X%                    | X                    |
+| %             |
 
 ✅ **Screenshot of the final test coverage report** _(to be added in README)_
 
