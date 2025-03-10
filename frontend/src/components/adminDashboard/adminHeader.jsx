@@ -4,7 +4,7 @@ import { cilUser, cilLockLocked } from "@coreui/icons";
 
 const Header = () => {
   return (
-    <CHeader position="sticky" className="header">
+    <CHeader className="header">
       <CHeaderBrand className="header-text" href="/admin/dashboard">
         <strong>Admin Dashboard</strong>
       </CHeaderBrand>

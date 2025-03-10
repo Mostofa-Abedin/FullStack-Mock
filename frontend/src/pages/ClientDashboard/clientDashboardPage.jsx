@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"; 
 import ClientDashboard from "../../components/clientDashboard/clientDashboard";
-import Header from "../../components/adminDashboard/adminHeader"; 
-import Sidebar from "../../components/adminDashboard/adminSidebar"; 
+import Header from "../../components/clientDashboard/clientHeader"; 
 import "./clientdashboardpage.css"
 
 const ClientDashboardPage = () => {

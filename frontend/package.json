@@ -12,9 +12,16 @@
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {
+    "@coreui/icons": "^2.1.0",
     "@coreui/icons-react": "^2.3.0",
+    "@coreui/react": "^4.10.0",
+    "@emailjs/browser": "^4.4.1",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@testing-library/react": "^16.2.0",
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",

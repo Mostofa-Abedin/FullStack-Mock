@@ -9,7 +9,15 @@ export default defineConfig({
     sourcemap: true,
   },
   server: {
-    port: 5173,
+    port: 5000,
+  },
+  preview: {
+    port: 5000,
+  },
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
   },
   test: {
     globals: true,

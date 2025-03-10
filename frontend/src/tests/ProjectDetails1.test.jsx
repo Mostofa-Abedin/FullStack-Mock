@@ -1,22 +1,35 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom"; // Import MemoryRouter
 import Project1 from "../pages/ProjectPages/projectdetails1";
 
 describe("Project1 Component", () => {
   test("renders project title", () => {
-    render(<Project1 />);
+    render(
+      <MemoryRouter> 
+        <Project1 />
+      </MemoryRouter>
+    );
     expect(screen.getByText(/Project Title 1/i)).toBeInTheDocument();
   });
 
   test("renders project description", () => {
-    render(<Project1 />);
+    render(
+      <MemoryRouter> 
+        <Project1 />
+      </MemoryRouter>
+    );
     expect(
       screen.getByText(/A brief overview of the project, highlighting its goals, objectives, and outcomes./i)
     ).toBeInTheDocument();
   });
 
   test("renders three images", () => {
-    render(<Project1 />);
+    render(
+      <MemoryRouter> 
+        <Project1 />
+      </MemoryRouter>
+    );
     const images = screen.getAllByRole("img");
     expect(images).toHaveLength(3);
     images.forEach((img) => {
@@ -26,12 +39,20 @@ describe("Project1 Component", () => {
   });
 
   test("renders project details section", () => {
-    render(<Project1 />);
+    render(
+      <MemoryRouter> 
+        <Project1 />
+      </MemoryRouter>
+    );
     expect(screen.getByText(/Project Details/i)).toBeInTheDocument();
   });
 
   test("renders project details list", () => {
-    render(<Project1 />);
+    render(
+      <MemoryRouter> 
+        <Project1 />
+      </MemoryRouter>
+    );
     expect(
       screen.getByText(/Goal: Describe the main objective of the project./i)
     ).toBeInTheDocument();
@@ -44,7 +65,11 @@ describe("Project1 Component", () => {
   });
 
   test("renders call-to-action button", () => {
-    render(<Project1 />);
+    render(
+      <MemoryRouter> 
+        <Project1 />
+      </MemoryRouter>
+    );
     const link = screen.getByRole("link", { name: /Back to Our Work/i });
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute("href", "/work");

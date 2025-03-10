@@ -22,7 +22,8 @@
     font-family: "Kode Mono", monospace;
     text-transform: uppercase;
     border: none;
-    padding: 2rem 2.5rem;
+    padding: 2rem;
+    --cui-header-min-height: 8rem;
     --cui-header-color: white;
     --cui-body-font-family: "Inter", sans-serif;
 }

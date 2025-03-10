@@ -1,5 +1,5 @@
 //Import JWT
-const jwt = require('jsonwebtoken');
+import jwt from "jsonwebtoken";
 
 //Middleware to verify role from JWT
 const authorizeAdmin = (req, res, next) => {
@@ -25,4 +25,4 @@ const authenticateUser = (req, res, next) => {
         res.status(403).json({ message: 'Invalid Token.' });
     }
 };
-module.exports = { authenticateUser, authorizeAdmin };
+export { authenticateUser, authorizeAdmin };

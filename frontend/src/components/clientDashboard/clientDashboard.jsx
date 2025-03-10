@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import axios from "axios";
 import {
   CContainer,
@@ -9,12 +10,14 @@ import {
   CCardBody,
   CCardHeader,
   CFormInput,
+
   CModal,
   CFormSelect,
   CModalHeader,
   CModalTitle,
   CModalBody,
   CModalFooter,
+
   CFormTextarea,
 } from "@coreui/react";
 import "@coreui/coreui/dist/css/coreui.min.css";
@@ -30,7 +33,6 @@ const ClientDashboard = ({ username }) => {
     businessType: "",
     website: "",
   });
-
   const [projects, setProjects] = useState([
     {
       id: 1,
@@ -258,6 +260,7 @@ const ClientDashboard = ({ username }) => {
     <CContainer fluid>
       <CRow>
         <CCol md="10" className="p-4">
+
           <h2 className="dash-welcome-text">
             Welcome, {username ? username : "Client"}!
           </h2>
@@ -487,5 +490,6 @@ const ClientDashboard = ({ username }) => {
     </CContainer>
   );
 };
+
 
 export default ClientDashboard;

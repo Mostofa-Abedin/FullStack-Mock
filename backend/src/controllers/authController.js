@@ -1,7 +1,7 @@
-const User = require("../models/User")
+import User from "../models/User.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 
 const loginUser = async (req, res) => {
 
@@ -35,8 +35,9 @@ const token = jwt.sign(
 
 res.json({
     token,
+    user,
     role: user.role // Sending role to frontend 
 });
 }
 
-module.exports = {loginUser}
+export { loginUser };

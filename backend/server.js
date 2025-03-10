@@ -1,5 +1,5 @@
-const http = require('http');
-const app = require('./index'); // Import configured app
+import http from 'http';
+import app from './index.js'; // Ensure the file extension is included
 
 const PORT = process.env.PORT || 5000;
 

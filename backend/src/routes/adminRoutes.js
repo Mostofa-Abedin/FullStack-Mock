@@ -1,7 +1,9 @@
-//Import required libraries
-const express = require('express');
+// Import required libraries
+import express from 'express';
+import { authenticateUser, authorizeAdmin } from '../middlewares/authMiddleware.js';
+
 const router = express.Router();
-const { authenticateUser,authorizeAdmin } = require('../middlewares/authMiddleware');
+
 
 
 // Admin protected route via middleware
@@ -10,4 +12,4 @@ router.get('/dashboard', authenticateUser, authorizeAdmin, (req, res) => {
     res.json({ message: "Welcome to the Admin Dashboard." });
 });
 
-module.exports = router;
+export default router;

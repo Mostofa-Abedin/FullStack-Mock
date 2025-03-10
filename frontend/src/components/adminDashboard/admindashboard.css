@@ -44,8 +44,8 @@
 }
 
 .dash-add-button:hover, .dashboard-button:hover {
-    background-color: #8BC4D9;
-    color: #192F3C;
+    background-color: #8BC4D9 !important;
+    color: #192F3C !important;
 }
 
 .dashboard-button {
@@ -103,11 +103,13 @@
 .dash-submit-button {
     background: #F3A83C;
     border-radius: 0%;
+    border: none;
 }
 
 .dash-submit-button:hover {
     background: #F3DCB2;
     border-radius: 0%;
+    border: none;
 }
 
 
@@ -180,9 +182,11 @@
 /* Delete Button */
 
 .dash-delete {
-    background-color: #841B13;
+    background-color: #841B13 !important;
     color: white;
     border-radius: 0%;
+    border:none;
+    margin: 10px;
 }
 
 .dash-delete:hover {
@@ -191,6 +195,40 @@
     color: white;
 }
 
+/* Edit Button */
+
+.dash-edit {
+    background-color: #F3A83C !important;
+    color: white;
+    border-radius: 0%;
+    border: none;
+    margin: 10px;
+
+}
+
+.dash-edit:hover {
+    background-color: #F3DCB2 !important;
+    scale: 1.025;
+    color: white;
+}
+
+
+/* Close Button */
+
+.dash-close-button {
+    background-color: white;
+    color: #841B13;
+    border-radius: 0%;
+    border: none;
+}
+
+.dash-close-button:hover {
+    background-color: white !important;
+    scale: 1.025;
+    color: #F3A83C;
+}
+
 .col-md-10 {
     width: 100% !important;
 }
+

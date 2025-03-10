@@ -1,5 +1,5 @@
 // Import the Mongoose library
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 // Define a schema for the Business model
 const BusinessSchema = new mongoose.Schema({
@@ -57,6 +57,6 @@ const BusinessSchema = new mongoose.Schema({
 // Prevent model overwrite during testing
 const Business = mongoose.models.Business || mongoose.model('Business', BusinessSchema);
 
-module.exports = Business;
+export default Business;
 
 
