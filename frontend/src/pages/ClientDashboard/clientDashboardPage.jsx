@@ -11,12 +11,9 @@ const ClientDashboardPage = () => {
   return (
     <div className="admin-dashboard-container">
       <Header />
-      <div className="dashboard-layout">
-        <Sidebar />
         <div className="dashboard-content">
           <ClientDashboard />
         </div>
-      </div>
     </div>
   );
 };
