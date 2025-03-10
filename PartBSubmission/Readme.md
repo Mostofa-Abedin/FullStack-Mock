@@ -80,7 +80,10 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 - **Database:**
 - **Others:**
 
-## Setup Instructions
+@Trenton- to update dataflow and app architecture diagrams and add
+@Perri to add wireframe showing final changes
+
+## Setup Instructions @ Trenton to start
 
 ---
 
@@ -1177,6 +1180,11 @@ Our final coverage report ensured that our codebase met **X%+ test coverage** ac
 ##### Problem Resolution
 
 Throughout the project, our team encountered several challenges which provided valuable learning opportunities.
+
+@ Mos to have a template for this section
+
+- Something
+  @Trenton
 
 - Testing with Github actions?
   @Mostofa-

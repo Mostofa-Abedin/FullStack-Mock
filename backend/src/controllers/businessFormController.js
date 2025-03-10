@@ -72,6 +72,6 @@ const registerBusiness = async (req, res) => {
     }
 };
 
-module.exports = { registerBusiness, getBusinessDetails };
 
-export { registerBusiness };
+export { registerBusiness, getBusinessDetails  };
+
