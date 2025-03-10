@@ -1,24 +1,20 @@
 import React, { useEffect } from "react"; 
-import AdminDashboard from "../../components/adminDashboard/adminDashboard";
-import Header from "../../components/adminDashboard/adminHeader"; 
-import Sidebar from "../../components/adminDashboard/adminSidebar"; 
+import ClientDashboard from "../../components/clientDashboard/clientDashboard";
+import Header from "../../components/clientDashboard/clientHeader"; 
 import "./clientdashboardpage.css"
 
-const AdminDashboardPage = () => {
+const ClientDashboardPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top when the page loads
   }, []);
   return (
     <div className="admin-dashboard-container">
       <Header />
-      <div className="dashboard-layout">
-        <Sidebar />
         <div className="dashboard-content">
-          <AdminDashboard />
+          <ClientDashboard />
         </div>
-      </div>
     </div>
   );
 };
 
-export default AdminDashboardPage;
+export default ClientDashboardPage;
