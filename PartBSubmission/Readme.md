@@ -1255,7 +1255,7 @@ app.use((req, res) => {
 });
 ```
 
-This led to preflight request failures, especially for PATCH and DELETE operations.
+This led to preflight request failures, especially for `PATCH` and `DELETE` operations.
 
 ##### **Why This Happened:**
 
@@ -1326,9 +1326,9 @@ const corsOptions = {
     }
     return callback(null, true);
   },
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // ✅ PATCH & DELETE included
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // PATCH & DELETE included
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // ✅ Allow credentials like cookies & auth headers
+  credentials: true, //  Allow credentials like cookies & auth headers
 };
 
 app.use(cors(corsOptions));
