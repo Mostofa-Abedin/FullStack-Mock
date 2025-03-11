@@ -1,50 +1,64 @@
-import './setup/dbSetup.js'; // Import  DB setup
-import request from 'supertest';
-import { describe, it, expect } from 'vitest';
-import app from '../../index.js';
-import User from '../models/User.js';
-import jwt from 'jsonwebtoken';
+import "./setup/dbSetup.js"; // Import  DB setup
+import request from "supertest";
+import { describe, it, expect, afterAll } from "vitest";
+import app from "../../index.js";
+import User from "../models/User.js";
+import jwt from "jsonwebtoken";
+let adminToken, clientToken, clientId, adminId;
 
-describe('PATCH /users/:id/password', () => {
-    let clientUser;
-    beforeAll(async () => {    
-        // Create a client user
-        clientUser = await User.create({
-          name: 'Client User',
-          email: 'changepassword@testexample.com',
-          role: 'client',
-          password: 'password123'
-        });
-      });
-  
-  it('should change password successfully', async () => {
-    // To be fixed/created once testing errors have been fixed
-    // I think it's the same issue as the others, DB returning null when finding user
-    /*const clientToken = jwt.sign(
-        { userID: clientUser._id},
-        process.env.JWT_SECRET || "secret",
-        { expiresIn: "1h" }
-      );
-    const decoded = jwt.verify(clientToken, process.env.JWT_SECRET || "secret"); 
-    const user = decoded;
-    const newPassword = {
-        oldPassword: "password123",
-        newPassword: "password234"
-    }
+beforeAll(async () => {
+  // Create test users
+  const adminUser = await User.create({
+    name: "Admin",
+    email: "admin@test.com",
+    role: "admin",
+    password: "password123",
+  });
+  const clientUser = await User.create({
+    name: "Client",
+    email: "client@test.com",
+    role: "client",
+    password: "password123",
+  });
+
+  clientId = clientUser._id;
+  adminId = adminUser._id;
+
+  // Generate JWT tokens
+  adminToken = jwt.sign(
+    { userID: adminUser._id, role: "admin" },
+    process.env.JWT_SECRET || "secret"
+  );
+  clientToken = jwt.sign(
+    { userID: clientUser._id, role: "client" },
+    process.env.JWT_SECRET || "secret"
+  );
+});
+
+afterAll(async () => {
+  await User.deleteMany({});
+});
+describe("PATCH /users/:id/profile", () => {
+  it.skip("should change password successfully", async () => {
+    const password = {
+      password: "password234",
+    };
     const res = await request(app)
-                .patch(`/users/${user.userID}/password`)
-                .set(`Authorization`, `Bearer ${clientToken}`)
-                .send(newPassword);
-    // console.log(res)
+      .patch(`/users/${clientId}/profile/`)
+      .set(`Authorization`, `Bearer ${clientToken}`)
+      .send(password);
     expect(res.statusCode).toBe(201);
-    expect(res.body.message).toBe('Business onboarded successfully'); */ //  Check JWT has been generated
+    expect(res.body.message).toBe("User profile updated successfully"); //  Check JWT has been generated
   });
 
-  it('should fail if old password is wrong', async () => {
-    //To be done once other testing errors are fixed
-  });
+  it.skip("should fail if user details are incorrect", async () => {
+    const badEmail = { email: "bademail" };
+    const res = await request(app)
+      .patch(`/users/${clientId}/profile`)
+      .set(`Authorization`, `Bearer ${clientToken}`)
+      .send(badEmail);
 
-  it('should fail if password fields are missing', async () => {
-    //To be done once other testing errors are fixed
+    expect(res.statusCode).toBe(404);
+    expect(res.body.message).toBe("User not found.");
   });
 });

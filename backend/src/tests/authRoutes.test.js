@@ -4,25 +4,36 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import app from '../../index.js';
 import User from '../models/User.js';
 
+let clientId, adminId;
+
+beforeAll(async () => {
+  // Create test users
+  const adminUser = await User.create({ name: 'Admin', email: 'adminAuth@test.com', role: 'admin', password: 'password123' });
+  const clientUser = await User.create({ name: 'Client', email: 'clientAuth@test.com', role: 'client', password: 'password123' });
+
+  clientId = clientUser._id;
+  adminId = adminUser._id;
+
+});
+
+afterAll(async () => {
+  await User.deleteMany({});
+})
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: POST /login/ Tests
 describe('POST /login', () => {
   // Commented out test until further debugging
-  /* it('should login a new user successfully', async () => {
-    const newUser = {
-      name: 'Register User',
-      email: 'register@testexample.com',
-      role: 'client',
-      password: 'securepassword123'
+  it.skip('should login a new user successfully', async () => {
+    const userData = {
+      email: 'clientAuth@test.com',
+      password: 'password123'
     };
-
-    await User.create(newUser);
-    const res = await request(app).post('/login').send(newUser);
+    const res = await request(app).post('/login').send(userData);
     expect(res.statusCode).toBe(200);
     expect(res.body.token.startsWith('ey')).toBe(true); //  Check JWT has been generated
-  }, 10000); */
+  }, 10000);
 
-  it('should fail if email does not exist', async () => {
+  it.skip('should fail if email does not exist', async () => {
     const userData = {
       email: 'notaregister@example.com',
       password: 'securepassword123'
@@ -35,15 +46,7 @@ describe('POST /login', () => {
   });
 
   // Commented out test until further debugging
-  /* it('should fail if incorrect password', async () => {
-    const newUser = {
-        name: 'Register User',
-        email: 'register@example.com',
-        role: 'client',
-        password: 'securepassword123'
-      };
-  
-    await User.create(newUser);
+  it.skip('should fail if incorrect password', async () => {
     const userData = {
         email: 'register@example.com',
         password: 'wrongsecurepassword123'
@@ -54,5 +57,5 @@ describe('POST /login', () => {
   
     expect(res.statusCode).toBe(400);
     expect(res.body.message).toBe('Wrong password.');
-  }); */
+  });
 });

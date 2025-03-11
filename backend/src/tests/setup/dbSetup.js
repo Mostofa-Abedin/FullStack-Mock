@@ -24,13 +24,13 @@ beforeAll(async () => {
 }, 20000); // ⬅️ Extended timeout to 20 seconds to prevent test failures
 
 // ✅ Clean up database before each test
-beforeEach(async () => {
+/* beforeEach(async () => {
     if (mongoose.connection.readyState === 1) {
       await User.deleteMany({});
       const count = await User.countDocuments();
       console.log(`✅ Database cleared. User count: ${count}`);
     }
-  });
+  }); */
   
 
 // ✅ Disconnect from MongoDB after all tests
