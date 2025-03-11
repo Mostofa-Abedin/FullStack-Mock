@@ -80,7 +80,13 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 - **Database:**
 - **Others:**
 
+@Trenton- to update dataflow and app architecture diagrams and add @Perri to add wireframe showing final changes
+
+@Perri to add final wireframes
+
 ## Setup Instructions
+
+@Trenton to start
 
 ---
 
@@ -974,8 +980,8 @@ All branches were automatically tested using **GitHub Actions** before merging t
 
 1️. **Developer pushes code → GitHub Actions is triggered.**  
 2️. **CI/CD pipeline runs all tests** (frontend + backend, unit + integration).  
-3️. **If tests pass** ✅ → The PR is ready for review.  
-4️. **If tests fail** ❌ → We investigate the cause before deciding to merge.
+3️. **If tests pass** → The PR is ready for review.  
+4️. **If tests fail** → We investigate the cause before deciding to merge.
 
 ---
 
@@ -1171,18 +1177,86 @@ Our final coverage report ensured that our codebase met **X%+ test coverage** ac
 
 ---
 
-## Challenges
-
-#### Challenge 1
-
-##### Problem Resolution
+## Challenges and Solutions
 
 Throughout the project, our team encountered several challenges which provided valuable learning opportunities.
 
-- Testing with Github actions?
-  @Mostofa-
+#### Challenge 1: [Title Related to the Issue] (Mostofa)
 
-- CoreUI template?
-  @Perri-
+##### **The Problem:**
+
+Testing with Github actions?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+
+#### Challenge 2: [Title Related to the Issue] (Perri)
+
+##### **The Problem:**
+
+CoreUI template?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+
+#### Challenge 3: [Title Related to the Issue] (Trenton)
+
+##### **The Problem:**
+
+CoreUI template?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
 
 ## Presentation
