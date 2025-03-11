@@ -82,6 +82,30 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 
 ## Setup Instructions
 
+### Environment variables
+In order to run the application, two `.env` files are required in the `frontend` and `backend` directories. Starting with the `backend` directory, an `.env` file is required with two enviroment variables: `MONGO_URI=string` and `PORT=PORTNUMBER`. `MONGO_URI` must be a [connection string](https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string) which will then connect the backend to a MongoDB cluster. `Port` must be a choice of port to run the backend/server on. 
+
+For the `frontend` directory, an `.env` file is required with a single environment variable `VITE_API_URL=http://localhost:PORTNUMBER`. The choice of port number is open to the user, but must match the choice of port number chosen in the backend directory. The port number that the frontend/React application runs on is configured in `frontend/vite.config.js`
+
+### Frontend
+To run the frontend of the application, follow these steps:
+
+1. Navigate to the `frontend` directory: `$ cd frontend`
+2. Install the required dependencies: `$ npm install`
+3. Start the development server: `$ npm run dev`
+
+The frontend should now be running on `http://localhost:5000`.
+
+### Backend
+
+To run the backend of the application, follow these steps:
+
+1. Navigate to the `backend` directory: `$ cd backend`
+2. Install the required dependencies: `$ npm install`
+3. Start the backend server: `$ npm run dev`
+
+The backend should now be running on `http://localhost:5001`.
+
 ---
 
 ## Project Management
