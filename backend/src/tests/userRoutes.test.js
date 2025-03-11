@@ -1,4 +1,4 @@
-import './setup/dbSetup.js'; // Import  DB setup
+/* import './setup/dbSetup.js'; // Import  DB setup */
 import request from 'supertest';
 import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 import app from '../../index.js';
@@ -6,11 +6,11 @@ import User from '../models/User.js';
 
 
 beforeAll(async () => {
-  await User.deleteMany(); // Ensure database is empty before testing
+  /* await User.deleteMany(); */ // Ensure database is empty before testing
 });
 
 afterAll(async () => {
-  await User.deleteMany(); // Clean up after all tests
+  /* await User.deleteMany(); */ // Clean up after all tests
 });
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: GET /users Tests
@@ -151,7 +151,7 @@ describe('Model Validations', () => {
   });
 
   it('should hash the password before saving', async () => {
-    const user = await User.create({ name: 'Test User', email: 'user@example.com', password: 'mypassword123' });
+    const user = await User.create({ name: 'Test User', email: 'hashinguser@example.com', password: 'mypassword123' });
 
     expect(user.password).not.toBe('mypassword123'); // Should not store plaintext password
     expect(user.password.startsWith('$2b$')).toBe(true); // Should be a bcrypt hash

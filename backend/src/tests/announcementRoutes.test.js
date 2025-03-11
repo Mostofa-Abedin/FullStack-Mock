@@ -1,4 +1,4 @@
-import './setup/dbSetup.js'; // Centralized DB setup
+/* import './setup/dbSetup.js'; // Centralized DB setup */
 import request from 'supertest';
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import app from '../../index.js';

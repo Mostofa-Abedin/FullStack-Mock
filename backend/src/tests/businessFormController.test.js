@@ -1,9 +1,9 @@
-import './setup/dbSetup.js'; // Import  DB setup
 import request from 'supertest';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import app from '../../index.js';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
+import Business from '../models/Business.js';
 let adminToken, clientToken, clientId, adminId;
 
 beforeAll(async () => {
@@ -18,25 +18,31 @@ beforeAll(async () => {
   adminToken = jwt.sign({ userID: adminUser._id, role: 'admin' }, process.env.JWT_SECRET || 'secret');
   clientToken = jwt.sign({ userID: clientUser._id, role: 'client' }, process.env.JWT_SECRET || 'secret');
 });
+
+afterAll(async () => {
+  await User.deleteMany({});
+});
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: POST /user/:id/onboarding/ Tests
-describe.skip('POST /users/:id/onboarding', () => {
+describe('POST /users/:id/onboarding', () => {
   
-  it.skip('should create a new business successfully', async () => {
+  it('should create a new business successfully', async () => {
     // To be fixed/created once testing errors have been fixed
     const newBusiness = {
-        businessName: "testBusiness",
-        industry: "testIndustry",
-        website: "testWebsite",
-        phone: "0412345678",
-        address: "test address"
-    }
+      userId: clientId,
+      businessName: "testBusiness",
+      industry: "testIndustry",
+      website: "https://www.testWebsite.com",
+      phone: "61412345678",
+      address: "123 test address"
+  }
+  const url = `/users/${clientId}/onboarding`;
     const res = await request(app)
-                .post(`users/${clientId}/onboarding`)
+                .post(url)
                 .set('Authorization', `Bearer ${clientToken}`)
                 .send(newBusiness);
-    expect(res.statusCode).toBe(200);
-    expect(res.body.token.startsWith('ey')).toBe(true); //  Check JWT has been generated
+    expect(res.statusCode).toBe(201);
+    expect(res.body.message).toBe('Business onboarded successfully');
   });
 
   it('should fail if fields are missing', async () => {
@@ -46,12 +52,13 @@ describe.skip('POST /users/:id/onboarding', () => {
         website: "testWebsite",
         phone: "0412345678"
     }
+    const url = `/users/${clientId}/onboarding`;
     const res = await request(app)
-                .post(`users/${clientId}/onboarding`)
+                .post(url)
                 .set('Authorization', `Bearer ${clientToken}`)
                 .send(newBusiness);
-    expect(res.statusCode).toBe(400);
-    expect(res.body.message).toBe('Missing fields');
+    expect(res.statusCode).toBe(401);
+    expect(res.body.message).toBe('Missing required fields');
   });
 
   it('should fail if details do not match specifications (website, phone number)', async () => {
@@ -62,11 +69,12 @@ describe.skip('POST /users/:id/onboarding', () => {
         phone: "0412345678",
         address: "test address"
     }
+    const url = `/users/${clientId}/onboarding`;
     const res = await request(app)
-                .post(`users/${clientId}/onboarding`)
+                .post(url)
                 .set('Authorization', `Bearer ${clientToken}`)
                 .send(newBusiness);
     expect(res.statusCode).toBe(400);
-    expect(res.body.message).toBe('Invalid fields');
+    expect(res.body.message.website.message).toBe('Invalid website URL');
   });
 });
