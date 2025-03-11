@@ -1087,7 +1087,7 @@ After merging to `main`, code was **auto-deployed to our live environment**. We 
 
 Since our website was **not yet accessible to the public** and in a pre-launch stage, we conducted **manual testing directly in the live production environment**.
 
-- If a test **failed**, and moved the existing feature ticket **back to In Progress** to be fixed **in `main` itself**.
+- If a test **failed**, and moved the existing feature ticket **back to In Progress** to be fixed in `main` itself.
 - This approach was **acceptable** because **pre-launch**, we had no live users relying on the system, allowing us to fix issues directly in production.
 - **Once launched**, we plan to **test in a staging environment** before merging to `main`.
 
