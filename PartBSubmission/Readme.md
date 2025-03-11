@@ -80,14 +80,20 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 - **Database:**
 - **Others:**
 
+@Trenton- to update dataflow and app architecture diagrams and add @Perri to add wireframe showing final changes
+
+@Perri to add final wireframes
+
 ## Setup Instructions
 
 ### Environment variables
-In order to run the application, two `.env` files are required in the `frontend` and `backend` directories. Starting with the `backend` directory, an `.env` file is required with two enviroment variables: `MONGO_URI=string` and `PORT=PORTNUMBER`. `MONGO_URI` must be a [connection string](https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string) which will then connect the backend to a MongoDB cluster. `Port` must be a choice of port to run the backend/server on. 
+
+In order to run the application, two `.env` files are required in the `frontend` and `backend` directories. Starting with the `backend` directory, an `.env` file is required with two enviroment variables: `MONGO_URI=string` and `PORT=PORTNUMBER`. `MONGO_URI` must be a [connection string](https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string) which will then connect the backend to a MongoDB cluster. `Port` must be a choice of port to run the backend/server on.
 
 For the `frontend` directory, an `.env` file is required with a single environment variable `VITE_API_URL=http://localhost:PORTNUMBER`. The choice of port number is open to the user, but must match the choice of port number chosen in the backend directory. The port number that the frontend/React application runs on is configured in `frontend/vite.config.js`
 
 ### Frontend
+
 To run the frontend of the application, follow these steps:
 
 1. Navigate to the `frontend` directory: `$ cd frontend`
@@ -998,8 +1004,8 @@ All branches were automatically tested using **GitHub Actions** before merging t
 
 1️. **Developer pushes code → GitHub Actions is triggered.**  
 2️. **CI/CD pipeline runs all tests** (frontend + backend, unit + integration).  
-3️. **If tests pass** ✅ → The PR is ready for review.  
-4️. **If tests fail** ❌ → We investigate the cause before deciding to merge.
+3️. **If tests pass** → The PR is ready for review.  
+4️. **If tests fail** → We investigate the cause before deciding to merge.
 
 ---
 
@@ -1195,18 +1201,86 @@ Our final coverage report ensured that our codebase met **X%+ test coverage** ac
 
 ---
 
-## Challenges
-
-#### Challenge 1
-
-##### Problem Resolution
+## Challenges and Solutions
 
 Throughout the project, our team encountered several challenges which provided valuable learning opportunities.
 
-- Testing with Github actions?
-  @Mostofa-
+#### Challenge 1: [Title Related to the Issue] (Mostofa)
 
-- CoreUI template?
-  @Perri-
+##### **The Problem:**
+
+Testing with Github actions?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+
+#### Challenge 2: [Title Related to the Issue] (Perri)
+
+##### **The Problem:**
+
+CoreUI template?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+
+#### Challenge 3: [Title Related to the Issue] (Trenton)
+
+##### **The Problem:**
+
+CoreUI template?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
 
 ## Presentation
