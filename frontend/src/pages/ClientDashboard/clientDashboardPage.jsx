@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"; 
 import ClientDashboard from "../../components/clientDashboard/clientDashboard";
-import Header from "../../components/adminDashboard/adminHeader"; 
+import Header from "../../components/clientDashboard/clientHeader"; 
 import "./clientdashboardpage.css"
 
 const ClientDashboardPage = () => {
@@ -13,7 +13,7 @@ const ClientDashboardPage = () => {
         <div className="dashboard-content">
           <ClientDashboard />
         </div>
-      </div>
+    </div>
   );
 };
 
