@@ -40,6 +40,8 @@ router.post('/:id/onboarding', authenticateUser, registerBusiness)
 // Do you think it should look like the route below?
 // Is it redundant now that I have the one below?
 router.patch('/:id/password', authenticateUser, changePassword)
+router.patch('/change-password', authenticateUser, changePassword);
+
 
 // Route: Update personal profile (Partial update allowed) (only own profile or admin access)
 router.patch('/:id/profile', authenticateUser, authUserOrAdmin, updateUserProfile);
