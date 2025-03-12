@@ -1530,42 +1530,53 @@ Browser DevTools (e.g., Chrome DevTools) are essential for inspecting HTML eleme
 
 General CSS documentation and study (case-by-case scenario)
 
-#### Challenge 3: [Title Related to the Issue] (Trenton)
+#### Challenge 3: Authorization Middlewares (Trenton)
 
 ##### **The Problem:**
-
-
-@ Mos to have a template for this section
-
-- Something
-  @Trenton
-
-- Testing with Github actions?
-  @Mostofa-
-
-CoreUI template?
+Role-based access control is a crucial element of this application, with different types of users requiring different access to different data. This required a careful consideration of security requirements and the design of the application's access control policies. 
 
 ##### **Code Snippet (Before Fix):**
 
 ```javascript
-code here
+router.delete("/:projectId");
 ```
 
 ##### **Why This Happened:**
 
-Loren ipsum
+This issue arose because of added complexity in the backend routes of the application, requiring checks to see whether the user accessing the route is logged in and/or an admin or a user able to access the route.
 
 ##### Problem Resolution
 
-Loren ipsum
+The resolution to this problem was to implement multiple middleware functions to determine authorization to certain routes.
 
 ##### **Code Snippet (After Fix):**
 
+New project route with middlewares
 ```javascript
-code here
+router.delete("/:projectId", authenticateUser, authUserOrAdmin, deleteProject);
+```
+authenticateUser Middleware function
+```javascript
+const authenticateUser = (req, res, next) => {
+    const token = req.headers.authorization ? req.headers.authorization.substring("Bearer ".length) : "";
+    if (!token) {
+        return res.status(401).json({ message: 'Access Denied. No token provided.' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret"); 
+        req.user = decoded;
+        next();
+    } catch (error) {
+        res.status(403).json({ message: 'Invalid Token.' });
+    }
+};
 ```
 
-
 ### **Resources Used to Solve the Problem**
+Express documentation:
+https://expressjs.com/en/guide/using-middleware.html
 
+GeekForGeeks:
+https://www.geeksforgeeks.org/middleware-in-express-js/
 ## Presentation
