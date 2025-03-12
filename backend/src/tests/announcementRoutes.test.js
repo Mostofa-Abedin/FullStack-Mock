@@ -122,12 +122,12 @@ describe('PATCH /announcements/:announcementId', () => {
 
   it('should fail if announcement is not found', async () => {
     const res = await request(app)
-      .patch(`/announcements/123456789`) 
+      .patch(`/announcements/67ce0d8a58d9550b1402afc7`) 
       .set('Authorization', `Bearer ${adminToken}`)
       .send({ content: 'Edited content' });
 
-    expect(res.statusCode).toBe(500);
-    expect(res.body.error).toMatch("Failed to update announcement");
+    expect(res.statusCode).toBe(404);
+    expect(res.body.error).toMatch("Announcement not found");
   })
 
   it('should fail to update announcement with invalid data', async () => {

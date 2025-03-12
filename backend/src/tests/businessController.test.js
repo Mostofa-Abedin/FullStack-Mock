@@ -18,7 +18,7 @@ beforeAll(async () => {
   adminToken = jwt.sign({ userID: adminUser._id, role: 'admin' }, process.env.JWT_SECRET || 'secret');
   clientToken = jwt.sign({ userID: clientUser._id, role: 'client' }, process.env.JWT_SECRET || 'secret');
 
-  // Create test project
+  // Create test business
   const business = await Business.create({
     userId: clientUser._id,
     businessName: 'ABC Solutions',
@@ -84,7 +84,7 @@ describe('POST /business/', () => {
         expect(res.body.message).toBe('Missing required fields');
     });
 
-    it('should fail if details do not match specifications (website, phone number)', async () => {
+    it('should fail if details do not match specifications (website))', async () => {
         const newBusiness = {
             userId: clientId,
             businessName: "testBusiness",
@@ -97,9 +97,26 @@ describe('POST /business/', () => {
         .post('/business')
         .set('Authorization', `Bearer ${adminToken}`)
         .send(newBusiness);
-        console.log(res.body);
+        
         expect(res.statusCode).not.toBe(200);
         expect(res.body.message).toBe('Business validation failed: website: Invalid website URL');
+    });
+    it('should fail if details do not match specifications (phone number)', async () => {
+        const newBusiness = {
+            userId: clientId,
+            businessName: "testBusiness",
+            industry: "testIndustry",
+            website: "http://www.testWebsite.com",
+            phone: "123",
+            address: "test address"
+        }
+        const res = await request(app)
+        .post('/business')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send(newBusiness);
+        
+        expect(res.statusCode).not.toBe(200);
+        expect(res.body.message).toBe('Business validation failed: phone: Invalid phone number format');
     });
 })
 
@@ -157,7 +174,7 @@ describe('PATCH /business/:id', () => {
         expect(res.statusCode).toBe(403);
         expect(res.body.message).toBe('Access Denied. You can only update your own profile or business.');
     })
-    it.skip ('should fail if phone number is invalid', async () => {
+    it.skip('should fail if phone number is invalid', async () => {
         const updatedBusiness = {
             businessName: "updatedBusiness",
             industry: "updatedIndustry",
@@ -170,12 +187,12 @@ describe('PATCH /business/:id', () => {
         .patch(url)
         .set('Authorization', `Bearer ${adminToken}`)
         .send(updatedBusiness);
-    
+        console.log(res.body);
         expect(res.statusCode).toBe(400);
         expect(res.body.message).toBe('Invalid phone number format.');
     })
 
-    it.skip ('should fail if website is invalid' , async () => {
+    it.skip('should fail if website is invalid' , async () => {
         const updatedBusiness = {
             businessName: "updatedBusiness",
             industry: "updatedIndustry",

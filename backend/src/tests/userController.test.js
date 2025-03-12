@@ -3,7 +3,6 @@ import { describe, it, expect, afterAll } from "vitest";
 import app from "../../index.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 let adminToken, clientToken, clientId, adminId;
 
 beforeAll(async () => {
@@ -37,10 +36,9 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await User.deleteMany({});
-  await mongoose.connection.close();
 });
 describe("PATCH /users/:id/profile", () => {
-  it.skip("should change password successfully", async () => {
+  it("should change password successfully", async () => {
     const password = {
       password: "password234",
     };

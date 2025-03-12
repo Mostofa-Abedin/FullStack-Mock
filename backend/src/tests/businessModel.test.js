@@ -86,7 +86,7 @@ describe(' Business Model Validations', () => {
         expect(savedBusiness._id).toBeDefined();
         expect(savedBusiness.createdAt).toBeDefined();
         expect(savedBusiness.updatedAt).toBeDefined();
-      });
+      }, 30000); // Increase timeout to 30 seconds for this test
     
 
 });

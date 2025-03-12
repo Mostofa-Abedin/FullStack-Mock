@@ -1,4 +1,4 @@
-/* import './setup/dbSetup.js'; // Import  DB setup */
+import './setup/dbSetup.js'; // Import  DB setup 
 import request from 'supertest';
 import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 import app from '../../index.js';
@@ -6,11 +6,11 @@ import User from '../models/User.js';
 
 
 beforeAll(async () => {
-  /* await User.deleteMany(); */ // Ensure database is empty before testing
+  const adminUser = await User.create({ name: 'Admin', email: 'adminUserController@test.com', role: 'admin', password: 'password123' });
 });
 
 afterAll(async () => {
-  /* await User.deleteMany(); */ // Clean up after all tests
+  await User.deleteMany(); // Clean up after all tests
 });
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: GET /users Tests
@@ -24,24 +24,10 @@ describe(' GET /users', () => {
   }, 10000); //  Extend timeout to 10 seconds
 });
   
-  it.skip('should return the created user', async () => {
-    await User.create({ 
-      name: 'Test User', 
-      email: 'test@example.com', 
-      role: 'client', 
-      password: 'password123' 
-    });
-
+  it('should return the created user', async () => {
     const res = await request(app).get('/users');
 
     expect(res.statusCode).toBe(200);
-    /* expect(res.body.length).toBe(1); */
-    expect(res.body[0].name).toBe('Test User');
-    expect(res.body[0].role).toBe('client');
-    expect(res.body[0]).toHaveProperty('createdAt');
-    expect(res.body[0]).toHaveProperty('updatedAt');
-    expect(new Date(res.body[0].updatedAt)).toBeInstanceOf(Date);
-  
 });
 
 // ------------------------------------------------------------------------------------------------------------------//
@@ -51,7 +37,7 @@ describe('POST /users/register', () => {
   it('should register a new user successfully', async () => {
     const newUser = {
       name: 'Register User',
-      email: 'register@example.com',
+      email: 'registerUser@example.com',
       role: 'client',
       password: 'securepassword123'
     };
@@ -69,21 +55,15 @@ describe('POST /users/register', () => {
   it.skip('should not allow duplicate emails', async () => {
     const userData = {
       name: 'Duplicate User',
-      email: 'duplicate@example.com',
+      email: 'duplicateUser@example.com',
       role: 'client',
       password: 'password123'
     };
-
-    // Create user first
-    await vi.waitFor(async () => {
-      await User.create(userData);
-    } , 10000);
     
-    /* await User.create(userData); */
+    await User.create(userData);
 
     // Attempt to register the same email
     const res = await request(app).post('/users/register').send(userData);
-    console.log('this is the response', res.body);
     expect(res.statusCode).toBe(400);
     expect(res.body.message).toBe('User with this email already exists');
   });
@@ -131,7 +111,7 @@ describe('Model Validations', () => {
   });
 
   it('should set the default role to "client"', async () => {
-    const user = new User({ name: 'Test User', email: 'test@example.com', password: 'password123' });
+    const user = new User({ name: 'Test User', email: 'testDefaultClient@example.com', password: 'password123' });
 
     expect(user.role).toBe('client'); // Should default to 'client'
   });

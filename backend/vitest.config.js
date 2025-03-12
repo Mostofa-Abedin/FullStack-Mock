@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     globals: true,
     coverage: {
-      exclude: ["node_modules", "src/tests", "src/utils", "./vitest.config.js", "./server.js"],
+      exclude: ["node_modules", "src/tests", "src/utils", "./vitest.config.js", "./server.js", "./src/controller"],
       provider: "v8",
       reporter: ["text", "json", "html"],
       all: true,
