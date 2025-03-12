@@ -358,7 +358,7 @@ For example, a simple UI adjustment might be assigned 1 or 2 story points, while
 
 ##### Priority
 
-We prioritized tasks based on bProject value, urgency, dependencies, and technical feasibility to ensure efficient sprint execution. Each task was assessed using the following criteria:
+We prioritized tasks based on Project value, urgency, dependencies, and technical feasibility to ensure efficient sprint execution. Each task was assessed using the following criteria:
 
 - **Critical Bugs & Blocking Issues:** Any issues that impacted core functionality or blocked other tasks were given the highest priority and addressed immediately.
 - **High-Value Features:** Features that directly contributed to the core functionality of the application or provided significant value to users were prioritized over minor enhancements.
