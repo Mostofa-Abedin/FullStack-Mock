@@ -71,19 +71,75 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 ├── LICENSE                # License information
 ```
 
-## Technologies
+### Tech Stack
 
-**Technologies:**
+#### **Front-end**
 
-- **Frontend:**
-- **Backend:**
-- **Database:**
-- **Others:**
+- HTML
+- CSS
+- [React](https://reactjs.org/)
+
+#### **Back-end**
+
+- [Express](https://expressjs.com/)
+- [Node.js](https://nodejs.org/en/)
+
+#### **Database**
+
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+
+#### **Deployment**
+
+- [Vercel](https://vercel.com/)
+- [Render](https://render.com/)
+
+#### **Project Management**
+
+- [Confluence](https://www.atlassian.com/software/confluence)
+- [Jira](https://www.atlassian.com/software/jira)
+- [Discord](https://discord.com/)
+
+#### **Testing**
+
+- [Jest](https://jestjs.io/)
+- [Vitest](https://vitest.dev/)
+
+#### **DevOps Tools**
+
+- [git](https://git-scm.com/)
+- [GitHub Actions](https://github.com/features/actions)
 
 @Trenton- to update dataflow and app architecture diagrams and add
 @Perri to add wireframe showing final changes
 
 ## Setup Instructions @ Trenton to start
+
+### Environment variables
+
+In order to run the application, two `.env` files are required in the `frontend` and `backend` directories. Starting with the `backend` directory, an `.env` file is required with two enviroment variables: `MONGO_URI=string` and `PORT=PORTNUMBER`. `MONGO_URI` must be a [connection string](https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string) which will then connect the backend to a MongoDB cluster. `Port` must be a choice of port to run the backend/server on.
+
+For the `frontend` directory, an `.env` file is required with a single environment variable `VITE_API_URL=http://localhost:PORTNUMBER`. The choice of port number is open to the user, but must match the choice of port number chosen in the backend directory. The port number that the frontend/React application runs on is configured in `frontend/vite.config.js`
+
+### Frontend
+
+To run the frontend of the application, follow these steps:
+
+1. Navigate to the `frontend` directory: `$ cd frontend`
+2. Install the required dependencies: `$ npm install`
+3. Start the development server: `$ npm run dev`
+
+The frontend should now be running on `http://localhost:5000`.
+
+### Backend
+
+To run the backend of the application, follow these steps:
+
+1. Navigate to the `backend` directory: `$ cd backend`
+2. Install the required dependencies: `$ npm install`
+3. Start the backend server: `$ npm run dev`
+
+The backend should now be running on `http://localhost:5001`.
 
 ---
 
@@ -977,8 +1033,8 @@ All branches were automatically tested using **GitHub Actions** before merging t
 
 1️. **Developer pushes code → GitHub Actions is triggered.**  
 2️. **CI/CD pipeline runs all tests** (frontend + backend, unit + integration).  
-3️. **If tests pass** ✅ → The PR is ready for review.  
-4️. **If tests fail** ❌ → We investigate the cause before deciding to merge.
+3️. **If tests pass** → The PR is ready for review.  
+4️. **If tests fail** → We investigate the cause before deciding to merge.
 
 ---
 
@@ -1167,19 +1223,206 @@ Our final coverage report ensured that our codebase met **X%+ test coverage** ac
 | Lines Covered | X%                    | X%                   |
 | Statements    | X%                    | X%                   |
 | Functions     | X%                    | X%                   |
-| Branches      | X%                    | X%                   |
+| Branches      | X%                    | X                    |
+| %             |
 
 ✅ **Screenshot of the final test coverage report** _(to be added in README)_
 
 ---
 
-## Challenges
+## Challenges and Solutions
 
-#### Challenge 1
+Throughout the project, our team encountered several challenges which provided valuable learning opportunities.
+
+#### Challenge 1: [Title Related to the Issue] (Mostofa)
+
+##### **The Problem:**
+
+During the development of our project, we encountered significant issues with Cross-Origin Resource Sharing (CORS) when trying to make network requests between our frontend and backend. Initially, the backend did not explicitly define allowed origins or HTTP methods, which caused the browser to block API requests from our frontend due to the Same-Origin Policy.
+
+We specifically faced two key CORS-related problems:
+
+1.Origin Restrictions:
+
+- The browser blocked requests because the backend did not specify which frontend domains were allowed to make API calls.
+- This resulted in errors like:
+
+```bash
+Access to fetch at 'https://fullstack-mock-backend.onrender.com/projects'
+from origin 'http://127.0.0.1:5000' has been blocked by CORS policy:
+No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+2. HTTP Methods Restrictions:
+
+- `PATCH` and `DELETE` requests were being blocked because our backend did not explicitly allow them in the CORS settings.
+- We observed errors such as:
+
+```bash
+Method PATCH is not allowed by Access-Control-Allow-Methods in preflight response.
+```
+
+These issues prevented our frontend, running on http://127.0.0.1:5000 and https://full-stack-mock-six.vercel.app, from successfully interacting with the backend API.
+
+##### **Code Snippet (Before Fix):**
+
+Initially, our Express.js server did not have any CORS configuration at all:
+
+```javascript
+import express from "express";
+
+const app = express();
+
+app.use(express.json());
+
+// Define routes
+app.use("/api", apiRoutes);
+
+// Handle unknown routes
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+```
+
+This led to preflight request failures, especially for `PATCH` and `DELETE` operations.
+
+##### **Why This Happened:**
+
+Browsers enforce the Same-Origin Policy to prevent security risks by restricting cross-origin requests. Since our frontend and backend were hosted on different domains, the browser blocked API calls unless the backend explicitly allowed them through CORS headers.
+
+- Problem 1 (Origin Blocked):
+
+  - The backend did not specify which frontend URLs were allowed to make requests.
+  - Without an Access-Control-Allow-Origin header, browsers automatically blocked cross-origin requests.
+
+- Problem 2 (PATCH & DELETE Blocked):
+
+  - CORS preflight requests (OPTIONS) check whether certain HTTP methods (like PATCH, DELETE) are allowed before sending actual API requests.
+  - Our backend did not explicitly define which HTTP methods were permitted, leading to requests being rejected.
 
 ##### Problem Resolution
 
-Throughout the project, our team encountered several challenges which provided valuable learning opportunities.
+To resolve these CORS issues, we took the following steps:
+
+1. Installed the CORS Middleware
+   We installed the cors package, which allows fine-grained control over cross-origin requests:
+
+```bash
+npm install cors
+```
+
+2. Configured Allowed Origins
+
+- We specified the allowed frontend origins to ensure the browser recognizes valid requests.
+- This included:
+  - https://full-stack-mock-six.vercel.app (Production Frontend)
+  - http://127.0.0.1:5000 (Local Development)
+  - http://localhost:5000 (Alternative Local Development)
+
+3. Allowed Specific HTTP Methods
+
+- We explicitly defined allowed methods (GET, POST, PUT, PATCH, DELETE, OPTIONS).
+- This fixed issues where PATCH and DELETE requests were blocked.
+
+4. Handled Preflight Requests
+
+- Browsers send an OPTIONS request before making non-GET requests.
+- We made sure our server responds correctly to OPTIONS preflight requests.
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+import express from "express";
+import cors from "cors";
+
+const app = express();
+
+// CORS Configuration
+const allowedOrigins = [
+  "https://full-stack-mock-six.vercel.app",
+  "http://127.0.0.1:5000",
+  "http://localhost:5000",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // Allow server-to-server requests
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(
+        new Error(`CORS policy does not allow access from ${origin}`),
+        false
+      );
+    }
+    return callback(null, true);
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // PATCH & DELETE included
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, //  Allow credentials like cookies & auth headers
+};
+
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options("*", cors(corsOptions));
+
+// Middleware to parse JSON requests
+app.use(express.json());
+
+// Define routes
+app.use("/api", apiRoutes);
+
+// Handle unknown routes
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+```
+
+### **Resources Used to Solve the Problem**
+
+1. **MDN Web Docs on CORS:**  
+   Helped understand CORS headers and preflight requests.  
+   **Link:** [MDN Web Docs: CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+
+2. **Express.js CORS Middleware Documentation:**  
+   Provided guidance on implementing and configuring CORS in Express.js.  
+   **Link:** [Express.js CORS Middleware](https://expressjs.com/en/resources/middleware/cors.html)
+
+3. **Stack Overflow Discussions:**  
+   Helped troubleshoot specific issues related to `PATCH` and `DELETE` methods being blocked.  
+   **Link:** [Stack Overflow: Allow multiple CORS domains in Express.js](https://stackoverflow.com/questions/26988071/allow-multiple-cors-domain-in-express-js)
+
+#### Challenge 2: [Title Related to the Issue] (Perri)
+
+##### **The Problem:**
+
+CoreUI template?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+
+### **Resources Used to Solve the Problem**
+
+#### Challenge 3: [Title Related to the Issue] (Trenton)
+
+##### **The Problem:**
+
 
 @ Mos to have a template for this section
 
@@ -1189,7 +1432,29 @@ Throughout the project, our team encountered several challenges which provided v
 - Testing with Github actions?
   @Mostofa-
 
-- CoreUI template?
-  @Perri-
+CoreUI template?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+
+
+### **Resources Used to Solve the Problem**
 
 ## Presentation
