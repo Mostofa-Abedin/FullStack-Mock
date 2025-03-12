@@ -54,12 +54,12 @@ const registerUser = async (req, res) => {
 // Controller: Change password (I think Separate route needed? )
 const changePassword = async (req, res) => {
   try {
-    const { oldPassword, newPassword } = req.body;
+    const { currentPassword, newPassword } = req.body;
 
     const userID = req.user.userID;
     const user = await User.findOne({ _id: userID });
 
-    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
 
     if (!isPasswordValid) {
       return res.status(400).json({
