@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"; 
-import AdminDashboard from "../../components/adminDashboard/adminDashboard";
+import ClientDashboard from "../../components/clientDashboard/clientDashboard";
 import Header from "../../components/clientDashboard/clientHeader"; 
 import "./clientdashboardpage.css"
 
-const AdminDashboardPage = () => {
+const ClientDashboardPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top when the page loads
   }, []);
@@ -11,10 +11,10 @@ const AdminDashboardPage = () => {
     <div className="admin-dashboard-container">
       <Header />
         <div className="dashboard-content">
-          <AdminDashboard />
+          <ClientDashboard />
         </div>
     </div>
   );
 };
 
-export default AdminDashboardPage;
+export default ClientDashboardPage;

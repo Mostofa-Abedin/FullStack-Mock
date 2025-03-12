@@ -54,4 +54,23 @@ const registerBusiness = async (req, res) => {
     }
 }
 
-export { registerBusiness };
+ // Endpoint to get business details for the logged-in user
+ const getBusinessDetails = async (req, res) => {
+    const userID = req.user.userID;
+
+    try {
+        const business = await Business.findOne({ userId: userID });
+
+        if (!business) {
+            return res.status(404).json({ message: "Business details not found" });
+        }
+
+        return res.status(200).json(business);
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+};
+
+
+export { registerBusiness, getBusinessDetails  };
+

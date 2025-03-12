@@ -110,7 +110,10 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 - [git](https://git-scm.com/)
 - [GitHub Actions](https://github.com/features/actions)
 
-## Setup Instructions
+@Trenton- to update dataflow and app architecture diagrams and add
+@Perri to add wireframe showing final changes
+
+## Setup Instructions @ Trenton to start
 
 ### Environment variables
 
@@ -1420,6 +1423,15 @@ code here
 
 ##### **The Problem:**
 
+
+@ Mos to have a template for this section
+
+- Something
+  @Trenton
+
+- Testing with Github actions?
+  @Mostofa-
+
 CoreUI template?
 
 ##### **Code Snippet (Before Fix):**
@@ -1441,6 +1453,7 @@ Loren ipsum
 ```javascript
 code here
 ```
+
 
 ### **Resources Used to Solve the Problem**
 
