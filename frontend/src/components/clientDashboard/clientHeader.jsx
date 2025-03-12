@@ -43,8 +43,8 @@ const Header = () => {
   };
 
   return (
-    <CHeader className="header">
-      <CHeaderBrand className="header-text" href="/client/dashboard">
+    <CHeader position="sticky" className="header">
+      <CHeaderBrand className="header-text" href="/admin/dashboard">
         <strong>Client Dashboard</strong>
       </CHeaderBrand>
       <CHeaderNav>

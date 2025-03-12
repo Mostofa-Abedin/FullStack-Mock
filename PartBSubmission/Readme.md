@@ -71,20 +71,72 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 ├── LICENSE                # License information
 ```
 
-## Technologies
+### Tech Stack
 
-**Technologies:**
+#### **Front-end**
 
-- **Frontend:**
-- **Backend:**
-- **Database:**
-- **Others:**
+- HTML
+- CSS
+- [React](https://reactjs.org/)
 
-@Trenton- to update dataflow and app architecture diagrams and add @Perri to add wireframe showing final changes
+#### **Back-end**
 
-@Perri to add final wireframes
+- [Express](https://expressjs.com/)
+- [Node.js](https://nodejs.org/en/)
 
-## Setup Instructions
+#### **Database**
+
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+
+#### **Deployment**
+
+- [Vercel](https://vercel.com/)
+- [Render](https://render.com/)
+
+#### **Project Management**
+
+- [Confluence](https://www.atlassian.com/software/confluence)
+- [Jira](https://www.atlassian.com/software/jira)
+- [Discord](https://discord.com/)
+
+#### **Testing**
+
+- [Jest](https://jestjs.io/)
+- [Vitest](https://vitest.dev/)
+
+#### **DevOps Tools**
+
+- [git](https://git-scm.com/)
+- [GitHub Actions](https://github.com/features/actions)
+
+@Trenton- to update dataflow and app architecture diagrams and add
+
+### Wireframes
+
+During the UI/Frontend development process, we only deviated slightly from the original client and dashboard wireframes. This is due to 1. Time restraints, 2. Unnecessary Elements and 3. Familiarity with the CoreUI.io templates.
+
+1. Time restraints: The initial wireframes had various different layouts to display data (eg. table views etc.). Due to time constraints, we decided to make the dashboard UI simplier, therefore allowing us to focus on the key functionality of the app, rather than aesthetic changes that were not necessary.
+
+2. Unnecessary Elements: The initial wireframes featured a sidebar of links to show the full view of clients, projects and announcements. Throughout development, we realised these extra links/components were just repeats of what was already shown in the dashboard and unnecessary to have.
+
+3. Familiarity with the CoreUI.io templates: Using the CoreUI.io dashboard templates for the first time posed some challenges, this ultimately meant we had to resort to a much simplier aesthetic and layout for the dashboards.
+
+### Admin Dashboard
+Initial Wireframe: 
+![Photo of admin dashboard page wireframe](./docs/Wireframes/wireframe_admindashboard.png)
+
+New/Dev Wireframe:
+![Photo of new admin dashboard page wireframe](./docs/Wireframes/admin-dashboard-wireframe-new.png)
+
+### Client Dashboard
+Inital Wireframe:
+![Photo of client dashboard page wireframe](./docs/Wireframes/wireframe_clientdashboard.png)
+
+New/Dev Wireframe:
+![Photo of new admin dashboard page wireframe](./docs/Wireframes/client-dashbaord-wireframe-new.png)
+
+## Setup Instructions @ Trenton to start
 
 ### Environment variables
 
@@ -306,7 +358,7 @@ For example, a simple UI adjustment might be assigned 1 or 2 story points, while
 
 ##### Priority
 
-We prioritized tasks based on bProject value, urgency, dependencies, and technical feasibility to ensure efficient sprint execution. Each task was assessed using the following criteria:
+We prioritized tasks based on Project value, urgency, dependencies, and technical feasibility to ensure efficient sprint execution. Each task was assessed using the following criteria:
 
 - **Critical Bugs & Blocking Issues:** Any issues that impacted core functionality or blocked other tasks were given the highest priority and addressed immediately.
 - **High-Value Features:** Features that directly contributed to the core functionality of the application or provided significant value to users were prioritized over minor enhancements.
@@ -1185,6 +1237,31 @@ Below is our **structured UAT test plan**, documenting real tests performed befo
 | 18          | 26/2/25  | Verify Admin login page                 | Open app → Navigate to login page | Displays correctly   | Works as expected  | ✅ Pass       |
 | 19          | 26/2/25  | Verify email & password validation      | Open app → Attempt login/register | Validation works     | Works as expected  | ✅ Pass       |
 
+#### **ONBOARDING PAGE (TFS-19)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
+| 20          | 27/2/25  | Verify Onboarding page responsiveness | Open app → Navigate to login page → Register new user | Displays correctly   | Works as expected  | ✅ Pass       |
+| 21          | 27/2/25  | Verify form input validation         | Open app → Navigate to login page → Register new user | Validation Works   | Works as expected  | ✅ Pass       |
+| 22          | 28/2/25  | Verify user is redirected to client portal after submissison   | Open app → Navigate to login page → Register new user | User is redirected  | Works as expected  | ✅ Pass       |
+
+#### **ADMIN DASHBOARD (TFS-24)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
+| 23         | 1/3/25  | Verify Admin Dashboard responsiveness | Open app → login as Admin | Displays correctly   | Works as expected  | ✅ Pass       |
+| 24          | 1/3/25  | Verify correct components display         | Open app → login as Admin | Displays correctly  | Works as expected  | ✅ Pass       |
+| 25         | 1/3/25  | Verify CRUD functionality works for each component   | Open app → login as Admin | CRUD functionaloty works  | Works as expected  | ✅ Pass       |
+
+#### **CLIENT DASHBOARD (TFS-22)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
+| 26         | 4/3/25  | Verify Client Dashboard responsiveness | Open app → login as Client | Displays correctly   | Works as expected  | ✅ Pass       |
+| 27         | 4/3/25  | Verify correct components display         | Open app → login as Client | Displays correctly  | Works as expected  | ✅ Pass       |
+| 28         | 4/3/25  | Verify CRUD functionality works for each component   | Open app → login as Client | CRUD functionaloty works  | Works as expected  | ✅ Pass       |
+
+
 #### **Code Coverage Reports**
 
 Our final coverage report ensured that our codebase met **X%+ test coverage** across both frontend and backend.
@@ -1362,38 +1439,110 @@ app.use((req, res) => {
    Helped troubleshoot specific issues related to `PATCH` and `DELETE` methods being blocked.  
    **Link:** [Stack Overflow: Allow multiple CORS domains in Express.js](https://stackoverflow.com/questions/26988071/allow-multiple-cors-domain-in-express-js)
 
-#### Challenge 2: [Title Related to the Issue] (Perri)
+#### Challenge 2: CoreUI.io Template Integration (Perri)
 
 ##### **The Problem:**
 
-CoreUI template?
+Integrating the CoreUI template into the React app was challenging due to its pre-existing CSS class names and styles, which were difficult to locate and modify. CoreUI applies its own styles globally, and its class names can conflict with custom styles or prevent changes from being applied as expected. This made it tricky to find the specific elements to adjust and customise the design for the app.
 
 ##### **Code Snippet (Before Fix):**
 
-```javascript
-code here
+```
+.header { // Basic classnames (these were already used by global styling in CoreUI.io integration)
+    background-color: #192F3C !important;
+    color: white;
+    font-family: "Kode Mono", monospace;
+    text-transform: uppercase;
+    border: none;
+    padding: 2rem 2.5rem;
+    --cui-header-color: white; // Specific elements found using DevTools
+    --cui-body-font-family: "Inter", sans-serif;
+}
+
+.header-text {
+    color: #F3DCB2;
+    font-size: 2rem;
+}
+
+.header-nav {
+    margin: 0;
+    width: 200px;
+}
 ```
 
 ##### **Why This Happened:**
 
-Loren ipsum
+The CoreUI template comes with a predefined set of CSS classes, which apply globally across the app. The global styles can make it difficult to target specific components for customisation without overriding entire sections of the template or hunting for the correct class names. Additionally, some class names are not as intuitive, requiring deeper inspection of the CoreUI documentation or stylesheets to locate and adjust specific styles.
 
 ##### Problem Resolution
 
-Loren ipsum
+To resolve this, I used browser developer tools (like Chrome DevTools) to inspect the elements of the CoreUI components and identify the CSS classes responsible for the styles. After pinpointing the right classes, I created a custom stylesheet to override the default CoreUI styles with more specific class selectors. This allowed me to maintain the overall layout and structure of CoreUI while applying my own styles to match the app’s design requirements.
 
 ##### **Code Snippet (After Fix):**
 
-```javascript
-code here
+```
+.dash-main-card {
+    border-radius: 0% !important;
+    margin-bottom: 2rem;
+}
+
+.dash-client-card {
+    border-radius: 0% !important;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.dash-card-header { // Created unique identifiers for all elements to override global styles
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D9D9D952;
+    border: none;
+    border-radius: 0% !important;
+    font-family: "Kode Mono", monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+
+.dash-add-button {
+    background-color: #192F3C;
+    color: #8BC4D9;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+    border: none;
+}
+
+.dash-add-button:hover, .dashboard-button:hover {
+    background-color: #8BC4D9;
+    color: #192F3C;
+}
 ```
 
 ### **Resources Used to Solve the Problem**
+
+CoreUI Documentation:
+The official CoreUI documentation provides detailed information on the structure of the components, CSS class names, and customisation options.
+
+Browser Developer Tools:
+Browser DevTools (e.g., Chrome DevTools) are essential for inspecting HTML elements and finding specific class names applied by CoreUI.
+
+General CSS documentation and study (case-by-case scenario)
 
 #### Challenge 3: [Title Related to the Issue] (Trenton)
 
 ##### **The Problem:**
 
+
+@ Mos to have a template for this section
+
+- Something
+  @Trenton
+
+- Testing with Github actions?
+  @Mostofa-
+
 CoreUI template?
 
 ##### **Code Snippet (Before Fix):**
@@ -1415,6 +1564,7 @@ Loren ipsum
 ```javascript
 code here
 ```
+
 
 ### **Resources Used to Solve the Problem**
 
