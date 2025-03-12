@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   CContainer,
-  CNavItem as CSidebarItem,
   CRow,
   CCol,
   CCard,
   CCardBody,
   CCardHeader,
+  CButton,
 } from "@coreui/react";
 import "@coreui/coreui/dist/css/coreui.min.css";
 import "../adminDashboard/admindashboard.css";
@@ -15,15 +15,14 @@ import "../adminDashboard/admindashboard.css";
 const ClientDashboard = () => {
   const [projects, setProjects] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
+  const [businessDetails, setBusinessDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
   const token = localStorage.getItem("authToken");
-
-  // Retrieve userId from localStorage or from a decoded JWT token
-  const userId = localStorage.getItem("userId"); // Assuming the userId is stored in localStorage.
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if (userId) {
@@ -36,9 +35,20 @@ const ClientDashboard = () => {
 
   const fetchData = async () => {
     try {
+      // Fetching the business details for the logged-in user
+      const businessRes = await fetch(`${baseUrl}/business/details`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!businessRes.ok) {
+        throw new Error("Failed to fetch business details");
+      }
+
+      setBusinessDetails(await businessRes.json());
+
       const [projectsRes, announcementsRes] = await Promise.all([
-        fetch(`${baseUrl}/projects/${userId}`, { headers: { Authorization: `Bearer ${token}` } }),  // Client-specific project data
-        fetch(`${baseUrl}/announcements`, { headers: { Authorization: `Bearer ${token}` } }),  // All announcements (change if needed)
+        fetch(`${baseUrl}/projects/${userId}`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${baseUrl}/announcements`, { headers: { Authorization: `Bearer ${token}` } }),
       ]);
 
       if (!projectsRes.ok || !announcementsRes.ok) {
@@ -62,12 +72,24 @@ const ClientDashboard = () => {
         <p className="text-red-500">{error}</p>
       ) : (
         <>
+          {/* Business Details Section */}
+          {businessDetails && (
+            <CCard>
+              <CCardBody>
+                <h2 className="text-xl font-bold flex items-center gap-2">Business Details</h2>
+                <p><strong>Business Name:</strong> {businessDetails.businessName}</p>
+                <p><strong>Industry:</strong> {businessDetails.industry}</p>
+                <p><strong>Website:</strong> {businessDetails.website}</p>
+                <p><strong>Phone:</strong> {businessDetails.phone}</p>
+                <p><strong>Address:</strong> {businessDetails.address}</p>
+              </CCardBody>
+            </CCard>
+          )}
+
           {/* Projects Section */}
           <CCard>
             <CCardBody>
-              <h2 className="text-xl font-bold flex items-center gap-2">
-                Projects
-              </h2>
+              <h2 className="text-xl font-bold flex items-center gap-2">Projects</h2>
               <ul>
                 {projects.length > 0 ? (
                   projects.map((project) => (
@@ -85,9 +107,7 @@ const ClientDashboard = () => {
           {/* Announcements Section */}
           <CCard>
             <CCardBody>
-              <h2 className="text-xl font-bold flex items-center gap-2">
-                Announcements
-              </h2>
+              <h2 className="text-xl font-bold flex items-center gap-2">Announcements</h2>
               <ul>
                 {announcements.length > 0 ? (
                   announcements.map((announcement) => (
