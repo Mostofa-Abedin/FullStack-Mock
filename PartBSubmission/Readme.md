@@ -1237,6 +1237,31 @@ Below is our **structured UAT test plan**, documenting real tests performed befo
 | 18          | 26/2/25  | Verify Admin login page                 | Open app → Navigate to login page | Displays correctly   | Works as expected  | ✅ Pass       |
 | 19          | 26/2/25  | Verify email & password validation      | Open app → Attempt login/register | Validation works     | Works as expected  | ✅ Pass       |
 
+#### **ONBOARDING PAGE (TFS-19)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
+| 20          | 27/2/25  | Verify Onboarding page responsiveness | Open app → Navigate to login page → Register new user | Displays correctly   | Works as expected  | ✅ Pass       |
+| 21          | 27/2/25  | Verify form input validation         | Open app → Navigate to login page → Register new user | Validation Works   | Works as expected  | ✅ Pass       |
+| 22          | 28/2/25  | Verify user is redirected to client portal after submissison   | Open app → Navigate to login page → Register new user | User is redirected  | Works as expected  | ✅ Pass       |
+
+#### **ADMIN DASHBOARD (TFS-24)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
+| 23         | 1/3/25  | Verify Admin Dashboard responsiveness | Open app → login as Admin | Displays correctly   | Works as expected  | ✅ Pass       |
+| 24          | 1/3/25  | Verify correct components display         | Open app → login as Admin | Displays correctly  | Works as expected  | ✅ Pass       |
+| 25         | 1/3/25  | Verify CRUD functionality works for each component   | Open app → login as Admin | CRUD functionaloty works  | Works as expected  | ✅ Pass       |
+
+#### **CLIENT DASHBOARD (TFS-22)**
+
+| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
+| 26         | 4/3/25  | Verify Client Dashboard responsiveness | Open app → login as Client | Displays correctly   | Works as expected  | ✅ Pass       |
+| 27         | 4/3/25  | Verify correct components display         | Open app → login as Client | Displays correctly  | Works as expected  | ✅ Pass       |
+| 28         | 4/3/25  | Verify CRUD functionality works for each component   | Open app → login as Client | CRUD functionaloty works  | Works as expected  | ✅ Pass       |
+
+
 #### **Code Coverage Reports**
 
 Our final coverage report ensured that our codebase met **X%+ test coverage** across both frontend and backend.
