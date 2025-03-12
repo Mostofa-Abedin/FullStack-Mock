@@ -18,10 +18,10 @@ const ChangePassword = ({ role }) => {
       setErrorMessage("Passwords do not match!");
       return;
     }
-
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
     // Assume we have a backend API endpoint for changing password
     try {
-      const response = await fetch("/users/change-password", {
+      const response = await fetch(`${baseUrl}/users/change-password`, {
         method: "PATCH", // use PATCH for updates
         body: JSON.stringify({ currentPassword, newPassword }),
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("authToken")}` },
