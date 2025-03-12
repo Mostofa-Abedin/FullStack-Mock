@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/footer/footer";
 import WorkSection from "./components/workSection/workSection";
@@ -18,6 +17,7 @@ import ClientListPage from "./pages/AdminDashboard/clientListPage";
 import ProjectsListPage from "./pages/AdminDashboard/projectsListPage";
 import AnnouncementsListPage from "./pages/AdminDashboard/announcementsListPage";
 import ClientDashboardPage from "./pages/ClientDashboard/clientDashboardPage";
+import ChangePassword from "./components/changePassword/ChangePassword"; // Import the ChangePassword component
 
 import Project1 from "./pages/ProjectPages/projectdetails1";
 import Project2 from "./pages/ProjectPages/projectdetails2";
@@ -32,39 +32,40 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Admin Dashboard Routes - No Navbar/Footer */}
-        <Route path="/admin/dashboard/*" element={<AdminDashboardPage />} />
+        {/* Admin Dashboard Routes */}
+        <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         <Route path="/admin/clients" element={<ClientListPage />} />
         <Route path="/admin/projects" element={<ProjectsListPage />} />
         <Route path="/admin/announcements" element={<AnnouncementsListPage />} />
+        {/* Admin Change Password Route */}
+        <Route path="/admin/change-password" element={<ChangePassword role="admin" />} />
 
-        {/* Client Dashboard Route - No Navbar/Footer */}
-        <Route path="/client/dashboard/*" element={<ClientDashboardPage />} />
+        {/* Client Dashboard Routes */}
+        <Route path="/client/dashboard" element={<ClientDashboardPage />} />
+        {/* Client Change Password Route */}
+        <Route path="/client/change-password" element={<ChangePassword role="client" />} />
 
-        {/* Login & Onboarding */}
+        {/* Login & Onboarding Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
 
         {/* Public Routes with Navbar & Footer */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Navbar />
-              <HeroSection />
-              <p className="hero-text">
-                We craft solutions that
-                <span className="highlight red"> Attract</span>,
-                <span className="highlight blue"> Engage</span>, &
-                <span className="highlight yellow"> Convert</span>.
-              </p>
-              <ServicesSection />
-              <WorkSection />
-              <ContactSection />
-              <Footer />
-            </>
-          }
-        />
+        <Route path="/" element={
+          <>
+            <Navbar />
+            <HeroSection />
+            <p className="hero-text">
+              We craft solutions that
+              <span className="highlight red"> Attract</span>,
+              <span className="highlight blue"> Engage</span>, &
+              <span className="highlight yellow"> Convert</span>.
+            </p>
+            <ServicesSection />
+            <WorkSection />
+            <ContactSection />
+            <Footer />
+          </>
+        } />
         <Route path="/services" element={<><Navbar /><Services /><Footer /></>} />
         <Route path="/work" element={<><Navbar /><Work /><Footer /></>} />
         <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
