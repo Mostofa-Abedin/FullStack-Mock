@@ -1439,33 +1439,96 @@ app.use((req, res) => {
    Helped troubleshoot specific issues related to `PATCH` and `DELETE` methods being blocked.  
    **Link:** [Stack Overflow: Allow multiple CORS domains in Express.js](https://stackoverflow.com/questions/26988071/allow-multiple-cors-domain-in-express-js)
 
-#### Challenge 2: [Title Related to the Issue] (Perri)
+#### Challenge 2: CoreUI.io Template Integration (Perri)
 
 ##### **The Problem:**
 
-CoreUI template?
+Integrating the CoreUI template into the React app was challenging due to its pre-existing CSS class names and styles, which were difficult to locate and modify. CoreUI applies its own styles globally, and its class names can conflict with custom styles or prevent changes from being applied as expected. This made it tricky to find the specific elements to adjust and customise the design for the app.
 
 ##### **Code Snippet (Before Fix):**
 
-```javascript
-code here
+```
+.header { // Basic classnames (these were already used by global styling in CoreUI.io integration)
+    background-color: #192F3C !important;
+    color: white;
+    font-family: "Kode Mono", monospace;
+    text-transform: uppercase;
+    border: none;
+    padding: 2rem 2.5rem;
+    --cui-header-color: white; // Specific elements found using DevTools
+    --cui-body-font-family: "Inter", sans-serif;
+}
+
+.header-text {
+    color: #F3DCB2;
+    font-size: 2rem;
+}
+
+.header-nav {
+    margin: 0;
+    width: 200px;
+}
 ```
 
 ##### **Why This Happened:**
 
-Loren ipsum
+The CoreUI template comes with a predefined set of CSS classes, which apply globally across the app. The global styles can make it difficult to target specific components for customisation without overriding entire sections of the template or hunting for the correct class names. Additionally, some class names are not as intuitive, requiring deeper inspection of the CoreUI documentation or stylesheets to locate and adjust specific styles.
 
 ##### Problem Resolution
 
-Loren ipsum
+To resolve this, I used browser developer tools (like Chrome DevTools) to inspect the elements of the CoreUI components and identify the CSS classes responsible for the styles. After pinpointing the right classes, I created a custom stylesheet to override the default CoreUI styles with more specific class selectors. This allowed me to maintain the overall layout and structure of CoreUI while applying my own styles to match the app’s design requirements.
 
 ##### **Code Snippet (After Fix):**
 
-```javascript
-code here
+```
+.dash-main-card {
+    border-radius: 0% !important;
+    margin-bottom: 2rem;
+}
+
+.dash-client-card {
+    border-radius: 0% !important;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.dash-card-header { // Created unique identifiers for all elements to override global styles
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D9D9D952;
+    border: none;
+    border-radius: 0% !important;
+    font-family: "Kode Mono", monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+
+.dash-add-button {
+    background-color: #192F3C;
+    color: #8BC4D9;
+    font-family: "Inter", sans-serif;
+    border-radius: 0%;
+    border: none;
+}
+
+.dash-add-button:hover, .dashboard-button:hover {
+    background-color: #8BC4D9;
+    color: #192F3C;
+}
 ```
 
 ### **Resources Used to Solve the Problem**
+
+CoreUI Documentation:
+The official CoreUI documentation provides detailed information on the structure of the components, CSS class names, and customisation options.
+
+Browser Developer Tools:
+Browser DevTools (e.g., Chrome DevTools) are essential for inspecting HTML elements and finding specific class names applied by CoreUI.
+
+General CSS documentation and study (case-by-case scenario)
 
 #### Challenge 3: [Title Related to the Issue] (Trenton)
 
