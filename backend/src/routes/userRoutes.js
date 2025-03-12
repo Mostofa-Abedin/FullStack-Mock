@@ -32,7 +32,7 @@ router.post('/register', registerUser);
 
 // Route: Onboard/Register business (Client only)
 //@Trenton- Can we move this to the newly created businessRoutes.js as this route falls under business-related logic. 
-router.post('/:id/onboarding', authenticateUser, registerBusiness)
+router.post('/:id/onboarding', authenticateUser, registerBusiness);
 
 // Route: Change user password (Authenticated User only) 
 //@Trenton- You wrote this? It uses the authenticateUser middleware that verify if a token exist. However, it seems that we don't have any authorization. 
@@ -40,7 +40,7 @@ router.post('/:id/onboarding', authenticateUser, registerBusiness)
 // Do you think it should look like the route below?
 // Is it redundant now that I have the one below?
 router.patch('/change-password', authenticateUser, changePassword);
-router.patch('/:id/password', authenticateUser, changePassword)
+// router.patch('/:id/password', authenticateUser, changePassword)
 
 
 
