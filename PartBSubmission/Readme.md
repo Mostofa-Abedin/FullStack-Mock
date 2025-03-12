@@ -71,14 +71,44 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 ├── LICENSE                # License information
 ```
 
-## Technologies
+### Tech Stack
 
-**Technologies:**
+#### **Front-end**
 
-- **Frontend:**
-- **Backend:**
-- **Database:**
-- **Others:**
+- HTML
+- CSS
+- [React](https://reactjs.org/)
+
+#### **Back-end**
+
+- [Express](https://expressjs.com/)
+- [Node.js](https://nodejs.org/en/)
+
+#### **Database**
+
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+
+#### **Deployment**
+
+- [Vercel](https://vercel.com/)
+- [Render](https://render.com/)
+
+#### **Project Management**
+
+- [Confluence](https://www.atlassian.com/software/confluence)
+- [Jira](https://www.atlassian.com/software/jira)
+- [Discord](https://discord.com/)
+
+#### **Testing**
+
+- [Jest](https://jestjs.io/)
+- [Vitest](https://vitest.dev/)
+
+#### **DevOps Tools**
+
+- [git](https://git-scm.com/)
+- [GitHub Actions](https://github.com/features/actions)
 
 @Trenton- to update dataflow and app architecture diagrams and add @Perri to add wireframe showing final changes
 
