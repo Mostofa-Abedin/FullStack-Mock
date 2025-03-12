@@ -111,7 +111,30 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 - [GitHub Actions](https://github.com/features/actions)
 
 @Trenton- to update dataflow and app architecture diagrams and add
-@Perri to add wireframe showing final changes
+
+### Wireframes
+
+During the UI/Frontend development process, we only deviated slightly from the original client and dashboard wireframes. This is due to 1. Time restraints, 2. Unnecessary Elements and 3. Familiarity with the CoreUI.io templates.
+
+1. Time restraints: The initial wireframes had various different layouts to display data (eg. table views etc.). Due to time constraints, we decided to make the dashboard UI simplier, therefore allowing us to focus on the key functionality of the app, rather than aesthetic changes that were not necessary.
+
+2. Unnecessary Elements: The initial wireframes featured a sidebar of links to show the full view of clients, projects and announcements. Throughout development, we realised these extra links/components were just repeats of what was already shown in the dashboard and unnecessary to have.
+
+3. Familiarity with the CoreUI.io templates: Using the CoreUI.io dashboard templates for the first time posed some challenges, this ultimately meant we had to resort to a much simplier aesthetic and layout for the dashboards.
+
+### Admin Dashboard
+Initial Wireframe: 
+![Photo of admin dashboard page wireframe](./docs/Wireframes/wireframe_admindashboard.png)
+
+New/Dev Wireframe:
+![Photo of new admin dashboard page wireframe](./docs/Wireframes/admin-dashboard-wireframe-new.png)
+
+### Client Dashboard
+Inital Wireframe:
+![Photo of client dashboard page wireframe](./docs/Wireframes/wireframe_clientdashboard.png)
+
+New/Dev Wireframe:
+![Photo of new admin dashboard page wireframe](./docs/Wireframes/client-dashbaord-wireframe-new.png)
 
 ## Setup Instructions @ Trenton to start
 
