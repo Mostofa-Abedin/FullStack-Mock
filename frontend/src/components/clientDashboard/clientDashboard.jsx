@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import {
   CContainer,
   CNavItem as CSidebarItem,
@@ -20,543 +20,237 @@ import {
 import "@coreui/coreui/dist/css/coreui.min.css";
 import "../adminDashboard/admindashboard.css";
 
-import ProjectsList from "../adminDashboard/projectsList";
-import ClientsList from "../adminDashboard/clientList";
-import AnnouncementsList from "../adminDashboard/announcementList";
+const ClientDashboard = () => {
+  const [projects, setProjects] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
+  const [showCreateAnnouncementModal, setShowCreateAnnouncementModal] = useState(false);
+  const [newProjectName, setNewProjectName] = useState('');
+  const [newAnnouncementTitle, setNewAnnouncementTitle] = useState('');
+  const navigate = useNavigate();
 
-const AdminDashboard = ({ username }) => {
-  const [sidebarVisible, setSidebarVisible] = useState(true);
-  const [clients, setClients] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      businessName: "John's Bakery",
-      email: "john.doe@example.com",
-      phone: "123-456-7890",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      businessName: "Jane's Designs",
-      email: "jane.smith@example.com",
-      phone: "987-654-3210",
-    },
-    {
-      id: 3,
-      name: "Robert Brown",
-      businessName: "Robert's Auto Shop",
-      email: "robert.brown@example.com",
-      phone: "456-789-0123",
-    },
-    {
-      id: 4,
-      name: "Robert Brown",
-      businessName: "Robert's Auto Shop",
-      email: "robert.brown@example.com",
-      phone: "456-789-0123",
-    },
-  ]);
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      name: "Project Alpha",
-      details: "Details about Project Alpha",
-      client: "John Doe",
-      dueDate: "2025-03-01",
-      status: "Upcoming",
-    },
-    {
-      id: 2,
-      name: "Project Beta",
-      details: "Details about Project Beta",
-      client: "Jane Smith",
-      dueDate: "2025-04-01",
-      status: "Upcoming",
-    },
-    {
-      id: 3,
-      name: "Project Gamma",
-      details: "Details about Project Gamma",
-      client: "Robert Brown",
-      dueDate: "2025-05-01",
-      status: "Upcoming",
-    },
-  ]);
-  const [announcements, setAnnouncements] = useState([
-    { id: 1, title: "Update on New Features", date: "2025-02-20" },
-    { id: 2, title: "System Downtime Notice", date: "2025-02-19" },
-    { id: 3, title: "Client Survey", date: "2025-02-18" },
-  ]);
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+  const token = localStorage.getItem("authToken");
 
-  const [activeClientId, setActiveClientId] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalType, setModalType] = useState("");
-  const [currentItem, setCurrentItem] = useState(null);
-  const [formSection, setFormSection] = useState("");
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const handleSubmit = (e, type) => {
-    e.preventDefault();
-    const {
-      name,
-      details,
-      client,
-      dueDate,
-      status,
-      businessName,
-      email,
-      phone,
-    } = e.target.elements;
-    let newItem;
+  const fetchData = async () => {
+    try {
+      const [projectsRes, announcementsRes] = await Promise.all([
+        fetch(`${baseUrl}/projects`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${baseUrl}/announcements`, { headers: { Authorization: `Bearer ${token}` } })
+      ]);
 
-    if (formSection === "clients") {
-      if (type === "add") {
-        newItem = {
-          id: Date.now(),
-          name: name.value,
-          businessName: businessName.value,
-          email: email.value,
-          phone: phone.value,
-        };
-        setClients([...clients, newItem]);
-      } else if (type === "edit" && currentItem) {
-        newItem = {
-          id: currentItem.id,
-          name: name.value,
-          businessName: businessName.value,
-          email: email.value,
-          phone: phone.value,
-        };
-        setClients(
-          clients.map((client) =>
-            client.id === currentItem.id ? newItem : client
-          )
-        );
+      if (!projectsRes.ok || !announcementsRes.ok) {
+        throw new Error("Failed to fetch data");
       }
-    } else if (formSection === "projects") {
-      if (type === "add") {
-        newItem = {
-          id: Date.now(),
-          name: name.value,
-          details: details.value,
-          client: client.value,
-          dueDate: dueDate.value,
-          status: status.value,
-        };
-        setProjects([...projects, newItem]);
-      } else if (type === "edit" && currentItem) {
-        newItem = {
-          id: currentItem.id,
-          name: name.value,
-          details: details.value,
-          client: client.value,
-          dueDate: dueDate.value,
-          status: status.value,
-        };
-        setProjects(
-          projects.map((project) =>
-            project.id === currentItem.id ? newItem : project
-          )
-        );
-      }
-    } else if (formSection === "announcements") {
-      if (type === "add") {
-        newItem = { id: Date.now(), title: name.value, date: dueDate.value };
-        setAnnouncements([...announcements, newItem]);
-      } else if (type === "edit" && currentItem) {
-        newItem = {
-          id: currentItem.id,
-          title: name.value,
-          date: dueDate.value,
-        };
-        setAnnouncements(
-          announcements.map((announcement) =>
-            announcement.id === currentItem.id ? newItem : announcement
-          )
-        );
-      }
-    }
-    setModalVisible(false);
-  };
 
-  const handleDelete = (id, section) => {
-    if (section === "clients") {
-      setClients(clients.filter((client) => client.id !== id));
-    } else if (section === "projects") {
-      setProjects(projects.filter((project) => project.id !== id));
-    } else {
-      setAnnouncements(
-        announcements.filter((announcement) => announcement.id !== id)
-      );
+      setProjects((await projectsRes.json()).projects || []);
+      setAnnouncements((await announcementsRes.json()).announcements || []);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
     }
   };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Upcoming":
-        return "upcoming";
-      case "In Progress":
-        return "in-progress";
-      case "Client Review":
-        return "client-review";
-      case "Action Feedback":
-        return "action-feedback";
-      case "Complete":
-        return "complete";
-      case "On Hold":
-        return "on-hold";
-      default:
-        "Upcoming";
-        return "upcoming";
+  // Create Project function
+  const createProject = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/projects`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: newProjectName }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create project");
+      }
+
+      setNewProjectName('');
+      setShowCreateProjectModal(false);
+      fetchData(); // Refresh data after adding
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  // Create Announcement function
+  const createAnnouncement = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/announcements`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title: newAnnouncementTitle }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create announcement");
+      }
+
+      setNewAnnouncementTitle('');
+      setShowCreateAnnouncementModal(false);
+      fetchData(); // Refresh data after adding
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  // Delete Project function
+  const deleteProject = async (projectId) => {
+    try {
+      const response = await fetch(`${baseUrl}/projects/${projectId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete project");
+      }
+
+      fetchData(); // Refresh data after deletion
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  // Delete Announcement function
+  const deleteAnnouncement = async (announcementId) => {
+    try {
+      const response = await fetch(`${baseUrl}/announcements/${announcementId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete announcement");
+      }
+
+      fetchData(); // Refresh data after deletion
+    } catch (error) {
+      setError(error.message);
     }
   };
 
   return (
-    <CContainer fluid>
-      <CRow>
-        <CCol md="10" className="p-4">
-          <Routes>
-            <Route
-              path="/admin/clients"
-              element={<ClientsList clients={clients} />}
-            />
-            <Route
-              path="/admin/projects"
-              element={<ProjectsList projects={projects} />}
-            />
-            <Route
-              path="/announcements"
-              element={<AnnouncementsList announcements={announcements} />}
-            />
-          </Routes>
-
-          <h2 className="dash-welcome-text">
-            Welcome, {username ? username : "Admin"}!
-          </h2>
-
-          {/* Client Section */}
-          <CCard className="dash-main-card">
-            <CCardHeader className="dash-card-header">
-              <h4>Manage Clients</h4>
-              <CButton
-                className="dash-add-button"
-                onClick={() => {
-                  setFormSection("clients");
-                  setModalType("add");
-                  setCurrentItem(null);
-                  setModalVisible(true);
-                }}
-              >
-                Add Client
-              </CButton>
-            </CCardHeader>
+    <div className="p-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {loading ? (
+        <p>Loading dashboard...</p>
+      ) : error ? (
+        <p className="text-red-500">{error}</p>
+      ) : (
+        <>
+          {/* Projects Section */}
+          <CCard>
             <CCardBody>
-              <CRow>
-                {clients.slice(0, 3).map((client) => (
-                  <CCol sm="4" key={client.id}>
-                    <div
-                      className="dash-client-card p-3 shadow-sm"
-                      onClick={() =>
-                        setActiveClientId(
-                          activeClientId === client.id ? null : client.id
-                        )
-                      }
-                    >
-                      <h5>{client.name}</h5>
-                      <p>{client.businessName}</p>
-                      {activeClientId === client.id && (
-                        <>
-                          <p style={{ fontWeight: "bold", color:"#8BC4D9", lineHeight: "1" }}>
-                            Email: {client.email}
-                          </p>
-                          <p style={{ fontWeight: "bold", color:"#8BC4D9", lineHeight: "1" }}>
-                            Phone: {client.phone}
-                          </p>
-                        </>
-                      )}
-                      <div className="d-flex justify-content-end">
-                        <CButton
-                          className="dash-edit"
-                          onClick={() => {
-                            setFormSection("clients");
-                            setModalType("edit");
-                            setCurrentItem(client);
-                            setModalVisible(true);
-                          }}
-                        >
-                          Edit
-                        </CButton>
-                        <CButton
-                          className="dash-delete"
-                          onClick={() => handleDelete(client.id, "clients")}
-                        >
-                          Delete
-                        </CButton>
-                      </div>
-                    </div>
-                  </CCol>
-                ))}
-              </CRow>
-              <Link to="/admin/clients">
-                <CButton className="dash-add-button">View All</CButton>
-              </Link>
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                Projects
+              </h2>
+              <ul>
+                {projects.length > 0 ? (
+                  projects.map((project) => (
+                    <li key={project.id} className="py-2 border-b">
+                      {project.name}
+                      <Button onClick={() => deleteProject(project.id)} className="ml-2 text-red-500">
+                        Delete
+                      </Button>
+                    </li>
+                  ))
+                ) : (
+                  <p>No projects available</p>
+                )}
+              </ul>
+              <CButton onClick={() => setShowCreateProjectModal(true)} className="mt-4">
+                Add New Project
+              </CButton>
             </CCardBody>
           </CCard>
 
-          {/* Add/Edit Project Section */}
-          <CCard className="dash-main-card">
-            <CCardHeader className="dash-card-header">
-              <h4>Manage Projects</h4>
-              <CButton
-                className="dash-add-button"
-                onClick={() => {
-                  setFormSection("projects");
-                  setModalType("add");
-                  setCurrentItem(null);
-                  setModalVisible(true);
-                }}
-              >
-                Add Project
-              </CButton>
-            </CCardHeader>
+          {/* Announcements Section */}
+          <CCard>
             <CCardBody>
-              <CRow>
-                {projects.map((project) => (
-                  <CCol sm="4" key={project.id}>
-                    <div
-                      className={`dash-card p-3 shadow-sm ${getStatusColor(
-                        project.status
-                      )}`}
-                    >
-                      <p
-                        style={{
-                          fontWeight: "bold",
-                          textTransform: "uppercase",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        {project.status}
-                      </p>
-                      <h5>{project.name}</h5>
-                      <p>{project.client}</p>
-                      <p>Details: {project.details}</p>
-                      <p style={{ fontWeight: "bold" }}>
-                        Due Date:{" "}
-                        {new Date(project.dueDate).toLocaleDateString("en-GB")}
-                      </p>
-                      <div className="d-flex justify-content-end">
-                        <CButton
-                          className="dash-edit"
-                          onClick={() => {
-                            setFormSection("projects");
-                            setModalType("edit");
-                            setCurrentItem(project);
-                            setModalVisible(true);
-                          }}
-                        >
-                          Edit
-                        </CButton>
-                        <CButton
-                          className="dash-delete"
-                          onClick={() => handleDelete(project.id, "projects")}
-                        >
-                          Delete
-                        </CButton>
-                      </div>
-                    </div>
-                  </CCol>
-                ))}
-              </CRow>
-              <Link to="/admin/projects">
-                <CButton className="dash-add-button">View All</CButton>
-              </Link>
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                Announcements
+              </h2>
+              <ul>
+                {announcements.length > 0 ? (
+                  announcements.map((announcement) => (
+                    <li key={announcement.id} className="py-2 border-b">
+                      {announcement.title}
+                      <Button onClick={() => deleteAnnouncement(announcement.id)} className="ml-2 text-red-500">
+                        Delete
+                      </Button>
+                    </li>
+                  ))
+                ) : (
+                  <p>No announcements available</p>
+                )}
+              </ul>
+              <CButton onClick={() => setShowCreateAnnouncementModal(true)} className="mt-4">
+                Add New Announcement
+              </CButton>
             </CCardBody>
           </CCard>
+        </>
+      )}
 
-          <CCard className="dash-main-card">
-            <CCardHeader className="dash-card-header">
-              <h4>Manage Announcements</h4>
-              <CButton
-                className="dash-add-button"
-                onClick={() => {
-                  setFormSection("announcements");
-                  setModalType("add");
-                  setCurrentItem(null);
-                  setModalVisible(true);
-                }}
-              >
-                Add Announcement
-              </CButton>
-            </CCardHeader>
-            <CCardBody>
-              <CRow>
-                {announcements.map((announcement) => (
-                  <CCol sm="4" key={announcement.id}>
-                    <div className="dash-card p-3 shadow-sm">
-                      <h5>{announcement.title}</h5>
-                      <p>
-                        {new Date(announcement.date).toLocaleDateString(
-                          "en-GB"
-                        )}
-                      </p>
-                      <div className="d-flex justify-content-end">
-                        <CButton
-                          className="dash-edit"
-                          onClick={() => {
-                            setFormSection("announcements");
-                            setModalType("edit");
-                            setCurrentItem(announcement);
-                            setModalVisible(true);
-                          }}
-                        >
-                          Edit
-                        </CButton>
-                        <CButton
-                          className="dash-delete"
-                          onClick={() =>
-                            handleDelete(announcement.id, "announcements")
-                          }
-                        >
-                          Delete
-                        </CButton>
-                      </div>
-                    </div>
-                  </CCol>
-                ))}
-              </CRow>
-              <Link to="/admin/announcements">
-                <CButton className="dash-add-button">View All</CButton>
-              </Link>
-            </CCardBody>
-          </CCard>
+      {/* Create Project Modal */}
+      <CModal visible={showCreateProjectModal} onClose={() => setShowCreateProjectModal(false)}>
+        <CModalHeader>
+          <CModalTitle>Create New Project</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <CFormInput
+            type="text"
+            placeholder="Project Name"
+            value={newProjectName}
+            onChange={(e) => setNewProjectName(e.target.value)}
+          />
+        </CModalBody>
+        <CModalFooter>
+          <CButton onClick={createProject}>Save</CButton>
+          <CButton color="secondary" onClick={() => setShowCreateProjectModal(false)}>
+            Close
+          </CButton>
+        </CModalFooter>
+      </CModal>
 
-          {/* Modal for Add/Edit */}
-          <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
-            <CModalHeader>
-              <CModalTitle>
-                {modalType === "edit"
-                  ? `Edit ${formSection.slice(0, -1)}`
-                  : `Add ${formSection.slice(0, -1)}`}
-              </CModalTitle>
-            </CModalHeader>
-            <CModalBody>
-              <form onSubmit={(e) => handleSubmit(e, modalType)}>
-                {formSection === "clients" ? (
-                  <>
-                    <CFormInput
-                      className="form-input"
-                      type="text"
-                      label="Name"
-                      name="name"
-                      defaultValue={currentItem?.name}
-                    />
-                    <CFormInput
-                      className="form-input"
-                      type="text"
-                      label="Business Name"
-                      name="businessName"
-                      defaultValue={currentItem?.businessName}
-                    />
-                    <CFormInput
-                      className="form-input"
-                      type="email"
-                      label="Email"
-                      name="email"
-                      defaultValue={currentItem?.email}
-                    />
-                    <CFormInput
-                      className="form-input"
-                      type="text"
-                      label="Phone"
-                      name="phone"
-                      defaultValue={currentItem?.phone}
-                    />
-                  </>
-                ) : formSection === "projects" ? (
-                  <>
-                    <CFormInput
-                      className="form-input"
-                      type="text"
-                      label="Project Name"
-                      name="name"
-                      defaultValue={currentItem?.name}
-                    />
-                    <CFormInput
-                      className="form-input"
-                      type="text"
-                      label="Details"
-                      name="details"
-                      defaultValue={currentItem?.details}
-                    />
-                    <CFormSelect
-                      label="Client"
-                      name="client"
-                      className="custom-select"
-                      defaultValue={currentItem?.client}
-                    >
-                      {clients.map((client) => (
-                        <option key={client.id} value={client.name}>
-                          {client.name}
-                        </option>
-                      ))}
-                    </CFormSelect>
-                    <CFormInput
-                      className="form-input"
-                      type="date"
-                      label="Due Date"
-                      name="dueDate"
-                      defaultValue={currentItem?.dueDate}
-                    />
-                    <CFormSelect
-                      label="Status"
-                      name="status"
-                      defaultValue={currentItem?.status}
-                      className="custom-select"
-                    >
-                      <option value="Upcoming">Upcoming</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="Client Review">Client Review</option>
-                      <option value="Action Feedback">Action Feedback</option>
-                      <option value="Complete">Complete</option>
-                      <option value="On Hold">On Hold</option>
-                    </CFormSelect>
-                  </>
-                ) : formSection === "announcements" ? (
-                  <>
-                    <CFormInput
-                      className="form-input"
-                      type="text"
-                      label="Title"
-                      name="name"
-                      defaultValue={currentItem?.title}
-                    />
-                    <CFormInput
-                      className="form-input"
-                      type="date"
-                      label="Date"
-                      name="dueDate"
-                      defaultValue={currentItem?.date}
-                    />
-                  </>
-                ) : null}
-                <CModalFooter>
-                  <CButton
-                    className="dash-close-button"
-                    onClick={() => setModalVisible(false)}
-                  >
-                    Close
-                  </CButton>
-                  <CButton className="dash-submit-button" type="submit">
-                    Save Changes
-                  </CButton>
-                </CModalFooter>
-              </form>
-            </CModalBody>
-          </CModal>
-        </CCol>
-      </CRow>
-    </CContainer>
+      {/* Create Announcement Modal */}
+      <CModal visible={showCreateAnnouncementModal} onClose={() => setShowCreateAnnouncementModal(false)}>
+        <CModalHeader>
+          <CModalTitle>Create New Announcement</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <CFormInput
+            type="text"
+            placeholder="Announcement Title"
+            value={newAnnouncementTitle}
+            onChange={(e) => setNewAnnouncementTitle(e.target.value)}
+          />
+        </CModalBody>
+        <CModalFooter>
+          <CButton onClick={createAnnouncement}>Save</CButton>
+          <CButton color="secondary" onClick={() => setShowCreateAnnouncementModal(false)}>
+            Close
+          </CButton>
+        </CModalFooter>
+      </CModal>
+    </div>
   );
 };
 
-export default AdminDashboard;
+export default ClientDashboard;
