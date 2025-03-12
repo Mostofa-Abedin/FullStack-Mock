@@ -21,11 +21,12 @@ const ChangePassword = ({ role }) => {
 
     // Assume we have a backend API endpoint for changing password
     try {
-      const response = await fetch("/api/change-password", {
-        method: "POST",
+      const response = await fetch("/users/change-password", {
+        method: "PATCH", // use PATCH for updates
         body: JSON.stringify({ currentPassword, newPassword }),
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("authToken")}` },
       });
+      
 
       if (response.ok) {
         navigate(role === "admin" ? "/admin/dashboard" : "/client/dashboard");
