@@ -110,10 +110,6 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 - [git](https://git-scm.com/)
 - [GitHub Actions](https://github.com/features/actions)
 
-@Trenton- to update dataflow and app architecture diagrams and add @Perri to add wireframe showing final changes
-
-@Perri to add final wireframes
-
 ## Setup Instructions
 
 ### Environment variables
