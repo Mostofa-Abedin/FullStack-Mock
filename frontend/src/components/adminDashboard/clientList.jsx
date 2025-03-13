@@ -24,19 +24,30 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
   // Filter clients (users with role "client")
   const clientList = clients.filter((user) => user.role === "client");
 
+  // Helper: Get the business record for a client (if available)
+  const getBusinessForClient = (clientId) => {
+    // Look for a business where userId is either a string or an object with _id matching clientId
+    return businesses.find((bus) => {
+      if (!bus.userId) return false;
+      // bus.userId may be an object or a string
+      if (typeof bus.userId === "object" && bus.userId._id) {
+        return bus.userId._id === clientId;
+      }
+      return bus.userId === clientId;
+    }) || {};
+  };
+
   // Modal state for Add/Edit functionality
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState("add"); // "add" or "edit"
   const [currentItem, setCurrentItem] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Find the current business record for the selected client (if any)
-  let currentBusiness = null;
-  if (modalType === "edit" && currentItem && businesses) {
-    currentBusiness = businesses.find(
-      (bus) => bus.userId && bus.userId.toString() === currentItem._id
-    );
-  }
+  // For editing, find the current business record for the selected client (if any)
+  const currentBusiness =
+    modalType === "edit" && currentItem && businesses
+      ? getBusinessForClient(currentItem._id)
+      : null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,7 +89,7 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
     try {
       let updatedUser;
       if (modalType === "add") {
-        // 1. Create the new user
+        // Create the new user
         const userRes = await fetch(`${baseUrl}/users`, {
           method: "POST",
           headers: {
@@ -93,8 +104,7 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
         }
         updatedUser = await userRes.json();
 
-        // 2. Create the business record using the new route.
-        // For admin-created clients, we supply the new user's ID in the payload.
+        // Create the business record using the new user's ID in the payload.
         const businessPayload = { ...businessData, userId: updatedUser._id };
         const bizRes = await fetch(`${baseUrl}/business`, {
           method: "POST",
@@ -116,9 +126,8 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
         // Update local states.
         setClients((prev) => [...prev, updatedUser]);
         setBusinesses((prev) => [...prev, bizData.business]);
-
       } else if (modalType === "edit" && currentItem) {
-        // 1. Update user details.
+        // Update user details.
         const userPatchRes = await fetch(
           `${baseUrl}/users/${currentItem._id}/profile`,
           {
@@ -137,8 +146,8 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
         const patchedUser = await userPatchRes.json();
         updatedUser = patchedUser.user ? patchedUser.user : patchedUser;
 
-        // 2. Update or create the business record.
-        if (currentBusiness) {
+        // Update or create the business record.
+        if (currentBusiness && currentBusiness._id) {
           // Update existing business via PATCH.
           const bizPatchRes = await fetch(
             `${baseUrl}/business/${currentBusiness._id}`,
@@ -210,7 +219,15 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
       }
       setClients((prev) => prev.filter((client) => client._id !== id));
       // Remove associated business from state.
-      setBusinesses((prev) => prev.filter((bus) => bus.userId !== id));
+      setBusinesses((prev) =>
+        prev.filter((bus) => {
+          // Check if bus.userId is an object with _id, or a string
+          if (bus.userId && typeof bus.userId === "object" && bus.userId._id) {
+            return bus.userId._id !== id;
+          }
+          return bus.userId !== id;
+        })
+      );
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -241,32 +258,38 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
         <CCardBody>
           <CRow>
             {clientList.length > 0 ? (
-              clientList.map((client) => (
-                <CCol md="4" key={client._id}>
-                  <CCard className="client-card">
-                    <CCardBody>
-                      <h5>{client.name}</h5>
-                      <p>
-                        Business Name: {client.business?.businessName || "N/A"}
-                      </p>
-                      <p>Phone: {client.business?.phone || "N/A"}</p>
-                      <p>Email: {client.email}</p>
-                      <CButton
-                        onClick={() => {
-                          setModalType("edit");
-                          setCurrentItem(client);
-                          setModalVisible(true);
-                        }}
-                      >
-                        Edit
-                      </CButton>
-                      <CButton onClick={() => handleDelete(client._id)}>
-                        Delete
-                      </CButton>
-                    </CCardBody>
-                  </CCard>
-                </CCol>
-              ))
+              clientList.map((client) => {
+                const business = getBusinessForClient(client._id);
+                return (
+                  <CCol md="4" key={client._id}>
+                    <CCard className="client-card">
+                      <CCardBody>
+                        <h5>{client.name}</h5>
+                        <p>
+                          Business Name:{" "}
+                          {business.businessName || "N/A"}
+                        </p>
+                        <p>
+                          Phone: {business.phone || "N/A"}
+                        </p>
+                        <p>Email: {client.email}</p>
+                        <CButton
+                          onClick={() => {
+                            setModalType("edit");
+                            setCurrentItem(client);
+                            setModalVisible(true);
+                          }}
+                        >
+                          Edit
+                        </CButton>
+                        <CButton onClick={() => handleDelete(client._id)}>
+                          Delete
+                        </CButton>
+                      </CCardBody>
+                    </CCard>
+                  </CCol>
+                );
+              })
             ) : (
               <p>No clients found.</p>
             )}
