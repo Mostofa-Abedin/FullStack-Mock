@@ -271,7 +271,19 @@ const ClientDashboard = () => {
                 {announcements.length > 0 ? (
                   announcements.map((announcement) => (
                     <li key={announcement._id} className="py-2 border-b">
-                      {announcement.title}
+                      <p>
+                        <strong>Title:</strong> {announcement.title}
+                      </p>
+                      <p>
+                        <strong>Content:</strong> {announcement.content}
+                      </p>
+                      <p>
+                        <strong>Active:</strong> {announcement.active ? "Yes" : "No"}
+                      </p>
+                      <p>
+                        <strong>Created At:</strong>{" "}
+                        {new Date(announcement.createdAt).toLocaleString()}
+                      </p>
                     </li>
                   ))
                 ) : (
