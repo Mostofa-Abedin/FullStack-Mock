@@ -73,4 +73,3 @@ const registerBusiness = async (req, res) => {
 
 
 export { registerBusiness, getBusinessDetails  };
-

@@ -138,9 +138,9 @@ const ClientDashboard = () => {
         <>
           {/* ---------- Business Details Section ---------- */}
           {businessDetails && (
-            <CCard>
+            <CCard className="dash-client-card">
               <CCardBody>
-                <h2 className="text-xl font-bold flex items-center gap-2">
+                <h2 className="dash-card-header">
                   My Business Details
                 </h2>
                 {/* Read-only mode */}
@@ -164,8 +164,7 @@ const ClientDashboard = () => {
                     </p>
                     <CButton
                       onClick={handleEditClick}
-                      color="primary"
-                      className="mt-3"
+                      className="dash-edit"
                     >
                       Edit Business
                     </CButton>
@@ -220,12 +219,11 @@ const ClientDashboard = () => {
                       />
                     </div>
                     <div className="mt-3">
-                      <CButton color="success" onClick={handleSaveEdit}>
+                      <CButton className="dash-submit-button"onClick={handleSaveEdit}>
                         Save
                       </CButton>
                       <CButton
-                        color="secondary"
-                        className="ml-2"
+                        className="dash-delete"
                         onClick={handleCancelEdit}
                       >
                         Cancel
@@ -238,9 +236,9 @@ const ClientDashboard = () => {
           )}
 
           {/* ---------- Projects Section (Read-Only) ---------- */}
-          <CCard>
+          <CCard className="dash-card">
             <CCardBody>
-              <h2 className="text-xl font-bold flex items-center gap-2">
+              <h2 className="dash-card-header">
                 My Projects
               </h2>
               <ul>
@@ -262,9 +260,9 @@ const ClientDashboard = () => {
           </CCard>
 
           {/* ---------- Announcements Section (Read-Only) ---------- */}
-          <CCard>
+          <CCard className="dash-card">
             <CCardBody>
-              <h2 className="text-xl font-bold flex items-center gap-2">
+              <h2 className="dash-card-header">
                 Announcements
               </h2>
               <ul>
