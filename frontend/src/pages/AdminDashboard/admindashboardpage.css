@@ -112,4 +112,11 @@ li {
     box-shadow: none;
 }
 
+/* Responsive Styling */
+
+@media (max-width: 600px){
+    .header {
+        height: 180px;
+    }
+}
   
