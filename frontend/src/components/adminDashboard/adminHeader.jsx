@@ -4,6 +4,7 @@ import CIcon from "@coreui/icons-react";
 import { cilUser, cilLockLocked } from "@coreui/icons";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import ChangePassword from "../changePassword/ChangePassword"; // Import ChangePassword component
+import "../adminDashboard/admindashboard.css";
 
 const Header = () => {
   const navigate = useNavigate(); // Hook to handle navigation
@@ -49,14 +50,14 @@ const Header = () => {
       </CHeaderBrand>
       <CHeaderNav>
         <CNavItem>
-          <CNavLink href="#" className="profile" onClick={handleProfileClick}>
-            <CIcon icon={cilUser} className="profile-icon" />
+          <CNavLink href="#" onClick={handleProfileClick} className="header-button">
+            <CIcon icon={cilUser} style={{ color: "#F3A83C" }} />
             Profile
           </CNavLink>
         </CNavItem>
         <CNavItem>
-          <CNavLink href="#" className="logout" onClick={handleLogoutClick}>
-            <CIcon icon={cilLockLocked} className="profile-icon" />
+          <CNavLink href="#" onClick={handleLogoutClick} className="header-button">
+            <CIcon icon={cilLockLocked} style={{ color: "#F3A83C" }} />
             Logout
           </CNavLink>
         </CNavItem>
