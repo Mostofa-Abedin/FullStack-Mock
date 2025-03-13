@@ -79,13 +79,6 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 - CSS
 - [React](https://reactjs.org/)
 
-<<<<<<< HEAD
-@Trenton- to update dataflow and app architecture diagrams and add @Perri to add wireframe showing final changes
-
-@Perri to add final wireframes
-
-## Setup Instructions
-=======
 #### **Back-end**
 
 - [Express](https://expressjs.com/)
@@ -130,13 +123,15 @@ During the UI/Frontend development process, we only deviated slightly from the o
 3. Familiarity with the CoreUI.io templates: Using the CoreUI.io dashboard templates for the first time posed some challenges, this ultimately meant we had to resort to a much simplier aesthetic and layout for the dashboards.
 
 ### Admin Dashboard
-Initial Wireframe: 
+
+Initial Wireframe:
 ![Photo of admin dashboard page wireframe](./docs/Wireframes/wireframe_admindashboard.png)
 
 New/Dev Wireframe:
 ![Photo of new admin dashboard page wireframe](./docs/Wireframes/admin-dashboard-wireframe-new.png)
 
 ### Client Dashboard
+
 Inital Wireframe:
 ![Photo of client dashboard page wireframe](./docs/Wireframes/wireframe_clientdashboard.png)
 
@@ -170,7 +165,6 @@ To run the backend of the application, follow these steps:
 3. Start the backend server: `$ npm run dev`
 
 The backend should now be running on `http://localhost:5001`.
->>>>>>> main
 
 @Trenton to start
 
@@ -1249,28 +1243,27 @@ Below is our **structured UAT test plan**, documenting real tests performed befo
 
 #### **ONBOARDING PAGE (TFS-19)**
 
-| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
-| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
-| 20          | 27/2/25  | Verify Onboarding page responsiveness | Open app → Navigate to login page → Register new user | Displays correctly   | Works as expected  | ✅ Pass       |
-| 21          | 27/2/25  | Verify form input validation         | Open app → Navigate to login page → Register new user | Validation Works   | Works as expected  | ✅ Pass       |
-| 22          | 28/2/25  | Verify user is redirected to client portal after submissison   | Open app → Navigate to login page → Register new user | User is redirected  | Works as expected  | ✅ Pass       |
+| **Test ID** | **Date** | **Test Description**                                         | **Steps**                                             | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | ------------------------------------------------------------ | ----------------------------------------------------- | -------------------- | ------------------ | ------------- |
+| 20          | 27/2/25  | Verify Onboarding page responsiveness                        | Open app → Navigate to login page → Register new user | Displays correctly   | Works as expected  | ✅ Pass       |
+| 21          | 27/2/25  | Verify form input validation                                 | Open app → Navigate to login page → Register new user | Validation Works     | Works as expected  | ✅ Pass       |
+| 22          | 28/2/25  | Verify user is redirected to client portal after submissison | Open app → Navigate to login page → Register new user | User is redirected   | Works as expected  | ✅ Pass       |
 
 #### **ADMIN DASHBOARD (TFS-24)**
 
-| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
-| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
-| 23         | 1/3/25  | Verify Admin Dashboard responsiveness | Open app → login as Admin | Displays correctly   | Works as expected  | ✅ Pass       |
-| 24          | 1/3/25  | Verify correct components display         | Open app → login as Admin | Displays correctly  | Works as expected  | ✅ Pass       |
-| 25         | 1/3/25  | Verify CRUD functionality works for each component   | Open app → login as Admin | CRUD functionaloty works  | Works as expected  | ✅ Pass       |
+| **Test ID** | **Date** | **Test Description**                               | **Steps**                 | **Expected Outcome**     | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | -------------------------------------------------- | ------------------------- | ------------------------ | ------------------ | ------------- |
+| 23          | 1/3/25   | Verify Admin Dashboard responsiveness              | Open app → login as Admin | Displays correctly       | Works as expected  | ✅ Pass       |
+| 24          | 1/3/25   | Verify correct components display                  | Open app → login as Admin | Displays correctly       | Works as expected  | ✅ Pass       |
+| 25          | 1/3/25   | Verify CRUD functionality works for each component | Open app → login as Admin | CRUD functionaloty works | Works as expected  | ✅ Pass       |
 
 #### **CLIENT DASHBOARD (TFS-22)**
 
-| **Test ID** | **Date** | **Test Description**                    | **Steps**                         | **Expected Outcome** | **Actual Outcome** | **Pass/Fail** |
-| ----------- | -------- | --------------------------------------- | --------------------------------- | -------------------- | ------------------ | ------------- |
-| 26         | 4/3/25  | Verify Client Dashboard responsiveness | Open app → login as Client | Displays correctly   | Works as expected  | ✅ Pass       |
-| 27         | 4/3/25  | Verify correct components display         | Open app → login as Client | Displays correctly  | Works as expected  | ✅ Pass       |
-| 28         | 4/3/25  | Verify CRUD functionality works for each component   | Open app → login as Client | CRUD functionaloty works  | Works as expected  | ✅ Pass       |
-
+| **Test ID** | **Date** | **Test Description**                               | **Steps**                  | **Expected Outcome**     | **Actual Outcome** | **Pass/Fail** |
+| ----------- | -------- | -------------------------------------------------- | -------------------------- | ------------------------ | ------------------ | ------------- |
+| 26          | 4/3/25   | Verify Client Dashboard responsiveness             | Open app → login as Client | Displays correctly       | Works as expected  | ✅ Pass       |
+| 27          | 4/3/25   | Verify correct components display                  | Open app → login as Client | Displays correctly       | Works as expected  | ✅ Pass       |
+| 28          | 4/3/25   | Verify CRUD functionality works for each component | Open app → login as Client | CRUD functionaloty works | Works as expected  | ✅ Pass       |
 
 #### **Code Coverage Reports**
 
@@ -1292,86 +1285,9 @@ Our final coverage report ensured that our codebase met **X%+ test coverage** ac
 
 Throughout the project, our team encountered several challenges which provided valuable learning opportunities.
 
-#### Challenge 1: [Title Related to the Issue] (Mostofa)
+#### Challenge 1: Cross-Origin Resource Sharing (CORS) Issue (Mostofa)
 
 ##### **The Problem:**
-<<<<<<< HEAD
-
-Testing with Github actions?
-
-##### **Code Snippet (Before Fix):**
-
-```javascript
-code here
-```
-
-##### **Why This Happened:**
-
-Loren ipsum
-
-##### Problem Resolution
-
-Loren ipsum
-
-##### **Code Snippet (After Fix):**
-
-```javascript
-code here
-```
-
-#### Challenge 2: [Title Related to the Issue] (Perri)
-
-##### **The Problem:**
-
-CoreUI template?
-
-##### **Code Snippet (Before Fix):**
-
-```javascript
-code here
-```
-
-##### **Why This Happened:**
-
-Loren ipsum
-
-##### Problem Resolution
-
-Loren ipsum
-
-##### **Code Snippet (After Fix):**
-
-```javascript
-code here
-```
-
-#### Challenge 3: [Title Related to the Issue] (Trenton)
-
-##### **The Problem:**
-
-CoreUI template?
-
-##### **Code Snippet (Before Fix):**
-
-```javascript
-code here
-```
-
-##### **Why This Happened:**
-
-Loren ipsum
-
-##### Problem Resolution
-
-Loren ipsum
-
-##### **Code Snippet (After Fix):**
-
-```javascript
-code here
-```
-=======
->>>>>>> main
 
 During the development of our project, we encountered significant issues with Cross-Origin Resource Sharing (CORS) when trying to make network requests between our frontend and backend. Initially, the backend did not explicitly define allowed origins or HTTP methods, which caused the browser to block API requests from our frontend due to the Same-Origin Policy.
 
@@ -1620,7 +1536,8 @@ General CSS documentation and study (case-by-case scenario)
 #### Challenge 3: Authorization Middlewares (Trenton)
 
 ##### **The Problem:**
-Role-based access control is a crucial element of this application, with different types of users requiring different access to different data. This required a careful consideration of security requirements and the design of the application's access control policies. 
+
+Role-based access control is a crucial element of this application, with different types of users requiring different access to different data. This required a careful consideration of security requirements and the design of the application's access control policies.
 
 ##### **Code Snippet (Before Fix):**
 
@@ -1639,31 +1556,40 @@ The resolution to this problem was to implement multiple middleware functions to
 ##### **Code Snippet (After Fix):**
 
 New project route with middlewares
+
 ```javascript
 router.delete("/:projectId", authenticateUser, authUserOrAdmin, deleteProject);
 ```
+
 authenticateUser Middleware function
+
 ```javascript
 const authenticateUser = (req, res, next) => {
-    const token = req.headers.authorization ? req.headers.authorization.substring("Bearer ".length) : "";
-    if (!token) {
-        return res.status(401).json({ message: 'Access Denied. No token provided.' });
-    }
+  const token = req.headers.authorization
+    ? req.headers.authorization.substring("Bearer ".length)
+    : "";
+  if (!token) {
+    return res
+      .status(401)
+      .json({ message: "Access Denied. No token provided." });
+  }
 
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret"); 
-        req.user = decoded;
-        next();
-    } catch (error) {
-        res.status(403).json({ message: 'Invalid Token.' });
-    }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret");
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(403).json({ message: "Invalid Token." });
+  }
 };
 ```
 
 ### **Resources Used to Solve the Problem**
+
 Express documentation:
 https://expressjs.com/en/guide/using-middleware.html
 
 GeekForGeeks:
 https://www.geeksforgeeks.org/middleware-in-express-js/
+
 ## Presentation
