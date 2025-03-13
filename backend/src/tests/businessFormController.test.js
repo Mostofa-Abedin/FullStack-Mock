@@ -1,12 +1,12 @@
 import request from 'supertest';
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
 import app from '../../index.js';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import Business from '../models/Business.js';
 let adminToken, clientToken, clientId, adminId;
 
-beforeAll(async () => {
+beforeEach(async () => {
   // Create test users
   const adminUser = await User.create({ name: 'Admin', email: 'adminOnboarding@test.com', role: 'admin', password: 'password123' });
   const clientUser = await User.create({ name: 'Client', email: 'clientOnboarding@test.com', role: 'client', password: 'password123' });
@@ -19,7 +19,7 @@ beforeAll(async () => {
   clientToken = jwt.sign({ userID: clientUser._id, role: 'client' }, process.env.JWT_SECRET || 'secret');
 });
 
-afterAll(async () => {
+afterEach(async () => {
   await User.deleteMany({});
 });
 // ------------------------------------------------------------------------------------------------------------------//
@@ -27,7 +27,6 @@ afterAll(async () => {
 describe('POST /users/:id/onboarding', () => {
   
   it('should create a new business successfully', async () => {
-    // To be fixed/created once testing errors have been fixed
     const newBusiness = {
       userId: clientId,
       businessName: "testBusiness",

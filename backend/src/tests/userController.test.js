@@ -1,11 +1,11 @@
 import request from "supertest";
-import { describe, it, expect, afterAll } from "vitest";
+import { describe, it, expect, afterAll, afterEach, beforeEach } from "vitest";
 import app from "../../index.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 let adminToken, clientToken, clientId, adminId;
 
-beforeAll(async () => {
+beforeEach(async () => {
   // Create test users
   const adminUser = await User.create({
     name: "Admin",
@@ -34,13 +34,15 @@ beforeAll(async () => {
   );
 });
 
-afterAll(async () => {
+afterEach(async () => {
   await User.deleteMany({});
+
 });
 describe("PATCH /users/:id/profile", () => {
   it("should change password successfully", async () => {
     const password = {
-      password: "password234",
+      currentPassword: "password123",
+      newPassword: "password234",
     };
     const url = `/users/${clientId}/profile`;
     const res = await request(app)
@@ -88,7 +90,7 @@ describe("DELETE /users/:id", () => {
   });
 
   it("should fail if user does not exist", async () => {
-    const url = `/users/${clientId}`;
+    const url = `/users/67ce0d8a58d9550b1402afc7`;
     const res = await request(app)
       .delete(url)
       .set(`Authorization`, `Bearer ${adminToken}`);

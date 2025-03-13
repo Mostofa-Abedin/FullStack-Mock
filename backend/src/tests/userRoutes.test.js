@@ -1,26 +1,25 @@
 import './setup/dbSetup.js'; // Import  DB setup 
 import request from 'supertest';
-import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, vi, beforeEach, afterEach } from 'vitest';
 import app from '../../index.js';
 import User from '../models/User.js';
 
 
-beforeAll(async () => {
+beforeEach(async () => {
   const adminUser = await User.create({ name: 'Admin', email: 'adminUserController@test.com', role: 'admin', password: 'password123' });
 });
 
-afterAll(async () => {
+afterEach(async () => {
   await User.deleteMany(); // Clean up after all tests
 });
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: GET /users Tests
 describe(' GET /users', () => {
 
-  it.skip('should return an empty array if no users exist', async () => {
+  it('should return an array ifusers exist', async () => {
     const res = await request(app).get('/users');
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Array);
-    expect(res.body.length).toBe(0);
   }, 10000); //  Extend timeout to 10 seconds
 });
   
@@ -52,18 +51,11 @@ describe('POST /users/register', () => {
     expect(res.body.user.password.startsWith('$2b$')).toBe(true); //  Check bcrypt hash
   });
 
-  it.skip('should not allow duplicate emails', async () => {
-    const userData = {
-      name: 'Duplicate User',
-      email: 'duplicateUser@example.com',
-      role: 'client',
-      password: 'password123'
-    };
+  it('should not allow duplicate emails', async () => {
+    const dupeUser = { name: 'Admin', email: 'adminUserController@test.com', role: 'admin', password: 'password123' }
     
-    await User.create(userData);
-
     // Attempt to register the same email
-    const res = await request(app).post('/users/register').send(userData);
+    const res = await request(app).post('/users/register').send(dupeUser);
     expect(res.statusCode).toBe(400);
     expect(res.body.message).toBe('User with this email already exists');
   });

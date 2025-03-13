@@ -1,17 +1,16 @@
 /* import './setup/dbSetup.js'; // Import  DB setup */
 import request from 'supertest';
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, afterEach, beforeEach } from 'vitest';
 import app from '../../index.js';
 import User from '../models/User.js';
 
-beforeAll(async () => {
+beforeEach(async () => {
   // Create test users
-  const adminUser = await User.create({ name: 'Admin', email: 'adminAuth@test.com', role: 'admin', password: 'password123' });
-  const clientUser = await User.create({ name: 'Client', email: 'clientAuth@test.com', role: 'client', password: 'password123' });
-
+  await User.create({ name: 'Admin', email: 'adminAuth@test.com', role: 'admin', password: 'password123' });
+  await User.create({ name: 'Client', email: 'clientAuth@test.com', role: 'client', password: 'password123' });
 });
 
-afterAll(async () => {
+afterEach(async () => {
   await User.deleteMany({});
 })
 // ------------------------------------------------------------------------------------------------------------------//

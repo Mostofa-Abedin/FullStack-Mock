@@ -1,6 +1,6 @@
 import './setup/dbSetup.js'; // ✅ Import DB setup
 import request from 'supertest';
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import app from '../../index.js';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
@@ -42,7 +42,9 @@ describe('GET /admin/dashboard', () => {
       { expiresIn: "1h" }
     );
   });
-
+  afterAll(async () => {
+    await User.deleteMany({});
+  })
   it('should allow an admin to access the admin dashboard', async () => {
     const res = await request(app)
       .get('/admin/dashboard')
