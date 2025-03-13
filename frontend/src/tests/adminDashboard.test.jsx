@@ -73,13 +73,7 @@ describe('AdminDashboard', () => {
   });
 
   it('should display the "Add Client" button', async () => {
-  it('should display the "Add Client" button', async () => {
     renderComponent();
-    
-    // Wait for the button in case it appears asynchronously
-    await waitFor(() => {
-      expect(screen.getByTestId('add-client-button')).toBeInTheDocument();
-    });
     await waitFor(() => {
       expect(screen.getByTestId('add-client-button')).toBeInTheDocument();
     });
@@ -91,7 +85,6 @@ describe('AdminDashboard', () => {
       expect(screen.getByText(/Manage Projects/i)).toBeInTheDocument();
     });
     const projectElements = screen.getAllByText(/Project Alpha/i);
-    expect(projectElements.length).toBeGreaterThan(0);
     expect(projectElements.length).toBeGreaterThan(0);
   });
 
