@@ -3,7 +3,6 @@
 }
 
 /* Main Dashboard Styles */
-
 .dash-welcome-text {
     font-family: "Inter", sans-serif;
     color: #192F3C;
@@ -32,7 +31,6 @@
     font-family: "Kode Mono", monospace;
     font-weight: bold;
     text-transform: uppercase;
-
 }
 
 .dash-add-button {
@@ -43,7 +41,8 @@
     border: none;
 }
 
-.dash-add-button:hover, .dashboard-button:hover {
+.dash-add-button:hover,
+.dashboard-button:hover {
     background-color: #8BC4D9;
     color: #192F3C;
 }
@@ -57,9 +56,7 @@
     margin: 20px 10px;
 }
 
-
 /* Card Styles */
-
 .dash-card {
     border-radius: 0%;
     padding: 2rem;
@@ -67,7 +64,6 @@
 }
 
 /* Modal Popup Styles */
-
 .modal-header {
     background-color: #8BC4D9;
     color: #192F3C;
@@ -75,7 +71,8 @@
     border-radius: 0%;
 }
 
-.modal-body, .modal-content {
+.modal-body,
+.modal-content {
     color: #192F3C;
     font-family: "Inter", sans-serif;
     border-radius: 0%;
@@ -93,12 +90,13 @@
 .custom-select {
     border-radius: 0%;
 }
-.custom-select:focus, .form-input:focus {
-    border: #F3A83C; 
-    box-shadow: 0 0 0 0.2rem  #f3a73c77; /* Custom glow color */
-    border-radius: 0%;
-  }
 
+.custom-select:focus,
+.form-input:focus {
+    border: #F3A83C;
+    box-shadow: 0 0 0 0.2rem #f3a73c77; /* Custom glow color */
+    border-radius: 0%;
+}
 
 .dash-submit-button {
     background: #F3A83C;
@@ -110,9 +108,7 @@
     border-radius: 0%;
 }
 
-
 /* Upcoming Project */
-
 .upcoming {
     background-color: #8BC4D9;
     color: #192F3C;
@@ -127,7 +123,6 @@
 }
 
 /* In Progress Project */
-
 .in-progress {
     background-color: #F3DCB2 !important;
     color: #841B13;
@@ -142,7 +137,6 @@
 }
 
 /* Client Review Project */
-
 .client-review {
     background-color: #192F3C !important;
     color: #8BC4D9;
@@ -157,7 +151,6 @@
 }
 
 /* Action Feedback Project */
-
 .action-feedback {
     background-color: #F3A83C;
     color: #192F3C;
@@ -172,7 +165,6 @@
 }
 
 /* Complete Project */
-
 .complete {
     background-color: #A7CF81;
     color: #192F3C;
@@ -186,8 +178,7 @@
     outline: none;
 }
 
-/*  On Hold Project */
-
+/* On Hold Project */
 .on-hold {
     background-color: #F1968F;
     color: #841B13;
@@ -202,7 +193,6 @@
 }
 
 /* Delete Button */
-
 .dash-delete {
     background-color: #841B13 !important;
     color: white;
@@ -217,4 +207,13 @@
 
 .col-md-10 {
     width: 100% !important;
+}
+
+/* Force white background on card and card body */
+.ccard,
+.ccard-body,
+.card,
+.card-body {
+  background-color: #fff !important;
+  color: #192F3C !important;
 }

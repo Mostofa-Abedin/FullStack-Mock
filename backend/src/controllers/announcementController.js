@@ -16,6 +16,10 @@ const getAnnouncements = async (req, res) => {
 
 const createAnnouncement = async (req, res) => {
     // Extract the necessary data from the request body
+
+    //Debugc
+    console.log(req.user)
+
     const { title, business, content } = req.body;
 
     const userId = req.user.userID;
