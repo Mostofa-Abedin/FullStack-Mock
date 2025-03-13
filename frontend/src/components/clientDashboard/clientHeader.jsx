@@ -64,9 +64,9 @@ const Header = () => {
             href="#"
             onClick={handleProfileClick}
             style={{
-              background: "none",
-              color: "#F3DCB2",
-              border: "none",
+              background: "none !important",
+              color: "#F3DCB2 !important",
+              border: "none !important",
             }}
           >
             <CIcon icon={cilUser} style={{ color: "#F3A83C" }} />
@@ -78,9 +78,9 @@ const Header = () => {
             href="#"
             onClick={handleLogoutClick}
             style={{
-              background: "none",
-              color: "#F3DCB2",
-              border: "none",
+              background: "none !important",
+              color: "#F3DCB2 !important",
+              border: "none !important",
             }}
           >
             <CIcon icon={cilLockLocked} style={{ color: "#F3A83C" }} />
