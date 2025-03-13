@@ -79,6 +79,13 @@ Given our small team size, tight deadlines, and the need for ease of testing and
 - CSS
 - [React](https://reactjs.org/)
 
+<<<<<<< HEAD
+@Trenton- to update dataflow and app architecture diagrams and add @Perri to add wireframe showing final changes
+
+@Perri to add final wireframes
+
+## Setup Instructions
+=======
 #### **Back-end**
 
 - [Express](https://expressjs.com/)
@@ -163,6 +170,9 @@ To run the backend of the application, follow these steps:
 3. Start the backend server: `$ npm run dev`
 
 The backend should now be running on `http://localhost:5001`.
+>>>>>>> main
+
+@Trenton to start
 
 ---
 
@@ -1163,7 +1173,7 @@ After merging to `main`, code was **auto-deployed to our live environment**. We 
 
 Since our website was **not yet accessible to the public** and in a pre-launch stage, we conducted **manual testing directly in the live production environment**.
 
-- If a test **failed**, and moved the existing feature ticket **back to In Progress** to be fixed **in `main` itself**.
+- If a test **failed**, and moved the existing feature ticket **back to In Progress** to be fixed in `main` itself.
 - This approach was **acceptable** because **pre-launch**, we had no live users relying on the system, allowing us to fix issues directly in production.
 - **Once launched**, we plan to **test in a staging environment** before merging to `main`.
 
@@ -1285,6 +1295,83 @@ Throughout the project, our team encountered several challenges which provided v
 #### Challenge 1: [Title Related to the Issue] (Mostofa)
 
 ##### **The Problem:**
+<<<<<<< HEAD
+
+Testing with Github actions?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+
+#### Challenge 2: [Title Related to the Issue] (Perri)
+
+##### **The Problem:**
+
+CoreUI template?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+
+#### Challenge 3: [Title Related to the Issue] (Trenton)
+
+##### **The Problem:**
+
+CoreUI template?
+
+##### **Code Snippet (Before Fix):**
+
+```javascript
+code here
+```
+
+##### **Why This Happened:**
+
+Loren ipsum
+
+##### Problem Resolution
+
+Loren ipsum
+
+##### **Code Snippet (After Fix):**
+
+```javascript
+code here
+```
+=======
+>>>>>>> main
 
 During the development of our project, we encountered significant issues with Cross-Origin Resource Sharing (CORS) when trying to make network requests between our frontend and backend. Initially, the backend did not explicitly define allowed origins or HTTP methods, which caused the browser to block API requests from our frontend due to the Same-Origin Policy.
 
