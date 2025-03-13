@@ -3,11 +3,15 @@
 .header-button {
     background-color: #192F3C !important;
     color: #F3DCB2 !important;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 .header-button:hover {
     background-color: #8BC4D9 !important;
     color: #192F3C !important;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 
@@ -54,12 +58,16 @@
     font-family: "Inter", sans-serif;
     border-radius: 0%;
     border: none;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 .dash-add-button:hover,
 .dashboard-button:hover {
     background-color: #8BC4D9;
     color: #192F3C;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 .dashboard-button {
@@ -69,6 +77,8 @@
     border-radius: 0%;
     border: none;
     margin: 20px 10px;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 /* Card Styles */
@@ -105,6 +115,7 @@
     --cui-btn-border-radius: none !important;
     border: none;
     outline: none;
+    --cui-btn-border-color: none;
 }
 
 .modal-button:hover {
@@ -151,11 +162,15 @@
 .dash-submit-button {
     background: #F3A83C;
     border-radius: 0%;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 .dash-submit-button:hover {
     background: #F3DCB2;
     border-radius: 0%;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 /* Upcoming Project */
@@ -164,26 +179,11 @@
     color: #192F3C;
 }
 
-.upcoming .dash-edit {
-    color: white;
-    background-color: #192F3C;
-    border-radius: 0%;
-    outline: none;
-    border: none;
-}
 
 /* In Progress Project */
 .in-progress {
     background-color: #F3DCB2 !important;
     color: #841B13;
-}
-
-.in-progress .dash-edit {
-    color: white;
-    background-color: #841B13;
-    border-radius: 0%;
-    outline: none;
-    border: none;
 }
 
 /* Client Review Project */
@@ -192,26 +192,10 @@
     color: #8BC4D9;
 }
 
-.client-review .dash-edit {
-    color: white;
-    background-color: #8BC4D9;
-    border-radius: 0%;
-    outline: none;
-    border: none;
-}
-
 /* Action Feedback Project */
 .action-feedback {
     background-color: #F3A83C;
     color: #192F3C;
-}
-
-.action-feedback .dash-edit {
-    color: white;
-    background-color: #192F3C;
-    border-radius: 0%;
-    outline: none;
-    border: none;
 }
 
 /* Complete Project */
@@ -220,13 +204,6 @@
     color: #192F3C;
 }
 
-.complete .dash-edit {
-    color: white;
-    background-color: #192F3C;
-    border: none;
-    border-radius: 0;
-    outline: none;
-}
 
 /* On Hold Project */
 .on-hold {
@@ -234,25 +211,22 @@
     color: #841B13;
 }
 
-.on-hold .dash-edit {
-    color: white;
-    background-color: #841B13;
-    border-radius: 0%;
-    outline: none;
-    border: none;
-}
 
 /* Delete Button */
 .dash-delete {
     background-color: #841B13 !important;
     color: white;
     border-radius: 0%;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 .dash-delete:hover {
     background-color: #841B13;
     scale: 1.025;
     color: white;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 .col-md-10 {
