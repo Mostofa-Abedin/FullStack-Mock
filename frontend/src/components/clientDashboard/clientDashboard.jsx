@@ -141,7 +141,7 @@ const ClientDashboard = () => {
             <CCard>
               <CCardBody>
                 <h2 className="text-xl font-bold flex items-center gap-2">
-                  Business Details
+                  My Business Details
                 </h2>
                 {/* Read-only mode */}
                 {!editMode && (
@@ -241,7 +241,7 @@ const ClientDashboard = () => {
           <CCard>
             <CCardBody>
               <h2 className="text-xl font-bold flex items-center gap-2">
-                Projects
+                My Projects
               </h2>
               <ul>
                 {projects.length > 0 ? (
@@ -265,7 +265,7 @@ const ClientDashboard = () => {
           <CCard>
             <CCardBody>
               <h2 className="text-xl font-bold flex items-center gap-2">
-                Announcements
+                 All Announcements
               </h2>
               <ul>
                 {announcements.length > 0 ? (
