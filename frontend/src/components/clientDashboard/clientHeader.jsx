@@ -88,12 +88,12 @@ const Header = () => {
         onClose={handleCancelLogout}
       >
         <CModalHeader>Confirm Logout</CModalHeader>
-        <CModalBody>
+        <CModalBody className="modal-text">
           Are you sure you want to log out? Your session will end.
         </CModalBody>
         <CModalFooter>
-          <CButton onClick={handleCancelLogout}>Cancel</CButton>
-          <CButton onClick={handleConfirmLogout}>Confirm</CButton>
+          <CButton className="modal-button" onClick={handleCancelLogout}>Cancel</CButton>
+          <CButton className="modal-button-confirm" onClick={handleConfirmLogout}>Confirm</CButton>
         </CModalFooter>
       </CModal>
 
@@ -109,7 +109,7 @@ const Header = () => {
             {/* Pass the role to change password */}
           </CModalBody>
           <CModalFooter>
-            <CButton color="secondary" onClick={handleClosePasswordChange}>
+            <CButton className="modal-button" onClick={handleClosePasswordChange}>
               Close
             </CButton>
           </CModalFooter>

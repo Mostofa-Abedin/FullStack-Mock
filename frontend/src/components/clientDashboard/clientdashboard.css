@@ -45,6 +45,7 @@
     font-family: "Kode Mono", monospace;
     font-weight: bold;
     text-transform: uppercase;
+    padding: 1rem;
 }
 
 .dash-add-button {
@@ -91,6 +92,41 @@
     font-family: "Inter", sans-serif;
     border-radius: none !important;
     border: none;
+}
+
+.modal-text {
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+.modal-button {
+    background-color: #8BC4D9;
+    color: #192F3C;
+    --cui-btn-border-radius: none !important;
+    border: none;
+    outline: none;
+}
+
+.modal-button:hover {
+    background-color: #F3A83C;
+    color: #192F3C;
+    --cui-btn-border-radius: none !important;
+    border: none;
+    outline: none;
+}
+
+.modal-button-confirm {
+    background-color: #F3A83C;
+    color: #192F3C;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
+}
+
+.modal-button-confirm:hover {
+    background-color: #192F3C;
+    color: #8BC4D9;
+    --cui-btn-border-radius: none;
+    --cui-btn-border-color: none;
 }
 
 .form-control {
