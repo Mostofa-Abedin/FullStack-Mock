@@ -116,7 +116,6 @@ li {
 
 @media (max-width: 600px){
     .header {
-        height: 180px;
+        height: 200px;
     }
 }
-  

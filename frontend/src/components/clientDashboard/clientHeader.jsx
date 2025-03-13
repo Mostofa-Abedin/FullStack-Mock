@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import ChangePassword from "../changePassword/ChangePassword"; // Import ChangePassword component
 import "../clientDashboard/clientdashboard.css";
 
+import Logo from "../../assets/images/magnetlabslogo_full.png"
+
 const Header = () => {
   const navigate = useNavigate(); // Hook to handle navigation
 
@@ -55,68 +57,60 @@ const Header = () => {
   };
 
   return (
-    <CHeader position="sticky" className="header">
-      <CHeaderBrand className="header-text" href="/admin/dashboard">
-        <strong>Client Dashboard</strong>
-      </CHeaderBrand>
-      <CHeaderNav>
-        <CNavItem>
-          <CNavLink
-            href="#"
-            onClick={handleProfileClick}
-            className="header-button"
-          >
-            <CIcon icon={cilUser} style={{ color: "#F3A83C" }} />
-            Profile
-          </CNavLink>
-        </CNavItem>
-        <CNavItem>
-          <CNavLink
-            href="#"
-            onClick={handleLogoutClick}
-            className="header-button"
-          >
-            <CIcon icon={cilLockLocked} style={{ color: "#F3A83C" }} />
-            Logout
-          </CNavLink>
-        </CNavItem>
-      </CHeaderNav>
+    <CHeader className="header">
+      
+    {/* Logo */}
+    <div className="logo-container">
+      <img src={ Logo } alt="Logo" className="logo" />
+    </div>
 
-      {/* Logout Confirmation Modal */}
-      <CModal
-        visible={isModalVisible}
-        onClose={handleCancelLogout}
-      >
-        <CModalHeader>Confirm Logout</CModalHeader>
-        <CModalBody className="modal-text">
-          Are you sure you want to log out? Your session will end.
+    {/* Centered title */}
+    <CHeaderBrand className="header-text">
+      <strong>Client Dashboard</strong>
+    </CHeaderBrand>
+
+    {/* Navigation */}
+    <CHeaderNav className="nav-buttons">
+      <CNavItem>
+        <CNavLink href="#" onClick={handleProfileClick} className="header-button">
+          <CIcon icon={cilUser} className="nav-icon" />
+          Profile
+        </CNavLink>
+      </CNavItem>
+      <CNavItem>
+        <CNavLink href="#" onClick={handleLogoutClick} className="header-button">
+          <CIcon icon={cilLockLocked} className="nav-icon" />
+          Logout
+        </CNavLink>
+      </CNavItem>
+    </CHeaderNav>
+
+    {/* Logout Modal */}
+    <CModal visible={isModalVisible} onClose={handleCancelLogout}>
+      <CModalHeader>Confirm Logout</CModalHeader>
+      <CModalBody className="modal-text">
+        Are you sure you want to log out? Your session will end.
+      </CModalBody>
+      <CModalFooter>
+        <CButton className="modal-button" onClick={handleCancelLogout}>Cancel</CButton>
+        <CButton className="modal-button-confirm" onClick={handleConfirmLogout}>Confirm</CButton>
+      </CModalFooter>
+    </CModal>
+
+    {/* Change Password Modal */}
+    {isPasswordChangeVisible && (
+      <CModal visible={isPasswordChangeVisible} onClose={handleClosePasswordChange}>
+        <CModalHeader>Your Profile</CModalHeader>
+        <CModalBody>
+          <ChangePassword role="admin" />
         </CModalBody>
         <CModalFooter>
-          <CButton className="modal-button" onClick={handleCancelLogout}>Cancel</CButton>
-          <CButton className="modal-button-confirm" onClick={handleConfirmLogout}>Confirm</CButton>
+          <CButton className="modal-button" onClick={handleClosePasswordChange}>Close</CButton>
         </CModalFooter>
       </CModal>
+    )}
 
-      {/* Conditionally render ChangePassword component as a modal */}
-      {isPasswordChangeVisible && (
-        <CModal
-          visible={isPasswordChangeVisible}
-          onClose={handleClosePasswordChange}
-        >
-          <CModalHeader>Your Profile</CModalHeader>
-          <CModalBody>
-            <ChangePassword role="client" />{" "}
-            {/* Pass the role to change password */}
-          </CModalBody>
-          <CModalFooter>
-            <CButton className="modal-button" onClick={handleClosePasswordChange}>
-              Close
-            </CButton>
-          </CModalFooter>
-        </CModal>
-      )}
-    </CHeader>
-  );
+  </CHeader>
+);
 };
-
 export default Header;
