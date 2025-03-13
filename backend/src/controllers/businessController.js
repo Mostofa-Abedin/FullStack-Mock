@@ -77,6 +77,8 @@ const updateBusinessDetails = async (req, res) => {
   const userId = req.user.userID; // Extracted from JWT token
   const userRole = req.user.role;
 
+  console.log("Inside updateBusinessDetails")
+  
   // Validate ObjectId
   if (!mongoose.Types.ObjectId.isValid(businessId)) {
     return res.status(400).json({ message: "Invalid Business ID format." });
@@ -90,11 +92,20 @@ const updateBusinessDetails = async (req, res) => {
     }
 
     // Allow update if user is owner or admin
-    if (business.userId.toString() !== userId && userRole !== "admin") {
-      return res.status(403).json({
-        message: "Access Denied. You can only update your own business.",
-      });
-    }
+    const businessOwnerId = business.userId._id 
+    ? business.userId._id.toString() 
+    : business.userId.toString();
+  
+    // Debug logs: compare the IDs
+    console.log("Business owner ID:", businessOwnerId);
+    console.log("Token user ID:", userId); 
+
+  if (businessOwnerId !== userId && userRole !== "admin") {
+    return res.status(403).json({
+      message: "Access Denied. You can only update your own business.",
+    });
+  }
+  
 
     // Perform partial updates
     if (updates.businessName) {
