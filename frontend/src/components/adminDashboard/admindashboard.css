@@ -14,9 +14,6 @@
     --cui-btn-border-color: none;
 }
 
-
-
-
 .body {
     font-family: "Inter", sans-serif !important;
 }
@@ -99,43 +96,6 @@
     font-family: "Inter", sans-serif;
     border-radius: 0%;
     border: none;
-}
-
-
-.modal-text {
-    color: white;
-    font-family: 'Inter', sans-serif;
-}
-
-.modal-button {
-    background-color: #8BC4D9;
-    color: #192F3C;
-    --cui-btn-border-radius: none !important;
-    border: none;
-    outline: none;
-    --cui-btn-border-color: none;
-}
-
-.modal-button:hover {
-    background-color: #F3A83C;
-    color: #192F3C;
-    --cui-btn-border-radius: none !important;
-    border: none;
-    outline: none;
-}
-
-.modal-button-confirm {
-    background-color: #F3A83C;
-    color: #192F3C;
-    --cui-btn-border-radius: none;
-    --cui-btn-border-color: none;
-}
-
-.modal-button-confirm:hover {
-    background-color: #192F3C;
-    color: #8BC4D9;
-    --cui-btn-border-radius: none;
-    --cui-btn-border-color: none;
 }
 
 .form-control {
@@ -288,3 +248,19 @@
     width: 100% !important;
 }
 
+@media (max-width: 600px) {
+    .header, .logo-container, .header-text{
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .nav-links {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header-nav {
+        width: 100%;
+        margin: 0 auto;
+    }
+}

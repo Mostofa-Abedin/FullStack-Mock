@@ -1,72 +1,64 @@
 import React, { useState } from "react";
-import { CHeader, CHeaderNav, CHeaderBrand, CNavItem, CNavLink, CModal, CModalHeader, CModalBody, CModalFooter, CButton } from "@coreui/react"; // Added CModal import
+import { 
+  CHeader, CHeaderNav, CHeaderBrand, CNavItem, CNavLink, 
+  CModal, CModalHeader, CModalBody, CModalFooter, CButton 
+} from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilUser, cilLockLocked } from "@coreui/icons";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import ChangePassword from "../changePassword/ChangePassword"; // Import ChangePassword component
+import { useNavigate } from "react-router-dom";
+import ChangePassword from "../changePassword/ChangePassword";
 import "../adminDashboard/admindashboard.css";
 
+import Logo from "../../assets/images/magnetlabslogo_full.png"
+
 const Header = () => {
-  const navigate = useNavigate(); // Hook to handle navigation
-
-  // State to manage modal visibility
+  const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isPasswordChangeVisible, setIsPasswordChangeVisible] = useState(false); // New state for showing change password component
+  const [isPasswordChangeVisible, setIsPasswordChangeVisible] = useState(false);
 
-  // Handle logout button click to show confirmation modal
-  const handleLogoutClick = () => {
-    setIsModalVisible(true);
-  };
-
-  // Handle confirmation of logout
+  const handleLogoutClick = () => setIsModalVisible(true);
   const handleConfirmLogout = () => {
-    // Clear authentication (e.g., token)
     localStorage.removeItem("authToken");
-    // Close modal
     setIsModalVisible(false);
-    // Navigate to login page
     navigate("/login");
   };
-
-  // Handle cancel logout
-  const handleCancelLogout = () => {
-    setIsModalVisible(false);
-  };
-
-  // Handle profile click to show change password modal
-  const handleProfileClick = () => {
-    setIsPasswordChangeVisible(true); // Show the change password component
-  };
-
-  // Handle closing the change password modal
-  const handleClosePasswordChange = () => {
-    setIsPasswordChangeVisible(false); // Close the change password component
-  };
+  const handleCancelLogout = () => setIsModalVisible(false);
+  const handleProfileClick = () => setIsPasswordChangeVisible(true);
+  const handleClosePasswordChange = () => setIsPasswordChangeVisible(false);
 
   return (
     <CHeader className="header">
-      <CHeaderBrand className="header-text" href="/admin/dashboard">
+      
+      {/* Logo */}
+      <div className="logo-container">
+        <img src={ Logo } alt="Logo" className="logo" />
+      </div>
+
+      {/* Centered title */}
+      <CHeaderBrand className="header-text">
         <strong>Admin Dashboard</strong>
       </CHeaderBrand>
-      <CHeaderNav>
+
+      {/* Navigation */}
+      <CHeaderNav className="nav-buttons">
         <CNavItem>
           <CNavLink href="#" onClick={handleProfileClick} className="header-button">
-            <CIcon icon={cilUser} style={{ color: "#F3A83C" }} />
+            <CIcon icon={cilUser} className="nav-icon" />
             Profile
           </CNavLink>
         </CNavItem>
         <CNavItem>
           <CNavLink href="#" onClick={handleLogoutClick} className="header-button">
-            <CIcon icon={cilLockLocked} style={{ color: "#F3A83C" }} />
+            <CIcon icon={cilLockLocked} className="nav-icon" />
             Logout
           </CNavLink>
         </CNavItem>
       </CHeaderNav>
 
-      {/* Logout Confirmation Modal */}
+      {/* Logout Modal */}
       <CModal visible={isModalVisible} onClose={handleCancelLogout}>
         <CModalHeader>Confirm Logout</CModalHeader>
-        <CModalBody  className="modal-text">
+        <CModalBody className="modal-text">
           Are you sure you want to log out? Your session will end.
         </CModalBody>
         <CModalFooter>
@@ -75,20 +67,19 @@ const Header = () => {
         </CModalFooter>
       </CModal>
 
-      {/* Conditionally render ChangePassword component as a modal */}
+      {/* Change Password Modal */}
       {isPasswordChangeVisible && (
         <CModal visible={isPasswordChangeVisible} onClose={handleClosePasswordChange}>
           <CModalHeader>Your Profile</CModalHeader>
           <CModalBody>
-            <ChangePassword role="admin" /> {/* Pass the role to change password */}
+            <ChangePassword role="admin" />
           </CModalBody>
           <CModalFooter>
-            <CButton color="secondary" onClick={handleClosePasswordChange}>
-              Close
-            </CButton>
+            <CButton className="modal-button" onClick={handleClosePasswordChange}>Close</CButton>
           </CModalFooter>
         </CModal>
       )}
+
     </CHeader>
   );
 };
