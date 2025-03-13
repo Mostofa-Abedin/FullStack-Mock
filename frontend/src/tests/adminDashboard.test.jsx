@@ -73,7 +73,13 @@ describe('AdminDashboard', () => {
   });
 
   it('should display the "Add Client" button', async () => {
+  it('should display the "Add Client" button', async () => {
     renderComponent();
+    
+    // Wait for the button in case it appears asynchronously
+    await waitFor(() => {
+      expect(screen.getByTestId('add-client-button')).toBeInTheDocument();
+    });
     await waitFor(() => {
       expect(screen.getByTestId('add-client-button')).toBeInTheDocument();
     });
@@ -85,6 +91,7 @@ describe('AdminDashboard', () => {
       expect(screen.getByText(/Manage Projects/i)).toBeInTheDocument();
     });
     const projectElements = screen.getAllByText(/Project Alpha/i);
+    expect(projectElements.length).toBeGreaterThan(0);
     expect(projectElements.length).toBeGreaterThan(0);
   });
 
@@ -99,10 +106,8 @@ describe('AdminDashboard', () => {
     const modalTitle = await screen.findByRole('heading', { name: /Add client/i });
     expect(modalTitle).toBeInTheDocument();
 
-    // Close the modal by clicking the "Close" button
     fireEvent.click(screen.getByText(/Close/i));
 
-    // Wait for the modal to be removed from the document
     await waitFor(() => {
       expect(screen.queryByRole('heading', { name: /Add client/i })).not.toBeInTheDocument();
     });
