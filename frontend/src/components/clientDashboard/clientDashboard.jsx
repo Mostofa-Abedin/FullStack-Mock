@@ -265,7 +265,7 @@ const ClientDashboard = () => {
           <CCard>
             <CCardBody>
               <h2 className="text-xl font-bold flex items-center gap-2">
-                 All Announcements
+                Announcements
               </h2>
               <ul>
                 {announcements.length > 0 ? (
@@ -281,8 +281,8 @@ const ClientDashboard = () => {
                         <strong>Active:</strong> {announcement.active ? "Yes" : "No"}
                       </p>
                       <p>
-                        <strong>Created At:</strong>{" "}
-                        {new Date(announcement.createdAt).toLocaleString()}
+                        <strong>Date:</strong>{" "}
+                        {new Date(announcement.createdAt).toLocaleDateString()}
                       </p>
                     </li>
                   ))
