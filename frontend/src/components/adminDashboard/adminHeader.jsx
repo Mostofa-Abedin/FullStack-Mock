@@ -66,12 +66,12 @@ const Header = () => {
       {/* Logout Confirmation Modal */}
       <CModal visible={isModalVisible} onClose={handleCancelLogout}>
         <CModalHeader>Confirm Logout</CModalHeader>
-        <CModalBody>
+        <CModalBody  className="modal-text">
           Are you sure you want to log out? Your session will end.
         </CModalBody>
         <CModalFooter>
-          <CButton color="secondary" onClick={handleCancelLogout}>Cancel</CButton>
-          <CButton color="primary" onClick={handleConfirmLogout}>Confirm</CButton>
+          <CButton className="modal-button" onClick={handleCancelLogout}>Cancel</CButton>
+          <CButton className="modal-button-confirm" onClick={handleConfirmLogout}>Confirm</CButton>
         </CModalFooter>
       </CModal>
 
