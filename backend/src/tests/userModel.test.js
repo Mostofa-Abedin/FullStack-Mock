@@ -24,7 +24,7 @@ describe('User Model Validations', () => {
   });
 
   it('should set the default role to "client"', async () => {
-    const user = new User({ name: 'Test User', email: 'test@example.com', password: 'password123' });
+    const user = new User({ name: 'Test User', email: 'userModel@example.com', password: 'password123' });
 
     expect(user.role).toBe('client'); //  Should default to 'client'
   });

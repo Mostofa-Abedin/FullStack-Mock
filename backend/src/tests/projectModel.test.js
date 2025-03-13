@@ -91,7 +91,7 @@ describe('Project Model Validations', () => {
         expect(savedProject._id).toBeDefined();
         expect(savedProject.createdAt).toBeDefined();
         expect(savedProject.updatedAt).toBeDefined();
-    });
+    }, 30000); // Increase timeout to 30 seconds for this test
 
 });
 // ------------------------------------------------------------------------------------------------------------------

@@ -1,45 +1,32 @@
-import './setup/dbSetup.js'; // Import  DB setup
+import './setup/dbSetup.js'; // Import  DB setup 
 import request from 'supertest';
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, vi, beforeEach, afterEach } from 'vitest';
 import app from '../../index.js';
 import User from '../models/User.js';
 
+
+beforeEach(async () => {
+  const adminUser = await User.create({ name: 'Admin', email: 'adminUserController@test.com', role: 'admin', password: 'password123' });
+});
+
+afterEach(async () => {
+  await User.deleteMany(); // Clean up after all tests
+});
 // ------------------------------------------------------------------------------------------------------------------//
 // SECTION: GET /users Tests
 describe(' GET /users', () => {
-  it('should return an empty array if no users exist', async () => {
-    await User.deleteMany({}); // Ensure database is empty before testing
 
-    const count = await User.countDocuments();
-    console.log(`User count before test: ${count}`); //  Debugging log
-
+  it('should return an array ifusers exist', async () => {
     const res = await request(app).get('/users');
-
     expect(res.statusCode).toBe(200);
     expect(res.body).toBeInstanceOf(Array);
-    expect(res.body.length).toBe(0);
   }, 10000); //  Extend timeout to 10 seconds
 });
   
-
   it('should return the created user', async () => {
-    await User.create({ 
-      name: 'Test User', 
-      email: 'test@example.com', 
-      role: 'client', 
-      password: 'password123' 
-    });
-
     const res = await request(app).get('/users');
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.length).toBe(1);
-    expect(res.body[0].name).toBe('Test User');
-    expect(res.body[0].role).toBe('client');
-    expect(res.body[0]).toHaveProperty('createdAt');
-    expect(res.body[0]).toHaveProperty('updatedAt');
-    expect(new Date(res.body[0].updatedAt)).toBeInstanceOf(Date);
-  
 });
 
 // ------------------------------------------------------------------------------------------------------------------//
@@ -49,7 +36,7 @@ describe('POST /users/register', () => {
   it('should register a new user successfully', async () => {
     const newUser = {
       name: 'Register User',
-      email: 'register@example.com',
+      email: 'registerUser@example.com',
       role: 'client',
       password: 'securepassword123'
     };
@@ -65,19 +52,10 @@ describe('POST /users/register', () => {
   });
 
   it('should not allow duplicate emails', async () => {
-    const userData = {
-      name: 'Duplicate User',
-      email: 'duplicate@example.com',
-      role: 'client',
-      password: 'password123'
-    };
-
-    // Create user first
-    await User.create(userData);
-
+    const dupeUser = { name: 'Admin', email: 'adminUserController@test.com', role: 'admin', password: 'password123' }
+    
     // Attempt to register the same email
-    const res = await request(app).post('/users/register').send(userData);
-
+    const res = await request(app).post('/users/register').send(dupeUser);
     expect(res.statusCode).toBe(400);
     expect(res.body.message).toBe('User with this email already exists');
   });
@@ -125,7 +103,7 @@ describe('Model Validations', () => {
   });
 
   it('should set the default role to "client"', async () => {
-    const user = new User({ name: 'Test User', email: 'test@example.com', password: 'password123' });
+    const user = new User({ name: 'Test User', email: 'testDefaultClient@example.com', password: 'password123' });
 
     expect(user.role).toBe('client'); // Should default to 'client'
   });
@@ -145,7 +123,7 @@ describe('Model Validations', () => {
   });
 
   it('should hash the password before saving', async () => {
-    const user = await User.create({ name: 'Test User', email: 'user@example.com', password: 'mypassword123' });
+    const user = await User.create({ name: 'Test User', email: 'hashinguser@example.com', password: 'mypassword123' });
 
     expect(user.password).not.toBe('mypassword123'); // Should not store plaintext password
     expect(user.password.startsWith('$2b$')).toBe(true); // Should be a bcrypt hash

@@ -1,4 +1,4 @@
-import './setup/dbSetup.js'; // Centralized DB setup
+/* import './setup/dbSetup.js'; // Centralized DB setup */
 import request from 'supertest';
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import app from '../../index.js';
@@ -14,8 +14,8 @@ let adminToken, clientToken, clientId, projectId;
 
 beforeAll(async () => {
   // Create test users
-  const adminUser = await User.create({ name: 'Admin', email: 'admin@test.com', role: 'admin', password: 'password123' });
-  const clientUser = await User.create({ name: 'Client', email: 'client@test.com', role: 'client', password: 'password123' });
+  const adminUser = await User.create({ name: 'Admin', email: 'adminProject@test.com', role: 'admin', password: 'password123' });
+  const clientUser = await User.create({ name: 'Client', email: 'clientProject@test.com', role: 'client', password: 'password123' });
 
   clientId = clientUser._id;
 
@@ -178,6 +178,24 @@ describe('DELETE /projects/:projectId', () => {
 
     expect(res.statusCode).toBe(403);
   });
+
+  it('should return 404 if project is not found', async () => {
+    const res = await request(app)
+      .delete(`/projects/67ce0d8a58d9550b1402afc7`) // 
+      .set('Authorization', `Bearer ${adminToken}`);
+    console.log(res.body); // ✅ Added for debugging
+    expect(res.statusCode).toBe(404);
+    expect(res.body.message).toMatch(/Project not found/);
+  });
+
+  it('should return 500 if project ID is invalid', async () => {
+    const res = await request(app)
+      .delete(`/projects/123`) // 
+      .set('Authorization', `Bearer ${adminToken}`);
+
+    expect(res.statusCode).toBe(500);
+    expect(res.body.message).toBe("Error deleting project");
+  })
 });
 
 // ------------------------------------------------------------------------------------------------------------------//

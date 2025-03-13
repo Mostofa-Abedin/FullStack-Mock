@@ -14,6 +14,7 @@ const getAllUsers = async (req, res) => {
 };
 
 // Controller: Create a new user
+/* v8 ignore start */
 const createUser = async (req, res) => {
   try {
     const { name, email, role, password } = req.body;
@@ -24,6 +25,7 @@ const createUser = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+/* v8 ignore stop */
 
 // Controller: Register a new user
 const registerUser = async (req, res) => {

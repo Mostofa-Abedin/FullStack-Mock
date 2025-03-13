@@ -21,20 +21,19 @@ beforeAll(async () => {
     console.error('❌ MongoDB connection error:', error);
     throw error;
   }
-}, 20000); // ⬅️ Extended timeout to 20 seconds to prevent test failures
+}, 20000); // ⬅️ Extended timeout to 20 seconds to prevent test failures 
 
 // ✅ Clean up database before each test
 beforeEach(async () => {
     if (mongoose.connection.readyState === 1) {
       await User.deleteMany({});
-      const count = await User.countDocuments();
-      console.log(`✅ Database cleared. User count: ${count}`);
     }
   });
   
 
 // ✅ Disconnect from MongoDB after all tests
-afterAll(async () => {
+/* afterAll(async () => {
+
   await mongoose.disconnect();
   console.log('✅ MongoDB disconnected after tests');
-});
+});  */
