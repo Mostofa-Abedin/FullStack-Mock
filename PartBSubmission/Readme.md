@@ -1267,19 +1267,43 @@ Below is our **structured UAT test plan**, documenting real tests performed befo
 
 #### **Code Coverage Reports**
 
-Our final coverage report ensured that our codebase met **X%+ test coverage** across both frontend and backend.
+##### Code Coverage Report for `Frontend`
 
-| **Metric**    | **Frontend Coverage** | **Backend Coverage** |
-| ------------- | --------------------- | -------------------- |
-| Lines Covered | X%                    | X%                   |
-| Statements    | X%                    | X%                   |
-| Functions     | X%                    | X%                   |
-| Branches      | X%                    | X                    |
-| %             |
+###### Summary
 
-✅ **Screenshot of the final test coverage report** _(to be added in README)_
+- **Statements**: 60.2% (1425/2367)
+- **Branches**: 50.23% (108/215)
+- **Functions**: 52.56% (41/78)
+- **Lines**: 60.2% (1425/2367)
+
+##### File Coverage Breakdown
+
+| File Path                    | Statements           | Branches           | Functions         | Lines                |
+| ---------------------------- | -------------------- | ------------------ | ----------------- | -------------------- |
+| `components`                 | **77.77%** (28/36)   | **62.5%** (5/8)    | **100%** (2/2)    | **77.77%** (28/36)   |
+| `components/NavBar`          | **95.83%** (46/48)   | **75%** (9/12)     | **83.33%** (5/6)  | **95.83%** (46/48)   |
+| `components/adminDashboard`  | **44.38%** (383/863) | **28.98%** (20/69) | **32.14%** (9/28) | **44.38%** (383/863) |
+| `components/changePassword`  | **93.33%** (70/75)   | **63.63%** (7/11)  | **100%** (5/5)    | **93.33%** (70/75)   |
+| `components/clientDashboard` | **0%** (0/339)       | **0%** (0/2)       | **0%** (0/2)      | **0%** (0/339)       |
+| `components/contactSection`  | **100%** (23/23)     | **100%** (1/1)     | **50%** (1/2)     | **100%** (23/23)     |
+| `components/footer`          | **74.19%** (69/93)   | **100%** (1/1)     | **14.28%** (1/7)  | **74.19%** (69/93)   |
+| `components/heroSection`     | **100%** (45/45)     | **100%** (1/1)     | **100%** (1/1)    | **100%** (45/45)     |
+| `components/loginForm`       | **82.35%** (126/153) | **60.97%** (25/41) | **66.66%** (4/6)  | **82.35%** (126/153) |
+| `components/servicesSection` | **100%** (35/35)     | **100%** (3/3)     | **100%** (1/1)    | **100%** (35/35)     |
+| `components/workSection`     | **100%** (31/31)     | **100%** (2/2)     | **100%** (1/1)    | **100%** (31/31)     |
+| `pages/Contact`              | **88.19%** (127/144) | **44.44%** (4/9)   | **60%** (3/5)     | **88.19%** (127/144) |
+| `pages/OnboardingPage`       | **74.6%** (94/126)   | **66.66%** (18/27) | **100%** (5/5)    | **74.6%** (94/126)   |
+| `pages/ProjectPages`         | **95.85%** (185/193) | **15.78%** (3/19)  | **25%** (1/4)     | **95.85%** (185/193) |
+| `pages/Services`             | **100%** (126/126)   | **100%** (6/6)     | **50%** (1/2)     | **100%** (126/126)   |
+| `pages/Work`                 | **100%** (37/37)     | **100%** (3/3)     | **100%** (1/1)    | **100%** (37/37)     |
 
 ---
+
+## Key Insights:
+
+- **High Coverage (100%)**: Several components and pages such as `heroSection`, `servicesSection`, and `workSection`.
+- **Low Coverage (0%)**: `clientDashboard` has **0% test coverage** and needs immediate attention.
+- **Needs Improvement**: `adminDashboard` has only **44.38% statement coverage** and **32.14% function coverage**, indicating untested logic.
 
 ## Challenges and Solutions
 
@@ -1591,5 +1615,3 @@ https://expressjs.com/en/guide/using-middleware.html
 
 GeekForGeeks:
 https://www.geeksforgeeks.org/middleware-in-express-js/
-
-## Presentation
