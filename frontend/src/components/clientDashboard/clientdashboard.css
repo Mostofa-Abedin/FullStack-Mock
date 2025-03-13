@@ -1,3 +1,17 @@
+/* Header Styles */
+
+.header-button {
+    background-color: #192F3C !important;
+    color: #F3DCB2 !important;
+}
+
+.header-button:hover {
+    background-color: #8BC4D9 !important;
+    color: #192F3C !important;
+}
+
+
+
 .body {
     font-family: "Inter", sans-serif !important;
 }

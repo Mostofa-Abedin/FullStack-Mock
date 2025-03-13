@@ -6,7 +6,7 @@ import {
   CButton,
 } from "@coreui/react";
 import "@coreui/coreui/dist/css/coreui.min.css";
-import "../adminDashboard/admindashboard.css";
+import "../clientDashboard/clientdashboard.css";
 
 const ClientDashboard = () => {
   const [projects, setProjects] = useState([]);
