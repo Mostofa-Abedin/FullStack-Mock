@@ -64,7 +64,7 @@ const Header = () => {
             href="#"
             onClick={handleProfileClick}
             style={{
-              background: "none !important",
+              background: "#192F3C !important",
               color: "#F3DCB2 !important",
               border: "none !important",
             }}
@@ -78,7 +78,7 @@ const Header = () => {
             href="#"
             onClick={handleLogoutClick}
             style={{
-              background: "none !important",
+              background: "#192F3C !important",
               color: "#F3DCB2 !important",
               border: "none !important",
             }}
