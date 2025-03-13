@@ -228,6 +228,7 @@ const ClientsList = ({ clients, setClients, businesses, setBusinesses }) => {
         <CCardHeader>
           <h4>All Clients</h4>
           <CButton
+            data-testid="add-client-button"
             onClick={() => {
               setModalType("add");
               setCurrentItem(null);

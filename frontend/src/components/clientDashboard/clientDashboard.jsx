@@ -1,56 +1,72 @@
 import { useState, useEffect } from "react";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  CContainer,
-  CNavItem as CSidebarItem,
-  CRow,
-  CCol,
-  CButton,
   CCard,
   CCardBody,
-  CCardHeader,
-  CFormInput,
-  CFormSelect,
-  CModal,
-  CModalHeader,
-  CModalTitle,
-  CModalBody,
-  CModalFooter,
+  CButton,
 } from "@coreui/react";
 import "@coreui/coreui/dist/css/coreui.min.css";
-import "../adminDashboard/admindashboard.css";
+import "../clientDashboard/clientdashboard.css";
 
 const ClientDashboard = () => {
   const [projects, setProjects] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
+  const [businessDetails, setBusinessDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
-  const [showCreateAnnouncementModal, setShowCreateAnnouncementModal] = useState(false);
-  const [newProjectName, setNewProjectName] = useState('');
-  const [newAnnouncementTitle, setNewAnnouncementTitle] = useState('');
-  const navigate = useNavigate();
 
+  // Edit mode state for business details
+  const [editMode, setEditMode] = useState(false);
+  const [editBusinessName, setEditBusinessName] = useState("");
+  const [editIndustry, setEditIndustry] = useState("");
+  const [editWebsite, setEditWebsite] = useState("");
+  const [editPhone, setEditPhone] = useState("");
+  const [editAddress, setEditAddress] = useState("");
+
+  const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
   const token = localStorage.getItem("authToken");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (userId) {
+      fetchData();
+    } else {
+      setError("User not found.");
+      setLoading(false);
+    }
+  }, [userId]);
 
   const fetchData = async () => {
     try {
+      // 1. Fetch the business details for the logged-in user
+      const businessRes = await fetch(`${baseUrl}/business/details`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!businessRes.ok) {
+        throw new Error("Failed to fetch business details");
+      }
+      const businessData = await businessRes.json();
+
+      // 2. Fetch projects and announcements concurrently
       const [projectsRes, announcementsRes] = await Promise.all([
-        fetch(`${baseUrl}/projects`, { headers: { Authorization: `Bearer ${token}` } }),
-        fetch(`${baseUrl}/announcements`, { headers: { Authorization: `Bearer ${token}` } })
+        fetch(`${baseUrl}/projects/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        fetch(`${baseUrl}/announcements`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
       ]);
-
       if (!projectsRes.ok || !announcementsRes.ok) {
-        throw new Error("Failed to fetch data");
+        throw new Error("Failed to fetch projects or announcements");
       }
+      const projectsData = await projectsRes.json();
+      const announcementsData = await announcementsRes.json();
 
-      setProjects((await projectsRes.json()).projects || []);
-      setAnnouncements((await announcementsRes.json()).announcements || []);
+      // 3. Update state
+      setBusinessDetails(businessData);
+      setProjects(projectsData.projects || []);
+      setAnnouncements(announcementsData.announcements || []);
       setLoading(false);
     } catch (error) {
       setError(error.message);
@@ -58,91 +74,57 @@ const ClientDashboard = () => {
     }
   };
 
-  // Create Project function
-  const createProject = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/projects`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: newProjectName }),
-      });
+  // ---------- Business Details Edit Handlers ----------
 
-      if (!response.ok) {
-        throw new Error("Failed to create project");
-      }
-
-      setNewProjectName('');
-      setShowCreateProjectModal(false);
-      fetchData(); // Refresh data after adding
-    } catch (error) {
-      setError(error.message);
-    }
+  const handleEditClick = () => {
+    if (!businessDetails) return;
+    // Initialize editable fields with current business details
+    setEditBusinessName(businessDetails.businessName || "");
+    setEditIndustry(businessDetails.industry || "");
+    setEditWebsite(businessDetails.website || "");
+    setEditPhone(businessDetails.phone || "");
+    setEditAddress(businessDetails.address || "");
+    setEditMode(true);
   };
 
-  // Create Announcement function
-  const createAnnouncement = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/announcements`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title: newAnnouncementTitle }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to create announcement");
-      }
-
-      setNewAnnouncementTitle('');
-      setShowCreateAnnouncementModal(false);
-      fetchData(); // Refresh data after adding
-    } catch (error) {
-      setError(error.message);
-    }
+  const handleCancelEdit = () => {
+    setEditMode(false);
   };
 
-  // Delete Project function
-  const deleteProject = async (projectId) => {
-    try {
-      const response = await fetch(`${baseUrl}/projects/${projectId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete project");
-      }
-
-      fetchData(); // Refresh data after deletion
-    } catch (error) {
-      setError(error.message);
+  const handleSaveEdit = async () => {
+    if (!businessDetails?._id) {
+      setError("No business record to update.");
+      return;
     }
-  };
-
-  // Delete Announcement function
-  const deleteAnnouncement = async (announcementId) => {
     try {
-      const response = await fetch(`${baseUrl}/announcements/${announcementId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const patchRes = await fetch(
+        `${baseUrl}/business/update/${businessDetails._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            businessName: editBusinessName,
+            industry: editIndustry,
+            website: editWebsite,
+            phone: editPhone,
+            address: editAddress,
+          }),
+        }
+      );
 
-      if (!response.ok) {
-        throw new Error("Failed to delete announcement");
+      if (!patchRes.ok) {
+        throw new Error("Failed to update business details");
       }
 
-      fetchData(); // Refresh data after deletion
-    } catch (error) {
-      setError(error.message);
+      const patchData = await patchRes.json();
+      setBusinessDetails(patchData.business);
+      setEditMode(false);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -154,101 +136,162 @@ const ClientDashboard = () => {
         <p className="text-red-500">{error}</p>
       ) : (
         <>
-          {/* Projects Section */}
-          <CCard>
+          {/* ---------- Business Details Section ---------- */}
+          {businessDetails && (
+            <CCard className="dash-card">
+              <CCardBody>
+                <h2 className="dash-card-header">
+                  My Business Details
+                </h2>
+                {/* Read-only mode */}
+                {!editMode && (
+                  <>
+                    <p>
+                      <strong>Business Name:</strong>{" "}
+                      {businessDetails.businessName}
+                    </p>
+                    <p>
+                      <strong>Industry:</strong> {businessDetails.industry}
+                    </p>
+                    <p>
+                      <strong>Website:</strong> {businessDetails.website}
+                    </p>
+                    <p>
+                      <strong>Phone:</strong> {businessDetails.phone}
+                    </p>
+                    <p>
+                      <strong>Address:</strong> {businessDetails.address}
+                    </p>
+                    <CButton
+                      onClick={handleEditClick}
+                      className="dash-add-button"
+                    >
+                      Edit Business
+                    </CButton>
+                  </>
+                )}
+                {/* Edit mode */}
+                {editMode && (
+                  <div className="mt-2">
+                    <div className="mb-3">
+                      <label>Business Name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editBusinessName}
+                        onChange={(e) => setEditBusinessName(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label>Industry</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editIndustry}
+                        onChange={(e) => setEditIndustry(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label>Website</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editWebsite}
+                        onChange={(e) => setEditWebsite(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label>Phone</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editPhone}
+                        onChange={(e) => setEditPhone(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label>Address</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editAddress}
+                        onChange={(e) => setEditAddress(e.target.value)}
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <CButton className="dash-submit-button"onClick={handleSaveEdit}>
+                        Save
+                      </CButton>
+                      <CButton
+                        className="dash-delete"
+                        onClick={handleCancelEdit}
+                      >
+                        Cancel
+                      </CButton>
+                    </div>
+                  </div>
+                )}
+              </CCardBody>
+            </CCard>
+          )}
+
+          {/* ---------- Projects Section (Read-Only) ---------- */}
+          <CCard className="dash-card">
             <CCardBody>
-              <h2 className="text-xl font-bold flex items-center gap-2">
-                Projects
+              <h2 className="dash-card-header">
+                My Projects
               </h2>
               <ul>
                 {projects.length > 0 ? (
                   projects.map((project) => (
-                    <li key={project.id} className="py-2 border-b">
-                      {project.name}
-                      <Button onClick={() => deleteProject(project.id)} className="ml-2 text-red-500">
-                        Delete
-                      </Button>
+                    <li key={project._id} className="py-2 border-b">
+                      <p><strong>Project Name:</strong> {project.projectName}</p>
+                      <p><strong>Status:</strong> {project.status}</p>
+                      <p><strong>Description:</strong> {project.description}</p>
+                      <p><strong>Start Date:</strong> {new Date(project.startDate).toLocaleDateString()}</p>
+                      <p><strong>End Date:</strong> {new Date(project.endDate).toLocaleDateString()}</p>
                     </li>
                   ))
                 ) : (
                   <p>No projects available</p>
                 )}
               </ul>
-              <CButton onClick={() => setShowCreateProjectModal(true)} className="mt-4">
-                Add New Project
-              </CButton>
             </CCardBody>
           </CCard>
 
-          {/* Announcements Section */}
-          <CCard>
+          {/* ---------- Announcements Section (Read-Only) ---------- */}
+          <CCard className="dash-card">
             <CCardBody>
-              <h2 className="text-xl font-bold flex items-center gap-2">
+              <h2 className="dash-card-header">
                 Announcements
               </h2>
               <ul>
                 {announcements.length > 0 ? (
                   announcements.map((announcement) => (
-                    <li key={announcement.id} className="py-2 border-b">
-                      {announcement.title}
-                      <Button onClick={() => deleteAnnouncement(announcement.id)} className="ml-2 text-red-500">
-                        Delete
-                      </Button>
+                    <li key={announcement._id} className="py-2 border-b">
+                      <p>
+                        <strong>Title:</strong> {announcement.title}
+                      </p>
+                      <p>
+                        <strong>Content:</strong> {announcement.content}
+                      </p>
+                      <p>
+                        <strong>Active:</strong> {announcement.active ? "Yes" : "No"}
+                      </p>
+                      <p>
+                        <strong>Date:</strong>{" "}
+                        {new Date(announcement.createdAt).toLocaleDateString()}
+                      </p>
                     </li>
                   ))
                 ) : (
                   <p>No announcements available</p>
                 )}
               </ul>
-              <CButton onClick={() => setShowCreateAnnouncementModal(true)} className="mt-4">
-                Add New Announcement
-              </CButton>
             </CCardBody>
           </CCard>
         </>
       )}
-
-      {/* Create Project Modal */}
-      <CModal visible={showCreateProjectModal} onClose={() => setShowCreateProjectModal(false)}>
-        <CModalHeader>
-          <CModalTitle>Create New Project</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <CFormInput
-            type="text"
-            placeholder="Project Name"
-            value={newProjectName}
-            onChange={(e) => setNewProjectName(e.target.value)}
-          />
-        </CModalBody>
-        <CModalFooter>
-          <CButton onClick={createProject}>Save</CButton>
-          <CButton color="secondary" onClick={() => setShowCreateProjectModal(false)}>
-            Close
-          </CButton>
-        </CModalFooter>
-      </CModal>
-
-      {/* Create Announcement Modal */}
-      <CModal visible={showCreateAnnouncementModal} onClose={() => setShowCreateAnnouncementModal(false)}>
-        <CModalHeader>
-          <CModalTitle>Create New Announcement</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <CFormInput
-            type="text"
-            placeholder="Announcement Title"
-            value={newAnnouncementTitle}
-            onChange={(e) => setNewAnnouncementTitle(e.target.value)}
-          />
-        </CModalBody>
-        <CModalFooter>
-          <CButton onClick={createAnnouncement}>Save</CButton>
-          <CButton color="secondary" onClick={() => setShowCreateAnnouncementModal(false)}>
-            Close
-          </CButton>
-        </CModalFooter>
-      </CModal>
     </div>
   );
 };
