@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { CHeader, CHeaderNav, CHeaderBrand, CNavItem, CNavLink, CModal, CModalHeader, CModalBody, CModalFooter, CButton } from "@coreui/react"; // Added CModal import
+import {
+  CHeader,
+  CHeaderNav,
+  CHeaderBrand,
+  CNavItem,
+  CNavLink,
+  CModal,
+  CModalHeader,
+  CModalBody,
+  CModalFooter,
+  CButton,
+} from "@coreui/react"; // Added CModal import
 import CIcon from "@coreui/icons-react";
 import { cilUser, cilLockLocked } from "@coreui/icons";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
@@ -49,37 +60,61 @@ const Header = () => {
       </CHeaderBrand>
       <CHeaderNav>
         <CNavItem>
-          <CNavLink href="#" className="profile" onClick={handleProfileClick}>
-            <CIcon icon={cilUser} className="profile-icon" />
+          <CNavLink
+            href="#"
+            onClick={handleProfileClick}
+            style={{
+              background: "none",
+              color: "#F3DCB2",
+              border: "none",
+            }}
+          >
+            <CIcon icon={cilUser} style={{ color: "#F3A83C" }} />
             Profile
           </CNavLink>
         </CNavItem>
         <CNavItem>
-          <CNavLink href="#" className="logout" onClick={handleLogoutClick}>
-            <CIcon icon={cilLockLocked} className="profile-icon" />
+          <CNavLink
+            href="#"
+            onClick={handleLogoutClick}
+            style={{
+              background: "none",
+              color: "#F3DCB2",
+              border: "none",
+            }}
+          >
+            <CIcon icon={cilLockLocked} style={{ color: "#F3A83C" }} />
             Logout
           </CNavLink>
         </CNavItem>
       </CHeaderNav>
 
       {/* Logout Confirmation Modal */}
-      <CModal visible={isModalVisible} onClose={handleCancelLogout}>
+      <CModal
+        visible={isModalVisible}
+        onClose={handleCancelLogout}
+        style={{ backgroundColor: "white", color: "#192F3C" }}
+      >
         <CModalHeader>Confirm Logout</CModalHeader>
         <CModalBody>
           Are you sure you want to log out? Your session will end.
         </CModalBody>
         <CModalFooter>
-          <CButton color="secondary" onClick={handleCancelLogout}>Cancel</CButton>
-          <CButton color="primary" onClick={handleConfirmLogout}>Confirm</CButton>
+          <CButton onClick={handleCancelLogout}>Cancel</CButton>
+          <CButton onClick={handleConfirmLogout}>Confirm</CButton>
         </CModalFooter>
       </CModal>
 
       {/* Conditionally render ChangePassword component as a modal */}
       {isPasswordChangeVisible && (
-        <CModal visible={isPasswordChangeVisible} onClose={handleClosePasswordChange}>
+        <CModal
+          visible={isPasswordChangeVisible}
+          onClose={handleClosePasswordChange}
+        >
           <CModalHeader>Your Profile</CModalHeader>
           <CModalBody>
-            <ChangePassword role="client" /> {/* Pass the role to change password */}
+            <ChangePassword role="client" />{" "}
+            {/* Pass the role to change password */}
           </CModalBody>
           <CModalFooter>
             <CButton color="secondary" onClick={handleClosePasswordChange}>

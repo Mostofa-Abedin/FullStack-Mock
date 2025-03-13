@@ -138,7 +138,7 @@ const ClientDashboard = () => {
         <>
           {/* ---------- Business Details Section ---------- */}
           {businessDetails && (
-            <CCard className="dash-client-card">
+            <CCard className="dash-card">
               <CCardBody>
                 <h2 className="dash-card-header">
                   My Business Details
@@ -164,7 +164,7 @@ const ClientDashboard = () => {
                     </p>
                     <CButton
                       onClick={handleEditClick}
-                      className="dash-edit"
+                      className="dash-add-button"
                     >
                       Edit Business
                     </CButton>
