@@ -89,7 +89,7 @@
 .modal-content {
     color: #192F3C;
     font-family: "Inter", sans-serif;
-    border-radius: 0%;
+    border-radius: none !important;
     border: none;
 }
 

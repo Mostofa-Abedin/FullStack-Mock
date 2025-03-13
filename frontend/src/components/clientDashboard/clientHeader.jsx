@@ -86,7 +86,6 @@ const Header = () => {
       <CModal
         visible={isModalVisible}
         onClose={handleCancelLogout}
-        style={{ backgroundColor: "white", color: "#192F3C" }}
       >
         <CModalHeader>Confirm Logout</CModalHeader>
         <CModalBody>
