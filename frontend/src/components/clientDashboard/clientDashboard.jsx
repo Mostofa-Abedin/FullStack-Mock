@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  CContainer,
-  CRow,
-  CCol,
   CCard,
   CCardBody,
-  CCardHeader,
   CButton,
 } from "@coreui/react";
 import "@coreui/coreui/dist/css/coreui.min.css";
@@ -16,14 +12,11 @@ const ClientDashboard = () => {
   const [projects, setProjects] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
   const [businessDetails, setBusinessDetails] = useState(null);
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Edit mode state
+  // Edit mode state for business details
   const [editMode, setEditMode] = useState(false);
-
-  // Editable form fields for business
   const [editBusinessName, setEditBusinessName] = useState("");
   const [editIndustry, setEditIndustry] = useState("");
   const [editWebsite, setEditWebsite] = useState("");
@@ -55,7 +48,7 @@ const ClientDashboard = () => {
       }
       const businessData = await businessRes.json();
 
-      // 2. Fetch projects and announcements
+      // 2. Fetch projects and announcements concurrently
       const [projectsRes, announcementsRes] = await Promise.all([
         fetch(`${baseUrl}/projects/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -65,13 +58,12 @@ const ClientDashboard = () => {
         }),
       ]);
       if (!projectsRes.ok || !announcementsRes.ok) {
-        throw new Error("Failed to fetch data");
+        throw new Error("Failed to fetch projects or announcements");
       }
-
       const projectsData = await projectsRes.json();
       const announcementsData = await announcementsRes.json();
 
-      // 3. Update states
+      // 3. Update state
       setBusinessDetails(businessData);
       setProjects(projectsData.projects || []);
       setAnnouncements(announcementsData.announcements || []);
@@ -82,28 +74,23 @@ const ClientDashboard = () => {
     }
   };
 
-  // -------- Edit Mode Handlers --------
+  // ---------- Business Details Edit Handlers ----------
 
-  // When user clicks "Edit" button
   const handleEditClick = () => {
     if (!businessDetails) return;
-
-    // Set edit fields from current business details
+    // Initialize editable fields with current business details
     setEditBusinessName(businessDetails.businessName || "");
     setEditIndustry(businessDetails.industry || "");
     setEditWebsite(businessDetails.website || "");
     setEditPhone(businessDetails.phone || "");
     setEditAddress(businessDetails.address || "");
-
     setEditMode(true);
   };
 
-  // Cancel editing
   const handleCancelEdit = () => {
     setEditMode(false);
   };
 
-  // Save changes
   const handleSaveEdit = async () => {
     if (!businessDetails?._id) {
       setError("No business record to update.");
@@ -133,7 +120,6 @@ const ClientDashboard = () => {
       }
 
       const patchData = await patchRes.json();
-      // Replace local businessDetails with the updated one
       setBusinessDetails(patchData.business);
       setEditMode(false);
       setError(null);
@@ -141,8 +127,6 @@ const ClientDashboard = () => {
       setError(err.message);
     }
   };
-
-  // -----------------------------------
 
   return (
     <div className="p-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -159,8 +143,7 @@ const ClientDashboard = () => {
                 <h2 className="text-xl font-bold flex items-center gap-2">
                   Business Details
                 </h2>
-
-                {/* If not in edit mode: display read-only */}
+                {/* Read-only mode */}
                 {!editMode && (
                   <>
                     <p>
@@ -179,8 +162,6 @@ const ClientDashboard = () => {
                     <p>
                       <strong>Address:</strong> {businessDetails.address}
                     </p>
-
-                    {/* Edit button */}
                     <CButton
                       onClick={handleEditClick}
                       color="primary"
@@ -190,8 +171,7 @@ const ClientDashboard = () => {
                     </CButton>
                   </>
                 )}
-
-                {/* If in edit mode: show form */}
+                {/* Edit mode */}
                 {editMode && (
                   <div className="mt-2">
                     <div className="mb-3">
@@ -239,7 +219,6 @@ const ClientDashboard = () => {
                         onChange={(e) => setEditAddress(e.target.value)}
                       />
                     </div>
-
                     <div className="mt-3">
                       <CButton color="success" onClick={handleSaveEdit}>
                         Save
@@ -258,7 +237,7 @@ const ClientDashboard = () => {
             </CCard>
           )}
 
-          {/* ---------- Projects Section ---------- */}
+          {/* ---------- Projects Section (Read-Only) ---------- */}
           <CCard>
             <CCardBody>
               <h2 className="text-xl font-bold flex items-center gap-2">
@@ -267,8 +246,12 @@ const ClientDashboard = () => {
               <ul>
                 {projects.length > 0 ? (
                   projects.map((project) => (
-                    <li key={project.id} className="py-2 border-b">
-                      {project.name}
+                    <li key={project._id} className="py-2 border-b">
+                      <p><strong>Project Name:</strong> {project.projectName}</p>
+                      <p><strong>Status:</strong> {project.status}</p>
+                      <p><strong>Description:</strong> {project.description}</p>
+                      <p><strong>Start Date:</strong> {new Date(project.startDate).toLocaleDateString()}</p>
+                      <p><strong>End Date:</strong> {new Date(project.endDate).toLocaleDateString()}</p>
                     </li>
                   ))
                 ) : (
@@ -278,7 +261,7 @@ const ClientDashboard = () => {
             </CCardBody>
           </CCard>
 
-          {/* ---------- Announcements Section ---------- */}
+          {/* ---------- Announcements Section (Read-Only) ---------- */}
           <CCard>
             <CCardBody>
               <h2 className="text-xl font-bold flex items-center gap-2">
@@ -287,7 +270,7 @@ const ClientDashboard = () => {
               <ul>
                 {announcements.length > 0 ? (
                   announcements.map((announcement) => (
-                    <li key={announcement.id} className="py-2 border-b">
+                    <li key={announcement._id} className="py-2 border-b">
                       {announcement.title}
                     </li>
                   ))
