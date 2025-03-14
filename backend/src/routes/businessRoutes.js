@@ -7,10 +7,6 @@ import { getBusinessDetails } from '../controllers/businessFormController.js';
 
 const router = express.Router();
 
-// @Trenton- here
-//router.post('/:id/onboarding', authenticateUser, registerBusiness)
-
-
 // Route: GET all businesses (Publicly accessible) (For now & testing)
 router.get('/', getAllBusinessesWithUserDetails);
 

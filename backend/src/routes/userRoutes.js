@@ -35,14 +35,7 @@ router.post('/register', registerUser);
 router.post('/:id/onboarding', authenticateUser, registerBusiness);
 
 // Route: Change user password (Authenticated User only) 
-//@Trenton- You wrote this? It uses the authenticateUser middleware that verify if a token exist. However, it seems that we don't have any authorization. 
-// Which could imply that anybody with the right ID can change the password?
-// Do you think it should look like the route below?
-// Is it redundant now that I have the one below?
 router.patch('/change-password', authenticateUser, changePassword);
-// router.patch('/:id/password', authenticateUser, changePassword)
-
-
 
 // Route: Update personal profile (Partial update allowed) (only own profile or admin access)
 router.patch('/:id/profile', authenticateUser, authUserOrAdmin, updateUserProfile);
