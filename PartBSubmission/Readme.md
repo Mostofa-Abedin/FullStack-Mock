@@ -138,11 +138,11 @@ Inital Wireframe:
 New/Dev Wireframe:
 ![Photo of new admin dashboard page wireframe](./docs/Wireframes/client-dashbaord-wireframe-new.png)
 
-## Setup Instructions @ Trenton to start
+## Setup Instructions
 
 ### Environment variables
 
-In order to run the application, two `.env` files are required in the `frontend` and `backend` directories. Starting with the `backend` directory, an `.env` file is required with two enviroment variables: `MONGO_URI=string` and `PORT=PORTNUMBER`. `MONGO_URI` must be a [connection string](https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string) which will then connect the backend to a MongoDB cluster. `Port` must be a choice of port to run the backend/server on.
+In order to run the application, two `.env` files are required in the `frontend` and `backend` directories. Starting with the `backend` directory, an `.env` file is required with two enviroment variables: `MONGO_URI=string` and `PORT=PORTNUMBER`. `MONGO_URI` must be a [connection string](https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string) which will then connect the backend to a MongoDB cluster. `Port` must be a choice of port to run the backend/server on. A local database can be used to run the application, using a env variable `MONGO_URI=mongodb://localhost:27017/localDatabase` or to utilise the production database `MONGO_URI=mongodb+srv://Admin:qazmokfgh7@cluster0.3efwx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0` will work.
 
 For the `frontend` directory, an `.env` file is required with a single environment variable `VITE_API_URL=http://localhost:PORTNUMBER`. The choice of port number is open to the user, but must match the choice of port number chosen in the backend directory. The port number that the frontend/React application runs on is configured in `frontend/vite.config.js`
 
@@ -166,7 +166,7 @@ To run the backend of the application, follow these steps:
 
 The backend should now be running on `http://localhost:5001`.
 
-@Trenton to start
+An admin account can be logged in using username: testAdmin@test.com and password: Password1! and a user account using username: testClient@test.com and password: Password1!
 
 ---
 
@@ -811,6 +811,12 @@ The reviewer typically conducted the review using **GitHub Codespaces**, allowin
 This section provides an overview of our testing approach, including Test-Driven Development (TDD) methodology, development and production testing, and our automated test workflows to maintain high-quality code.
 
 ### Test-Driven Development (TDD) Approach
+
+Test Coverage results for backend tests:
+![Backend Test Controller](./docs/backendTestCoverage.png)
+
+Test Coverage results for frontend tests:
+![Backend Test Controller](./docs/frontendTestCoverage.png)
 
 We followed a **Test-Driven Development (TDD)** approach to ensure all features were thoroughly tested before implementation. This methodology improved code stability, reduced post-deployment bugs, and maintained high-quality standards.
 
