@@ -3,7 +3,8 @@
 </p>
 
 # Full Stack Application (Part B)
-
+[GitHub Repository](https://github.com/Mostofa-Abedin/T3A2-MagnetLabs)
+[Magnet Labs](https://full-stack-mock-six.vercel.app/)
 ## Project Overview
 
 Our Full Stack Application (Part B) is designed to meet the requirements of a real-world client. The application demonstrates our ability to design a scalable architecture, implement robust features using MERN technologies, and deploy the solution on a cloud platform. This project builds on the planning completed in Part A, and it is developed in a collaborative group environment.
